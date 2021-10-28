@@ -40,6 +40,7 @@ namespace FCartographer
             this.StrengthControl = new System.Windows.Forms.TrackBar();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.ElevationSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SizeControl)).BeginInit();
@@ -61,6 +62,7 @@ namespace FCartographer
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -76,7 +78,6 @@ namespace FCartographer
             this.ElevationSettings.Controls.Add(this.SizeControl);
             this.ElevationSettings.Controls.Add(this.StrengthLabel);
             this.ElevationSettings.Controls.Add(this.StrengthControl);
-            this.ElevationSettings.Controls.Add(this.button1);
             this.ElevationSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ElevationSettings.Location = new System.Drawing.Point(0, 0);
             this.ElevationSettings.Name = "ElevationSettings";
@@ -89,7 +90,7 @@ namespace FCartographer
             this.HeightLabel.BackColor = System.Drawing.Color.BlanchedAlmond;
             this.HeightLabel.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.HeightLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.HeightLabel.Location = new System.Drawing.Point(10, 241);
+            this.HeightLabel.Location = new System.Drawing.Point(9, 108);
             this.HeightLabel.Name = "HeightLabel";
             this.HeightLabel.Size = new System.Drawing.Size(45, 17);
             this.HeightLabel.TabIndex = 6;
@@ -97,7 +98,7 @@ namespace FCartographer
             // 
             // HeightControl
             // 
-            this.HeightControl.Location = new System.Drawing.Point(2, 260);
+            this.HeightControl.Location = new System.Drawing.Point(1, 127);
             this.HeightControl.Maximum = 255;
             this.HeightControl.Name = "HeightControl";
             this.HeightControl.Size = new System.Drawing.Size(104, 45);
@@ -111,7 +112,7 @@ namespace FCartographer
             this.SizeLabel.BackColor = System.Drawing.Color.BlanchedAlmond;
             this.SizeLabel.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SizeLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.SizeLabel.Location = new System.Drawing.Point(11, 189);
+            this.SizeLabel.Location = new System.Drawing.Point(10, 56);
             this.SizeLabel.Name = "SizeLabel";
             this.SizeLabel.Size = new System.Drawing.Size(31, 17);
             this.SizeLabel.TabIndex = 4;
@@ -119,7 +120,7 @@ namespace FCartographer
             // 
             // SizeControl
             // 
-            this.SizeControl.Location = new System.Drawing.Point(3, 209);
+            this.SizeControl.Location = new System.Drawing.Point(2, 76);
             this.SizeControl.Maximum = 255;
             this.SizeControl.Name = "SizeControl";
             this.SizeControl.Size = new System.Drawing.Size(104, 45);
@@ -133,7 +134,7 @@ namespace FCartographer
             this.StrengthLabel.BackColor = System.Drawing.Color.BlanchedAlmond;
             this.StrengthLabel.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.StrengthLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.StrengthLabel.Location = new System.Drawing.Point(11, 138);
+            this.StrengthLabel.Location = new System.Drawing.Point(10, 5);
             this.StrengthLabel.Name = "StrengthLabel";
             this.StrengthLabel.Size = new System.Drawing.Size(56, 17);
             this.StrengthLabel.TabIndex = 2;
@@ -141,7 +142,7 @@ namespace FCartographer
             // 
             // StrengthControl
             // 
-            this.StrengthControl.Location = new System.Drawing.Point(3, 158);
+            this.StrengthControl.Location = new System.Drawing.Point(2, 25);
             this.StrengthControl.Maximum = 255;
             this.StrengthControl.Name = "StrengthControl";
             this.StrengthControl.Size = new System.Drawing.Size(104, 45);
@@ -180,6 +181,7 @@ namespace FCartographer
             this.Controls.Add(this.Canvas);
             this.Name = "Form1";
             this.Text = "FCartographer";
+            this.panel1.ResumeLayout(false);
             this.ElevationSettings.ResumeLayout(false);
             this.ElevationSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightControl)).EndInit();

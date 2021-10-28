@@ -12,11 +12,12 @@ namespace FCartographer
 {
     public partial class Form1 : Form
     {
+        private BrushType tool;
         private bool painting;
 
-        // Height Data
-        private Graphics height_data_graphics;
-        private Bitmap height_data;
+        private int height_brush_size;
+        private int height_brush_strength;
+        private int height_brush_height;
 
         // Display to user
         private Graphics display_graphics;
@@ -30,12 +31,12 @@ namespace FCartographer
 
             SolidBrush brush = new SolidBrush(Color.FromArgb(255, 255, 255, 255));
 
-            // Height Editing Initialization
+            // Height Data Initialization
             height_data = new Bitmap(Canvas.Width, Canvas.Height);
             height_data_graphics = Graphics.FromImage(height_data);
             height_data_graphics.FillRectangle(brush, 0, 0, Canvas.Width, Canvas.Height);
 
-            // Height Editing Initialization
+            // Height Display Initialization
             display_data = new Bitmap(Canvas.Width, Canvas.Height);
             display_graphics = Canvas.CreateGraphics();
             display_graphics.FillRectangle(brush, 0, 0, Canvas.Width, Canvas.Height);
@@ -44,6 +45,11 @@ namespace FCartographer
         private void button1_Click(object sender, EventArgs e)
         {
             height_data.Save("Output.png", System.Drawing.Imaging.ImageFormat.Png);
+        }
+
+        private enum BrushType
+        {
+            elevationbrush
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -66,7 +72,6 @@ namespace FCartographer
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             ElevationBrushTool(sender, e);
-            
         }
 
         enum ToolUsed
@@ -75,6 +80,14 @@ namespace FCartographer
             ElevationSmoothenBrush
         }
 
+
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Elevation Data and Graphics
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        private Graphics height_data_graphics;
+        private Bitmap height_data;
+
+        private int drawcounter = 0;
         private void ElevationBrushTool(object sender, MouseEventArgs e)
         {
             if (painting)
@@ -87,26 +100,40 @@ namespace FCartographer
                 xprime = e.X;
                 yprime = e.Y;
 
-                FastRender();
+                drawcounter++;
+                if (drawcounter == 2)
+                {
+                    drawcounter = 0;
+                    FastRender(e.X - SizeControl.Value / 2, e.Y - SizeControl.Value / 2, SizeControl.Value, SizeControl.Value);
+                }
             }
         }
 
-        private void FastRender()
+
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Rendering
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        private void FastRender(int x_start, int y_start, int width, int height)
         {
-
-
-            // Canvas.DrawToBitmap(bmp, new Rectangle(0, 0, Canvas.Width, Canvas.Height));
-            /*for (int i = 1; i < Canvas.Width-1; i++)
+            Console.WriteLine("Hello?");
+            /*for (int i = x_start; i < width; i++)
             {
-                for (int j = 1; j < Canvas.Height-1; j++)
+                for (int j = y_start; j < height; j++)
+                {*/
+            for (int i = 0; i < Canvas.Width; i++)
+            {
+                for (int j = 0; j < Canvas.Height; j++)
                 {
-                    int shade = bmp.GetPixel(i, j).R;// - bmp.GetPixel(i, j).R;
+                    int shade = 25;
+                    //int shade = height_data.GetPixel(i, j).R - height_data.GetPixel(i-1, j-1).R;
                     shade = (shade + 255) / 2;
-                    new_bmp.SetPixel(i, j, Color.FromArgb(255, shade, shade, shade));
-                }
-            }*/
 
-            display_graphics.DrawImage(height_data, 0, 0);
+                    display_data.SetPixel(i, j, Color.FromArgb(255, shade, shade, shade));
+                }
+            }
+
+            display_data.SetPixel(1, 1, Color.Black);
+            display_graphics.DrawImage(display_data, 0, 0);
         }
     }
 }
