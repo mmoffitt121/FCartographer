@@ -31,6 +31,7 @@ namespace FCartographer
         {
             this.Canvas = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.ElevationSettings = new System.Windows.Forms.Panel();
             this.HeightLabel = new System.Windows.Forms.Label();
             this.HeightControl = new System.Windows.Forms.TrackBar();
@@ -38,7 +39,6 @@ namespace FCartographer
             this.SizeControl = new System.Windows.Forms.TrackBar();
             this.StrengthLabel = new System.Windows.Forms.Label();
             this.StrengthControl = new System.Windows.Forms.TrackBar();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.ElevationSettings.SuspendLayout();
@@ -68,6 +68,16 @@ namespace FCartographer
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(103, 961);
             this.panel1.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(39, 41);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Save";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ElevationSettings
             // 
@@ -104,7 +114,6 @@ namespace FCartographer
             this.HeightControl.Size = new System.Drawing.Size(104, 45);
             this.HeightControl.TabIndex = 5;
             this.HeightControl.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.HeightControl.Value = 100;
             // 
             // SizeLabel
             // 
@@ -121,12 +130,12 @@ namespace FCartographer
             // SizeControl
             // 
             this.SizeControl.Location = new System.Drawing.Point(2, 76);
-            this.SizeControl.Maximum = 255;
+            this.SizeControl.Maximum = 100;
             this.SizeControl.Name = "SizeControl";
             this.SizeControl.Size = new System.Drawing.Size(104, 45);
             this.SizeControl.TabIndex = 3;
             this.SizeControl.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.SizeControl.Value = 100;
+            this.SizeControl.Value = 15;
             // 
             // StrengthLabel
             // 
@@ -143,22 +152,12 @@ namespace FCartographer
             // StrengthControl
             // 
             this.StrengthControl.Location = new System.Drawing.Point(2, 25);
-            this.StrengthControl.Maximum = 255;
+            this.StrengthControl.Maximum = 50;
             this.StrengthControl.Name = "StrengthControl";
             this.StrengthControl.Size = new System.Drawing.Size(104, 45);
             this.StrengthControl.TabIndex = 1;
             this.StrengthControl.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.StrengthControl.Value = 100;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(39, 41);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.StrengthControl.Value = 10;
             // 
             // panel2
             // 
