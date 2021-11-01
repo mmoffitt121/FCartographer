@@ -9,10 +9,12 @@ namespace FCartographer
 {
     public class Project
     {
-        public String name;
+        private String name;
 
         private IList<Layer> layers;
         private IList<BrushPreset> brushes;
+
+        private int current;
 
         private Graphics g;
 
@@ -46,26 +48,19 @@ namespace FCartographer
         public void SelectLayer(int layer)
         {
             g = Graphics.FromImage(layers[layer].GetData());
+            current = layer;
         }
 
-        public void Draw(SolidBrush brush, int size, MouseEventArgs e)
+        public void Draw(BrushPreset brush, MouseEventArgs e)
         {
-            g.FillEllipse(brush, e.X - size / 2, e.Y - size / 2, size, size);
-        }
 
-        public void Draw(TextureBrush brush, int size, MouseEventArgs e)
-        {
-            g.FillRectangle(brush, e.X - size / 2, e.Y - size / 2, size, size);
-        }
-
-        public void Draw(Bitmap brush, int size, MouseEventArgs e)
-        {
-            g.DrawImage(brush, e.X - size / 2, e.Y - size / 2, size, size);
+            int size = brush.GetSize();
+            g.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
         }
 
         public Layer CurrentLayer()
         {
-            return layers[0];
+            return layers[current];
         }
 
         public Project(int w, int h)

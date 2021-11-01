@@ -78,7 +78,7 @@ namespace FCartographer
         {
             if (painting)
             {
-                project.Draw(brushpreset.GetImage(), SizeControl.Value, e);
+                project.Draw(brushpreset, e);
                 xprime = e.X;
                 yprime = e.Y;
 
@@ -106,6 +106,9 @@ namespace FCartographer
         {
             InitializeComponent();
 
+            // Settings init
+            ProjectSettings settings = new ProjectSettings();
+
             // Control init
             painting = false;
 
@@ -114,7 +117,8 @@ namespace FCartographer
             project.AddLayer(0);
 
             // Brush init
-            brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png");
+            // brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50);
+            brushpreset = new BrushPreset(@"Tools/Brushes/..png", 20, 50);
 
             // Canvas interface init
             g = Canvas.CreateGraphics();

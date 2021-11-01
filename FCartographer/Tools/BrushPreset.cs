@@ -3,43 +3,40 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace FCartographer
 {
     public class BrushPreset
     {
-        private Bitmap bitmap;
+        private Bitmap source_bitmap;
+        private Bitmap output_bitmap;
 
         private int size;
         private int opacity;
 
-        private TextureBrush brush;
-
-        public Bitmap GetImage()
+        public void SetImage(string brushpath, int input_opacity)
         {
-            return bitmap;
+            source_bitmap = (Bitmap)Image.FromFile(brushpath);
+            opacity = input_opacity;
+            CalculateOutputBrush();
         }
 
         public void SetImage(Bitmap input)
         {
-            bitmap = new Bitmap(input);
+            source_bitmap = new Bitmap(input);
+            CalculateOutputBrush();
         }
 
         public void SetImage(string brushpath)
         {
-            bitmap = (Bitmap)Image.FromFile(brushpath);
-            SetBrush();
+            source_bitmap = (Bitmap)Image.FromFile(brushpath);
+            CalculateOutputBrush();
         }
 
-        public TextureBrush GetBrush()
+        public Bitmap GetImage()
         {
-            return brush;
-        }
-
-        private void SetBrush()
-        {
-            brush = new TextureBrush(bitmap);
-            brush.WrapMode = System.Drawing.Drawing2D.WrapMode.Clamp;
+            return output_bitmap;
         }
 
         public void SetSize(int input)
@@ -47,9 +44,35 @@ namespace FCartographer
             size = input;
         }
 
+        public int GetSize()
+        {
+            return size;
+        }
+
         public void SetOpacity(int input)
         {
             opacity = input;
+            CalculateOutputBrush();
+        }
+
+        public int GetOpacity()
+        {
+            return opacity;
+        }
+
+        public void CalculateOutputBrush()
+        {
+            ColorMatrix cmatrix = new ColorMatrix();
+            cmatrix.Matrix33 = (float)GetOpacity() / 255;
+
+            var attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cmatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+            output_bitmap = new Bitmap(source_bitmap.Width, source_bitmap.Height);
+            Graphics g = Graphics.FromImage(output_bitmap);
+
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.DrawImage(source_bitmap, new Rectangle(0, 0, source_bitmap.Width, source_bitmap.Height), 0, 0, source_bitmap.Width, source_bitmap.Height, GraphicsUnit.Pixel, attributes);
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -61,7 +84,34 @@ namespace FCartographer
         {
             try
             {
-                SetImage(brushpath);
+                SetImage(brushpath, 255);
+                SetSize(10);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Console.WriteLine("No Brush Found!");
+            }
+        }
+
+        public BrushPreset(string brushpath, int size)
+        {
+            try
+            {
+                SetImage(brushpath, 255);
+                SetSize(size);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Console.WriteLine("No Brush Found!");
+            }
+        }
+
+        public BrushPreset(string brushpath, int size, int opacity)
+        {
+            try
+            {
+                SetImage(brushpath, opacity);
+                SetSize(size);
             }
             catch (System.IO.FileNotFoundException)
             {
