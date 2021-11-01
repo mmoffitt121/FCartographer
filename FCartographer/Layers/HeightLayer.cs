@@ -10,9 +10,14 @@ namespace FCartographer
     {
         private TerrainShader shader;
 
-        public HeightLayer(int x, int y) : base(x, y)
+        public new void Render()
         {
 
+        }
+
+        public HeightLayer(int x, int y) : base(x, y)
+        {
+            SetType(LayerType.HeightMap);
         }
     }
 }

@@ -8,14 +8,16 @@ namespace FCartographer
 {
     public class Layer
     {
-        public String name;
+        private String name;
 
         private int width;
         private int height;
 
         private Bitmap data;
 
-        public void Draw()
+        private LayerType type;
+
+        public void Render()
         {
 
         }
@@ -23,6 +25,16 @@ namespace FCartographer
         public Bitmap GetData()
         {
             return data;
+        }
+
+        public void SetType(LayerType input)
+        {
+            type = input;
+        }
+
+        public LayerType GetType()
+        {
+            return type;
         }
 
         public Layer(int x, int y)

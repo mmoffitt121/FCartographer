@@ -15,6 +15,8 @@ namespace FCartographer
         private int size;
         private int opacity;
 
+        private Color color;
+
         public void SetImage(string brushpath, int input_opacity)
         {
             source_bitmap = (Bitmap)Image.FromFile(brushpath);
@@ -42,6 +44,11 @@ namespace FCartographer
         public void SetSize(int input)
         {
             size = input;
+        }
+
+        public void SetColor(int r, int g, int b)
+        {
+            color = Color.FromArgb(255, r, g, b);
         }
 
         public int GetSize()
