@@ -12,7 +12,6 @@ namespace FCartographer
         private String name;
 
         private IList<Layer> layers;
-        private IList<BrushPreset> brushes;
 
         private int current;
 
@@ -20,7 +19,7 @@ namespace FCartographer
 
         private int width, height;
 
-        public void AddLayer(LayerType type)
+        public void AddLayer(Layer.LayerType type)
         {
             switch (type)
             {
@@ -53,9 +52,7 @@ namespace FCartographer
 
         public void Draw(BrushPreset brush, MouseEventArgs e)
         {
-
-            int size = brush.GetSize();
-            g.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
+            layers[current].Draw(brush, e); 
         }
 
         public Layer CurrentLayer()

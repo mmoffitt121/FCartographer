@@ -14,7 +14,6 @@ namespace FCartographer
 
         private int size;
         private int opacity;
-
         private Color color;
 
         public void SetImage(string brushpath, int input_opacity)
@@ -51,6 +50,16 @@ namespace FCartographer
             color = Color.FromArgb(255, r, g, b);
         }
 
+        public void SetColor(Color clr)
+        {
+            color = Color.FromArgb(clr.A, clr.R, clr.G, clr.B);
+        }
+
+        public Color GetColor()
+        {
+            return color;
+        }
+
         public int GetSize()
         {
             return size;
@@ -67,19 +76,28 @@ namespace FCartographer
             return opacity;
         }
 
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Brush Color Calculation
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+        // Calculates the color and opacity of the output brush
         public void CalculateOutputBrush()
         {
-            ColorMatrix cmatrix = new ColorMatrix();
-            cmatrix.Matrix33 = (float)GetOpacity() / 255;
 
-            var attributes = new ImageAttributes();
+            ColorMatrix cmatrix = new ColorMatrix();
+            cmatrix.Matrix40 = (float)color.R / 255;           // Sets red value
+            cmatrix.Matrix41 = (float)color.G / 255;           // Sets green value
+            cmatrix.Matrix42 = (float)color.B / 255;           // Sets blue value
+            cmatrix.Matrix33 = (float)GetOpacity() / 255;    // Sets opacity
+
+            ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(cmatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             output_bitmap = new Bitmap(source_bitmap.Width, source_bitmap.Height);
-            Graphics g = Graphics.FromImage(output_bitmap);
+            Graphics output_g = Graphics.FromImage(output_bitmap);
 
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            g.DrawImage(source_bitmap, new Rectangle(0, 0, source_bitmap.Width, source_bitmap.Height), 0, 0, source_bitmap.Width, source_bitmap.Height, GraphicsUnit.Pixel, attributes);
+            output_g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            output_g.DrawImage(source_bitmap, new Rectangle(0, 0, source_bitmap.Width, source_bitmap.Height), 0, 0, source_bitmap.Width, source_bitmap.Height, GraphicsUnit.Pixel, attributes);
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -117,6 +135,20 @@ namespace FCartographer
         {
             try
             {
+                SetImage(brushpath, opacity);
+                SetSize(size);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Console.WriteLine("No Brush Found!");
+            }
+        }
+
+        public BrushPreset(string brushpath, int size, int opacity, Color clr)
+        {
+            try
+            {
+                SetColor(clr);
                 SetImage(brushpath, opacity);
                 SetSize(size);
             }

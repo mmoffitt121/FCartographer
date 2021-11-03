@@ -25,15 +25,11 @@ namespace FCartographer
         // Current brush
         BrushPreset brushpreset;
 
-        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-        // Save Panel
-        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Brush Array
+        private IList<BrushPreset> brushes;
 
-        // Save button
-        private void button1_Click(object sender, EventArgs e)
-        {
-            project.CurrentLayer().GetData().Save("Output.png", System.Drawing.Imaging.ImageFormat.Png);
-        }
+        // Zoom Control
+        private float zoom;
 
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -45,21 +41,22 @@ namespace FCartographer
         private int? yprime = null;
 
         // Mouse click on canvas
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
             painting = true;
         }
 
         // Mouse up
-        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
             painting = false;
             xprime = null;
             yprime = null;
+            RenderGraphics(project.GetGraphics());
         }
 
         // Mouse moves
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (painting)
             {
@@ -86,6 +83,15 @@ namespace FCartographer
             }
         }
 
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Zoom
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+        // Zoom In
+        private void ZoomIn_Click(object sender, EventArgs e)
+        {
+
+        }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Rendering
@@ -105,23 +111,37 @@ namespace FCartographer
         public Form1()
         {
             InitializeComponent();
+            NewProject(3000, 500);
+        }
 
+        public void NewProject(int width, int height)
+        {
             // Settings init
             ProjectSettings settings = new ProjectSettings();
 
             // Control init
             painting = false;
 
+            // Canvas init
+            Canvas.Width = width;
+            Canvas.Height = height;
+            Canvas.Location = new Point((int)((float)CanvasHolder.Width / 2 - (float)(Canvas.Width / 2)), (int)((float)CanvasHolder.Height / 2 - (float)(Canvas.Height / 2)));
+
             // Project init
-            project = new Project(Canvas.Width, Canvas.Height);
-            project.AddLayer(0);
+            project = new Project(width, height);
+            project.AddLayer(Layer.LayerType.HeightMap);
 
             // Brush init
             // brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50);
-            brushpreset = new BrushPreset(@"Tools/Brushes/..png", 20, 50);
+            brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 100, 20, 100));
 
             // Canvas interface init
             g = Canvas.CreateGraphics();
+        }
+
+        private void ZoomIn_Click(object sender, MouseEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Click!");
         }
     }
 }

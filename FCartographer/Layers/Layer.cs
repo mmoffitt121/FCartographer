@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
 
 namespace FCartographer
 {
@@ -16,6 +18,8 @@ namespace FCartographer
         private Bitmap data;
 
         private LayerType type;
+
+        public Graphics g;
 
         public void Render()
         {
@@ -37,18 +41,24 @@ namespace FCartographer
             return type;
         }
 
+        public virtual void Draw(BrushPreset brush, MouseEventArgs e)
+        {
+
+        }
+
         public Layer(int x, int y)
         {
             width = x;
             height = y;
             data = new Bitmap(x, y);
+            g = Graphics.FromImage(data);
         }
-    }
 
-    public enum LayerType
-    {
-        HeightMap,
-        Ocean,
-        Subdivision
+        public enum LayerType
+        {
+            HeightMap,
+            Ocean,
+            Subdivision
+        }
     }
 }
