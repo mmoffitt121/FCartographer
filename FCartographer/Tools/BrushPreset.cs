@@ -16,10 +16,9 @@ namespace FCartographer
         private int opacity;
         private Color color;
 
-        public void SetImage(string brushpath, int input_opacity)
+        public void SetImage(string brushpath, int input_opacity, Color clr)
         {
             source_bitmap = (Bitmap)Image.FromFile(brushpath);
-            opacity = input_opacity;
             CalculateOutputBrush();
         }
 
@@ -48,11 +47,14 @@ namespace FCartographer
         public void SetColor(int r, int g, int b)
         {
             color = Color.FromArgb(255, r, g, b);
+            System.Diagnostics.Debug.WriteLine(r + " " + g + " " + b);
+            CalculateOutputBrush();
         }
 
         public void SetColor(Color clr)
         {
             color = Color.FromArgb(clr.A, clr.R, clr.G, clr.B);
+            CalculateOutputBrush();
         }
 
         public Color GetColor()
@@ -93,8 +95,10 @@ namespace FCartographer
             ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(cmatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-            output_bitmap = new Bitmap(source_bitmap.Width, source_bitmap.Height);
+            
+            //output_bitmap = new Bitmap(source_bitmap.Width, source_bitmap.Height);
             Graphics output_g = Graphics.FromImage(output_bitmap);
+            output_g.Clear(Color.FromArgb(0, 0, 0, 0));
 
             output_g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             output_g.DrawImage(source_bitmap, new Rectangle(0, 0, source_bitmap.Width, source_bitmap.Height), 0, 0, source_bitmap.Width, source_bitmap.Height, GraphicsUnit.Pixel, attributes);
@@ -105,52 +109,16 @@ namespace FCartographer
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
         // BrushPreset constructor
-        public BrushPreset(string brushpath)
+        public BrushPreset(string brushpath, int siz, int opac, Color clr)
         {
             try
             {
-                SetImage(brushpath, 255);
-                SetSize(10);
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                Console.WriteLine("No Brush Found!");
-            }
-        }
-
-        public BrushPreset(string brushpath, int size)
-        {
-            try
-            {
-                SetImage(brushpath, 255);
-                SetSize(size);
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                Console.WriteLine("No Brush Found!");
-            }
-        }
-
-        public BrushPreset(string brushpath, int size, int opacity)
-        {
-            try
-            {
-                SetImage(brushpath, opacity);
-                SetSize(size);
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                Console.WriteLine("No Brush Found!");
-            }
-        }
-
-        public BrushPreset(string brushpath, int size, int opacity, Color clr)
-        {
-            try
-            {
-                SetColor(clr);
-                SetImage(brushpath, opacity);
-                SetSize(size);
+                source_bitmap = (Bitmap)Image.FromFile(brushpath);
+                output_bitmap = new Bitmap(source_bitmap);
+                opacity = opac;
+                color = clr;
+                size = siz;
+                CalculateOutputBrush();
             }
             catch (System.IO.FileNotFoundException)
             {

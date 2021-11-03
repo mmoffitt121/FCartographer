@@ -22,6 +22,12 @@ namespace FCartographer
             g.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
         }
 
+        public override void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr)
+        {
+            int size = brush.GetSize();
+            gr.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
+        }
+
         public HeightLayer(int x, int y) : base(x, y)
         {
             SetType(LayerType.HeightMap);

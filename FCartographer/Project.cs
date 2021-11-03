@@ -55,6 +55,11 @@ namespace FCartographer
             layers[current].Draw(brush, e); 
         }
 
+        public void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr)
+        {
+            layers[current].DrawTemp(brush, e, gr);
+        }
+
         public Layer CurrentLayer()
         {
             return layers[current];

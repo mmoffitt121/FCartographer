@@ -124,6 +124,7 @@ namespace FCartographer
             this.HeightControl.Size = new System.Drawing.Size(104, 45);
             this.HeightControl.TabIndex = 5;
             this.HeightControl.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.HeightControl.Scroll += new System.EventHandler(this.HeightControl_Scroll);
             // 
             // SizeLabel
             // 
@@ -146,6 +147,7 @@ namespace FCartographer
             this.SizeControl.TabIndex = 3;
             this.SizeControl.TickStyle = System.Windows.Forms.TickStyle.None;
             this.SizeControl.Value = 15;
+            this.SizeControl.Scroll += new System.EventHandler(this.SizeControl_Scroll);
             // 
             // StrengthLabel
             // 
@@ -168,6 +170,7 @@ namespace FCartographer
             this.StrengthControl.TabIndex = 1;
             this.StrengthControl.TickStyle = System.Windows.Forms.TickStyle.None;
             this.StrengthControl.Value = 10;
+            this.StrengthControl.Scroll += new System.EventHandler(this.StrengthControl_Scroll);
             // 
             // panel2
             // 

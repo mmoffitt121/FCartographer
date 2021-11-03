@@ -46,6 +46,11 @@ namespace FCartographer
 
         }
 
+        public virtual void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr)
+        {
+
+        }
+
         public Layer(int x, int y)
         {
             width = x;

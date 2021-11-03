@@ -76,10 +76,11 @@ namespace FCartographer
             if (painting)
             {
                 project.Draw(brushpreset, e);
+                project.DrawTemp(brushpreset, e, g);
                 xprime = e.X;
                 yprime = e.Y;
 
-                RenderGraphics(project.GetGraphics());
+                //RenderGraphics(project.GetGraphics());
             }
         }
 
@@ -132,8 +133,7 @@ namespace FCartographer
             project.AddLayer(Layer.LayerType.HeightMap);
 
             // Brush init
-            // brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50);
-            brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 100, 20, 100));
+            brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20));
 
             // Canvas interface init
             g = Canvas.CreateGraphics();
