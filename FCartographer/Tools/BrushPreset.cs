@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace FCartographer
 {
@@ -15,6 +16,8 @@ namespace FCartographer
         private int size;
         private int opacity;
         private Color color;
+
+        private bool solidify;
 
         public void SetImage(string brushpath, int input_opacity, Color clr)
         {
@@ -92,6 +95,11 @@ namespace FCartographer
             cmatrix.Matrix42 = (float)color.B / 255;           // Sets blue value
             cmatrix.Matrix33 = (float)GetOpacity() / 255;    // Sets opacity
 
+            if (solidify)
+            {
+                cmatrix.Matrix33 = 2555;
+            }
+
             ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(cmatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
@@ -100,8 +108,14 @@ namespace FCartographer
             Graphics output_g = Graphics.FromImage(output_bitmap);
             output_g.Clear(Color.FromArgb(0, 0, 0, 0));
 
-            output_g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            output_g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            output_g.SmoothingMode = SmoothingMode.None; // AntiAlias;
             output_g.DrawImage(source_bitmap, new Rectangle(0, 0, source_bitmap.Width, source_bitmap.Height), 0, 0, source_bitmap.Width, source_bitmap.Height, GraphicsUnit.Pixel, attributes);
+        }
+
+        public void SetSolidify(Boolean _solidify)
+        {
+            solidify = _solidify;
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -109,7 +123,7 @@ namespace FCartographer
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
         // BrushPreset constructor
-        public BrushPreset(string brushpath, int siz, int opac, Color clr)
+        public BrushPreset(string brushpath, int siz, int opac, Color clr, bool _solidify)
         {
             try
             {
@@ -118,6 +132,7 @@ namespace FCartographer
                 opacity = opac;
                 color = clr;
                 size = siz;
+                SetSolidify(_solidify);
                 CalculateOutputBrush();
             }
             catch (System.IO.FileNotFoundException)

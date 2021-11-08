@@ -16,12 +16,14 @@ namespace FCartographer
         private int height;
 
         private Bitmap data;
+        private Bitmap tempdata;
 
         private LayerType type;
 
+        public Graphics data_g;
         public Graphics g;
 
-        public void Render()
+        public virtual void Render()
         {
 
         }
@@ -29,6 +31,11 @@ namespace FCartographer
         public Bitmap GetData()
         {
             return data;
+        }
+
+        public Bitmap GetTempData()
+        {
+            return tempdata;
         }
 
         public void SetType(LayerType input)
@@ -56,13 +63,16 @@ namespace FCartographer
             width = x;
             height = y;
             data = new Bitmap(x, y);
-            g = Graphics.FromImage(data);
+            tempdata = new Bitmap(x, y);
+            data_g = Graphics.FromImage(data);
+            g = Graphics.FromImage(tempdata);
         }
 
         public enum LayerType
         {
             HeightMap,
             Ocean,
+            NationMap,
             Subdivision
         }
     }

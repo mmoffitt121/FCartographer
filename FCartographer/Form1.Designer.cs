@@ -53,10 +53,15 @@ namespace FCartographer
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Navigation = new System.Windows.Forms.Panel();
+            this.LayerToAdd = new System.Windows.Forms.ComboBox();
+            this.LayerPane = new System.Windows.Forms.FlowLayoutPanel();
             this.ZoomOut = new System.Windows.Forms.Button();
             this.ZoomIn = new System.Windows.Forms.Button();
+            this.AddLayer = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.CanvasHolder = new System.Windows.Forms.Panel();
+            this.HorizontalScroll = new System.Windows.Forms.HScrollBar();
+            this.VerticalScroll = new System.Windows.Forms.VScrollBar();
             this.ElevationSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SizeControl)).BeginInit();
@@ -71,7 +76,7 @@ namespace FCartographer
             // 
             this.Canvas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Canvas.BackColor = System.Drawing.Color.White;
-            this.Canvas.Location = new System.Drawing.Point(385, 188);
+            this.Canvas.Location = new System.Drawing.Point(340, 203);
             this.Canvas.Name = "Canvas";
             this.Canvas.Size = new System.Drawing.Size(829, 509);
             this.Canvas.TabIndex = 0;
@@ -280,13 +285,37 @@ namespace FCartographer
             // Navigation
             // 
             this.Navigation.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.Navigation.Controls.Add(this.LayerToAdd);
+            this.Navigation.Controls.Add(this.LayerPane);
             this.Navigation.Controls.Add(this.ZoomOut);
             this.Navigation.Controls.Add(this.ZoomIn);
+            this.Navigation.Controls.Add(this.AddLayer);
             this.Navigation.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Navigation.Location = new System.Drawing.Point(1622, 60);
+            this.Navigation.Location = new System.Drawing.Point(1546, 60);
             this.Navigation.Name = "Navigation";
-            this.Navigation.Size = new System.Drawing.Size(83, 901);
+            this.Navigation.Size = new System.Drawing.Size(159, 901);
             this.Navigation.TabIndex = 3;
+            // 
+            // LayerToAdd
+            // 
+            this.LayerToAdd.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.LayerToAdd.FormattingEnabled = true;
+            this.LayerToAdd.Items.AddRange(new object[] {
+            "Terrain",
+            "Nations"});
+            this.LayerToAdd.Location = new System.Drawing.Point(38, 446);
+            this.LayerToAdd.Name = "LayerToAdd";
+            this.LayerToAdd.Size = new System.Drawing.Size(109, 23);
+            this.LayerToAdd.TabIndex = 3;
+            this.LayerToAdd.Text = "Nations";
+            // 
+            // LayerPane
+            // 
+            this.LayerPane.AutoScroll = true;
+            this.LayerPane.Location = new System.Drawing.Point(7, 475);
+            this.LayerPane.Name = "LayerPane";
+            this.LayerPane.Size = new System.Drawing.Size(140, 420);
+            this.LayerPane.TabIndex = 2;
             // 
             // ZoomOut
             // 
@@ -307,16 +336,50 @@ namespace FCartographer
             this.ZoomIn.UseVisualStyleBackColor = true;
             this.ZoomIn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ZoomIn_Click);
             // 
+            // AddLayer
+            // 
+            this.AddLayer.Location = new System.Drawing.Point(7, 444);
+            this.AddLayer.Name = "AddLayer";
+            this.AddLayer.Size = new System.Drawing.Size(25, 25);
+            this.AddLayer.TabIndex = 4;
+            this.AddLayer.Text = "+";
+            this.AddLayer.UseVisualStyleBackColor = true;
+            // 
             // CanvasHolder
             // 
-            this.CanvasHolder.AutoScroll = true;
             this.CanvasHolder.AutoScrollMargin = new System.Drawing.Size(500, 500);
+            this.CanvasHolder.Controls.Add(this.HorizontalScroll);
+            this.CanvasHolder.Controls.Add(this.VerticalScroll);
             this.CanvasHolder.Controls.Add(this.Canvas);
             this.CanvasHolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CanvasHolder.Location = new System.Drawing.Point(50, 60);
             this.CanvasHolder.Name = "CanvasHolder";
-            this.CanvasHolder.Size = new System.Drawing.Size(1572, 901);
+            this.CanvasHolder.Size = new System.Drawing.Size(1496, 901);
             this.CanvasHolder.TabIndex = 4;
+            // 
+            // HorizontalScroll
+            // 
+            this.HorizontalScroll.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.HorizontalScroll.Location = new System.Drawing.Point(0, 879);
+            this.HorizontalScroll.Maximum = 50;
+            this.HorizontalScroll.Minimum = -50;
+            this.HorizontalScroll.Name = "HorizontalScroll";
+            this.HorizontalScroll.Size = new System.Drawing.Size(1478, 22);
+            this.HorizontalScroll.TabIndex = 1;
+            this.HorizontalScroll.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ScrollHorizontally);
+            this.HorizontalScroll.ValueChanged += new System.EventHandler(this.HorizontalScroll_ValueChanged);
+            // 
+            // VerticalScroll
+            // 
+            this.VerticalScroll.Dock = System.Windows.Forms.DockStyle.Right;
+            this.VerticalScroll.Location = new System.Drawing.Point(1478, 0);
+            this.VerticalScroll.Maximum = 50;
+            this.VerticalScroll.Minimum = -50;
+            this.VerticalScroll.Name = "VerticalScroll";
+            this.VerticalScroll.Size = new System.Drawing.Size(18, 901);
+            this.VerticalScroll.TabIndex = 2;
+            this.VerticalScroll.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ScrollVertically);
+            this.VerticalScroll.ValueChanged += new System.EventHandler(this.VerticalScroll_ValueChanged);
             // 
             // Form1
             // 
@@ -377,6 +440,11 @@ namespace FCartographer
         private System.Windows.Forms.Panel CanvasHolder;
         private System.Windows.Forms.Button ZoomOut;
         private System.Windows.Forms.Button ZoomIn;
+        private System.Windows.Forms.VScrollBar VerticalScroll;
+        private System.Windows.Forms.HScrollBar HorizontalScroll;
+        private System.Windows.Forms.FlowLayoutPanel LayerPane;
+        private System.Windows.Forms.ComboBox LayerToAdd;
+        private System.Windows.Forms.Button AddLayer;
     }
 }
 

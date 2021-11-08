@@ -52,6 +52,7 @@ namespace FCartographer
             painting = false;
             xprime = null;
             yprime = null;
+            project.CurrentLayer().Render();
             RenderGraphics(project.GetGraphics());
         }
 
@@ -80,7 +81,7 @@ namespace FCartographer
                 xprime = e.X;
                 yprime = e.Y;
 
-                //RenderGraphics(project.GetGraphics());
+                // RenderGraphics(project.GetGraphics());
             }
         }
 
@@ -112,7 +113,7 @@ namespace FCartographer
         public Form1()
         {
             InitializeComponent();
-            NewProject(3000, 500);
+            NewProject(500, 500);
         }
 
         public void NewProject(int width, int height)
@@ -126,14 +127,17 @@ namespace FCartographer
             // Canvas init
             Canvas.Width = width;
             Canvas.Height = height;
-            Canvas.Location = new Point((int)((float)CanvasHolder.Width / 2 - (float)(Canvas.Width / 2)), (int)((float)CanvasHolder.Height / 2 - (float)(Canvas.Height / 2)));
+            SetScrollMargin(100);
+            SetScrollIncrement(50);
+            SetScrollbarDimensions();
+            CenterCanvas();
 
             // Project init
             project = new Project(width, height);
-            project.AddLayer(Layer.LayerType.HeightMap);
+            project.AddLayer(Layer.LayerType.NationMap);
 
             // Brush init
-            brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20));
+            brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), true);
 
             // Canvas interface init
             g = Canvas.CreateGraphics();

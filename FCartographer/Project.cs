@@ -23,8 +23,11 @@ namespace FCartographer
         {
             switch (type)
             {
-                case 0:
+                case Layer.LayerType.HeightMap:
                     layers.Add(new HeightLayer(width, height));
+                    break;
+                case Layer.LayerType.NationMap:
+                    layers.Add(new NationLayer(width, height));
                     break;
                 default:
                     break;
