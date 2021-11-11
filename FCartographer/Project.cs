@@ -68,6 +68,23 @@ namespace FCartographer
             return layers[current];
         }
 
+        public Layer GetLayer(int i)
+        {
+            try
+            {
+                return layers[i];
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                return null;
+            }
+        }
+
+        public int GetLayerCount()
+        {
+            return layers.Count;
+        }
+
         public Project(int w, int h)
         {
             SetCanvasSize(w, h);

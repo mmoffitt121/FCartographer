@@ -11,6 +11,10 @@ using System.Windows.Forms;
 
 namespace FCartographer
 {
+    /// <summary>
+    /// [Form1]
+    /// This is Form1
+    /// </summary>
     public partial class Form1 : Form
     {
         // Current project
@@ -40,10 +44,15 @@ namespace FCartographer
         private int? xprime = null;
         private int? yprime = null;
 
+        private int? xbegin = null;
+        private int? ybegin = null;
+
         // Mouse click on canvas
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
             painting = true;
+            xbegin = e.X;
+            ybegin = e.Y;
         }
 
         // Mouse up
@@ -141,6 +150,9 @@ namespace FCartographer
 
             // Canvas interface init
             g = Canvas.CreateGraphics();
+
+            // Layer control init
+            DisplayLayers();
         }
 
         private void ZoomIn_Click(object sender, MouseEventArgs e)

@@ -15,7 +15,13 @@ namespace FCartographer
     {
         public void DisplayLayers()
         {
+            Panel paneltemp = new Panel() { Location = new Point(10, 10) };
+            Controls.Add(paneltemp);
 
+            for (int i = 0; i < project.GetLayerCount(); i++)
+            {
+
+            }
         }
     }
 }
