@@ -11,7 +11,23 @@
             </summary>
             <summary>
             Partial Class: Form1
+            This part of Form1 controls the elevation brush settings
+            </summary>
+            <summary>
+            Partial Class: Form1
+            This part of Form1 is used for the bar at the top of the form, handling File, Edit, View, etc.
+            </summary>
+            <summary>
+            Partial Class: Form1
+            This part of Form1 is used for Layer control
+            </summary>
+            <summary>
+            Partial Class: Form1
             This part of Form1 is used for navigating the canvas; zoom, scroll, etc.
+            </summary>
+            <summary>
+            Partial Class: Form1
+            This part of Form1 controls the visibility of the panels
             </summary>
         </member>
         <member name="F:FCartographer.Form1.project">
@@ -75,11 +91,6 @@
             Draws on the canvas based on user mouse args variable e
             </summary>
         </member>
-        <member name="M:FCartographer.Form1.ZoomIn_Click(System.Object,System.Windows.Forms.MouseEventArgs)">
-            <summary>
-            Zooms in on canvas when button is clicked
-            </summary>
-        </member>
         <member name="M:FCartographer.Form1.RenderGraphics(System.Drawing.Bitmap)">
             <summary>
             Draws rendered graphics to the canvas
@@ -115,6 +126,11 @@
              the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.AddLayer_Click(System.Object,System.EventArgs)">
+            <summary>
+            Adds a layer to the project
+            </summary>
+        </member>
         <member name="M:FCartographer.Form1.DisplayLayers">
             <summary>
             Places a panel for each layer in the layer pane for user navigation.
@@ -147,6 +163,11 @@
         <member name="M:FCartographer.Form1.CenterCanvas">
             <summary>
             Centers the canvas.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.ZoomIn_Click(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Zooms in on canvas when button is clicked
             </summary>
         </member>
         <member name="M:FCartographer.Form1.ScrollVertically(System.Object,System.Windows.Forms.ScrollEventArgs)">
@@ -187,6 +208,23 @@
         <member name="M:FCartographer.Program.Main">
             <summary>
              The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:FCartographer.Project">
+            <summary>
+            Class: Project
+            This part of Form1 is used for navigating the canvas; zoom, scroll, etc.
+            </summary>
+        </member>
+        <member name="T:FCartographer.ProjectSettings">
+            <summary>
+            Class: ProjectSettings
+            Class that contains the project settings.
+            </summary>
+        </member>
+        <member name="M:FCartographer.ProjectSettings.#ctor">
+            <summary>
+            Project Settings Constructor, default variables.
             </summary>
         </member>
     </members>

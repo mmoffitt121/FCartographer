@@ -12,27 +12,39 @@ using System.Windows.Forms;
 namespace FCartographer
 {
     /// <summary>
-    /// [Form1]
-    /// This is Form1
+    /// Class: Form1
+    /// Used to interface with windows forms, holds program data.
     /// </summary>
     public partial class Form1 : Form
     {
-        // Current project
+        /// <summary>
+        /// Current project 
+        /// </summary>
         private Project project;
 
-        // Graphics to interface with project
+        /// <summary>
+        /// Graphics to interface with project
+        /// </summary>
         private Graphics g;
 
-        // If user has mouse down on canvas
+        /// <summary>
+        /// Boolean to store if use has mouse down on canvas
+        /// </summary>
         private bool painting;
 
-        // Current brush
+        /// <summary>
+        /// Holds current selected brush
+        /// </summary>
         BrushPreset brushpreset;
 
-        // Brush Array
+        /// <summary>
+        /// Array of possible brushes for the user to use
+        /// </summary>
         private IList<BrushPreset> brushes;
 
-        // Zoom Control
+        /// <summary>
+        /// Value of how zoomed in the canvas is
+        /// </summary>
         private float zoom;
 
 
@@ -40,14 +52,21 @@ namespace FCartographer
         // Mouse Control
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        // Previous mouse location storage
+        /// <summary>
+        /// Integers depicting the previous mouse location one frame before
+        /// </summary>
         private int? xprime = null;
         private int? yprime = null;
 
+        /// <summary>
+        /// Integers depicting the previous mouse location at the beginning of the brush stroke
+        /// </summary>
         private int? xbegin = null;
         private int? ybegin = null;
 
-        // Mouse click on canvas
+        /// <summary>
+        /// Fires when the mouse clicks on the canvas
+        /// </summary>
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
             painting = true;
@@ -55,7 +74,9 @@ namespace FCartographer
             ybegin = e.Y;
         }
 
-        // Mouse up
+        /// <summary>
+        /// Fires when the mouse releases
+        /// </summary>
         private void Canvas_MouseUp(object sender, MouseEventArgs e)
         {
             painting = false;
@@ -65,7 +86,9 @@ namespace FCartographer
             RenderGraphics(project.GetGraphics());
         }
 
-        // Mouse moves
+        /// <summary>
+        /// Fires when the mouse moves
+        /// </summary>
         private void Canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (painting)
@@ -79,8 +102,10 @@ namespace FCartographer
         // Tools
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        // -=-= Brush Tool =-=-
-        // Parameters: 
+        /// <summary>
+        /// Brush tool
+        /// Draws on the canvas based on user mouse args variable e
+        /// </summary>
         private void BrushTool(object sender, MouseEventArgs e)
         {
             if (painting)
@@ -95,18 +120,13 @@ namespace FCartographer
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-        // Zoom
-        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-
-        // Zoom In
-        private void ZoomIn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Rendering
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+        /// <summary>
+        /// Draws rendered graphics to the canvas
+        /// Input: Bitmap display -> Already rendered graphics to display to user
+        /// </summary>
         private void RenderGraphics(Bitmap display)
         {
             g.DrawImage(display, 0, 0);
@@ -117,23 +137,29 @@ namespace FCartographer
         // Initialization
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        // Form1 Constructor
-        // Initializes program
+        /// <summary>
+        /// Initializes Form1
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
             NewProject(500, 500);
         }
 
+        /// <summary>
+        /// Creates a new project
+        /// Input:  int width -> Project width
+        ///         int height -> Project height
+        /// </summary>
         public void NewProject(int width, int height)
         {
-            // Settings init
+            // Settings Initialization
             ProjectSettings settings = new ProjectSettings();
 
-            // Control init
+            // Control Initialization
             painting = false;
 
-            // Canvas init
+            // Canvas Initialization
             Canvas.Width = width;
             Canvas.Height = height;
             SetScrollMargin(100);
@@ -141,23 +167,20 @@ namespace FCartographer
             SetScrollbarDimensions();
             CenterCanvas();
 
-            // Project init
+            // Project Initialization
             project = new Project(width, height);
             project.AddLayer(Layer.LayerType.NationMap);
 
-            // Brush init
+            // Brush Initialization
             brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), true);
 
-            // Canvas interface init
+            // Canvas Interface Initialization
             g = Canvas.CreateGraphics();
 
-            // Layer control init
+            // Layer Control Initialization
             DisplayLayers();
-        }
 
-        private void ZoomIn_Click(object sender, MouseEventArgs e)
-        {
-            System.Diagnostics.Debug.WriteLine("Click!");
+            ReadySettingsPanels(project.CurrentLayer());
         }
     }
 }

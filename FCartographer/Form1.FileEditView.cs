@@ -11,6 +11,10 @@ using System.Windows.Forms;
 
 namespace FCartographer
 {
+    /// <summary>
+    /// Partial Class: Form1
+    /// This part of Form1 is used for the bar at the top of the form, handling File, Edit, View, etc.
+    /// </summary>
     public partial class Form1 : Form
     {
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

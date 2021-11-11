@@ -50,7 +50,6 @@ namespace FCartographer
         public void SetColor(int r, int g, int b)
         {
             color = Color.FromArgb(255, r, g, b);
-            System.Diagnostics.Debug.WriteLine(r + " " + g + " " + b);
             CalculateOutputBrush();
         }
 

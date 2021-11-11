@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace FCartographer
 {
+    /// <summary>
+    /// Class: Project
+    /// This part of Form1 is used for navigating the canvas; zoom, scroll, etc.
+    /// </summary>
     public class Project
     {
         private String name;

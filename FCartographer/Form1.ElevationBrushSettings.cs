@@ -11,6 +11,10 @@ using System.Windows.Forms;
 
 namespace FCartographer
 {
+    /// <summary>
+    /// Partial Class: Form1
+    /// This part of Form1 controls the elevation brush settings
+    /// </summary>
     public partial class Form1 : Form
     {
         private void StrengthControl_Scroll(object sender, EventArgs e)
