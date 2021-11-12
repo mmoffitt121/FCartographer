@@ -35,7 +35,7 @@ namespace FCartographer
         /// <summary>
         /// Holds current selected brush
         /// </summary>
-        BrushPreset brushpreset;
+        BrushPreset terrain_brushpreset;
 
         /// <summary>
         /// Array of possible brushes for the user to use
@@ -69,7 +69,14 @@ namespace FCartographer
         /// </summary>
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            painting = true;
+            if (project.CurrentLayer() != null)
+            {
+                painting = true;
+            }
+            else
+            {
+                painting = false;
+            }
             xbegin = e.X;
             ybegin = e.Y;
         }
@@ -82,8 +89,12 @@ namespace FCartographer
             painting = false;
             xprime = null;
             yprime = null;
-            project.CurrentLayer().Render();
-            RenderGraphics(project.GetGraphics());
+            if (project.CurrentLayer() != null)
+            {
+                project.CurrentLayer().Render();
+                RenderGraphics(project.GetGraphics());
+            }
+
         }
 
         /// <summary>
@@ -110,8 +121,8 @@ namespace FCartographer
         {
             if (painting)
             {
-                project.Draw(brushpreset, e);
-                project.DrawTemp(brushpreset, e, g);
+                project.Draw(terrain_brushpreset, e);
+                project.DrawTemp(terrain_brushpreset, e, g);
                 xprime = e.X;
                 yprime = e.Y;
 
@@ -172,7 +183,7 @@ namespace FCartographer
             project.AddLayer(Layer.LayerType.NationMap);
 
             // Brush Initialization
-            brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), true);
+            terrain_brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), true);
 
             // Canvas Interface Initialization
             g = Canvas.CreateGraphics();

@@ -19,17 +19,17 @@ namespace FCartographer
     {
         private void StrengthControl_Scroll(object sender, EventArgs e)
         {
-            brushpreset.SetOpacity(StrengthControl.Value);
+            terrain_brushpreset.SetOpacity(StrengthControl.Value);
         }
 
         private void SizeControl_Scroll(object sender, EventArgs e)
         {
-            brushpreset.SetSize(SizeControl.Value);
+            terrain_brushpreset.SetSize(SizeControl.Value);
         }
 
         private void HeightControl_Scroll(object sender, EventArgs e)
         {
-            brushpreset.SetColor(HeightControl.Value, HeightControl.Value, HeightControl.Value);
+            terrain_brushpreset.SetColor(HeightControl.Value, HeightControl.Value, HeightControl.Value);
         }
     }
 }

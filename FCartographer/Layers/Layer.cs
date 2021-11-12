@@ -8,9 +8,10 @@ using System.Windows.Forms;
 
 namespace FCartographer
 {
-    public class Layer
+    public class Layer : IDisposable
     {
         private String name;
+        private bool visible;
 
         private int width;
         private int height;
@@ -22,6 +23,8 @@ namespace FCartographer
 
         public Graphics data_g;
         public Graphics g;
+
+        private bool disposedValue;
 
         public virtual void Render()
         {
@@ -84,6 +87,28 @@ namespace FCartographer
             Ocean,
             NationMap,
             Subdivision
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    data.Dispose();
+                    tempdata.Dispose();
+
+                    g.Dispose();
+                    data_g.Dispose();
+                }
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

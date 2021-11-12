@@ -44,6 +44,11 @@ namespace FCartographer
         {
             ClearLayerPane();
 
+            if (project.GetLayerCount() == 0)
+            {
+                return;
+            }
+
             for (int i = project.GetLayerCount() - 1; i >= 0; i--)
             {
                 // The Base Panel
@@ -70,6 +75,7 @@ namespace FCartographer
                     Height = 44
                 };
 
+                // Text that displays layer's name
                 Label text = new Label()
                 {
                     Text = project.GetLayer(i).Name(),
@@ -77,9 +83,38 @@ namespace FCartographer
                     Location = new Point(48, 2)
                 };
 
+                Button delbutton = new Button()
+                {
+                    Location = new Point(137, 2),
+                    BackColor = Color.DarkRed,
+                    Width = 15,
+                    Height = 15
+                };
+
+                Button upbutton = new Button()
+                {
+                    Location = new Point(137, 17),
+                    Width = 15,
+                    Height = 15
+                };
+
+                Button downbutton = new Button()
+                {
+                    Location = new Point(137, 32),
+                    Width = 15,
+                    Height = 15
+                };
+
                 text.Click += LayerPanelChild_Select;
                 icon.Click += LayerPanelChild_Select;
 
+                delbutton.Click += DeleteLayer_Click;
+                upbutton.Click += LayerUp_Click;
+                downbutton.Click += LayerDown_Click;
+
+                panel.Controls.Add(delbutton);
+                panel.Controls.Add(upbutton);
+                panel.Controls.Add(downbutton);
                 panel.Controls.Add(text);
                 panel.Controls.Add(icon);
 
@@ -87,6 +122,8 @@ namespace FCartographer
 
                 LayerPane.Controls.Add(panel);
             }
+
+            DisplaySelectedLayer();
         }
 
         private void ClearLayerPane()
@@ -129,13 +166,70 @@ namespace FCartographer
             DisplaySelectedLayer();
         }
 
-        public void DisplaySelectedLayer()
+        private void DisplaySelectedLayer()
         {
             for (int i = 0; i < LayerPane.Controls.Count; i++)
             {
                 LayerPane.Controls[i].BackColor = Color.NavajoWhite;
             }
             LayerPane.Controls[LayerPane.Controls.Count - project.GetCurrentIndex() - 1].BackColor = Color.White;
+
+        }
+
+        private void DeleteLayer_Click(object sender, EventArgs e)
+        {
+            Control csender;
+            try
+            {
+                csender = (Control)sender;
+                project.DeleteLayer(csender.Parent.TabIndex);
+
+                if (project.GetLayerCount() - 1 >= 0)
+                {
+                    project.SelectLayer(Math.Clamp(csender.Parent.TabIndex, 0, project.GetLayerCount() - 1));
+                }
+
+                DisplayLayers();
+                RenderGraphics(project.GetGraphics());
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void LayerUp_Click(object sender, EventArgs e)
+        {
+            Control csender;
+            try
+            {
+                csender = (Control)sender;
+                project.SwapLayers(csender.Parent.TabIndex, Math.Clamp(csender.Parent.TabIndex + 1, 0, LayerPane.Controls.Count - 1));
+                project.SelectLayer(Math.Clamp(Math.Clamp(csender.Parent.TabIndex + 1, 0, LayerPane.Controls.Count - 1), 0, LayerPane.Controls.Count - 1));
+                DisplayLayers();
+                RenderGraphics(project.GetGraphics());
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void LayerDown_Click(object sender, EventArgs e)
+        {
+            Control csender;
+            try
+            {
+                csender = (Control)sender;
+                project.SwapLayers(csender.Parent.TabIndex, Math.Clamp(csender.Parent.TabIndex - 1, 0, LayerPane.Controls.Count - 1));
+                project.SelectLayer(Math.Clamp(Math.Clamp(csender.Parent.TabIndex - 1, 0, LayerPane.Controls.Count - 1), 0, LayerPane.Controls.Count - 1));
+                DisplayLayers();
+                RenderGraphics(project.GetGraphics());
+            }
+            catch
+            {
+                return;
+            }
         }
     }
 }

@@ -6,12 +6,12 @@
     <members>
         <member name="T:FCartographer.Form1">
             <summary>
-            Class: Form1
-            Used to interface with windows forms, holds program data.
-            </summary>
-            <summary>
             Partial Class: Form1
             This part of Form1 controls the elevation brush settings
+            </summary>
+            <summary>
+            Class: Form1
+            Used to interface with windows forms, holds program data.
             </summary>
             <summary>
             Partial Class: Form1
@@ -45,7 +45,7 @@
             Boolean to store if use has mouse down on canvas
             </summary>
         </member>
-        <member name="F:FCartographer.Form1.brushpreset">
+        <member name="F:FCartographer.Form1.terrain_brushpreset">
             <summary>
             Holds current selected brush
             </summary>

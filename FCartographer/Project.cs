@@ -40,6 +40,34 @@ namespace FCartographer
             SelectLayer(layers.Count - 1);
         }
 
+        public void DeleteLayer(int to_delete)
+        {
+            try
+            {
+                Layer layer = layers[to_delete];
+                layers.RemoveAt(to_delete);
+                layer.Dispose();
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        public void SwapLayers(int s1, int s2)
+        {
+            try
+            {
+                Layer temp = layers[s1];
+                layers[s1] = layers[s2];
+                layers[s2] = temp;
+            }
+            catch
+            {
+                return;
+            }
+        }
+
         public void AddBrushPreset(string filename)
         {
 
@@ -53,23 +81,58 @@ namespace FCartographer
 
         public void SelectLayer(int layer)
         {
-            g = Graphics.FromImage(layers[layer].GetData());
-            current = layer;
+            try
+            {
+                g = Graphics.FromImage(layers[layer].GetData());
+                current = layer;
+            }
+            catch
+            {
+                current = -1;
+            }
+            
         }
 
         public void Draw(BrushPreset brush, MouseEventArgs e)
         {
-            layers[current].Draw(brush, e); 
+            try
+            {
+                layers[current].Draw(brush, e);
+            }
+            catch
+            {
+                return;
+            }
         }
 
         public void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr)
         {
-            layers[current].DrawTemp(brush, e, gr);
+            try
+            {
+                layers[current].DrawTemp(brush, e, gr);
+            }
+            catch
+            {
+                return;
+            }
         }
 
         public Layer CurrentLayer()
         {
-            return layers[current];
+            if (layers.Count < 1)
+            {
+                return null;
+            }
+
+            try
+            {
+                return layers[current];
+            }
+            catch
+            {
+                return null;
+            }
+            
         }
 
         public int GetCurrentIndex()
@@ -100,6 +163,7 @@ namespace FCartographer
             layers = new List<Layer>();
             output = new Bitmap(width, height);
             outg = Graphics.FromImage(output);
+            current = -1;
         }
 
         public Bitmap GetGraphics()
