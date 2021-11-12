@@ -38,6 +38,7 @@ namespace FCartographer
         public HeightLayer(int x, int y) : base(x, y)
         {
             SetType(LayerType.HeightMap);
+            SetName("Terrain layer");
         }
     }
 }

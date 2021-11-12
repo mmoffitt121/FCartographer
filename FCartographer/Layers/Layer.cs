@@ -48,6 +48,16 @@ namespace FCartographer
             return type;
         }
 
+        public void SetName(string _name)
+        {
+            name = _name;
+        }
+
+        public string Name()
+        {
+            return name;
+        }
+
         public virtual void Draw(BrushPreset brush, MouseEventArgs e)
         {
 

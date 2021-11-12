@@ -134,6 +134,7 @@
         <member name="M:FCartographer.Form1.DisplayLayers">
             <summary>
             Places a panel for each layer in the layer pane for user navigation.
+            Also places references to each layer panel object in List of layer display objects.
             </summary>
         </member>
         <member name="M:FCartographer.Form1.UpdateCanvasLocation">

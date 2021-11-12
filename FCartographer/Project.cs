@@ -72,6 +72,11 @@ namespace FCartographer
             return layers[current];
         }
 
+        public int GetCurrentIndex()
+        {
+            return current;
+        }
+
         public Layer GetLayer(int i)
         {
             try

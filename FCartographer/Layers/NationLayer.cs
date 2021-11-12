@@ -40,6 +40,7 @@ namespace FCartographer
         public NationLayer(int x, int y) : base(x, y)
         {
             SetType(LayerType.NationMap);
+            SetName("Nation layer");
         }
     }
 }
