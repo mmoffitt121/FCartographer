@@ -12,7 +12,6 @@ using System.Windows.Forms;
 namespace FCartographer
 {
     /// <summary>
-    /// Partial Class: Form1
     /// This part of Form1 is used for Layer control
     /// </summary>
     public partial class Form1 : Form
@@ -126,6 +125,9 @@ namespace FCartographer
             DisplaySelectedLayer();
         }
 
+        /// <summary>
+        /// Calls Dispose() on every Layer Panel in the viewer
+        /// </summary>
         private void ClearLayerPane()
         {
             for (int i = LayerPane.Controls.Count - 1; i >= 0; i--)
@@ -134,6 +136,13 @@ namespace FCartographer
             }
         }
 
+        /// <summary>
+        /// Event that fires when a child of a layer pane is clicked.
+        /// 
+        /// This allows the user to click anywhere on a layer rather than just the empty space in the background.
+        /// 
+        /// Gets the layer pane, then calls LayerPanel_Select, which is the event that fires when the user clicks on the panel normally.
+        /// </summary>
         private void LayerPanelChild_Select(object sender, EventArgs e)
         {
             Control csender;
@@ -148,6 +157,9 @@ namespace FCartographer
             }
         }
 
+        /// <summary>
+        /// Event that fires when a layer pane is clicked. It calls project.SelectLayer() to select the layer clicked.
+        /// </summary>
         private void LayerPanel_Select(object sender, EventArgs e)
         {
             Panel psender;
@@ -166,6 +178,9 @@ namespace FCartographer
             DisplaySelectedLayer();
         }
 
+        /// <summary>
+        /// Turns all layers the default layer panel color, and colors the currently selected the selected layer color.
+        /// </summary>
         private void DisplaySelectedLayer()
         {
             for (int i = 0; i < LayerPane.Controls.Count; i++)
@@ -174,8 +189,12 @@ namespace FCartographer
             }
             LayerPane.Controls[LayerPane.Controls.Count - project.GetCurrentIndex() - 1].BackColor = Color.White;
 
+            ReadySettingsPanels(project.CurrentLayer());
         }
 
+        /// <summary>
+        /// Event that fires when a delete layer button was clicked. Calls the project object to delete the selected layer.
+        /// </summary>
         private void DeleteLayer_Click(object sender, EventArgs e)
         {
             Control csender;
@@ -198,6 +217,9 @@ namespace FCartographer
             }
         }
 
+        /// <summary>
+        /// Event that fires when a move layer up button was clicked. Calls the project object to switch the selected layer with the one above.
+        /// </summary>
         private void LayerUp_Click(object sender, EventArgs e)
         {
             Control csender;
@@ -215,6 +237,9 @@ namespace FCartographer
             }
         }
 
+        /// <summary>
+        /// Event that fires when a move layer down button was clicked. Calls the project object to switch the selected layer with the one below.
+        /// </summary>
         private void LayerDown_Click(object sender, EventArgs e)
         {
             Control csender;

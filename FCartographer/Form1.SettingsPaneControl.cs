@@ -12,13 +12,17 @@ using System.Windows.Forms;
 namespace FCartographer
 {
     /// <summary>
-    /// Partial Class: Form1
     /// This part of Form1 controls the visibility of the panels
     /// </summary>
     public partial class Form1 : Form
     {
         private void ReadySettingsPanels(Layer layer)
         {
+            if (layer == null)
+            {
+                DisableAllSettingsPanels();
+                return;
+            }
             switch (layer.GetType())
             {
                 case Layer.LayerType.HeightMap:

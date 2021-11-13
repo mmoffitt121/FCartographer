@@ -8,8 +8,7 @@ using System.Windows.Forms;
 namespace FCartographer
 {
     /// <summary>
-    /// Class: Project
-    /// This part of Form1 is used for navigating the canvas; zoom, scroll, etc.
+    /// Holds project data including dimensions, layers, and data interfaces.
     /// </summary>
     public class Project
     {
@@ -23,6 +22,9 @@ namespace FCartographer
 
         private int width, height;
 
+        /// <summary>
+        /// AddLayer
+        /// </summary>
         public void AddLayer(Layer.LayerType type)
         {
             switch (type)

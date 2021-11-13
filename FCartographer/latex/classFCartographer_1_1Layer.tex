@@ -1,0 +1,74 @@
+\hypertarget{classFCartographer_1_1Layer}{}\doxysection{FCartographer.\+Layer Class Reference}
+\label{classFCartographer_1_1Layer}\index{FCartographer.Layer@{FCartographer.Layer}}
+Inheritance diagram for FCartographer.\+Layer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classFCartographer_1_1Layer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_acb2403c70fbc1107ab1e9f2b27d93eb2}\label{classFCartographer_1_1Layer_acb2403c70fbc1107ab1e9f2b27d93eb2}} 
+enum {\bfseries Layer\+Type} \{ {\bfseries Height\+Map}
+, {\bfseries Ocean}
+, {\bfseries Nation\+Map}
+, {\bfseries Subdivision}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_a76c2a8c0d2e507a929a029cb12f3c3e7}\label{classFCartographer_1_1Layer_a76c2a8c0d2e507a929a029cb12f3c3e7}} 
+virtual void {\bfseries Render} ()
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_ad58446fb8d2c2c3d28c91b0bf19f6114}\label{classFCartographer_1_1Layer_ad58446fb8d2c2c3d28c91b0bf19f6114}} 
+Bitmap {\bfseries Get\+Data} ()
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_a57be953bd7e04a8bf1ff843a3d1bdb7d}\label{classFCartographer_1_1Layer_a57be953bd7e04a8bf1ff843a3d1bdb7d}} 
+Bitmap {\bfseries Get\+Temp\+Data} ()
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_af6430f7038ab87e2b5ef694cf60350d9}\label{classFCartographer_1_1Layer_af6430f7038ab87e2b5ef694cf60350d9}} 
+void {\bfseries Set\+Type} (Layer\+Type input)
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_ac853ed18c8aa801d30373590e7724225}\label{classFCartographer_1_1Layer_ac853ed18c8aa801d30373590e7724225}} 
+Layer\+Type {\bfseries Get\+Type} ()
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_a076ccaca609ae3a3c794e597bd9e2e2a}\label{classFCartographer_1_1Layer_a076ccaca609ae3a3c794e597bd9e2e2a}} 
+void {\bfseries Set\+Name} (string \+\_\+name)
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_a2f27214071de0e2417a0e4340a5c8907}\label{classFCartographer_1_1Layer_a2f27214071de0e2417a0e4340a5c8907}} 
+string {\bfseries Name} ()
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_ae95d0f55c68ded755ee75d4ff286b2dd}\label{classFCartographer_1_1Layer_ae95d0f55c68ded755ee75d4ff286b2dd}} 
+virtual void {\bfseries Draw} (\mbox{\hyperlink{classFCartographer_1_1BrushPreset}{Brush\+Preset}} brush, Mouse\+Event\+Args e)
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_a7b30cc76e2e20f0194fba78a02c4c2b9}\label{classFCartographer_1_1Layer_a7b30cc76e2e20f0194fba78a02c4c2b9}} 
+virtual void {\bfseries Draw\+Temp} (\mbox{\hyperlink{classFCartographer_1_1BrushPreset}{Brush\+Preset}} brush, Mouse\+Event\+Args e, Graphics gr)
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_abac5e8cd21d735e9e9e3939cdc4b72fd}\label{classFCartographer_1_1Layer_abac5e8cd21d735e9e9e3939cdc4b72fd}} 
+{\bfseries Layer} (int x, int y)
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_a810f0ed5ceb127ceec08dfc65589033e}\label{classFCartographer_1_1Layer_a810f0ed5ceb127ceec08dfc65589033e}} 
+void {\bfseries Dispose} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_a06c5eb8b37d53714681159a68a6bcf89}\label{classFCartographer_1_1Layer_a06c5eb8b37d53714681159a68a6bcf89}} 
+Graphics {\bfseries data\+\_\+g}
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_a433cb5a3e5de1258fcdb093d97740a58}\label{classFCartographer_1_1Layer_a433cb5a3e5de1258fcdb093d97740a58}} 
+Graphics {\bfseries g}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFCartographer_1_1Layer_aa6a32d2b5250dc1420796ec7b2093f1e}\label{classFCartographer_1_1Layer_aa6a32d2b5250dc1420796ec7b2093f1e}} 
+virtual void {\bfseries Dispose} (bool disposing)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Layers/Layer.\+cs\end{DoxyCompactItemize}

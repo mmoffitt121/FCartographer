@@ -12,7 +12,6 @@ using System.Windows.Forms;
 namespace FCartographer
 {
     /// <summary>
-    /// Partial Class: Form1
     /// This part of Form1 is used for navigating the canvas; zoom, scroll, etc.
     /// </summary>
     public partial class Form1 : Form

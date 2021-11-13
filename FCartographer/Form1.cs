@@ -12,7 +12,6 @@ using System.Windows.Forms;
 namespace FCartographer
 {
     /// <summary>
-    /// Class: Form1
     /// Used to interface with windows forms, holds program data.
     /// </summary>
     public partial class Form1 : Form

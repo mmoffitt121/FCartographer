@@ -10,23 +10,18 @@
             This part of Form1 controls the elevation brush settings
             </summary>
             <summary>
-            Class: Form1
             Used to interface with windows forms, holds program data.
             </summary>
             <summary>
-            Partial Class: Form1
             This part of Form1 is used for the bar at the top of the form, handling File, Edit, View, etc.
             </summary>
             <summary>
-            Partial Class: Form1
             This part of Form1 is used for Layer control
             </summary>
             <summary>
-            Partial Class: Form1
             This part of Form1 is used for navigating the canvas; zoom, scroll, etc.
             </summary>
             <summary>
-            Partial Class: Form1
             This part of Form1 controls the visibility of the panels
             </summary>
         </member>
@@ -137,6 +132,45 @@
             Also places references to each layer panel object in List of layer display objects.
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.ClearLayerPane">
+            <summary>
+            Calls Dispose() on every Layer Panel in the viewer
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.LayerPanelChild_Select(System.Object,System.EventArgs)">
+            <summary>
+            Event that fires when a child of a layer pane is clicked.
+            
+            This allows the user to click anywhere on a layer rather than just the empty space in the background.
+            
+            Gets the layer pane, then calls LayerPanel_Select, which is the event that fires when the user clicks on the panel normally.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.LayerPanel_Select(System.Object,System.EventArgs)">
+            <summary>
+            Event that fires when a layer pane is clicked. It calls project.SelectLayer() to select the layer clicked.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.DisplaySelectedLayer">
+            <summary>
+            Turns all layers the default layer panel color, and colors the currently selected the selected layer color.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.DeleteLayer_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event that fires when a delete layer button was clicked. Calls the project object to delete the selected layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.LayerUp_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event that fires when a move layer up button was clicked. Calls the project object to switch the selected layer with the one above.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.LayerDown_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event that fires when a move layer down button was clicked. Calls the project object to switch the selected layer with the one below.
+            </summary>
+        </member>
         <member name="M:FCartographer.Form1.UpdateCanvasLocation">
             <summary>
             Applies this class' internal canvas location to the canvas
@@ -213,13 +247,16 @@
         </member>
         <member name="T:FCartographer.Project">
             <summary>
-            Class: Project
-            This part of Form1 is used for navigating the canvas; zoom, scroll, etc.
+            Holds project data including dimensions, layers, and data interfaces.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.AddLayer(FCartographer.Layer.LayerType)">
+            <summary>
+            AddLayer
             </summary>
         </member>
         <member name="T:FCartographer.ProjectSettings">
             <summary>
-            Class: ProjectSettings
             Class that contains the project settings.
             </summary>
         </member>

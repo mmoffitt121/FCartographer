@@ -7,7 +7,6 @@ using System.Drawing;
 namespace FCartographer
 {
     /// <summary>
-    /// Class: ProjectSettings
     /// Class that contains the project settings.
     /// </summary>
     public class ProjectSettings
