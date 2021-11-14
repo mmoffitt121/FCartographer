@@ -237,6 +237,7 @@ namespace FCartographer
             this.NationsHeightControl.Size = new System.Drawing.Size(104, 45);
             this.NationsHeightControl.TabIndex = 5;
             this.NationsHeightControl.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.NationsHeightControl.Scroll += new System.EventHandler(this.NationsHeightControl_Scroll);
             // 
             // NationsSizeLabel
             // 
@@ -259,6 +260,7 @@ namespace FCartographer
             this.NationsSizeControl.TabIndex = 3;
             this.NationsSizeControl.TickStyle = System.Windows.Forms.TickStyle.None;
             this.NationsSizeControl.Value = 15;
+            this.NationsSizeControl.Scroll += new System.EventHandler(this.NationsSizeControl_Scroll);
             // 
             // NationsStrengthLabel
             // 
@@ -281,6 +283,7 @@ namespace FCartographer
             this.NationsStrengthControl.TabIndex = 1;
             this.NationsStrengthControl.TickStyle = System.Windows.Forms.TickStyle.None;
             this.NationsStrengthControl.Value = 10;
+            this.NationsStrengthControl.Scroll += new System.EventHandler(this.NationsStrengthControl_Scroll);
             // 
             // menuStrip1
             // 

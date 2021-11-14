@@ -32,9 +32,14 @@ namespace FCartographer
         private bool painting;
 
         /// <summary>
-        /// Holds current selected brush
+        /// Holds current selected terrain brush
         /// </summary>
-        BrushPreset terrain_brushpreset;
+        private BrushPreset terrain_brushpreset;
+
+        /// <summary>
+        /// Holds current selected terrain brush
+        /// </summary>
+        private BrushPreset nations_brushpreset;
 
         /// <summary>
         /// Array of possible brushes for the user to use
@@ -182,7 +187,8 @@ namespace FCartographer
             project.AddLayer(Layer.LayerType.NationMap);
 
             // Brush Initialization
-            terrain_brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), true);
+            terrain_brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), false);
+            nations_brushpreset = new BrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), true);
 
             // Canvas Interface Initialization
             g = Canvas.CreateGraphics();

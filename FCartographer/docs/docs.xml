@@ -25,6 +25,21 @@
             This part of Form1 controls the visibility of the panels
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.StrengthControl_Scroll(System.Object,System.EventArgs)">
+            <summary>
+            Sets the opacity for the Terrain Brush from Terrain Brush strength Slider
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.SizeControl_Scroll(System.Object,System.EventArgs)">
+            <summary>
+            Sets the size for the Terrain Brush from Terrain Brush size Slider
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.HeightControl_Scroll(System.Object,System.EventArgs)">
+            <summary>
+            Sets the Target Height for the Terrain Brush from Terrain Brush size Slider
+            </summary>
+        </member>
         <member name="F:FCartographer.Form1.project">
             <summary>
             Current project 
@@ -42,7 +57,12 @@
         </member>
         <member name="F:FCartographer.Form1.terrain_brushpreset">
             <summary>
-            Holds current selected brush
+            Holds current selected terrain brush
+            </summary>
+        </member>
+        <member name="F:FCartographer.Form1.nations_brushpreset">
+            <summary>
+            Holds current selected terrain brush
             </summary>
         </member>
         <member name="F:FCartographer.Form1.brushes">
