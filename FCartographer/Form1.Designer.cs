@@ -40,12 +40,8 @@ namespace FCartographer
             this.StrengthControl = new System.Windows.Forms.TrackBar();
             this.panel2 = new System.Windows.Forms.Panel();
             this.NationsSettings = new System.Windows.Forms.Panel();
-            this.NationsHeightLabel = new System.Windows.Forms.Label();
-            this.NationsHeightControl = new System.Windows.Forms.TrackBar();
             this.NationsSizeLabel = new System.Windows.Forms.Label();
             this.NationsSizeControl = new System.Windows.Forms.TrackBar();
-            this.NationsStrengthLabel = new System.Windows.Forms.Label();
-            this.NationsStrengthControl = new System.Windows.Forms.TrackBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,9 +72,7 @@ namespace FCartographer
             ((System.ComponentModel.ISupportInitialize)(this.StrengthControl)).BeginInit();
             this.panel2.SuspendLayout();
             this.NationsSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NationsHeightControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NationsSizeControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NationsStrengthControl)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.Navigation.SuspendLayout();
             this.CanvasHolder.SuspendLayout();
@@ -205,39 +199,13 @@ namespace FCartographer
             // 
             this.NationsSettings.BackColor = System.Drawing.Color.BlanchedAlmond;
             this.NationsSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.NationsSettings.Controls.Add(this.NationsHeightLabel);
-            this.NationsSettings.Controls.Add(this.NationsHeightControl);
             this.NationsSettings.Controls.Add(this.NationsSizeLabel);
             this.NationsSettings.Controls.Add(this.NationsSizeControl);
-            this.NationsSettings.Controls.Add(this.NationsStrengthLabel);
-            this.NationsSettings.Controls.Add(this.NationsStrengthControl);
             this.NationsSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NationsSettings.Location = new System.Drawing.Point(0, 0);
             this.NationsSettings.Name = "NationsSettings";
             this.NationsSettings.Size = new System.Drawing.Size(1705, 38);
             this.NationsSettings.TabIndex = 1;
-            // 
-            // NationsHeightLabel
-            // 
-            this.NationsHeightLabel.AutoSize = true;
-            this.NationsHeightLabel.BackColor = System.Drawing.Color.BlanchedAlmond;
-            this.NationsHeightLabel.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.NationsHeightLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.NationsHeightLabel.Location = new System.Drawing.Point(329, 5);
-            this.NationsHeightLabel.Name = "NationsHeightLabel";
-            this.NationsHeightLabel.Size = new System.Drawing.Size(45, 17);
-            this.NationsHeightLabel.TabIndex = 6;
-            this.NationsHeightLabel.Text = "Height";
-            // 
-            // NationsHeightControl
-            // 
-            this.NationsHeightControl.Location = new System.Drawing.Point(380, 5);
-            this.NationsHeightControl.Maximum = 255;
-            this.NationsHeightControl.Name = "NationsHeightControl";
-            this.NationsHeightControl.Size = new System.Drawing.Size(104, 45);
-            this.NationsHeightControl.TabIndex = 5;
-            this.NationsHeightControl.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.NationsHeightControl.Scroll += new System.EventHandler(this.NationsHeightControl_Scroll);
             // 
             // NationsSizeLabel
             // 
@@ -245,7 +213,7 @@ namespace FCartographer
             this.NationsSizeLabel.BackColor = System.Drawing.Color.BlanchedAlmond;
             this.NationsSizeLabel.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NationsSizeLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.NationsSizeLabel.Location = new System.Drawing.Point(182, 5);
+            this.NationsSizeLabel.Location = new System.Drawing.Point(11, 5);
             this.NationsSizeLabel.Name = "NationsSizeLabel";
             this.NationsSizeLabel.Size = new System.Drawing.Size(31, 17);
             this.NationsSizeLabel.TabIndex = 4;
@@ -253,37 +221,15 @@ namespace FCartographer
             // 
             // NationsSizeControl
             // 
-            this.NationsSizeControl.Location = new System.Drawing.Point(219, 5);
+            this.NationsSizeControl.Location = new System.Drawing.Point(48, 5);
             this.NationsSizeControl.Maximum = 100;
+            this.NationsSizeControl.Minimum = 1;
             this.NationsSizeControl.Name = "NationsSizeControl";
             this.NationsSizeControl.Size = new System.Drawing.Size(104, 45);
             this.NationsSizeControl.TabIndex = 3;
             this.NationsSizeControl.TickStyle = System.Windows.Forms.TickStyle.None;
             this.NationsSizeControl.Value = 15;
             this.NationsSizeControl.Scroll += new System.EventHandler(this.NationsSizeControl_Scroll);
-            // 
-            // NationsStrengthLabel
-            // 
-            this.NationsStrengthLabel.AutoSize = true;
-            this.NationsStrengthLabel.BackColor = System.Drawing.Color.BlanchedAlmond;
-            this.NationsStrengthLabel.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.NationsStrengthLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.NationsStrengthLabel.Location = new System.Drawing.Point(10, 5);
-            this.NationsStrengthLabel.Name = "NationsStrengthLabel";
-            this.NationsStrengthLabel.Size = new System.Drawing.Size(56, 17);
-            this.NationsStrengthLabel.TabIndex = 2;
-            this.NationsStrengthLabel.Text = "Strength";
-            // 
-            // NationsStrengthControl
-            // 
-            this.NationsStrengthControl.Location = new System.Drawing.Point(72, 5);
-            this.NationsStrengthControl.Maximum = 50;
-            this.NationsStrengthControl.Name = "NationsStrengthControl";
-            this.NationsStrengthControl.Size = new System.Drawing.Size(104, 45);
-            this.NationsStrengthControl.TabIndex = 1;
-            this.NationsStrengthControl.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.NationsStrengthControl.Value = 10;
-            this.NationsStrengthControl.Scroll += new System.EventHandler(this.NationsStrengthControl_Scroll);
             // 
             // menuStrip1
             // 
@@ -522,9 +468,7 @@ namespace FCartographer
             this.panel2.ResumeLayout(false);
             this.NationsSettings.ResumeLayout(false);
             this.NationsSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NationsHeightControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NationsSizeControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NationsStrengthControl)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.Navigation.ResumeLayout(false);
@@ -571,12 +515,8 @@ namespace FCartographer
         private System.Windows.Forms.ComboBox LayerToAdd;
         private System.Windows.Forms.Button AddLayer;
         private System.Windows.Forms.Panel NationsSettings;
-        private System.Windows.Forms.Label NationsHeightLabel;
-        private System.Windows.Forms.TrackBar NationsHeightControl;
         private System.Windows.Forms.Label NationsSizeLabel;
         private System.Windows.Forms.TrackBar NationsSizeControl;
-        private System.Windows.Forms.Label NationsStrengthLabel;
-        private System.Windows.Forms.TrackBar NationsStrengthControl;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

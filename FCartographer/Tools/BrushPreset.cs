@@ -85,7 +85,7 @@ namespace FCartographer
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
         // Calculates the color and opacity of the output brush
-        public void CalculateOutputBrush()
+        public virtual void CalculateOutputBrush()
         {
 
             ColorMatrix cmatrix = new ColorMatrix();
