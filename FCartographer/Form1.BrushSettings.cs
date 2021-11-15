@@ -44,17 +44,17 @@ namespace FCartographer
 
         private void NationsHeightControl_Scroll(object sender, EventArgs e)
         {
-
+            nations_brushpreset.SetOpacity(NationsStrengthControl.Value);
         }
 
         private void NationsSizeControl_Scroll(object sender, EventArgs e)
         {
-
+            nations_brushpreset.SetSize(NationsSizeControl.Value);
         }
 
         private void NationsStrengthControl_Scroll(object sender, EventArgs e)
         {
-
+            nations_brushpreset.SetColor(HeightControl.Value, HeightControl.Value, HeightControl.Value);
         }
     }
 }

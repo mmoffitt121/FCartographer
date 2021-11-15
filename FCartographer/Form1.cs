@@ -125,8 +125,17 @@ namespace FCartographer
         {
             if (painting)
             {
-                project.Draw(terrain_brushpreset, e);
-                project.DrawTemp(terrain_brushpreset, e, g);
+                switch (project.CurrentLayer().GetType())
+                {
+                    case Layer.LayerType.HeightMap:
+                        project.Draw(terrain_brushpreset, e);
+                        project.DrawTemp(terrain_brushpreset, e, g);
+                        break;
+                    case Layer.LayerType.NationMap:
+                        project.Draw(nations_brushpreset, e);
+                        project.DrawTemp(nations_brushpreset, e, g);
+                        break;
+                }
                 xprime = e.X;
                 yprime = e.Y;
 
