@@ -75,6 +75,14 @@ namespace FCartographer
             SetCanvasXLocation((int)((float)CanvasHolder.Width / 2 - (float)(Canvas.Width / 2)) - HorizontalScroll.Value);
         }
 
+        /// <summary>
+        /// Places canvas when resizing window
+        /// </summary>
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            SetCanvasYLocation((int)((float)CanvasHolder.Height / 2 - (float)(Canvas.Height / 2)) - VerticalScroll.Value);
+            SetCanvasXLocation((int)((float)CanvasHolder.Width / 2 - (float)(Canvas.Width / 2)) - HorizontalScroll.Value);
+        }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Zoom

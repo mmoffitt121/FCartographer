@@ -271,6 +271,11 @@
             Centers the canvas.
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.Form1_Resize(System.Object,System.EventArgs)">
+            <summary>
+            Places canvas when resizing window
+            </summary>
+        </member>
         <member name="M:FCartographer.Form1.ZoomIn_Click(System.Object,System.Windows.Forms.MouseEventArgs)">
             <summary>
             Zooms in on canvas when button is clicked

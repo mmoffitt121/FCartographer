@@ -445,6 +445,7 @@ namespace FCartographer
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "FCartographer";
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ElevationSettings.ResumeLayout(false);
             this.ElevationSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightControl)).EndInit();
