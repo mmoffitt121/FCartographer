@@ -56,7 +56,6 @@ namespace FCartographer
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Navigation = new System.Windows.Forms.Panel();
-            this.LayerToAdd = new System.Windows.Forms.ComboBox();
             this.LayerPane = new System.Windows.Forms.FlowLayoutPanel();
             this.ZoomOut = new System.Windows.Forms.Button();
             this.ZoomIn = new System.Windows.Forms.Button();
@@ -329,7 +328,6 @@ namespace FCartographer
             // Navigation
             // 
             this.Navigation.BackColor = System.Drawing.Color.BlanchedAlmond;
-            this.Navigation.Controls.Add(this.LayerToAdd);
             this.Navigation.Controls.Add(this.LayerPane);
             this.Navigation.Controls.Add(this.ZoomOut);
             this.Navigation.Controls.Add(this.ZoomIn);
@@ -339,19 +337,6 @@ namespace FCartographer
             this.Navigation.Name = "Navigation";
             this.Navigation.Size = new System.Drawing.Size(194, 893);
             this.Navigation.TabIndex = 3;
-            // 
-            // LayerToAdd
-            // 
-            this.LayerToAdd.BackColor = System.Drawing.Color.BlanchedAlmond;
-            this.LayerToAdd.FormattingEnabled = true;
-            this.LayerToAdd.Items.AddRange(new object[] {
-            "Terrain",
-            "Nations"});
-            this.LayerToAdd.Location = new System.Drawing.Point(38, 446);
-            this.LayerToAdd.Name = "LayerToAdd";
-            this.LayerToAdd.Size = new System.Drawing.Size(109, 23);
-            this.LayerToAdd.TabIndex = 3;
-            this.LayerToAdd.Text = "Nations";
             // 
             // LayerPane
             // 
@@ -512,7 +497,6 @@ namespace FCartographer
         private System.Windows.Forms.VScrollBar VerticalScroll;
         private System.Windows.Forms.HScrollBar HorizontalScroll;
         private System.Windows.Forms.FlowLayoutPanel LayerPane;
-        private System.Windows.Forms.ComboBox LayerToAdd;
         private System.Windows.Forms.Button AddLayer;
         private System.Windows.Forms.Panel NationsSettings;
         private System.Windows.Forms.Label NationsSizeLabel;

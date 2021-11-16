@@ -204,6 +204,7 @@ namespace FCartographer
 
             // Layer Control Initialization
             DisplayLayers();
+            InitializeLayerAdder();
 
             ReadySettingsPanels(project.CurrentLayer());
         }

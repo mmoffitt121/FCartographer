@@ -158,6 +158,11 @@
              the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.InitializeLayerAdder">
+            <summary>
+            Initializes Menu for adding new layer
+            </summary>
+        </member>
         <member name="M:FCartographer.Form1.AddLayer_Click(System.Object,System.EventArgs)">
             <summary>
             Adds a layer to the project

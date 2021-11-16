@@ -16,19 +16,31 @@ namespace FCartographer
     /// </summary>
     public partial class Form1 : Form
     {
+        private AddLayerMenu layermenu;
+
+        /// <summary>
+        /// Initializes Menu for adding new layer
+        /// </summary>
+        private void InitializeLayerAdder()
+        {
+            layermenu = new AddLayerMenu();
+        }
         /// <summary>
         /// Adds a layer to the project
         /// </summary>
         private void AddLayer_Click(object sender, EventArgs e)
         {
-            if (LayerToAdd.Text.Equals("Nations"))
+            // layermenu.ResetOptions();
+            layermenu.ShowDialog();
+
+            /*if (LayerToAdd.Text.Equals("Nations"))
             {
                 project.AddLayer(Layer.LayerType.NationMap);
             }
             if (LayerToAdd.Text.Equals("Terrain"))
             {
                 project.AddLayer(Layer.LayerType.HeightMap);
-            }
+            }*/
 
             ReadySettingsPanels(project.CurrentLayer());
 
