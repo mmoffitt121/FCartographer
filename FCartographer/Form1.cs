@@ -12,14 +12,16 @@ using System.Windows.Forms;
 namespace FCartographer
 {
     /// <summary>
-    /// Used to interface with windows forms, holds program data.
+    /// The main user interface of the program.
+    /// 
+    /// Holds the canvas, navigation menues, tool menues, and all non-dialogue ui elements used to interface with user projects.
     /// </summary>
     public partial class Form1 : Form
     {
         /// <summary>
         /// Current project 
         /// </summary>
-        private Project project;
+        public Project project;
 
         /// <summary>
         /// Graphics to interface with project
@@ -193,7 +195,7 @@ namespace FCartographer
 
             // Project Initialization
             project = new Project(width, height);
-            project.AddLayer(Layer.LayerType.NationMap);
+            // project.AddLayer(Layer.LayerType.NationMap);
 
             // Brush Initialization
             terrain_brushpreset = new TerrainBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), false);

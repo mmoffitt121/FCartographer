@@ -4,6 +4,33 @@
         <name>FCartographer</name>
     </assembly>
     <members>
+        <member name="T:FCartographer.AddLayerMenu">
+            <summary>
+            Window for adding a new layer with specified settings.
+            
+            This class, when instantiated, takes the parent form as input, and interfaces with the project.
+            </summary>
+        </member>
+        <member name="F:FCartographer.AddLayerMenu.parentform">
+            <summary>
+            Holds the reference to the parent Form1 object, aka the main program.
+            </summary>
+        </member>
+        <member name="M:FCartographer.AddLayerMenu.CreateLayerButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Adds a layer based on the layer type name in the LayerToAdd text input box
+            </summary>
+        </member>
+        <member name="M:FCartographer.AddLayerMenu.CancelCreateLayerButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Closes window
+            </summary>
+        </member>
+        <member name="M:FCartographer.AddLayerMenu.#ctor(FCartographer.Form1)">
+            <summary>
+            Constructor, takes parent Form1 as input.
+            </summary>
+        </member>
         <member name="F:FCartographer.AddLayerMenu.components">
             <summary>
             Required designer variable.
@@ -27,7 +54,9 @@
             This part of Form1 controls the elevation brush settings
             </summary>
             <summary>
-            Used to interface with windows forms, holds program data.
+            The main user interface of the program.
+            
+            Holds the canvas, navigation menues, tool menues, and all non-dialogue ui elements used to interface with user projects.
             </summary>
             <summary>
             This part of Form1 is used for the bar at the top of the form, handling File, Edit, View, etc.

@@ -23,7 +23,7 @@ namespace FCartographer
         /// </summary>
         private void InitializeLayerAdder()
         {
-            layermenu = new AddLayerMenu();
+            layermenu = new AddLayerMenu(this);
         }
         /// <summary>
         /// Adds a layer to the project
@@ -31,6 +31,9 @@ namespace FCartographer
         private void AddLayer_Click(object sender, EventArgs e)
         {
             // layermenu.ResetOptions();
+            // layermenu.Parent = this;
+            layermenu.StartPosition = FormStartPosition.Manual;
+            layermenu.Location = new Point(this.Location.X + this.Width / 2 - layermenu.Width / 2, this.Location.Y + this.Height / 2 - layermenu.Height / 2);
             layermenu.ShowDialog();
 
             /*if (LayerToAdd.Text.Equals("Nations"))

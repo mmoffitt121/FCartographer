@@ -185,7 +185,7 @@ namespace FCartographer
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel2.BackColor = System.Drawing.Color.BlanchedAlmond;
             this.panel2.Controls.Add(this.NationsSettings);
             this.panel2.Controls.Add(this.ElevationSettings);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
