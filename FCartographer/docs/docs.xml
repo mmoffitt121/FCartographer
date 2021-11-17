@@ -70,6 +70,9 @@
             <summary>
             This part of Form1 controls the visibility of the panels
             </summary>
+            <summary>
+            This part of Form1 is used for choosing what tool is selected
+            </summary>
         </member>
         <member name="M:FCartographer.Form1.StrengthControl_Scroll(System.Object,System.EventArgs)">
             <summary>
@@ -84,6 +87,11 @@
         <member name="M:FCartographer.Form1.HeightControl_Scroll(System.Object,System.EventArgs)">
             <summary>
             Sets the Target Height for the Terrain Brush from Terrain Brush size Slider
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.NationsSizeControl_Scroll(System.Object,System.EventArgs)">
+            <summary>
+            Initializes Form1
             </summary>
         </member>
         <member name="F:FCartographer.Form1.project">
@@ -222,6 +230,11 @@
             Event that fires when a layer pane is clicked. It calls project.SelectLayer() to select the layer clicked.
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.UpdateLayerBrushes">
+            <summary>
+            Keeps current layer brush up to date with user control.
+            </summary>
+        </member>
         <member name="M:FCartographer.Form1.DisplaySelectedLayer">
             <summary>
             Turns all layers the default layer panel color, and colors the currently selected the selected layer color.
@@ -344,6 +357,11 @@
         <member name="M:FCartographer.ProjectSettings.#ctor">
             <summary>
             Project Settings Constructor, default variables.
+            </summary>
+        </member>
+        <member name="T:FCartographer.AreaSelector">
+            <summary>
+            Responsible for selecting an area on canvas based on color difference
             </summary>
         </member>
     </members>

@@ -81,7 +81,12 @@ namespace FCartographer
 
         }
 
-        public virtual void UpdateOptions(NationsBrushPreset nationsBrushPreset)
+        public virtual void UpdateBrushOptions(BrushPreset brushPreset)
+        {
+
+        }
+
+        public virtual void Fill(MouseEventArgs e, BrushPreset brush)
         {
 
         }

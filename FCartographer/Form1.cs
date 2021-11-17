@@ -75,13 +75,27 @@ namespace FCartographer
         /// </summary>
         private void Canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            if (project.CurrentLayer() != null)
+            if (project.CurrentLayer() != null && GetCurrentTool() == ToolSelected.brush)
             {
                 painting = true;
             }
             else
             {
                 painting = false;
+            }
+
+            if (project.CurrentLayer() != null && GetCurrentTool() == ToolSelected.fill)
+            {
+                switch (project.CurrentLayer().GetType())
+                {
+                    case Layer.LayerType.HeightMap:
+                        project.Fill(e, terrain_brushpreset);
+                        break;
+                    case Layer.LayerType.NationMap:
+                        project.Fill(e, nations_brushpreset);
+                        break;
+                }
+                
             }
             xbegin = e.X;
             ybegin = e.Y;
@@ -195,11 +209,14 @@ namespace FCartographer
 
             // Project Initialization
             project = new Project(width, height);
-            // project.AddLayer(Layer.LayerType.NationMap);
+            project.AddLayer(Layer.LayerType.NationMap);
 
             // Brush Initialization
             terrain_brushpreset = new TerrainBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), false);
-            nations_brushpreset = new NationsBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), true);
+            nations_brushpreset = new NationsBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 80, 100, 100), true);
+
+            // Tool Initialization
+            BrushSelect_Click(new object(), new EventArgs());
 
             // Canvas Interface Initialization
             g = Canvas.CreateGraphics();

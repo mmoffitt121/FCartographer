@@ -27,18 +27,31 @@ namespace FCartographer
 
         public override void Draw(BrushPreset brush, MouseEventArgs e, int? xprime, int? yprime)
         {
-            int size = brush.GetSize();
-            g.InterpolationMode = InterpolationMode.NearestNeighbor;
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-
-            if (xprime != null && yprime != null)
-            {
-                g.DrawLine(pen, (int)xprime, (int)yprime, e.X, e.Y);
-            }
-            g.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
+            DrawToCanvas(brush, e, g, xprime, yprime);
         }
 
         public override void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr, int? xprime, int? yprime)
+        {
+            DrawToCanvas(brush, e, gr, xprime, yprime);
+        }
+
+        public override void Fill(MouseEventArgs e, BrushPreset brush)
+        {
+            // convert to two using statements shortly
+            GraphicsPath gpath = new GraphicsPath();
+            gpath.AddLine(new Point(20, 20), new Point(20, 200));
+            gpath.AddLine(new Point(20, 200), new Point(200, 200));
+            gpath.AddLine(new Point(200, 200), new Point(200, 20));
+            gpath.AddLine(new Point(200, 20), new Point(20, 20));
+            using (SolidBrush fillbrush = new SolidBrush(brushcolor))
+            {
+                g.FillPath(fillbrush, gpath);
+            }
+                
+            //g.DrawImage(brush.GetImage(), e.X, e.Y, 500, 500);
+        }
+
+        public void DrawToCanvas(BrushPreset brush, MouseEventArgs e, Graphics gr, int? xprime, int? yprime)
         {
             int size = brush.GetSize();
             gr.InterpolationMode = InterpolationMode.NearestNeighbor;
@@ -54,6 +67,12 @@ namespace FCartographer
         public override void SetColor(Color _color)
         {
             brushcolor = _color;
+            pen.Color = brushcolor;
+        }
+
+        public void InitializeColor(Color _color)
+        {
+            brushcolor = _color;
         }
 
         public override void SetSize(int _size)
@@ -61,10 +80,10 @@ namespace FCartographer
             pen.Width = _size;
         }
 
-        public override void UpdateOptions(NationsBrushPreset nationsBrushPreset)
+        public override void UpdateBrushOptions(BrushPreset brushPreset)
         {
-            SetSize(nationsBrushPreset.GetSize());
-            SetColor(nationsBrushPreset.GetColor());
+            SetSize(brushPreset.GetSize());
+            SetColor(brushPreset.GetColor());
         }
 
         public NationLayer(int x, int y) : base(x, y)
@@ -72,7 +91,7 @@ namespace FCartographer
             SetType(LayerType.NationMap);
             SetName("Nation layer");
 
-            SetColor(Color.FromArgb(255, 200, 0, 255));
+            InitializeColor(Color.FromArgb(255, 200, 0, 255));
             pen = new Pen(brushcolor, 20);
             pen.Width = 20;
         }
@@ -81,7 +100,7 @@ namespace FCartographer
         {
             SetType(LayerType.NationMap);
 
-            SetColor(Color.FromArgb(255, 0, 0, 0));
+            InitializeColor(Color.FromArgb(255, 200, 0, 255));
             pen = new Pen(brushcolor, 30);
             pen.Width = 20;
         }

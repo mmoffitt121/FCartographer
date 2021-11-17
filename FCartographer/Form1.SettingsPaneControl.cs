@@ -28,10 +28,12 @@ namespace FCartographer
                 case Layer.LayerType.HeightMap:
                     DisableAllSettingsPanels();
                     SetElevationSettingsActive(true);
+                    SetBitmapToolsActive(true);
                     break;
                 case Layer.LayerType.NationMap:
                     DisableAllSettingsPanels();
                     SetNationsSettingsActive(true);
+                    SetBitmapToolsActive(true);
                     break;
                 default:
                     break;
@@ -42,6 +44,7 @@ namespace FCartographer
         {
             SetElevationSettingsActive(false);
             SetNationsSettingsActive(false);
+            SetBitmapToolsActive(false);
         }
 
         private void SetElevationSettingsActive(bool active)
@@ -65,6 +68,18 @@ namespace FCartographer
             else
             {
                 panel2.Controls.Remove(NationsSettings);
+            }
+        }
+
+        private void SetBitmapToolsActive(bool active)
+        {
+            if (active)
+            {
+                ToolsPanel.Controls.Add(BitmapTools);
+            }
+            else
+            {
+                ToolsPanel.Controls.Remove(BitmapTools);
             }
         }
     }

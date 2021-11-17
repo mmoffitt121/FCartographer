@@ -190,11 +190,14 @@ namespace FCartographer
             UpdateLayerBrushes();
         }
 
+        /// <summary>
+        /// Keeps current layer brush up to date with user control.
+        /// </summary>
         private void UpdateLayerBrushes()
         {
             if (project.CurrentLayer() != null && project.CurrentLayer().GetType() == Layer.LayerType.NationMap)
             {
-                project.CurrentLayer().UpdateOptions(nations_brushpreset);
+                project.CurrentLayer().UpdateBrushOptions(nations_brushpreset);
             }
         }
 

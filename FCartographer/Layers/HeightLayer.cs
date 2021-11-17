@@ -35,6 +35,11 @@ namespace FCartographer
             gr.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
         }
 
+        public override void Fill(MouseEventArgs e, BrushPreset brush)
+        {
+            
+        }
+
         public override void SetColor(Color _color)
         {
 

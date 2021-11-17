@@ -31,6 +31,9 @@ namespace FCartographer
         {
             this.Canvas = new System.Windows.Forms.Panel();
             this.ToolsPanel = new System.Windows.Forms.Panel();
+            this.BitmapTools = new System.Windows.Forms.Panel();
+            this.FillSelect = new System.Windows.Forms.Button();
+            this.BrushSelect = new System.Windows.Forms.Button();
             this.ElevationSettings = new System.Windows.Forms.Panel();
             this.HeightLabel = new System.Windows.Forms.Label();
             this.HeightControl = new System.Windows.Forms.TrackBar();
@@ -65,6 +68,8 @@ namespace FCartographer
             this.HorizontalScroll = new System.Windows.Forms.HScrollBar();
             this.VerticalScroll = new System.Windows.Forms.VScrollBar();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.ToolsPanel.SuspendLayout();
+            this.BitmapTools.SuspendLayout();
             this.ElevationSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SizeControl)).BeginInit();
@@ -82,7 +87,7 @@ namespace FCartographer
             // 
             this.Canvas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Canvas.BackColor = System.Drawing.Color.White;
-            this.Canvas.Location = new System.Drawing.Point(303, 199);
+            this.Canvas.Location = new System.Drawing.Point(263, 199);
             this.Canvas.Name = "Canvas";
             this.Canvas.Size = new System.Drawing.Size(829, 509);
             this.Canvas.TabIndex = 0;
@@ -93,11 +98,44 @@ namespace FCartographer
             // ToolsPanel
             // 
             this.ToolsPanel.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.ToolsPanel.Controls.Add(this.BitmapTools);
             this.ToolsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolsPanel.Location = new System.Drawing.Point(3, 3);
             this.ToolsPanel.Name = "ToolsPanel";
-            this.ToolsPanel.Size = new System.Drawing.Size(70, 893);
+            this.ToolsPanel.Size = new System.Drawing.Size(150, 893);
             this.ToolsPanel.TabIndex = 1;
+            // 
+            // BitmapTools
+            // 
+            this.BitmapTools.Controls.Add(this.FillSelect);
+            this.BitmapTools.Controls.Add(this.BrushSelect);
+            this.BitmapTools.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BitmapTools.Location = new System.Drawing.Point(0, 0);
+            this.BitmapTools.Name = "BitmapTools";
+            this.BitmapTools.Size = new System.Drawing.Size(150, 349);
+            this.BitmapTools.TabIndex = 0;
+            // 
+            // FillSelect
+            // 
+            this.FillSelect.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.FillSelect.Location = new System.Drawing.Point(46, 7);
+            this.FillSelect.Name = "FillSelect";
+            this.FillSelect.Size = new System.Drawing.Size(30, 30);
+            this.FillSelect.TabIndex = 1;
+            this.FillSelect.Text = "F";
+            this.FillSelect.UseVisualStyleBackColor = false;
+            this.FillSelect.Click += new System.EventHandler(this.FillSelect_Click);
+            // 
+            // BrushSelect
+            // 
+            this.BrushSelect.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.BrushSelect.Location = new System.Drawing.Point(8, 7);
+            this.BrushSelect.Name = "BrushSelect";
+            this.BrushSelect.Size = new System.Drawing.Size(30, 30);
+            this.BrushSelect.TabIndex = 0;
+            this.BrushSelect.Text = "B";
+            this.BrushSelect.UseVisualStyleBackColor = false;
+            this.BrushSelect.Click += new System.EventHandler(this.BrushSelect_Click);
             // 
             // ElevationSettings
             // 
@@ -386,9 +424,9 @@ namespace FCartographer
             this.CanvasHolder.Controls.Add(this.VerticalScroll);
             this.CanvasHolder.Controls.Add(this.Canvas);
             this.CanvasHolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CanvasHolder.Location = new System.Drawing.Point(79, 3);
+            this.CanvasHolder.Location = new System.Drawing.Point(159, 3);
             this.CanvasHolder.Name = "CanvasHolder";
-            this.CanvasHolder.Size = new System.Drawing.Size(1423, 893);
+            this.CanvasHolder.Size = new System.Drawing.Size(1343, 893);
             this.CanvasHolder.TabIndex = 4;
             // 
             // HorizontalScroll
@@ -398,7 +436,7 @@ namespace FCartographer
             this.HorizontalScroll.Maximum = 50;
             this.HorizontalScroll.Minimum = -50;
             this.HorizontalScroll.Name = "HorizontalScroll";
-            this.HorizontalScroll.Size = new System.Drawing.Size(1405, 22);
+            this.HorizontalScroll.Size = new System.Drawing.Size(1325, 22);
             this.HorizontalScroll.TabIndex = 1;
             this.HorizontalScroll.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ScrollHorizontally);
             this.HorizontalScroll.ValueChanged += new System.EventHandler(this.HorizontalScroll_ValueChanged);
@@ -406,7 +444,7 @@ namespace FCartographer
             // VerticalScroll
             // 
             this.VerticalScroll.Dock = System.Windows.Forms.DockStyle.Right;
-            this.VerticalScroll.Location = new System.Drawing.Point(1405, 0);
+            this.VerticalScroll.Location = new System.Drawing.Point(1325, 0);
             this.VerticalScroll.Maximum = 50;
             this.VerticalScroll.Minimum = -50;
             this.VerticalScroll.Name = "VerticalScroll";
@@ -418,7 +456,7 @@ namespace FCartographer
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.Controls.Add(this.CanvasHolder, 1, 0);
@@ -446,6 +484,8 @@ namespace FCartographer
             this.Name = "Form1";
             this.Text = "FCartographer";
             this.Resize += new System.EventHandler(this.Form1_Resize);
+            this.ToolsPanel.ResumeLayout(false);
+            this.BitmapTools.ResumeLayout(false);
             this.ElevationSettings.ResumeLayout(false);
             this.ElevationSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightControl)).EndInit();
@@ -503,6 +543,9 @@ namespace FCartographer
         private System.Windows.Forms.Label NationsSizeLabel;
         private System.Windows.Forms.TrackBar NationsSizeControl;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel BitmapTools;
+        private System.Windows.Forms.Button FillSelect;
+        private System.Windows.Forms.Button BrushSelect;
     }
 }
 

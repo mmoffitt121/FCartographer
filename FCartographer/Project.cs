@@ -139,6 +139,18 @@ namespace FCartographer
             }
         }
 
+        public void Fill(MouseEventArgs e, BrushPreset brush)
+        {
+            try
+            {
+                layers[current].Fill(e, brush);
+            }
+            catch
+            {
+                return;
+            }
+        }
+
         public Layer CurrentLayer()
         {
             if (layers.Count < 1)

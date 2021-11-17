@@ -17,6 +17,10 @@ namespace FCartographer
     /// </summary>
     public partial class Form1 : Form
     {
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Elevation Brush
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
         /// <summary>
         /// Sets the opacity for the Terrain Brush from Terrain Brush strength Slider
         /// </summary>
@@ -44,6 +48,14 @@ namespace FCartographer
             UpdateLayerBrushes();
         }
 
+
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Nation Brush
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+        /// <summary>
+        /// Initializes Form1
+        /// </summary>
         private void NationsSizeControl_Scroll(object sender, EventArgs e)
         {
             nations_brushpreset.SetSize(NationsSizeControl.Value);
