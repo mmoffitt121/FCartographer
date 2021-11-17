@@ -36,15 +36,6 @@ namespace FCartographer
             layermenu.Location = new Point(this.Location.X + this.Width / 2 - layermenu.Width / 2, this.Location.Y + this.Height / 2 - layermenu.Height / 2);
             layermenu.ShowDialog();
 
-            /*if (LayerToAdd.Text.Equals("Nations"))
-            {
-                project.AddLayer(Layer.LayerType.NationMap);
-            }
-            if (LayerToAdd.Text.Equals("Terrain"))
-            {
-                project.AddLayer(Layer.LayerType.HeightMap);
-            }*/
-
             ReadySettingsPanels(project.CurrentLayer());
 
             DisplayLayers();
@@ -94,9 +85,11 @@ namespace FCartographer
                 {
                     Text = project.GetLayer(i).Name(),
                     ForeColor = Color.DarkRed,
-                    Location = new Point(48, 2)
+                    Location = new Point(48, 2),
+                    Width = 90
                 };
 
+                // Delete Button
                 Button delbutton = new Button()
                 {
                     Location = new Point(137, 2),
@@ -105,6 +98,7 @@ namespace FCartographer
                     Height = 15
                 };
 
+                // Move Layer Up Button
                 Button upbutton = new Button()
                 {
                     Location = new Point(137, 17),
@@ -112,6 +106,7 @@ namespace FCartographer
                     Height = 15
                 };
 
+                // Move Layer Down Button
                 Button downbutton = new Button()
                 {
                     Location = new Point(137, 32),
@@ -138,6 +133,7 @@ namespace FCartographer
             }
 
             DisplaySelectedLayer();
+            UpdateLayerBrushes();
         }
 
         /// <summary>
@@ -191,6 +187,15 @@ namespace FCartographer
 
             project.SelectLayer(indx);
             DisplaySelectedLayer();
+            UpdateLayerBrushes();
+        }
+
+        private void UpdateLayerBrushes()
+        {
+            if (project.CurrentLayer() != null && project.CurrentLayer().GetType() == Layer.LayerType.NationMap)
+            {
+                project.CurrentLayer().UpdateOptions(nations_brushpreset);
+            }
         }
 
         /// <summary>
@@ -225,6 +230,7 @@ namespace FCartographer
 
                 DisplayLayers();
                 RenderGraphics(project.GetGraphics());
+                UpdateLayerBrushes();
             }
             catch
             {
@@ -245,6 +251,7 @@ namespace FCartographer
                 project.SelectLayer(Math.Clamp(Math.Clamp(csender.Parent.TabIndex + 1, 0, LayerPane.Controls.Count - 1), 0, LayerPane.Controls.Count - 1));
                 DisplayLayers();
                 RenderGraphics(project.GetGraphics());
+                UpdateLayerBrushes();
             }
             catch
             {
@@ -265,6 +272,7 @@ namespace FCartographer
                 project.SelectLayer(Math.Clamp(Math.Clamp(csender.Parent.TabIndex - 1, 0, LayerPane.Controls.Count - 1), 0, LayerPane.Controls.Count - 1));
                 DisplayLayers();
                 RenderGraphics(project.GetGraphics());
+                UpdateLayerBrushes();
             }
             catch
             {

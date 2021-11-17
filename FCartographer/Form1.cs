@@ -130,12 +130,12 @@ namespace FCartographer
                 switch (project.CurrentLayer().GetType())
                 {
                     case Layer.LayerType.HeightMap:
-                        project.Draw(terrain_brushpreset, e);
-                        project.DrawTemp(terrain_brushpreset, e, g);
+                        project.Draw(terrain_brushpreset, e, xprime, yprime);
+                        project.DrawTemp(terrain_brushpreset, e, g, xprime, yprime);
                         break;
                     case Layer.LayerType.NationMap:
-                        project.Draw(nations_brushpreset, e);
-                        project.DrawTemp(nations_brushpreset, e, g);
+                        project.Draw(nations_brushpreset, e, xprime, yprime);
+                        project.DrawTemp(nations_brushpreset, e, g, xprime, yprime);
                         break;
                 }
                 xprime = e.X;

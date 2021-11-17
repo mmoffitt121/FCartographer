@@ -29,11 +29,11 @@ namespace FCartographer
         {
             if (LayerToAdd.Text.Equals("Nations"))
             {
-                parentform.project.AddLayer(Layer.LayerType.NationMap);
+                parentform.project.AddLayer(Layer.LayerType.NationMap, NameOfNewLayer.Text);
             }
             if (LayerToAdd.Text.Equals("Terrain"))
             {
-                parentform.project.AddLayer(Layer.LayerType.HeightMap);
+                parentform.project.AddLayer(Layer.LayerType.HeightMap, NameOfNewLayer.Text);
             }
 
             Close();

@@ -328,7 +328,12 @@
         </member>
         <member name="M:FCartographer.Project.AddLayer(FCartographer.Layer.LayerType)">
             <summary>
-            AddLayer
+            Adds nameless layer based on input type enum value
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.AddLayer(FCartographer.Layer.LayerType,System.String)">
+            <summary>
+            Adds named layer based on input type enum value and input name
             </summary>
         </member>
         <member name="T:FCartographer.ProjectSettings">

@@ -19,7 +19,7 @@ namespace FCartographer
             g.Clear(Color.FromArgb(0, 0, 0, 0));
         }
 
-        public override void Draw(BrushPreset brush, MouseEventArgs e)
+        public override void Draw(BrushPreset brush, MouseEventArgs e, int? xprime, int? yprime)
         {
             int size = brush.GetSize();
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
@@ -27,7 +27,7 @@ namespace FCartographer
             g.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
         }
 
-        public override void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr)
+        public override void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr, int? xprime, int? yprime)
         {
             int size = brush.GetSize();
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
@@ -35,10 +35,20 @@ namespace FCartographer
             gr.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
         }
 
+        public override void SetColor(Color _color)
+        {
+
+        }
+
         public HeightLayer(int x, int y) : base(x, y)
         {
             SetType(LayerType.HeightMap);
             SetName("Terrain layer");
+        }
+
+        public HeightLayer(int x, int y, string _name) : base(x, y, _name)
+        {
+            SetType(LayerType.HeightMap);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace FCartographer
         private int width, height;
 
         /// <summary>
-        /// AddLayer
+        /// Adds nameless layer based on input type enum value
         /// </summary>
         public void AddLayer(Layer.LayerType type)
         {
@@ -34,6 +34,26 @@ namespace FCartographer
                     break;
                 case Layer.LayerType.NationMap:
                     layers.Add(new NationLayer(width, height));
+                    break;
+                default:
+                    break;
+            }
+
+            SelectLayer(layers.Count - 1);
+        }
+
+        /// <summary>
+        /// Adds named layer based on input type enum value and input name
+        /// </summary>
+        public void AddLayer(Layer.LayerType type, string _name)
+        {
+            switch (type)
+            {
+                case Layer.LayerType.HeightMap:
+                    layers.Add(new HeightLayer(width, height, _name));
+                    break;
+                case Layer.LayerType.NationMap:
+                    layers.Add(new NationLayer(width, height, _name));
                     break;
                 default:
                     break;
@@ -95,11 +115,11 @@ namespace FCartographer
             
         }
 
-        public void Draw(BrushPreset brush, MouseEventArgs e)
+        public void Draw(BrushPreset brush, MouseEventArgs e, int? xprime, int? yprime)
         {
             try
             {
-                layers[current].Draw(brush, e);
+                layers[current].Draw(brush, e, xprime, yprime);
             }
             catch
             {
@@ -107,11 +127,11 @@ namespace FCartographer
             }
         }
 
-        public void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr)
+        public void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr, int? xprime, int? yprime)
         {
             try
             {
-                layers[current].DrawTemp(brush, e, gr);
+                layers[current].DrawTemp(brush, e, gr, xprime, yprime);
             }
             catch
             {

@@ -61,12 +61,27 @@ namespace FCartographer
             return name;
         }
 
-        public virtual void Draw(BrushPreset brush, MouseEventArgs e)
+        public virtual void Draw(BrushPreset brush, MouseEventArgs e, int? xprime, int? yprime)
         {
 
         }
 
-        public virtual void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr)
+        public virtual void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr, int? xprime, int? yprime)
+        {
+
+        }
+
+        public virtual void SetColor(Color _color)
+        {
+
+        }
+
+        public virtual void SetSize(int _size)
+        {
+
+        }
+
+        public virtual void UpdateOptions(NationsBrushPreset nationsBrushPreset)
         {
 
         }
@@ -79,6 +94,17 @@ namespace FCartographer
             tempdata = new Bitmap(x, y);
             data_g = Graphics.FromImage(data);
             g = Graphics.FromImage(tempdata);
+        }
+
+        public Layer(int x, int y, string _name)
+        {
+            width = x;
+            height = y;
+            data = new Bitmap(x, y);
+            tempdata = new Bitmap(x, y);
+            data_g = Graphics.FromImage(data);
+            g = Graphics.FromImage(tempdata);
+            SetName(_name);
         }
 
         public enum LayerType

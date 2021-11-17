@@ -23,6 +23,7 @@ namespace FCartographer
         private void StrengthControl_Scroll(object sender, EventArgs e)
         {
             terrain_brushpreset.SetOpacity(StrengthControl.Value);
+            UpdateLayerBrushes();
         }
 
         /// <summary>
@@ -31,6 +32,7 @@ namespace FCartographer
         private void SizeControl_Scroll(object sender, EventArgs e)
         {
             terrain_brushpreset.SetSize(SizeControl.Value);
+            UpdateLayerBrushes();
         }
 
         /// <summary>
@@ -39,11 +41,13 @@ namespace FCartographer
         private void HeightControl_Scroll(object sender, EventArgs e)
         {
             terrain_brushpreset.SetColor(HeightControl.Value, HeightControl.Value, HeightControl.Value);
+            UpdateLayerBrushes();
         }
 
         private void NationsSizeControl_Scroll(object sender, EventArgs e)
         {
             nations_brushpreset.SetSize(NationsSizeControl.Value);
+            UpdateLayerBrushes();
         }
     }
 }
