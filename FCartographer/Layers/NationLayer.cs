@@ -42,7 +42,8 @@ namespace FCartographer
             gpath.AddLine(new Point(20, 20), new Point(20, 200));
             gpath.AddLine(new Point(20, 200), new Point(200, 200));
             gpath.AddLine(new Point(200, 200), new Point(200, 20));
-            gpath.AddLine(new Point(200, 20), new Point(20, 20));
+            gpath.AddLine(new Point(200, 20), new Point(300, 300));
+            g.DrawPath(pen, gpath);
             using (SolidBrush fillbrush = new SolidBrush(brushcolor))
             {
                 g.FillPath(fillbrush, gpath);
