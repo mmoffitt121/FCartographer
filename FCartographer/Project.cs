@@ -62,6 +62,9 @@ namespace FCartographer
             SelectLayer(layers.Count - 1);
         }
 
+        /// <summary>
+        /// Disposes of layer at specified index
+        /// </summary>
         public void DeleteLayer(int to_delete)
         {
             try
@@ -76,6 +79,9 @@ namespace FCartographer
             }
         }
 
+        /// <summary>
+        /// Swaps order of two layers
+        /// </summary>
         public void SwapLayers(int s1, int s2)
         {
             try
@@ -90,17 +96,18 @@ namespace FCartographer
             }
         }
 
-        public void AddBrushPreset(string filename)
-        {
-
-        }
-
+        /// <summary>
+        /// Sets size of project canvas
+        /// </summary>
         public void SetCanvasSize(int x, int y)
         {
             width = x; 
             height = y;
         }
 
+        /// <summary>
+        /// Selects layer of specified index
+        /// </summary>
         public void SelectLayer(int layer)
         {
             try
@@ -115,6 +122,9 @@ namespace FCartographer
             
         }
 
+        /// <summary>
+        /// Calls the specified layer's Draw() function
+        /// </summary>
         public void Draw(BrushPreset brush, MouseEventArgs e, int? xprime, int? yprime)
         {
             try
@@ -127,6 +137,9 @@ namespace FCartographer
             }
         }
 
+        /// <summary>
+        /// Calls the specified layer's DrawTemp() function
+        /// </summary>
         public void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr, int? xprime, int? yprime)
         {
             try
@@ -139,6 +152,9 @@ namespace FCartographer
             }
         }
 
+        /// <summary>
+        /// Calls specified layer's Fill() function, which fills a region with the user-selected color
+        /// </summary>
         public void Fill(MouseEventArgs e, BrushPreset brush)
         {
             try
@@ -151,6 +167,9 @@ namespace FCartographer
             }
         }
 
+        /// <summary>
+        /// Returns the currently selected layer
+        /// </summary>
         public Layer CurrentLayer()
         {
             if (layers.Count < 1)
@@ -169,11 +188,17 @@ namespace FCartographer
             
         }
 
+        /// <summary>
+        /// Gets the index of the current selected layer
+        /// </summary>
         public int GetCurrentIndex()
         {
             return current;
         }
 
+        /// <summary>
+        /// Returns layer at a specific index
+        /// </summary>
         public Layer GetLayer(int i)
         {
             try
@@ -186,20 +211,17 @@ namespace FCartographer
             }
         }
 
+        /// <summary>
+        /// Returns amount of layers
+        /// </summary>
         public int GetLayerCount()
         {
             return layers.Count;
         }
 
-        public Project(int w, int h)
-        {
-            SetCanvasSize(w, h);
-            layers = new List<Layer>();
-            output = new Bitmap(width, height);
-            outg = Graphics.FromImage(output);
-            current = -1;
-        }
-
+        /// <summary>
+        /// Returns all layers rendered and composited.
+        /// </summary>
         public Bitmap GetGraphics()
         {
             return CompositeLayers();
@@ -208,6 +230,9 @@ namespace FCartographer
         private Bitmap output;
         private Graphics outg;
 
+        /// <summary>
+        /// Composits layers together
+        /// </summary>
         private Bitmap CompositeLayers()
         {
             outg.Clear(Color.White);
@@ -218,6 +243,18 @@ namespace FCartographer
             }
 
             return output;
+        }
+
+        /// <summary>
+        /// Constructor, creates project object of specified width and height
+        /// </summary>
+        public Project(int w, int h)
+        {
+            SetCanvasSize(w, h);
+            layers = new List<Layer>();
+            output = new Bitmap(width, height);
+            outg = Graphics.FromImage(output);
+            current = -1;
         }
     }
 }

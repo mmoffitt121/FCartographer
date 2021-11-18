@@ -13,8 +13,10 @@ namespace FCartographer
     /// </summary>
     public static class AreaSelector
     {
-        public static GraphicsPath SelectArea(Bitmap bitmap, Point start)
+        public static GraphicsPath SelectArea(Bitmap bitmap, Point start, int tolerance)
         {
+            IList<Point> points = new List<Point>();
+
             GraphicsPath outpath = new GraphicsPath();
 
             return outpath;
