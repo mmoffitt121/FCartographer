@@ -50,7 +50,7 @@ namespace FCartographer
         public override void Fill(MouseEventArgs e, BrushPreset brush)
         {
             // convert to two using statements shortly
-            GraphicsPath gpath = AreaSelector.SelectArea(GetData(), new Point(e.X, e.Y), 0);/*new GraphicsPath();
+            GraphicsPath gpath = AreaSelector.SelectAreaContiguous(GetData(), new Point(e.X, e.Y), 0);/*new GraphicsPath();
             gpath.AddLine(new Point(20, 20), new Point(20, 200));
             gpath.AddLine(new Point(20, 200), new Point(200, 200));
             gpath.AddLine(new Point(200, 200), new Point(200, 20));

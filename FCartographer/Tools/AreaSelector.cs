@@ -15,9 +15,24 @@ namespace FCartographer
     {
         /// <summary>
         /// Returns a graphics path outlining a specific area on a bitmap.
+        /// 
+        /// Selection is contiguous, meaning only one region will be selected.
+        /// 
+        /// Algorithm:
+        ///     Scan east/down and west/up from clicked point.
+        ///     Run into wall? Run blind man algorithm
+        ///         If clicked point found in region
+        ///             Output[0] = region
+        ///         else
+        ///             Output.add region
+        ///     Continue scanning until impossible
+        /// 
+        /// Returns list of GraphicsPath objects, the first being the surrounding (include) path, and all 
+        /// subsequent being island (exclude) paths.
         /// </summary>
-        public static GraphicsPath SelectArea(Bitmap bitmap, Point start, int tolerance)
+        public static List<GraphicsPath> SelectAreaContiguous(Bitmap bitmap, Point start, int tolerance)
         {
+            IList<GraphicsPath> pathlist = new List<GraphicsPath>();
             IList<Point> points = new List<Point>();
 
             byte[] image = ImageTypeConverter.BmpToByte(bitmap);
