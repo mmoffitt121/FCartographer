@@ -8,10 +8,16 @@ using System.Drawing.Drawing2D;
 
 namespace FCartographer
 {
+    /// <summary>
+    /// Layer that holds and interfaces with data for heightmaps.
+    /// </summary>
     public class HeightLayer : Layer
     {
         private TerrainShader shader;
 
+        /// <summary>
+        /// Override void that composits temp data to the layer.
+        /// </summary>
         public override void Render()
         {
             data_g.InterpolationMode = InterpolationMode.NearestNeighbor;
@@ -19,6 +25,9 @@ namespace FCartographer
             g.Clear(Color.FromArgb(0, 0, 0, 0));
         }
 
+        /// <summary>
+        /// Override void that Draws on a temporary layer. Bitmap is cleared when drawing is complete.
+        /// </summary>
         public override void Draw(BrushPreset brush, MouseEventArgs e, int? xprime, int? yprime)
         {
             int size = brush.GetSize();
@@ -27,6 +36,9 @@ namespace FCartographer
             g.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
         }
 
+        /// <summary>
+        /// Override void that Draws on the display canvas. Bitmap is cleared when drawing is complete.
+        /// </summary>
         public override void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr, int? xprime, int? yprime)
         {
             int size = brush.GetSize();
@@ -40,17 +52,26 @@ namespace FCartographer
             
         }
 
+        /// <summary>
+        /// Override void that sets the internal layer saved color.
+        /// </summary>
         public override void SetColor(Color _color)
         {
 
         }
 
+        /// <summary>
+        /// Unnamed constructor, creates layer of size x and y. Inherits base constructor.
+        /// </summary>
         public HeightLayer(int x, int y) : base(x, y)
         {
             SetType(LayerType.HeightMap);
             SetName("Terrain layer");
         }
 
+        /// <summary>
+        /// Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
+        /// </summary>
         public HeightLayer(int x, int y, string _name) : base(x, y, _name)
         {
             SetType(LayerType.HeightMap);

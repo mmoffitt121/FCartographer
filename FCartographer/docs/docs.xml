@@ -329,6 +329,11 @@
             Re-compiles the graphcis when scrolling vertically.
             </summary>
         </member>
+        <member name="T:FCartographer.Layer">
+            <summary>
+            Ab
+            </summary>
+        </member>
         <member name="M:FCartographer.Program.Main">
             <summary>
              The main entry point for the application.
@@ -349,6 +354,76 @@
             Adds named layer based on input type enum value and input name
             </summary>
         </member>
+        <member name="M:FCartographer.Project.DeleteLayer(System.Int32)">
+            <summary>
+            Disposes of layer at specified index
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.SwapLayers(System.Int32,System.Int32)">
+            <summary>
+            Swaps order of two layers
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.SetCanvasSize(System.Int32,System.Int32)">
+            <summary>
+            Sets size of project canvas
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.SelectLayer(System.Int32)">
+            <summary>
+            Selects layer of specified index
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.Draw(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Calls the specified layer's Draw() function
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.DrawTemp(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Calls the specified layer's DrawTemp() function
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.Fill(System.Windows.Forms.MouseEventArgs,FCartographer.BrushPreset)">
+            <summary>
+            Calls specified layer's Fill() function, which fills a region with the user-selected color
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.CurrentLayer">
+            <summary>
+            Returns the currently selected layer
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.GetCurrentIndex">
+            <summary>
+            Gets the index of the current selected layer
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.GetLayer(System.Int32)">
+            <summary>
+            Returns layer at a specific index
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.GetLayerCount">
+            <summary>
+            Returns amount of layers
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.GetGraphics">
+            <summary>
+            Returns all layers rendered and composited.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.CompositeLayers">
+            <summary>
+            Composits layers together
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor, creates project object of specified width and height
+            </summary>
+        </member>
         <member name="T:FCartographer.ProjectSettings">
             <summary>
             Class that contains the project settings.
@@ -362,6 +437,21 @@
         <member name="T:FCartographer.AreaSelector">
             <summary>
             Responsible for selecting an area on canvas based on color difference
+            </summary>
+        </member>
+        <member name="M:FCartographer.AreaSelector.SelectArea(System.Drawing.Bitmap,System.Drawing.Point,System.Int32)">
+            <summary>
+            Returns a graphics path outlining a specific area on a bitmap.
+            </summary>
+        </member>
+        <member name="T:FCartographer.ImageTypeConverter">
+            <summary>
+            Responsible for selecting an area on canvas based on color difference
+            </summary>
+        </member>
+        <member name="M:FCartographer.ImageTypeConverter.BmpToByte(System.Drawing.Bitmap)">
+            <summary>
+            Converts bitmap to byte array
             </summary>
         </member>
     </members>
