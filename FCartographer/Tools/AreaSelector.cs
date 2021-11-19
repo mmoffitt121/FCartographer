@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace FCartographer
 {
@@ -30,26 +31,28 @@ namespace FCartographer
         /// Returns list of GraphicsPath objects, the first being the surrounding (include) path, and all 
         /// subsequent being island (exclude) paths.
         /// </summary>
-        public static List<GraphicsPath> SelectAreaContiguous(Bitmap bitmap, Point start, int tolerance)
+        public static unsafe IList<GraphicsPath> SelectAreaContiguous(Bitmap bitmap, Point start, int tolerance)
         {
             IList<GraphicsPath> pathlist = new List<GraphicsPath>();
-            IList<Point> points = new List<Point>();
 
-            byte[] image = ImageTypeConverter.BmpToByte(bitmap);
+            BitmapData data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.DontCare);
 
-            System.Diagnostics.Debug.WriteLine(image[0] + " " + image[1]);
-
-            /*int direction = 2;
-            Point curpos = start;
-
-            while (true)
+            int x1 = start.X;
+            int x2 = start.X;
+            int y1 = start.Y;
+            int y2 = start.Y;
+            System.Diagnostics.Debug.WriteLine(x1 + " " + x2);
+            /*while (true)
             {
-                if 
+                if ()
             }*/
 
             GraphicsPath outpath = new GraphicsPath();
+            pathlist.Add(outpath);
 
-            return outpath;
+            bitmap.UnlockBits(data);
+
+            return pathlist;
         }
 
         public static bool IsValid(Color tocheck, Color index, int tolerance)

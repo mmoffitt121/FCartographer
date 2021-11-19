@@ -50,17 +50,19 @@ namespace FCartographer
         public override void Fill(MouseEventArgs e, BrushPreset brush)
         {
             // convert to two using statements shortly
-            GraphicsPath gpath = AreaSelector.SelectAreaContiguous(GetData(), new Point(e.X, e.Y), 0);/*new GraphicsPath();
+            IList<GraphicsPath> gpath = AreaSelector.SelectAreaContiguous(GetData(), new Point(e.X, e.Y), 0);/*new GraphicsPath();
             gpath.AddLine(new Point(20, 20), new Point(20, 200));
             gpath.AddLine(new Point(20, 200), new Point(200, 200));
             gpath.AddLine(new Point(200, 200), new Point(200, 20));
             gpath.AddLine(new Point(200, 20), new Point(300, 300));*/
-            g.DrawPath(pen, gpath);
+            g.DrawPath(pen, gpath[0]);
             using (Bitmap fillimage = new Bitmap(GetWidth(), GetHeight()))
             using (SolidBrush fillbrush = new SolidBrush(brushcolor))
             {
-                g.FillPath(fillbrush, gpath);
+                g.FillPath(fillbrush, gpath[0]);
             }
+
+            Render();
                 
             //g.DrawImage(brush.GetImage(), e.X, e.Y, 500, 500);
         }

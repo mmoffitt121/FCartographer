@@ -329,9 +329,201 @@
             Re-compiles the graphcis when scrolling vertically.
             </summary>
         </member>
+        <member name="T:FCartographer.HeightLayer">
+            <summary>
+            Layer that holds and interfaces with data for heightmaps.
+            </summary>
+        </member>
+        <member name="M:FCartographer.HeightLayer.Render">
+            <summary>
+            Override void that composits temp data to the layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.HeightLayer.Draw(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Override void that Draws on a temporary layer. Bitmap is cleared when drawing is complete.
+            </summary>
+        </member>
+        <member name="M:FCartographer.HeightLayer.DrawTemp(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Override void that Draws on the display canvas. Bitmap is cleared when drawing is complete.
+            </summary>
+        </member>
+        <member name="M:FCartographer.HeightLayer.SetColor(System.Drawing.Color)">
+            <summary>
+            Override void that sets the internal layer saved color.
+            </summary>
+        </member>
+        <member name="M:FCartographer.HeightLayer.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Unnamed constructor, creates layer of size x and y. Inherits base constructor.
+            </summary>
+        </member>
+        <member name="M:FCartographer.HeightLayer.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
+            </summary>
+        </member>
         <member name="T:FCartographer.Layer">
             <summary>
-            Ab
+            Abstract class that holds the base data for all layertypes.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.GetWidth">
+            <summary>
+            Returns the width of the layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.GetHeight">
+            <summary>
+            Returns the Height.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.Render">
+            <summary>
+            Overridden in subclasses, called to composite changes and render output.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.GetData">
+            <summary>
+            Returns the base data of the bitmap.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.GetTempData">
+            <summary>
+            Returns the tempdata, where changes are temporarily stored before being applied to the base data.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.SetType(FCartographer.Layer.LayerType)">
+            <summary>
+            Sets the type of the layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.GetType">
+            <summary>
+            Returns the type of the layer
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.SetName(System.String)">
+            <summary>
+            Sets the name of the layer
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.Name">
+            <summary>
+            Returns the name of the layer
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.Draw(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Overridden in subclasses, called to draw to data using input brush.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.DrawTemp(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Overridden in subclasses, called to draw to temp data using input brush.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.SetColor(System.Drawing.Color)">
+            <summary>
+            Overridden in subclasses, sets the color of the layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.SetSize(System.Int32)">
+            <summary>
+            Overridden in subclasses, sets the size of internal layer brush and pen.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.UpdateBrushOptions(FCartographer.BrushPreset)">
+            <summary>
+            Overridden in subclasses, changes internal layer values based on selected input brush.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.Fill(System.Windows.Forms.MouseEventArgs,FCartographer.BrushPreset)">
+            <summary>
+            Overridden in subclasses, called to fill a region in data.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Unnamed constructor, creates layer of size x and y.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            Named constructor, creates layer of size x and y, and an input name.
+            </summary>
+        </member>
+        <member name="T:FCartographer.Layer.LayerType">
+            <summary>
+            Type enum, expresses the type of the layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.Dispose(System.Boolean)">
+            <summary>
+            Inherits IDisposable, needs to be overridden in all subclasses.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.Dispose">
+            <summary>
+            Function to call for disposal.
+            </summary>
+        </member>
+        <member name="T:FCartographer.NationLayer">
+            <summary>
+            Layer that holds and interfaces with data for nation maps.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.Render">
+            <summary>
+            Override void that composits temp data to the layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.Draw(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Override void that Draws on a temporary layer. Bitmap is cleared when drawing is complete.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.DrawTemp(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Override void that Draws on the display canvas. Bitmap is cleared when drawing is complete.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.DrawToCanvas(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Generalized draw to canvas function, used by both Draw() and DrawTemp(). Used to draw on canvas based
+            on input brush settings, as well as mouse location and movement.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.SetColor(System.Drawing.Color)">
+            <summary>
+            Override void that sets the internal layer saved color.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.InitializeColor(System.Drawing.Color)">
+            <summary>
+            Override void that initializes the internal layer saved color without interacting with the layer's 
+            internal pen.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.SetSize(System.Int32)">
+            <summary>
+            Override void that sets the internal layer saved pen.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.UpdateBrushOptions(FCartographer.BrushPreset)">
+            <summary>
+            Grabs internal brush options from the input layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Unnamed constructor, creates layer of size x and y. Inherits base constructor.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
             </summary>
         </member>
         <member name="M:FCartographer.Program.Main">
@@ -439,9 +631,23 @@
             Responsible for selecting an area on canvas based on color difference
             </summary>
         </member>
-        <member name="M:FCartographer.AreaSelector.SelectArea(System.Drawing.Bitmap,System.Drawing.Point,System.Int32)">
+        <member name="M:FCartographer.AreaSelector.SelectAreaContiguous(System.Drawing.Bitmap,System.Drawing.Point,System.Int32)">
             <summary>
             Returns a graphics path outlining a specific area on a bitmap.
+            
+            Selection is contiguous, meaning only one region will be selected.
+            
+            Algorithm:
+                Scan east/down and west/up from clicked point.
+                Run into wall? Run blind man algorithm
+                    If clicked point found in region
+                        Output[0] = region
+                    else
+                        Output.add region
+                Continue scanning until impossible
+            
+            Returns list of GraphicsPath objects, the first being the surrounding (include) path, and all 
+            subsequent being island (exclude) paths.
             </summary>
         </member>
         <member name="T:FCartographer.ImageTypeConverter">
