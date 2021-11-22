@@ -34,27 +34,51 @@ namespace FCartographer
             byte* imgtop = (byte*)data.Scan0.ToPointer();
 
             int pixelsiz = Image.GetPixelFormatSize(data.PixelFormat) / 8;
-            System.Diagnostics.Debug.WriteLine(pixelsiz);
+            System.Diagnostics.Debug.WriteLine(start.X  + " " + start.Y);
 
             /*int x1 = start.X;
             int x2 = start.X;
             int y1 = start.Y;
             int y2 = start.Y;*/
 
-            //byte* pixel = imgtop + start.X * data.Stride + start.Y * pixelsiz;
-            //pixel[1] = 255;
+            byte* pixel = imgtop + start.Y * data.Stride + start.X * pixelsiz;
+            pixel[0] = 100;
+            pixel[1] = 100;
+            pixel[2] = 100;
+            pixel[3] = 255;
+            pixel[4] = 100;
+            pixel[5] = 100;
+            pixel[6] = 100;
+            pixel[7] = 255;
+            pixel[8] = 100;
+            pixel[9] = 100;
+            pixel[10] = 100;
+            pixel[11] = 255;
 
-            for (int i = 0; i < data.Height; i++)
+            pixel[0+data.Stride] = 100;
+            pixel[1 + data.Stride] = 100;
+            pixel[2 + data.Stride] = 100;
+            pixel[3 + data.Stride] = 255;
+            pixel[4 + data.Stride] = 100;
+            pixel[5 + data.Stride] = 100;
+            pixel[6 + data.Stride] = 100;
+            pixel[7 + data.Stride] = 255;
+            pixel[8 + data.Stride] = 100;
+            pixel[9 + data.Stride] = 100;
+            pixel[10 + data.Stride] = 100;
+            pixel[11 + data.Stride] = 255;
+
+            /*for (int i = 0; i < data.Height; i++)
             {
                 for (int j = 0; j < data.Width; j++)
                 {
-                    byte* pixel = imgtop + i * data.Stride + j * pixelsiz;
-                    pixel[0] = 255;
-                    pixel[1] = 0;
-                    pixel[2] = 0;
-                    pixel[3] = 255;
+                    byte* pixe = imgtop + i * data.Stride + j * pixelsiz;
+                    pixe[0] = 255;
+                    pixe[1] = 0;
+                    pixe[2] = 0;
+                    pixe[3] = 255;
                 }
-            }
+            }*/
 
             /*while (true)
             {
