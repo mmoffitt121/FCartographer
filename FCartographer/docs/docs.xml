@@ -489,6 +489,11 @@
             Override void that Draws on the display canvas. Bitmap is cleared when drawing is complete.
             </summary>
         </member>
+        <member name="M:FCartographer.NationLayer.Fill(System.Windows.Forms.MouseEventArgs,FCartographer.BrushPreset)">
+            <summary>
+            Fills contiguous region with pixels of selected nation.
+            </summary>
+        </member>
         <member name="M:FCartographer.NationLayer.DrawToCanvas(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Generalized draw to canvas function, used by both Draw() and DrawTemp(). Used to draw on canvas based
@@ -631,23 +636,15 @@
             Responsible for selecting an area on canvas based on color difference
             </summary>
         </member>
-        <member name="M:FCartographer.AreaSelector.SelectAreaContiguous(System.Drawing.Bitmap,System.Drawing.Point,System.Int32)">
+        <member name="M:FCartographer.AreaSelector.FillAreaContiguous(System.Drawing.Bitmap,System.Drawing.Point,System.Int32,FCartographer.BrushPreset)">
             <summary>
-            Returns a graphics path outlining a specific area on a bitmap.
+            Returns a bitmap object filled based on mouse location and layer data.
             
             Selection is contiguous, meaning only one region will be selected.
             
-            Algorithm:
-                Scan east/down and west/up from clicked point.
-                Run into wall? Run blind man algorithm
-                    If clicked point found in region
-                        Output[0] = region
-                    else
-                        Output.add region
-                Continue scanning until impossible
+            Utilizes scan line algorithm.
             
-            Returns list of GraphicsPath objects, the first being the surrounding (include) path, and all 
-            subsequent being island (exclude) paths.
+            Generates image to overlay onto original image.
             </summary>
         </member>
         <member name="T:FCartographer.ImageTypeConverter">

@@ -47,24 +47,17 @@ namespace FCartographer
             DrawToCanvas(brush, e, gr, xprime, yprime);
         }
 
+        /// <summary>
+        /// Fills contiguous region with pixels of selected nation.
+        /// </summary>
         public override void Fill(MouseEventArgs e, BrushPreset brush)
         {
-            // convert to two using statements shortly
-            IList<GraphicsPath> gpath = AreaSelector.SelectAreaContiguous(GetData(), new Point(e.X, e.Y), 0);/*new GraphicsPath();
-            gpath.AddLine(new Point(20, 20), new Point(20, 200));
-            gpath.AddLine(new Point(20, 200), new Point(200, 200));
-            gpath.AddLine(new Point(200, 200), new Point(200, 20));
-            gpath.AddLine(new Point(200, 20), new Point(300, 300));*/
-            g.DrawPath(pen, gpath[0]);
-            using (Bitmap fillimage = new Bitmap(GetWidth(), GetHeight()))
-            using (SolidBrush fillbrush = new SolidBrush(brushcolor))
+            using (Bitmap fillregion = AreaSelector.FillAreaContiguous(GetData(), new Point(e.X, e.Y), 0, brush))
             {
-                g.FillPath(fillbrush, gpath[0]);
-            }
+                g.DrawImage(fillregion, 0, 0, fillregion.Width, fillregion.Height);
 
-            Render();
-                
-            //g.DrawImage(brush.GetImage(), e.X, e.Y, 500, 500);
+                Render();
+            }
         }
 
         /// <summary>
