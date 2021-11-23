@@ -55,9 +55,9 @@ namespace FCartographer
             using (Bitmap fillregion = AreaSelector.FillAreaContiguous(GetData(), new Point(e.X, e.Y), 0, brush))
             {
                 g.DrawImage(fillregion, 0, 0, fillregion.Width, fillregion.Height);
-
-                Render();
             }
+
+            Render();
         }
 
         /// <summary>
