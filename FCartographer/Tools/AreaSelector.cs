@@ -46,7 +46,7 @@ namespace FCartographer
             BitmapData data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, bitmap.PixelFormat);
             //BitmapData outputdata = bitmap.LockBits(new Rectangle(0, 0, output.Width, output.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, output.PixelFormat);
 
-            Color clr = Color.FromArgb(100, 75, 130);// brush.GetColor();
+            Color clr = /*Color.FromArgb(100, 75, 130);*/ brush.GetColor();
 
             byte* imgtop = (byte*)data.Scan0.ToPointer();
             //byte* outtop = (byte*)outputdata.Scan0.ToPointer();
@@ -66,27 +66,31 @@ namespace FCartographer
             byte* pixel = imgtop + start.Y * data.Stride + start.X * pixelsiz;
             Color targetcolor = Color.FromArgb(pixel[3], pixel[2], pixel[1], pixel[0]);
 
-            int line;
-
-            bool left;
-            bool right;
-
             points.Push(new Point(start.X, start.Y));
-            
-            PointerToPoint(pixel, imgtop, data.Stride, pixelsiz);
+
+            if (targetcolor.Equals(clr))
+            {
+                bitmap.UnlockBits(data);
+                return;
+            }
 
             while (points.Count > 0)
             {
                 Point pt = points.Pop();
-                line = pt.Y;
+                int line = pt.Y;
                 while (line > 0 && IsValid(PointToPointer(pt.X, line, imgtop, pixelsiz, data.Stride), targetcolor))
                 {
                     line--;
+                    
                 }
 
-                line++;
-                left = false;
-                right = false;
+                if (line != 0)
+                {
+                    line++;
+                }
+
+                bool left = false;
+                bool right = false;
 
                 while (line < data.Height && IsValid(PointToPointer(pt.X, line, imgtop, pixelsiz, data.Stride), targetcolor))
                 {
@@ -115,6 +119,8 @@ namespace FCartographer
                     {
                         right = false;
                     }
+
+                    line++;
                 }
             }
 
@@ -165,7 +171,6 @@ namespace FCartographer
 
         public static unsafe void ChangeColor(byte* outtop, int x, int y, Color clr, int pixelsiz, int stride)
         {
-            System.Diagnostics.Debug.WriteLine(clr.R + " " + clr.G + " " + clr.B + "  -  " + x + " " + y);
             byte* ptr = PointToPointer(x, y, outtop, pixelsiz, stride);
             ptr[0] = clr.B;
             ptr[1] = clr.G;
