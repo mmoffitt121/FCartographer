@@ -636,7 +636,7 @@
             Responsible for selecting an area on canvas based on color difference
             </summary>
         </member>
-        <member name="M:FCartographer.AreaSelector.FillAreaContiguous(System.Drawing.Bitmap,System.Drawing.Point,System.Int32,FCartographer.BrushPreset)">
+        <member name="M:FCartographer.AreaSelector.FillAreaContiguous(System.Drawing.Bitmap,System.Drawing.Point,FCartographer.BrushPreset)">
             <summary>
             Returns a bitmap object filled based on mouse location and layer data.
             

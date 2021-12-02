@@ -39,14 +39,14 @@ namespace FCartographer
         /// 
         /// Generates image to overlay onto original image.
         /// </summary>
-        public static unsafe void FillAreaContiguous(Bitmap bitmap, Point start, int tolerance, BrushPreset brush)
+        public static unsafe void FillAreaContiguous(Bitmap bitmap, Point start, BrushPreset brush)
         {
             IList<GraphicsPath> pathlist = new List<GraphicsPath>();
 
             BitmapData data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, bitmap.PixelFormat);
             //BitmapData outputdata = bitmap.LockBits(new Rectangle(0, 0, output.Width, output.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, output.PixelFormat);
 
-            Color clr = brush.GetColor();
+            Color clr = Color.FromArgb(100, 75, 130);// brush.GetColor();
 
             byte* imgtop = (byte*)data.Scan0.ToPointer();
             //byte* outtop = (byte*)outputdata.Scan0.ToPointer();
@@ -75,13 +75,11 @@ namespace FCartographer
             
             PointerToPoint(pixel, imgtop, data.Stride, pixelsiz);
 
-            int counter = 0;
-
             while (points.Count > 0)
             {
                 Point pt = points.Pop();
                 line = pt.Y;
-                while (line > 0 && IsValid(PointToPointer(pt.X, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance))
+                while (line > 0 && IsValid(PointToPointer(pt.X, line, imgtop, pixelsiz, data.Stride), targetcolor))
                 {
                     line--;
                 }
@@ -90,39 +88,35 @@ namespace FCartographer
                 left = false;
                 right = false;
 
-                while (line < data.Height && IsValid(PointToPointer(pt.X, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance))
+                while (line < data.Height && IsValid(PointToPointer(pt.X, line, imgtop, pixelsiz, data.Stride), targetcolor))
                 {
                     ChangeColor(imgtop, pt.X, line, clr, pixelsiz, data.Stride);
 
                     // Scanning Left
 
-                    if (!left && pt.X > 0 && IsValid(PointToPointer(pt.X - 1, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance))
+                    if (!left && pt.X > 0 && IsValid(PointToPointer(pt.X - 1, line, imgtop, pixelsiz, data.Stride), targetcolor))
                     {
                         points.Push(new Point(pt.X - 1, line));
                         left = true;
                     }
-                    else if (left && (pt.X - 1 == 0 || !IsValid(PointToPointer(pt.X - 1, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance)))
+                    else if (left && pt.X - 1 >= 0 && !IsValid(PointToPointer(pt.X - 1, line, imgtop, pixelsiz, data.Stride), targetcolor))
                     {
                         left = false;
                     }
 
                     // Scanning Right
 
-                    if (!right && pt.X < data.Width - 1 && IsValid(PointToPointer(pt.X + 1, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance))
+                    if (!right && pt.X < data.Width - 1 && IsValid(PointToPointer(pt.X + 1, line, imgtop, pixelsiz, data.Stride), targetcolor))
                     {
                         points.Push(new Point(pt.X + 1, line));
                         right = true;
                     }
-                    else if (right && (pt.X < data.Width - 1 || !IsValid(PointToPointer(pt.X + 1, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance)))
+                    else if (right && pt.X < data.Width - 1 && !IsValid(PointToPointer(pt.X + 1, line, imgtop, pixelsiz, data.Stride), targetcolor))
                     {
                         right = false;
                     }
                 }
-                counter++;
             }
-
-            System.Diagnostics.Debug.WriteLine(counter);
-            System.Diagnostics.Debug.WriteLine(pixel[0] + " " + pixel[1] + " " + pixel[3] + " " + pixel[2] + " ");
 
             /*for (int i = 0; i < data.Height; i++)
             {
@@ -157,9 +151,9 @@ namespace FCartographer
             return new Point((int)(((ptr - top) % stride) / pixelsiz), (int)(((ptr - top) - (ptr - top) % stride) / (stride)));
         }
 
-        public static unsafe bool IsValid(byte* clr, Color index, int tolerance)
+        public static unsafe bool IsValid(byte* clr, Color index)
         {
-            if (Math.Abs(index.R - clr[2]) <= tolerance && Math.Abs(index.G - clr[1]) <= tolerance && Math.Abs(index.B - clr[0]) <= tolerance)
+            if (index.R - clr[2] == 0 && index.G - clr[1] == 0 && index.B - clr[0] == 0)
             {
                 return true;
             }
@@ -171,10 +165,12 @@ namespace FCartographer
 
         public static unsafe void ChangeColor(byte* outtop, int x, int y, Color clr, int pixelsiz, int stride)
         {
+            System.Diagnostics.Debug.WriteLine(clr.R + " " + clr.G + " " + clr.B + "  -  " + x + " " + y);
             byte* ptr = PointToPointer(x, y, outtop, pixelsiz, stride);
             ptr[0] = clr.B;
             ptr[1] = clr.G;
             ptr[2] = clr.R;
+            ptr[3] = 255;
         }
     }
 }

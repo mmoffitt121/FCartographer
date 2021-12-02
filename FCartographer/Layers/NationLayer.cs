@@ -52,7 +52,7 @@ namespace FCartographer
         /// </summary>
         public override void Fill(MouseEventArgs e, BrushPreset brush)
         {
-            AreaSelector.FillAreaContiguous(GetData(), new Point(e.X, e.Y), 0, brush);
+            AreaSelector.FillAreaContiguous(GetData(), new Point(e.X, e.Y), brush);
             //g.DrawImage(fillregion, 0, 0, fillregion.Width, fillregion.Height);
             Render();
         }
