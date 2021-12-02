@@ -14,7 +14,7 @@ namespace FCartographer
     public class NationLayer : Layer
     {
         //private TerrainShader shader;
-        //private List<Nation> nations;
+        private List<Nation> nations;
 
         private Pen pen;
 

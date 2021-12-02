@@ -12,7 +12,8 @@ namespace FCartographer
     /// </summary>
     public class Nation
     {
-        private Color color;
+        private Color datacolor;
+        private Color displaycolor;
         private string name;
 
         /// <summary>
@@ -20,7 +21,7 @@ namespace FCartographer
         /// </summary>
         public void SetColor(Color _color)
         {
-            color = _color;
+            displaycolor = _color;
         }
 
         /// <summary>
@@ -28,7 +29,23 @@ namespace FCartographer
         /// </summary>
         public Color GetColor()
         {
-            return color;
+            return displaycolor;
+        }
+
+        /// <summary>
+        /// Data Color mutator
+        /// </summary>
+        public void SetDataColor(Color _color)
+        {
+            datacolor = _color;
+        }
+
+        /// <summary>
+        /// Data color accessor
+        /// </summary>
+        public Color GetDataColor()
+        {
+            return datacolor;
         }
 
         /// <summary>

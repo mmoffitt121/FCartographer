@@ -31,6 +31,7 @@ namespace FCartographer
         {
             this.Canvas = new System.Windows.Forms.Panel();
             this.ToolsPanel = new System.Windows.Forms.Panel();
+            this.NationPane = new System.Windows.Forms.FlowLayoutPanel();
             this.BitmapTools = new System.Windows.Forms.Panel();
             this.FillSelect = new System.Windows.Forms.Button();
             this.BrushSelect = new System.Windows.Forms.Button();
@@ -98,12 +99,25 @@ namespace FCartographer
             // ToolsPanel
             // 
             this.ToolsPanel.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.ToolsPanel.Controls.Add(this.NationPane);
             this.ToolsPanel.Controls.Add(this.BitmapTools);
             this.ToolsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ToolsPanel.Location = new System.Drawing.Point(3, 3);
             this.ToolsPanel.Name = "ToolsPanel";
             this.ToolsPanel.Size = new System.Drawing.Size(150, 893);
             this.ToolsPanel.TabIndex = 1;
+            // 
+            // NationPane
+            // 
+            this.NationPane.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NationPane.AutoScroll = true;
+            this.NationPane.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.NationPane.Location = new System.Drawing.Point(8, 356);
+            this.NationPane.Name = "NationPane";
+            this.NationPane.Size = new System.Drawing.Size(136, 533);
+            this.NationPane.TabIndex = 1;
             // 
             // BitmapTools
             // 
@@ -546,6 +560,7 @@ namespace FCartographer
         private System.Windows.Forms.Panel BitmapTools;
         private System.Windows.Forms.Button FillSelect;
         private System.Windows.Forms.Button BrushSelect;
+        private System.Windows.Forms.FlowLayoutPanel NationPane;
     }
 }
 

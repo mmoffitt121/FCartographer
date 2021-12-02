@@ -84,7 +84,6 @@ namespace FCartographer
                 while (line > 0 && IsValid(PointToPointer(pt.X, line, imgtop, pixelsiz, data.Stride), targetcolor))
                 {
                     line--;
-                    
                 }
 
                 if (line != 0)

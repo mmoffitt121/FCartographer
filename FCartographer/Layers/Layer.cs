@@ -206,7 +206,12 @@ namespace FCartographer
             /// <summary>
             /// Subdivision, for other subdivisions aside from NationMap.
             /// </summary>
-            Subdivision
+            Subdivision,
+
+            /// <summary>
+            /// Reference, for imported images/annotations/sketches
+            /// </summary>
+            Reference
         }
 
         /// <summary>

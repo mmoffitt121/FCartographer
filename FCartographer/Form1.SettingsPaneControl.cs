@@ -34,6 +34,7 @@ namespace FCartographer
                     DisableAllSettingsPanels();
                     SetNationsSettingsActive(true);
                     SetBitmapToolsActive(true);
+                    SetNationsPaneActive(true);
                     break;
                 default:
                     break;
@@ -45,6 +46,7 @@ namespace FCartographer
             SetElevationSettingsActive(false);
             SetNationsSettingsActive(false);
             SetBitmapToolsActive(false);
+            SetNationsPaneActive(false);
         }
 
         private void SetElevationSettingsActive(bool active)
@@ -80,6 +82,18 @@ namespace FCartographer
             else
             {
                 ToolsPanel.Controls.Remove(BitmapTools);
+            }
+        }
+
+        private void SetNationsPaneActive(bool active)
+        {
+            if (active)
+            {
+                ToolsPanel.Controls.Add(NationPane);
+            }
+            else
+            {
+                ToolsPanel.Controls.Remove(NationPane);
             }
         }
     }

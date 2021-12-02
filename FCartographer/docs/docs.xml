@@ -65,6 +65,9 @@
             This part of Form1 is used for Layer control
             </summary>
             <summary>
+            This part of Form1 handles the nation display.
+            </summary>
+            <summary>
             This part of Form1 is used for navigating the canvas; zoom, scroll, etc.
             </summary>
             <summary>
@@ -243,6 +246,17 @@
         <member name="M:FCartographer.Form1.LayerDown_Click(System.Object,System.EventArgs)">
             <summary>
             Event that fires when a move layer down button was clicked. Calls the project object to switch the selected layer with the one below.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.DisplayNations">
+            <summary>
+            Places a panel for each layer in the layer pane for user navigation.
+            Also places references to each layer panel object in List of layer display objects.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.ClearNationsPane">
+            <summary>
+            Calls Dispose() on every Natoin Panel in the viewer
             </summary>
         </member>
         <member name="M:FCartographer.Form1.UpdateCanvasLocation">
@@ -524,6 +538,11 @@
             Subdivision, for other subdivisions aside from NationMap.
             </summary>
         </member>
+        <member name="F:FCartographer.Layer.LayerType.Reference">
+            <summary>
+            Reference, for imported images/annotations/sketches
+            </summary>
+        </member>
         <member name="M:FCartographer.Layer.Dispose(System.Boolean)">
             <summary>
             Inherits IDisposable, needs to be overridden in all subclasses.
@@ -547,6 +566,16 @@
         <member name="M:FCartographer.Nation.GetColor">
             <summary>
             Color accessor
+            </summary>
+        </member>
+        <member name="M:FCartographer.Nation.SetDataColor(System.Drawing.Color)">
+            <summary>
+            Data Color mutator
+            </summary>
+        </member>
+        <member name="M:FCartographer.Nation.GetDataColor">
+            <summary>
+            Data color accessor
             </summary>
         </member>
         <member name="M:FCartographer.Nation.SetName(System.String)">
