@@ -19,54 +19,110 @@ namespace FCartographer
         /// 
         /// Selection is contiguous, meaning only one region will be selected.
         /// 
-        /// Utilizes scan line algorithm.
+        /// Utilizes seed fill algorithm:
+        /// 
+        /// Init: Initialize stack of pointers to store pixel locations, target color, y-integer, boolean left and right.
+        ///     - Push cursor point into the stack
+        /// While stack != empty
+        ///     - Pop, set y-integer to popped point
+        ///     - While y-integer > 0, and pixel x, y-integer = target color, decrement y-integer
+        ///     - increment y-integer
+        ///     - left and right = false
+        ///     - While y-integer less than height and pixel x, y-integer = targetcolor
+        ///         - replace color (x, y1)
+        ///         - if !left and x > 0 and pixel(x-1, y-integer) = target
+        ///             - push pointer (x-1, yinteger) and left = true
+        ///         - else, if left = true and x-1 is 0, and getpixel != target
+        ///             - stop moving left
+        ///         - Same thing, but going right
+        ///     - Return new data
         /// 
         /// Generates image to overlay onto original image.
         /// </summary>
-        public static unsafe Bitmap FillAreaContiguous(Bitmap bitmap, Point start, int tolerance, BrushPreset brush)
+        public static unsafe void FillAreaContiguous(Bitmap bitmap, Point start, int tolerance, BrushPreset brush)
         {
             IList<GraphicsPath> pathlist = new List<GraphicsPath>();
 
             BitmapData data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, bitmap.PixelFormat);
-            Bitmap output = new Bitmap(bitmap.Width, bitmap.Height);
+            //BitmapData outputdata = bitmap.LockBits(new Rectangle(0, 0, output.Width, output.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, output.PixelFormat);
+
             Color clr = brush.GetColor();
 
             byte* imgtop = (byte*)data.Scan0.ToPointer();
+            //byte* outtop = (byte*)outputdata.Scan0.ToPointer();
 
             int pixelsiz = Image.GetPixelFormatSize(data.PixelFormat) / 8;
-            System.Diagnostics.Debug.WriteLine(start.X  + " " + start.Y);
+            // System.Diagnostics.Debug.WriteLine(start.X  + " " + start.Y);
 
             /*int x1 = start.X;
             int x2 = start.X;
             int y1 = start.Y;
             int y2 = start.Y;*/
 
-            byte* pixel = imgtop + start.Y * data.Stride + start.X * pixelsiz;
-            pixel[0] = 100;
-            pixel[1] = 100;
-            pixel[2] = 100;
-            pixel[3] = 255;
-            pixel[4] = 100;
-            pixel[5] = 100;
-            pixel[6] = 100;
-            pixel[7] = 255;
-            pixel[8] = 100;
-            pixel[9] = 100;
-            pixel[10] = 100;
-            pixel[11] = 255;
+            // Seed algorithm starts here ---
 
-            pixel[0+data.Stride] = 100;
-            pixel[1 + data.Stride] = 100;
-            pixel[2 + data.Stride] = 100;
-            pixel[3 + data.Stride] = 255;
-            pixel[4 + data.Stride] = 100;
-            pixel[5 + data.Stride] = 100;
-            pixel[6 + data.Stride] = 100;
-            pixel[7 + data.Stride] = 255;
-            pixel[8 + data.Stride] = 100;
-            pixel[9 + data.Stride] = 100;
-            pixel[10 + data.Stride] = 100;
-            pixel[11 + data.Stride] = 255;
+            Stack<Point> points = new Stack<Point>();
+
+            byte* pixel = imgtop + start.Y * data.Stride + start.X * pixelsiz;
+            Color targetcolor = Color.FromArgb(pixel[3], pixel[2], pixel[1], pixel[0]);
+
+            int line;
+
+            bool left;
+            bool right;
+
+            points.Push(new Point(start.X, start.Y));
+            
+            PointerToPoint(pixel, imgtop, data.Stride, pixelsiz);
+
+            int counter = 0;
+
+            while (points.Count > 0)
+            {
+                Point pt = points.Pop();
+                line = pt.Y;
+                while (line > 0 && IsValid(PointToPointer(pt.X, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance))
+                {
+                    line--;
+                }
+
+                line++;
+                left = false;
+                right = false;
+
+                while (line < data.Height && IsValid(PointToPointer(pt.X, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance))
+                {
+                    ChangeColor(imgtop, pt.X, line, clr, pixelsiz, data.Stride);
+
+                    // Scanning Left
+
+                    if (!left && pt.X > 0 && IsValid(PointToPointer(pt.X - 1, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance))
+                    {
+                        points.Push(new Point(pt.X - 1, line));
+                        left = true;
+                    }
+                    else if (left && (pt.X - 1 == 0 || !IsValid(PointToPointer(pt.X - 1, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance)))
+                    {
+                        left = false;
+                    }
+
+                    // Scanning Right
+
+                    if (!right && pt.X < data.Width - 1 && IsValid(PointToPointer(pt.X + 1, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance))
+                    {
+                        points.Push(new Point(pt.X + 1, line));
+                        right = true;
+                    }
+                    else if (right && (pt.X < data.Width - 1 || !IsValid(PointToPointer(pt.X + 1, line, imgtop, pixelsiz, data.Stride), targetcolor, tolerance)))
+                    {
+                        right = false;
+                    }
+                }
+                counter++;
+            }
+
+            System.Diagnostics.Debug.WriteLine(counter);
+            System.Diagnostics.Debug.WriteLine(pixel[0] + " " + pixel[1] + " " + pixel[3] + " " + pixel[2] + " ");
 
             /*for (int i = 0; i < data.Height; i++)
             {
@@ -86,13 +142,24 @@ namespace FCartographer
             }*/
 
             bitmap.UnlockBits(data);
+            //output.UnlockBits(outputdata);
 
-            return output;
+            return;
         }
 
-        public static bool IsValid(Color tocheck, Color index, int tolerance)
+        public static unsafe byte* PointToPointer(int x, int y, byte* top, int pixelsiz, int stride)
         {
-            if (Math.Abs(index.R - tocheck.R) <= tolerance && Math.Abs(index.G - tocheck.G) <= tolerance && Math.Abs(index.B - tocheck.B) <= tolerance)
+            return top + y * stride + x * pixelsiz;
+        }
+
+        public static unsafe Point PointerToPoint(byte* ptr, byte* top, int stride, int pixelsiz)
+        {
+            return new Point((int)(((ptr - top) % stride) / pixelsiz), (int)(((ptr - top) - (ptr - top) % stride) / (stride)));
+        }
+
+        public static unsafe bool IsValid(byte* clr, Color index, int tolerance)
+        {
+            if (Math.Abs(index.R - clr[2]) <= tolerance && Math.Abs(index.G - clr[1]) <= tolerance && Math.Abs(index.B - clr[0]) <= tolerance)
             {
                 return true;
             }
@@ -100,6 +167,14 @@ namespace FCartographer
             {
                 return false;
             }
+        }
+
+        public static unsafe void ChangeColor(byte* outtop, int x, int y, Color clr, int pixelsiz, int stride)
+        {
+            byte* ptr = PointToPointer(x, y, outtop, pixelsiz, stride);
+            ptr[0] = clr.B;
+            ptr[1] = clr.G;
+            ptr[2] = clr.R;
         }
     }
 }

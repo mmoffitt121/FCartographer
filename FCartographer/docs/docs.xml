@@ -642,7 +642,23 @@
             
             Selection is contiguous, meaning only one region will be selected.
             
-            Utilizes scan line algorithm.
+            Utilizes seed fill algorithm:
+            
+            Init: Initialize stack of pointers to store pixel locations, target color, y-integer, boolean left and right.
+                - Push cursor point into the stack
+            While stack != empty
+                - Pop, set y-integer to popped point
+                - While y-integer > 0, and pixel x, y-integer = target color, decrement y-integer
+                - increment y-integer
+                - left and right = false
+                - While y-integer less than height and pixel x, y-integer = targetcolor
+                    - replace color (x, y1)
+                    - if !left and x > 0 and pixel(x-1, y-integer) = target
+                        - push pointer (x-1, yinteger) and left = true
+                    - else, if left = true and x-1 is 0, and getpixel != target
+                        - stop moving left
+                    - Same thing, but going right
+                - Return new data
             
             Generates image to overlay onto original image.
             </summary>
