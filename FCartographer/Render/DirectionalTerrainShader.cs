@@ -6,6 +6,9 @@ using System.Drawing;
 
 namespace FCartographer
 {
+    /// <summary>
+    /// Shader that extends terrainshader, shades terrain based on input direction.
+    /// </summary>
     public class DirectionalTerrainShader : TerrainShader
     {
 

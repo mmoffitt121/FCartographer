@@ -8,13 +8,18 @@ using System.Drawing.Drawing2D;
 
 namespace FCartographer
 {
+    /// <summary>
+    /// Holds data for brushes used on terrain layers
+    /// </summary>
     public class TerrainBrushPreset : BrushPreset
     {
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Initialization
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        // BrushPreset constructor
+        /// <summary>
+        /// Brush preset constructor.
+        /// </summary>
         public TerrainBrushPreset(string brushpath, int siz, int opac, Color clr, bool _solidify) : base(brushpath, siz, opac, clr, false)
         {
             

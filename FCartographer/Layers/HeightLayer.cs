@@ -13,7 +13,7 @@ namespace FCartographer
     /// </summary>
     public class HeightLayer : Layer
     {
-        private TerrainShader shader;
+        //private TerrainShader shader;
 
         /// <summary>
         /// Override void that composits temp data to the layer.
@@ -47,6 +47,9 @@ namespace FCartographer
             gr.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
         }
 
+        /// <summary>
+        /// Will fill a region, unimplemented.
+        /// </summary>
         public override void Fill(MouseEventArgs e, BrushPreset brush)
         {
             

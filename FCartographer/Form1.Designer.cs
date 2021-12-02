@@ -535,8 +535,8 @@ namespace FCartographer
         private System.Windows.Forms.Panel CanvasHolder;
         private System.Windows.Forms.Button ZoomOut;
         private System.Windows.Forms.Button ZoomIn;
-        private System.Windows.Forms.VScrollBar VerticalScroll;
-        private System.Windows.Forms.HScrollBar HorizontalScroll;
+        private new System.Windows.Forms.VScrollBar VerticalScroll;
+        private new System.Windows.Forms.HScrollBar HorizontalScroll;
         private System.Windows.Forms.FlowLayoutPanel LayerPane;
         private System.Windows.Forms.Button AddLayer;
         private System.Windows.Forms.Panel NationsSettings;

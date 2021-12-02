@@ -13,8 +13,8 @@ namespace FCartographer
     /// </summary>
     public class NationLayer : Layer
     {
-        private TerrainShader shader;
-        private List<Nation> nations;
+        //private TerrainShader shader;
+        //private List<Nation> nations;
 
         private Pen pen;
 

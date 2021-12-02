@@ -6,6 +6,9 @@ using System.Drawing;
 
 namespace FCartographer
 {
+    /// <summary>
+    /// Shader responsible for terrain layers
+    /// </summary>
     public class TerrainShader
     {
 

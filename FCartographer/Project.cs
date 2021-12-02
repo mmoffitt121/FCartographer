@@ -12,7 +12,7 @@ namespace FCartographer
     /// </summary>
     public class Project
     {
-        private String name;
+        //private String name;
 
         private IList<Layer> layers;
 
@@ -205,7 +205,7 @@ namespace FCartographer
             {
                 return layers[i];
             }
-            catch (IndexOutOfRangeException ex)
+            catch (IndexOutOfRangeException)
             {
                 return null;
             }

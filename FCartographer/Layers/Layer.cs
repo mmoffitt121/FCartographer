@@ -14,7 +14,7 @@ namespace FCartographer
     public abstract class Layer : IDisposable
     {
         private String name;
-        private bool visible;
+        //private bool visible;
 
         private int width;
         private int height;
@@ -24,7 +24,14 @@ namespace FCartographer
 
         private LayerType type;
 
+        /// <summary>
+        /// Graphics Object for interfacing with layer data.
+        /// </summary>
         public Graphics data_g;
+
+        /// <summary>
+        /// Graphics Object for interfacing with temporary layer data.
+        /// </summary>
         public Graphics g;
 
         private bool disposedValue;
@@ -80,7 +87,7 @@ namespace FCartographer
         /// <summary>
         /// Returns the type of the layer
         /// </summary>
-        public LayerType GetType()
+        public new LayerType GetType()
         {
             return type;
         }
@@ -181,9 +188,24 @@ namespace FCartographer
         /// </summary>
         public enum LayerType
         {
+            /// <summary>
+            /// HeightMap layer, also known as Terrain Layer.
+            /// </summary>
             HeightMap,
+
+            /// <summary>
+            /// Ocean layer, displays an ocean at a specified height.
+            /// </summary>
             Ocean,
+
+            /// <summary>
+            /// NationMap, holds nation data.
+            /// </summary>
             NationMap,
+
+            /// <summary>
+            /// Subdivision, for other subdivisions aside from NationMap.
+            /// </summary>
             Subdivision
         }
 

@@ -8,6 +8,9 @@ using System.Drawing.Drawing2D;
 
 namespace FCartographer
 {
+    /// <summary>
+    /// BrushPreset Class, holds brush data. Brush data should be imported by file, and saved when created.
+    /// </summary>
     public class BrushPreset
     {
         private Bitmap source_bitmap;
@@ -19,62 +22,95 @@ namespace FCartographer
 
         private bool solidify;
 
+        /// <summary>
+        /// Brush image mutator, image, opacity, and color overload
+        /// </summary>
         public void SetImage(string brushpath, int input_opacity, Color clr)
         {
             source_bitmap = (Bitmap)Image.FromFile(brushpath);
             CalculateOutputBrush();
         }
 
+        /// <summary>
+        /// Brush image mutator, image overload
+        /// </summary>
         public void SetImage(Bitmap input)
         {
             source_bitmap = new Bitmap(input);
             CalculateOutputBrush();
         }
 
+        /// <summary>
+        /// Brush image mutator, brush path location overload
+        /// </summary>
         public void SetImage(string brushpath)
         {
             source_bitmap = (Bitmap)Image.FromFile(brushpath);
             CalculateOutputBrush();
         }
 
+        /// <summary>
+        /// Brush image accessor
+        /// </summary>
         public Bitmap GetImage()
         {
             return output_bitmap;
         }
 
+        /// <summary>
+        /// Aize value mutator
+        /// </summary>
         public void SetSize(int input)
         {
             size = input;
         }
 
+        /// <summary>
+        /// Color value mutator, int triplet overload
+        /// </summary>
         public void SetColor(int r, int g, int b)
         {
             color = Color.FromArgb(255, r, g, b);
             CalculateOutputBrush();
         }
 
+        /// <summary>
+        /// Color value mutator, Color type overload
+        /// </summary>
         public void SetColor(Color clr)
         {
             color = Color.FromArgb(clr.A, clr.R, clr.G, clr.B);
             CalculateOutputBrush();
         }
 
+        /// <summary>
+        /// Size value mutator
+        /// </summary>
         public Color GetColor()
         {
             return color;
         }
 
+        /// <summary>
+        /// Size value accessor
+        /// </summary>
         public int GetSize()
         {
             return size;
         }
 
+        /// <summary>
+        /// Opacity value mutator
+        /// </summary>
         public void SetOpacity(int input)
         {
             opacity = input;
             CalculateOutputBrush();
         }
 
+        /// <summary>
+        /// Opacity value accessor
+        /// </summary>
         public int GetOpacity()
         {
             return opacity;
@@ -84,7 +120,9 @@ namespace FCartographer
         // Brush Color Calculation
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        // Calculates the color and opacity of the output brush
+        /// <summary>
+        /// Calculates the color and opacity of the output brush
+        /// </summary>
         public virtual void CalculateOutputBrush()
         {
 
@@ -112,6 +150,9 @@ namespace FCartographer
             output_g.DrawImage(source_bitmap, new Rectangle(0, 0, source_bitmap.Width, source_bitmap.Height), 0, 0, source_bitmap.Width, source_bitmap.Height, GraphicsUnit.Pixel, attributes);
         }
 
+        /// <summary>
+        /// Sets if the brush is to have hard edges
+        /// </summary>
         public void SetSolidify(Boolean _solidify)
         {
             solidify = _solidify;
@@ -121,7 +162,9 @@ namespace FCartographer
         // Initialization
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-        // BrushPreset constructor
+        /// <summary>
+        /// BrushPreset Constructor
+        /// </summary>
         public BrushPreset(string brushpath, int siz, int opac, Color clr, bool _solidify)
         {
             try

@@ -43,6 +43,7 @@ namespace FCartographer
         /// </summary>
         private NationsBrushPreset nations_brushpreset;
 
+        /*
         /// <summary>
         /// Array of possible brushes for the user to use
         /// </summary>
@@ -52,6 +53,7 @@ namespace FCartographer
         /// Value of how zoomed in the canvas is
         /// </summary>
         private float zoom;
+        */
 
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -178,15 +180,6 @@ namespace FCartographer
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
         /// <summary>
-        /// Initializes Form1
-        /// </summary>
-        public Form1()
-        {
-            InitializeComponent();
-            NewProject(500, 500);
-        }
-
-        /// <summary>
         /// Creates a new project
         /// Input:  int width -> Project width
         ///         int height -> Project height
@@ -226,6 +219,15 @@ namespace FCartographer
             InitializeLayerAdder();
 
             ReadySettingsPanels(project.CurrentLayer());
+        }
+
+        /// <summary>
+        /// Initializes Form1
+        /// </summary>
+        public Form1()
+        {
+            InitializeComponent();
+            NewProject(1000, 1000);
         }
     }
 }

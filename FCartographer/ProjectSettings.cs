@@ -11,18 +11,18 @@ namespace FCartographer
     /// </summary>
     public class ProjectSettings
     {
-        private int default_height_brush_opacity;
-        private int default_height_brush_size;
-        private int default_height_brush_height;
+        //private int default_height_brush_opacity;
+        //private int default_height_brush_size;
+        //private int default_height_brush_height;
 
         /// <summary>
         /// Project Settings Constructor, default variables.
         /// </summary>
         public ProjectSettings()
         {
-            default_height_brush_opacity = 50;
-            default_height_brush_size = 30;
-            default_height_brush_height = 100;
+            //default_height_brush_opacity = 50;
+            //default_height_brush_size = 30;
+            //default_height_brush_height = 100;
         }
     }
 }

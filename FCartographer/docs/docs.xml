@@ -119,16 +119,6 @@
             Holds current selected terrain brush
             </summary>
         </member>
-        <member name="F:FCartographer.Form1.brushes">
-            <summary>
-            Array of possible brushes for the user to use
-            </summary>
-        </member>
-        <member name="F:FCartographer.Form1.zoom">
-            <summary>
-            Value of how zoomed in the canvas is
-            </summary>
-        </member>
         <member name="F:FCartographer.Form1.xprime">
             <summary>
             Integers depicting the previous mouse location one frame before
@@ -166,16 +156,16 @@
             Input: Bitmap display -> Already rendered graphics to display to user
             </summary>
         </member>
-        <member name="M:FCartographer.Form1.#ctor">
-            <summary>
-            Initializes Form1
-            </summary>
-        </member>
         <member name="M:FCartographer.Form1.NewProject(System.Int32,System.Int32)">
             <summary>
             Creates a new project
             Input:  int width -> Project width
                     int height -> Project height
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.#ctor">
+            <summary>
+            Initializes Form1
             </summary>
         </member>
         <member name="F:FCartographer.Form1.components">
@@ -329,6 +319,46 @@
             Re-compiles the graphcis when scrolling vertically.
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.SetCurrentTool(FCartographer.Form1.ToolSelected)">
+            <summary>
+            Sets the current selected tool enum
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.GetCurrentTool">
+            <summary>
+            Returns the current selected tool
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.BrushSelect_Click(System.Object,System.EventArgs)">
+            <summary>
+            Selects the brush tool, event listener
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.FillSelect_Click(System.Object,System.EventArgs)">
+            <summary>
+            Selects the fill tool, event listener
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.ResetToolButtonColors">
+            <summary>
+            Sets tool buttons to default color
+            </summary>
+        </member>
+        <member name="T:FCartographer.Form1.ToolSelected">
+            <summary>
+            Enum that holds each type of tool in the program
+            </summary>
+        </member>
+        <member name="F:FCartographer.Form1.ToolSelected.brush">
+            <summary>
+            Brush tool
+            </summary>
+        </member>
+        <member name="F:FCartographer.Form1.ToolSelected.fill">
+            <summary>
+            Fill tool
+            </summary>
+        </member>
         <member name="T:FCartographer.HeightLayer">
             <summary>
             Layer that holds and interfaces with data for heightmaps.
@@ -349,6 +379,11 @@
             Override void that Draws on the display canvas. Bitmap is cleared when drawing is complete.
             </summary>
         </member>
+        <member name="M:FCartographer.HeightLayer.Fill(System.Windows.Forms.MouseEventArgs,FCartographer.BrushPreset)">
+            <summary>
+            Will fill a region, unimplemented.
+            </summary>
+        </member>
         <member name="M:FCartographer.HeightLayer.SetColor(System.Drawing.Color)">
             <summary>
             Override void that sets the internal layer saved color.
@@ -367,6 +402,16 @@
         <member name="T:FCartographer.Layer">
             <summary>
             Abstract class that holds the base data for all layertypes.
+            </summary>
+        </member>
+        <member name="F:FCartographer.Layer.data_g">
+            <summary>
+            Graphics Object for interfacing with layer data.
+            </summary>
+        </member>
+        <member name="F:FCartographer.Layer.g">
+            <summary>
+            Graphics Object for interfacing with temporary layer data.
             </summary>
         </member>
         <member name="M:FCartographer.Layer.GetWidth">
@@ -459,6 +504,26 @@
             Type enum, expresses the type of the layer.
             </summary>
         </member>
+        <member name="F:FCartographer.Layer.LayerType.HeightMap">
+            <summary>
+            HeightMap layer, also known as Terrain Layer.
+            </summary>
+        </member>
+        <member name="F:FCartographer.Layer.LayerType.Ocean">
+            <summary>
+            Ocean layer, displays an ocean at a specified height.
+            </summary>
+        </member>
+        <member name="F:FCartographer.Layer.LayerType.NationMap">
+            <summary>
+            NationMap, holds nation data.
+            </summary>
+        </member>
+        <member name="F:FCartographer.Layer.LayerType.Subdivision">
+            <summary>
+            Subdivision, for other subdivisions aside from NationMap.
+            </summary>
+        </member>
         <member name="M:FCartographer.Layer.Dispose(System.Boolean)">
             <summary>
             Inherits IDisposable, needs to be overridden in all subclasses.
@@ -467,6 +532,31 @@
         <member name="M:FCartographer.Layer.Dispose">
             <summary>
             Function to call for disposal.
+            </summary>
+        </member>
+        <member name="T:FCartographer.Nation">
+            <summary>
+            Class that holds the data for a particular nation.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Nation.SetColor(System.Drawing.Color)">
+            <summary>
+            Color mutator
+            </summary>
+        </member>
+        <member name="M:FCartographer.Nation.GetColor">
+            <summary>
+            Color accessor
+            </summary>
+        </member>
+        <member name="M:FCartographer.Nation.SetName(System.String)">
+            <summary>
+            Name mutator
+            </summary>
+        </member>
+        <member name="M:FCartographer.Nation.GetName">
+            <summary>
+            Name accessor
             </summary>
         </member>
         <member name="T:FCartographer.NationLayer">
@@ -631,9 +721,22 @@
             Project Settings Constructor, default variables.
             </summary>
         </member>
+        <member name="T:FCartographer.DirectionalTerrainShader">
+            <summary>
+            Shader that extends terrainshader, shades terrain based on input direction.
+            </summary>
+        </member>
+        <member name="T:FCartographer.TerrainShader">
+            <summary>
+            Shader responsible for terrain layers
+            </summary>
+        </member>
         <member name="T:FCartographer.AreaSelector">
             <summary>
             Responsible for selecting an area on canvas based on color difference
+            
+            !!! - WARNING - !!! All of the functions in this class are UNSAFE CLASSES. This means that they deal with POINTERS, and you
+            SHOULDN'T MESS WITH THEM unless you ABSOLUTELY KNOW WHAT YOU'RE DOING.
             </summary>
         </member>
         <member name="M:FCartographer.AreaSelector.FillAreaContiguous(System.Drawing.Bitmap,System.Drawing.Point,FCartographer.BrushPreset)">
@@ -661,6 +764,121 @@
                 - Return new data
             
             Generates image to overlay onto original image.
+            </summary>
+        </member>
+        <member name="M:FCartographer.AreaSelector.PointToPointer(System.Int32,System.Int32,System.Byte*,System.Int32,System.Int32)">
+            <summary>
+            Converts a point on a bitmap to a pointer in memory.
+            </summary>
+        </member>
+        <member name="M:FCartographer.AreaSelector.PointerToPoint(System.Byte*,System.Byte*,System.Int32,System.Int32)">
+            <summary>
+            Converts a pointer to a pixel on a bitmap to a point object.
+            </summary>
+        </member>
+        <member name="M:FCartographer.AreaSelector.IsValid(System.Byte*,System.Drawing.Color)">
+            <summary>
+            Detects if a color is equal to a byte* pixel on a bitmap.
+            </summary>
+        </member>
+        <member name="M:FCartographer.AreaSelector.ChangeColor(System.Byte*,System.Int32,System.Int32,System.Drawing.Color,System.Int32,System.Int32)">
+            <summary>
+            Changes the color of a point on a bitmap.
+            </summary>
+        </member>
+        <member name="T:FCartographer.BrushPreset">
+            <summary>
+            BrushPreset Class, holds brush data. Brush data should be imported by file, and saved when created.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.SetImage(System.String,System.Int32,System.Drawing.Color)">
+            <summary>
+            Brush image mutator, image, opacity, and color overload
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.SetImage(System.Drawing.Bitmap)">
+            <summary>
+            Brush image mutator, image overload
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.SetImage(System.String)">
+            <summary>
+            Brush image mutator, brush path location overload
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.GetImage">
+            <summary>
+            Brush image accessor
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.SetSize(System.Int32)">
+            <summary>
+            Aize value mutator
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.SetColor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Color value mutator, int triplet overload
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.SetColor(System.Drawing.Color)">
+            <summary>
+            Color value mutator, Color type overload
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.GetColor">
+            <summary>
+            Size value mutator
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.GetSize">
+            <summary>
+            Size value accessor
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.SetOpacity(System.Int32)">
+            <summary>
+            Opacity value mutator
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.GetOpacity">
+            <summary>
+            Opacity value accessor
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.CalculateOutputBrush">
+            <summary>
+            Calculates the color and opacity of the output brush
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.SetSolidify(System.Boolean)">
+            <summary>
+            Sets if the brush is to have hard edges
+            </summary>
+        </member>
+        <member name="M:FCartographer.BrushPreset.#ctor(System.String,System.Int32,System.Int32,System.Drawing.Color,System.Boolean)">
+            <summary>
+            BrushPreset Constructor
+            </summary>
+        </member>
+        <member name="T:FCartographer.NationsBrushPreset">
+            <summary>
+            Holds data for brushes used on nation layers
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationsBrushPreset.#ctor(System.String,System.Int32,System.Int32,System.Drawing.Color,System.Boolean)">
+            <summary>
+            Constructor for Nation layer-specific brushes. Ensures the brush's hardness.
+            </summary>
+        </member>
+        <member name="T:FCartographer.TerrainBrushPreset">
+            <summary>
+            Holds data for brushes used on terrain layers
+            </summary>
+        </member>
+        <member name="M:FCartographer.TerrainBrushPreset.#ctor(System.String,System.Int32,System.Int32,System.Drawing.Color,System.Boolean)">
+            <summary>
+            Brush preset constructor.
             </summary>
         </member>
         <member name="T:FCartographer.ImageTypeConverter">
