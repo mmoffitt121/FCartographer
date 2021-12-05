@@ -109,6 +109,18 @@ namespace FCartographer
             SetColor(brushPreset.GetColor());
         }
 
+        // ---========================================================---
+        // Nation Handling
+        // ---========================================================---
+
+        /// <summary>
+        /// Creates new nation with random data color.
+        /// </summary>
+        public void NewNation()
+        {
+            nations.Add(new Nation(nations));
+        }
+
         /// <summary>
         /// Unnamed constructor, creates layer of size x and y. Inherits base constructor.
         /// </summary>

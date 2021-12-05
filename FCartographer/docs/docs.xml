@@ -256,7 +256,7 @@
         </member>
         <member name="M:FCartographer.Form1.ClearNationsPane">
             <summary>
-            Calls Dispose() on every Natoin Panel in the viewer
+            Calls Dispose() on every Nation Panel in the viewer
             </summary>
         </member>
         <member name="M:FCartographer.Form1.UpdateCanvasLocation">

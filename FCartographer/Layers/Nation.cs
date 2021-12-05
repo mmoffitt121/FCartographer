@@ -9,6 +9,8 @@ namespace FCartographer
 {
     /// <summary>
     /// Class that holds the data for a particular nation.
+    /// 
+    /// Tip: All colors should have Alpha value of 255.
     /// </summary>
     public class Nation
     {
@@ -62,6 +64,50 @@ namespace FCartographer
         public string GetName()
         {
             return name;
+        }
+
+        /// <summary>
+        /// Nation constructor, builds nation of random color and new name.
+        /// </summary>
+        public Nation(List<Nation> nations)
+        {
+            // Setting name
+            SetName("New Nation");
+
+            // Setting unique data color
+
+            List<Color> colors = new List<Color>();
+
+            foreach (Nation n in nations)
+            {
+                colors.Add(n.GetDataColor());
+            }
+
+            if (colors.Count >= 255*255*255)
+            {
+                SetDataColor(Color.FromArgb(255, 0, 0, 0));
+            }
+            else
+            {
+                Random rand = new Random();
+                while (true)
+                {
+                    Color clr = Color.FromArgb(255, rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256));
+
+                    foreach (Color c in colors)
+                    {
+                        if (c.R == clr.R && c.G == clr.G && c.B == clr.B)
+                        {
+                            continue;
+                        }
+                    }
+
+                    SetDataColor(clr);
+                    SetColor(clr);
+                }
+            }
+
+            // Setting display color
         }
     }
 }

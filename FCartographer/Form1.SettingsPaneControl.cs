@@ -35,6 +35,7 @@ namespace FCartographer
                     SetNationsSettingsActive(true);
                     SetBitmapToolsActive(true);
                     SetNationsPaneActive(true);
+                    DisplayNations();
                     break;
                 default:
                     break;

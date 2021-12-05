@@ -24,12 +24,23 @@ namespace FCartographer
         {
             ClearNationsPane();
 
+            Layer lr = project.CurrentLayer();
+
+            if (lr.GetType() != Layer.LayerType.NationMap)
+            {
+                return;
+            }
+
+            NationLayer lyr = (NationLayer)lr;
+
             if (project.GetLayerCount() == 0)
             {
                 return;
             }
 
-            for (int i = project.GetLayerCount() - 1; i >= 0; i--)
+            //NationPane.Controls.Add(new Panel());
+
+            for (int i = 0; i < 5; i++)
             {
                 // The Base Panel
                 Panel panel = new Panel()
@@ -39,8 +50,8 @@ namespace FCartographer
                     BorderStyle = BorderStyle.FixedSingle,
                     Dock = DockStyle.None,
                     Anchor = (AnchorStyles.Left | AnchorStyles.Right),
-                    Width = 155,
-                    Height = 50,
+                    Width = 110,
+                    Height = 25,
 
                     TabIndex = i
                 };
@@ -51,16 +62,16 @@ namespace FCartographer
                     BackColor = Color.BlanchedAlmond,
                     BorderStyle = BorderStyle.FixedSingle,
                     Location = new Point(2, 2),
-                    Width = 44,
-                    Height = 44
+                    Width = 19,
+                    Height = 19
                 };
 
                 // Text that displays layer's name
                 Label text = new Label()
                 {
-                    Text = project.GetLayer(i).Name(),
+                    Text = "Hello!",
                     ForeColor = Color.DarkRed,
-                    Location = new Point(48, 2),
+                    Location = new Point(23, 2),
                     Width = 90
                 };
 
@@ -106,13 +117,10 @@ namespace FCartographer
 
                 NationPane.Controls.Add(panel);
             }
-
-            DisplaySelectedLayer();
-            UpdateLayerBrushes();
         }
 
         /// <summary>
-        /// Calls Dispose() on every Natoin Panel in the viewer
+        /// Calls Dispose() on every Nation Panel in the viewer
         /// </summary>
         private void ClearNationsPane()
         {
