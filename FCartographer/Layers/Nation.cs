@@ -74,7 +74,7 @@ namespace FCartographer
             // Setting name
             SetName("New Nation");
 
-            // Setting unique data color
+            // Setting unique data color & display color
 
             List<Color> colors = new List<Color>();
 
@@ -106,8 +106,6 @@ namespace FCartographer
                     SetColor(clr);
                 }
             }
-
-            // Setting display color
         }
     }
 }

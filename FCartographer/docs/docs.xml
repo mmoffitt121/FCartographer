@@ -556,6 +556,8 @@
         <member name="T:FCartographer.Nation">
             <summary>
             Class that holds the data for a particular nation.
+            
+            Tip: All colors should have Alpha value of 255.
             </summary>
         </member>
         <member name="M:FCartographer.Nation.SetColor(System.Drawing.Color)">
@@ -586,6 +588,11 @@
         <member name="M:FCartographer.Nation.GetName">
             <summary>
             Name accessor
+            </summary>
+        </member>
+        <member name="M:FCartographer.Nation.#ctor(System.Collections.Generic.List{FCartographer.Nation})">
+            <summary>
+            Nation constructor, builds nation of random color and new name.
             </summary>
         </member>
         <member name="T:FCartographer.NationLayer">
@@ -638,6 +645,11 @@
         <member name="M:FCartographer.NationLayer.UpdateBrushOptions(FCartographer.BrushPreset)">
             <summary>
             Grabs internal brush options from the input layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.NewNation">
+            <summary>
+            Creates new nation with random data color.
             </summary>
         </member>
         <member name="M:FCartographer.NationLayer.#ctor(System.Int32,System.Int32)">

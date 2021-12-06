@@ -132,6 +132,8 @@ namespace FCartographer
             InitializeColor(Color.FromArgb(255, 200, 0, 255));
             pen = new Pen(brushcolor, 20);
             pen.Width = 20;
+
+            nations = new List<Nation>();
         }
 
         /// <summary>
@@ -144,6 +146,8 @@ namespace FCartographer
             InitializeColor(Color.FromArgb(255, 200, 0, 255));
             pen = new Pen(brushcolor, 30);
             pen.Width = 20;
+
+            nations = new List<Nation>();
         }
     }
 }
