@@ -57,7 +57,7 @@ namespace FCartographer
                 // Panel that displays Layer Type Icon
                 Panel icon = new Panel()
                 {
-                    BackColor = Color.BlanchedAlmond,
+                    BackColor = lr.GetNation(i).GetColor(),
                     BorderStyle = BorderStyle.FixedSingle,
                     Location = new Point(2, 2),
                     Width = 19,

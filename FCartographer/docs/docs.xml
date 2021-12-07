@@ -254,6 +254,11 @@
             Also places references to each layer panel object in List of layer display objects.
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.NationPanel_Select(System.Object,System.EventArgs)">
+            <summary>
+            Event that fires when a layer pane is clicked. It calls project.SelectLayer() to select the layer clicked.
+            </summary>
+        </member>
         <member name="M:FCartographer.Form1.ClearNationsPane">
             <summary>
             Calls Dispose() on every Nation Panel in the viewer
