@@ -104,6 +104,7 @@ namespace FCartographer
 
                     SetDataColor(clr);
                     SetColor(clr);
+                    break;
                 }
             }
         }

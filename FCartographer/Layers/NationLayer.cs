@@ -122,6 +122,29 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Returns the amount of items in the intenal nation list
+        /// </summary>
+        public int GetNationCount()
+        {
+            return nations.Count;
+        }
+
+        /// <summary>
+        /// Gets a nation by it's index in the nations list. If index too high, return null.
+        /// </summary>
+        public Nation GetNation(int i)
+        {
+            if (i < nations.Count)
+            {
+                return nations[i];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Unnamed constructor, creates layer of size x and y. Inherits base constructor.
         /// </summary>
         public NationLayer(int x, int y) : base(x, y)
@@ -134,6 +157,7 @@ namespace FCartographer
             pen.Width = 20;
 
             nations = new List<Nation>();
+            NewNation();
         }
 
         /// <summary>
@@ -148,6 +172,7 @@ namespace FCartographer
             pen.Width = 20;
 
             nations = new List<Nation>();
+            NewNation();
         }
     }
 }

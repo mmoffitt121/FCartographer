@@ -652,6 +652,16 @@
             Creates new nation with random data color.
             </summary>
         </member>
+        <member name="M:FCartographer.NationLayer.GetNationCount">
+            <summary>
+            Returns the amount of items in the intenal nation list
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.GetNation(System.Int32)">
+            <summary>
+            Gets a nation by it's index in the nations list. If index too high, return null.
+            </summary>
+        </member>
         <member name="M:FCartographer.NationLayer.#ctor(System.Int32,System.Int32)">
             <summary>
             Unnamed constructor, creates layer of size x and y. Inherits base constructor.

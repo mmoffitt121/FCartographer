@@ -24,23 +24,21 @@ namespace FCartographer
         {
             ClearNationsPane();
 
-            Layer lr = project.CurrentLayer();
+            Layer lyr = project.CurrentLayer();
 
-            if (lr.GetType() != Layer.LayerType.NationMap)
+            if (lyr.GetType() != Layer.LayerType.NationMap)
             {
                 return;
             }
 
-            NationLayer lyr = (NationLayer)lr;
+            NationLayer lr = (NationLayer)lyr;
 
             if (project.GetLayerCount() == 0)
             {
                 return;
             }
 
-            //NationPane.Controls.Add(new Panel());
-
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < lr.GetNationCount(); i++)
             {
                 // The Base Panel
                 Panel panel = new Panel()
@@ -69,47 +67,15 @@ namespace FCartographer
                 // Text that displays layer's name
                 Label text = new Label()
                 {
-                    Text = "Hello!",
+                    Text = lr.GetNation(i).GetName(),
                     ForeColor = Color.DarkRed,
                     Location = new Point(23, 2),
                     Width = 90
                 };
 
-                // Delete Button
-                Button delbutton = new Button()
-                {
-                    Location = new Point(137, 2),
-                    BackColor = Color.DarkRed,
-                    Width = 15,
-                    Height = 15
-                };
-
-                // Move Layer Up Button
-                Button upbutton = new Button()
-                {
-                    Location = new Point(137, 17),
-                    Width = 15,
-                    Height = 15
-                };
-
-                // Move Layer Down Button
-                Button downbutton = new Button()
-                {
-                    Location = new Point(137, 32),
-                    Width = 15,
-                    Height = 15
-                };
-
                 text.Click += LayerPanelChild_Select;
                 icon.Click += LayerPanelChild_Select;
 
-                delbutton.Click += DeleteLayer_Click;
-                upbutton.Click += LayerUp_Click;
-                downbutton.Click += LayerDown_Click;
-
-                panel.Controls.Add(delbutton);
-                panel.Controls.Add(upbutton);
-                panel.Controls.Add(downbutton);
                 panel.Controls.Add(text);
                 panel.Controls.Add(icon);
 
@@ -117,6 +83,42 @@ namespace FCartographer
 
                 NationPane.Controls.Add(panel);
             }
+        }
+
+        private void NationPanelChild_Select(object sender, EventArgs e)
+        {
+            Control csender;
+            try
+            {
+                csender = (Control)sender;
+                NationPanel_Select(csender.Parent, e);
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Event that fires when a layer pane is clicked. It calls project.SelectLayer() to select the layer clicked.
+        /// </summary>
+        private void NationPanel_Select(object sender, EventArgs e)
+        {
+            Panel psender;
+            try
+            {
+                psender = (Panel)sender;
+            }
+            catch
+            {
+                return;
+            }
+
+            int indx = psender.TabIndex;
+
+            project.SelectLayer(indx);
+            DisplaySelectedLayer();
+            UpdateLayerBrushes();
         }
 
         /// <summary>
