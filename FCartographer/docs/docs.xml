@@ -264,6 +264,11 @@
             Calls Dispose() on every Nation Panel in the viewer
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.DisplaySelectedNation">
+            <summary>
+            Updates the nation gui to highlight the selected nation
+            </summary>
+        </member>
         <member name="M:FCartographer.Form1.UpdateCanvasLocation">
             <summary>
             Applies this class' internal canvas location to the canvas

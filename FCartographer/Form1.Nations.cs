@@ -83,6 +83,8 @@ namespace FCartographer
 
                 NationPane.Controls.Add(panel);
             }
+
+            DisplaySelectedNation();
         }
 
         private void NationPanelChild_Select(object sender, EventArgs e)
@@ -117,6 +119,7 @@ namespace FCartographer
             }
 
             lyr.SelectNation(psender.TabIndex);
+            nations_brushpreset.SetColor(lyr.GetNation(lyr.GetSelected()).GetDataColor());
 
             DisplaySelectedNation();
             UpdateLayerBrushes();
@@ -133,6 +136,9 @@ namespace FCartographer
             }
         }
 
+        /// <summary>
+        /// Updates the nation gui to highlight the selected nation
+        /// </summary>
         public void DisplaySelectedNation()
         {
             NationLayer lyr;
