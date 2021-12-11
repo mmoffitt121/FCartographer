@@ -69,6 +69,7 @@ namespace FCartographer
             this.HorizontalScroll = new System.Windows.Forms.HScrollBar();
             this.VerticalScroll = new System.Windows.Forms.VScrollBar();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.AddObjectButton = new System.Windows.Forms.Button();
             this.ToolsPanel.SuspendLayout();
             this.BitmapTools.SuspendLayout();
             this.ElevationSettings.SuspendLayout();
@@ -121,6 +122,7 @@ namespace FCartographer
             // 
             // BitmapTools
             // 
+            this.BitmapTools.Controls.Add(this.AddObjectButton);
             this.BitmapTools.Controls.Add(this.FillSelect);
             this.BitmapTools.Controls.Add(this.BrushSelect);
             this.BitmapTools.Dock = System.Windows.Forms.DockStyle.Top;
@@ -485,6 +487,16 @@ namespace FCartographer
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1705, 899);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
+            // AddObjectButton
+            // 
+            this.AddObjectButton.Location = new System.Drawing.Point(8, 321);
+            this.AddObjectButton.Name = "AddObjectButton";
+            this.AddObjectButton.Size = new System.Drawing.Size(25, 25);
+            this.AddObjectButton.TabIndex = 0;
+            this.AddObjectButton.Text = "+";
+            this.AddObjectButton.UseVisualStyleBackColor = true;
+            this.AddObjectButton.Click += new System.EventHandler(this.AddObjectButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -561,6 +573,7 @@ namespace FCartographer
         private System.Windows.Forms.Button FillSelect;
         private System.Windows.Forms.Button BrushSelect;
         private System.Windows.Forms.FlowLayoutPanel NationPane;
+        private System.Windows.Forms.Button AddObjectButton;
     }
 }
 

@@ -55,6 +55,19 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// What happens when the add nation/other button is clicked
+        /// </summary>
+        private void AddObjectButton_Click(object sender, EventArgs e)
+        {
+            if (project.CurrentLayer().GetType() == Layer.LayerType.NationMap)
+            {
+                NationLayer lr = (NationLayer)(project.CurrentLayer());
+                lr.NewNation();
+                DisplayNations();
+            }
+        }
+
+        /// <summary>
         /// Sets tool buttons to default color
         /// </summary>
         private void ResetToolButtonColors()

@@ -358,6 +358,11 @@
             Selects the fill tool, event listener
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.AddObjectButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            What happens when the add nation/other button is clicked
+            </summary>
+        </member>
         <member name="M:FCartographer.Form1.ResetToolButtonColors">
             <summary>
             Sets tool buttons to default color
