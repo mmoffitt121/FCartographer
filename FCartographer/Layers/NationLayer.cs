@@ -15,6 +15,7 @@ namespace FCartographer
     {
         //private TerrainShader shader;
         private List<Nation> nations;
+        private int selected;
 
         private Pen pen;
 
@@ -127,6 +128,30 @@ namespace FCartographer
         public int GetNationCount()
         {
             return nations.Count;
+        }
+
+        /// <summary>
+        /// Returns the index of the selected layer
+        /// </summary>
+        public int GetSelected()
+        {
+            return selected;
+        }
+
+        /// <summary>
+        /// Changes the index of layer to be selected
+        /// </summary>
+        public void SelectNation(int i)
+        {
+            selected = i;
+        }
+
+        /// <summary>
+        /// Checks if an index is selected
+        /// </summary>
+        public bool IsSelected(int i)
+        {
+            return selected == i;
         }
 
         /// <summary>

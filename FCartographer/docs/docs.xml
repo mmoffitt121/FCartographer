@@ -667,6 +667,21 @@
             Returns the amount of items in the intenal nation list
             </summary>
         </member>
+        <member name="M:FCartographer.NationLayer.GetSelected">
+            <summary>
+            Returns the index of the selected layer
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.SelectNation(System.Int32)">
+            <summary>
+            Changes the index of layer to be selected
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationLayer.IsSelected(System.Int32)">
+            <summary>
+            Checks if an index is selected
+            </summary>
+        </member>
         <member name="M:FCartographer.NationLayer.GetNation(System.Int32)">
             <summary>
             Gets a nation by it's index in the nations list. If index too high, return null.

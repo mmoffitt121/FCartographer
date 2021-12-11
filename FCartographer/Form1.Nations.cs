@@ -73,13 +73,13 @@ namespace FCartographer
                     Width = 90
                 };
 
-                text.Click += LayerPanelChild_Select;
-                icon.Click += LayerPanelChild_Select;
+                text.Click += NationPanelChild_Select;
+                icon.Click += NationPanelChild_Select;
 
                 panel.Controls.Add(text);
                 panel.Controls.Add(icon);
 
-                panel.Click += LayerPanel_Select;
+                panel.Click += NationPanel_Select;
 
                 NationPane.Controls.Add(panel);
             }
@@ -105,19 +105,20 @@ namespace FCartographer
         private void NationPanel_Select(object sender, EventArgs e)
         {
             Panel psender;
+            NationLayer lyr;
             try
             {
                 psender = (Panel)sender;
+                lyr = (NationLayer)(project.CurrentLayer());
             }
             catch
             {
                 return;
             }
 
-            int indx = psender.TabIndex;
+            lyr.SelectNation(psender.TabIndex);
 
-            project.SelectLayer(indx);
-            DisplaySelectedLayer();
+            DisplaySelectedNation();
             UpdateLayerBrushes();
         }
 
@@ -129,6 +130,32 @@ namespace FCartographer
             for (int i = NationPane.Controls.Count - 1; i >= 0; i--)
             {
                 NationPane.Controls[i].Dispose();
+            }
+        }
+
+        public void DisplaySelectedNation()
+        {
+            NationLayer lyr;
+            try
+            {
+                lyr = (NationLayer)(project.CurrentLayer());
+            }
+            catch
+            {
+                return;
+            }
+
+            for (int i = 0; i < NationPane.Controls.Count; i++)
+            {
+                if (lyr.IsSelected(i))
+                {
+                    System.Diagnostics.Debug.WriteLine(i);
+                    NationPane.Controls[i].BackColor = Color.White;
+                }
+                else
+                {
+                    NationPane.Controls[i].BackColor = Color.NavajoWhite;
+                }
             }
         }
     }
