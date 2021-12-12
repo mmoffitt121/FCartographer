@@ -250,13 +250,8 @@
         </member>
         <member name="M:FCartographer.Form1.DisplayNations">
             <summary>
-            Places a panel for each layer in the layer pane for user navigation.
-            Also places references to each layer panel object in List of layer display objects.
-            </summary>
-        </member>
-        <member name="M:FCartographer.Form1.NationPanel_Select(System.Object,System.EventArgs)">
-            <summary>
-            Event that fires when a layer pane is clicked. It calls project.SelectLayer() to select the layer clicked.
+            Places a panel for each nation in the nation pane for user navigation.
+            Also places references to each nation panel object in List of nation display objects.
             </summary>
         </member>
         <member name="M:FCartographer.Form1.ClearNationsPane">
@@ -674,7 +669,7 @@
         </member>
         <member name="M:FCartographer.NationLayer.GetSelected">
             <summary>
-            Returns the index of the selected layer
+            Returns the index of the selected nation
             </summary>
         </member>
         <member name="M:FCartographer.NationLayer.SelectNation(System.Int32)">

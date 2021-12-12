@@ -131,7 +131,7 @@ namespace FCartographer
         }
 
         /// <summary>
-        /// Returns the index of the selected layer
+        /// Returns the index of the selected nation
         /// </summary>
         public int GetSelected()
         {

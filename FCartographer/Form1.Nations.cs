@@ -17,8 +17,8 @@ namespace FCartographer
     public partial class Form1 : Form
     {
         /// <summary>
-        /// Places a panel for each layer in the layer pane for user navigation.
-        /// Also places references to each layer panel object in List of layer display objects.
+        /// Places a panel for each nation in the nation pane for user navigation.
+        /// Also places references to each nation panel object in List of nation display objects.
         /// </summary>
         public void DisplayNations()
         {
@@ -101,9 +101,6 @@ namespace FCartographer
             }
         }
 
-        /// <summary>
-        /// Event that fires when a layer pane is clicked. It calls project.SelectLayer() to select the layer clicked.
-        /// </summary>
         private void NationPanel_Select(object sender, EventArgs e)
         {
             Panel psender;

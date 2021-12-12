@@ -197,6 +197,8 @@ namespace FCartographer
         {
             if (project.CurrentLayer() != null && project.CurrentLayer().GetType() == Layer.LayerType.NationMap)
             {
+                NationLayer lr = (NationLayer)(project.CurrentLayer());
+                nations_brushpreset.SetColor(lr.GetNation(lr.GetSelected()).GetDataColor());
                 project.CurrentLayer().UpdateBrushOptions(nations_brushpreset);
             }
         }
