@@ -43,10 +43,22 @@ namespace FCartographer.Window
             this.MaxHeightLabel = new System.Windows.Forms.Label();
             this.layerNameField = new System.Windows.Forms.TextBox();
             this.layerNameLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.PlainsBox = new System.Windows.Forms.CheckBox();
+            this.MesasBox = new System.Windows.Forms.CheckBox();
+            this.MountainsBox = new System.Windows.Forms.CheckBox();
+            this.PlainsLabel = new System.Windows.Forms.Label();
+            this.MesasLabel = new System.Windows.Forms.Label();
+            this.MountainsLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.ScaleField = new System.Windows.Forms.TextBox();
+            this.ScaleLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -62,6 +74,8 @@ namespace FCartographer.Window
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.layerNameField, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.layerNameLabel, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 8);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 2, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -222,6 +236,129 @@ namespace FCartographer.Window
             this.layerNameLabel.TabIndex = 7;
             this.layerNameLabel.Text = "Name";
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 6;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31F));
+            this.tableLayoutPanel2.Controls.Add(this.PlainsBox, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.MesasBox, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.MountainsBox, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.PlainsLabel, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.MesasLabel, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.MountainsLabel, 5, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(88, 237);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66666F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(699, 216);
+            this.tableLayoutPanel2.TabIndex = 8;
+            // 
+            // PlainsBox
+            // 
+            this.PlainsBox.AutoSize = true;
+            this.PlainsBox.Location = new System.Drawing.Point(3, 3);
+            this.PlainsBox.Name = "PlainsBox";
+            this.PlainsBox.Size = new System.Drawing.Size(14, 19);
+            this.PlainsBox.TabIndex = 0;
+            this.PlainsBox.Text = "checkBox1";
+            this.PlainsBox.UseVisualStyleBackColor = true;
+            // 
+            // MesasBox
+            // 
+            this.MesasBox.AutoSize = true;
+            this.MesasBox.Location = new System.Drawing.Point(232, 3);
+            this.MesasBox.Name = "MesasBox";
+            this.MesasBox.Size = new System.Drawing.Size(14, 19);
+            this.MesasBox.TabIndex = 1;
+            this.MesasBox.Text = "checkBox2";
+            this.MesasBox.UseVisualStyleBackColor = true;
+            // 
+            // MountainsBox
+            // 
+            this.MountainsBox.AutoSize = true;
+            this.MountainsBox.Location = new System.Drawing.Point(461, 3);
+            this.MountainsBox.Name = "MountainsBox";
+            this.MountainsBox.Size = new System.Drawing.Size(14, 19);
+            this.MountainsBox.TabIndex = 2;
+            this.MountainsBox.Text = "checkBox3";
+            this.MountainsBox.UseVisualStyleBackColor = true;
+            // 
+            // PlainsLabel
+            // 
+            this.PlainsLabel.AutoSize = true;
+            this.PlainsLabel.Location = new System.Drawing.Point(23, 3);
+            this.PlainsLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.PlainsLabel.Name = "PlainsLabel";
+            this.PlainsLabel.Size = new System.Drawing.Size(38, 15);
+            this.PlainsLabel.TabIndex = 3;
+            this.PlainsLabel.Text = "Plains";
+            // 
+            // MesasLabel
+            // 
+            this.MesasLabel.AutoSize = true;
+            this.MesasLabel.Location = new System.Drawing.Point(252, 3);
+            this.MesasLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.MesasLabel.Name = "MesasLabel";
+            this.MesasLabel.Size = new System.Drawing.Size(40, 15);
+            this.MesasLabel.TabIndex = 4;
+            this.MesasLabel.Text = "Mesas";
+            // 
+            // MountainsLabel
+            // 
+            this.MountainsLabel.AutoSize = true;
+            this.MountainsLabel.Location = new System.Drawing.Point(481, 3);
+            this.MountainsLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.MountainsLabel.Name = "MountainsLabel";
+            this.MountainsLabel.Size = new System.Drawing.Size(64, 15);
+            this.MountainsLabel.TabIndex = 5;
+            this.MountainsLabel.Text = "Mountains";
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 4;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel6.Controls.Add(this.ScaleField, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.ScaleLabel, 0, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(88, 141);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(696, 26);
+            this.tableLayoutPanel6.TabIndex = 9;
+            // 
+            // ScaleField
+            // 
+            this.ScaleField.Location = new System.Drawing.Point(177, 3);
+            this.ScaleField.Name = "ScaleField";
+            this.ScaleField.Size = new System.Drawing.Size(168, 23);
+            this.ScaleField.TabIndex = 0;
+            this.ScaleField.Text = "100";
+            // 
+            // ScaleLabel
+            // 
+            this.ScaleLabel.AutoSize = true;
+            this.ScaleLabel.Location = new System.Drawing.Point(3, 3);
+            this.ScaleLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.ScaleLabel.Name = "ScaleLabel";
+            this.ScaleLabel.Size = new System.Drawing.Size(34, 15);
+            this.ScaleLabel.TabIndex = 1;
+            this.ScaleLabel.Text = "Scale";
+            // 
             // LandscapeGeneratorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -238,6 +375,10 @@ namespace FCartographer.Window
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -258,5 +399,15 @@ namespace FCartographer.Window
         private System.Windows.Forms.Label MaxHeightLabel;
         private System.Windows.Forms.TextBox layerNameField;
         private System.Windows.Forms.Label layerNameLabel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.CheckBox PlainsBox;
+        private System.Windows.Forms.CheckBox MesasBox;
+        private System.Windows.Forms.CheckBox MountainsBox;
+        private System.Windows.Forms.Label PlainsLabel;
+        private System.Windows.Forms.Label MesasLabel;
+        private System.Windows.Forms.Label MountainsLabel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.TextBox ScaleField;
+        private System.Windows.Forms.Label ScaleLabel;
     }
 }

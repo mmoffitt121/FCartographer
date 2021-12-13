@@ -352,6 +352,37 @@
             Landscape generator class, used to generate a custom landscape based on a seed, and user defined options. Will use unsafe functions.
             </summary>
         </member>
+        <member name="M:FCartographer.LandscapeGenerator.PopulatePoints(System.Int32,System.Int32)">
+            <summary>
+            Populates points on the bitmap for generation
+            </summary>
+        </member>
+        <member name="M:FCartographer.LandscapeGenerator.DrawPoints">
+            <summary>
+            Draws points for debug use
+            </summary>
+        </member>
+        <member name="M:FCartographer.LandscapeGenerator.DrawPoints(System.Drawing.Color)">
+            <summary>
+            Draws points for debug use of specified color
+            </summary>
+        </member>
+        <member name="M:FCartographer.LandscapeGenerator.GenerateMountains(System.Int32)">
+            <summary>
+            Generates mountains on internal bitmap
+            </summary>
+        </member>
+        <member name="M:FCartographer.LandscapeGenerator.Flatten(System.Int32)">
+            <summary>
+            Fills image to given height
+            </summary>
+        </member>
+        <member name="M:FCartographer.LandscapeGenerator.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Generator constructor
+            </summary>
+            <param name="_data"></param>
+        </member>
         <member name="T:FCartographer.HeightLayer">
             <summary>
             Layer that holds and interfaces with data for heightmaps.
@@ -944,6 +975,31 @@
         <member name="M:FCartographer.ImageTypeConverter.BmpToByte(System.Drawing.Bitmap)">
             <summary>
             Converts bitmap to byte array
+            </summary>
+        </member>
+        <member name="T:FCartographer.PointerOps">
+            <summary>
+            Class holding pointer helper conversion functions. Uses unsafe functions.
+            </summary>
+        </member>
+        <member name="M:FCartographer.PointerOps.PointToPointer(System.Int32,System.Int32,System.Byte*,System.Int32,System.Int32)">
+            <summary>
+            Converts a point on a bitmap to a pointer in memory.
+            </summary>
+        </member>
+        <member name="M:FCartographer.PointerOps.PointerToPoint(System.Byte*,System.Byte*,System.Int32,System.Int32)">
+            <summary>
+            Converts a pointer to a pixel on a bitmap to a point object.
+            </summary>
+        </member>
+        <member name="M:FCartographer.PointerOps.IsValid(System.Byte*,System.Drawing.Color)">
+            <summary>
+            Detects if a color is equal to a byte* pixel on a bitmap.
+            </summary>
+        </member>
+        <member name="M:FCartographer.PointerOps.ChangeColor(System.Byte*,System.Int32,System.Int32,System.Drawing.Color,System.Int32,System.Int32)">
+            <summary>
+            Changes the color of a point on a bitmap.
             </summary>
         </member>
         <member name="T:FCartographer.AddLayerMenu">

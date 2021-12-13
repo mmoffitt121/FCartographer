@@ -169,7 +169,7 @@ namespace FCartographer
         /// Draws rendered graphics to the canvas
         /// Input: Bitmap display -> Already rendered graphics to display to user
         /// </summary>
-        private void RenderGraphics(Bitmap display)
+        public void RenderGraphics(Bitmap display)
         {
             g.DrawImage(display, 0, 0);
         }

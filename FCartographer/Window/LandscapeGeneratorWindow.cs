@@ -42,10 +42,20 @@ namespace FCartographer.Window
 
             parentform.project.AddLayer(Layer.LayerType.HeightMap);
             parentform.project.CurrentLayer().SetName(layerNameField.Text);
+            Bitmap data = parentform.project.CurrentLayer().GetData();
+
+            // Generator
+
+            LandscapeGenerator gen = new LandscapeGenerator(data);
 
             // Get data for generation
 
-            string seed = seedBox.Text;
+            string stringseed = seedBox.Text;
+            int seed = 0;
+            foreach (char c in stringseed)
+            {
+                seed += System.Convert.ToInt32(c);
+            }
 
             int min, max;
             try
@@ -59,8 +69,25 @@ namespace FCartographer.Window
                 max = 255;
             }
 
+            int density;
+            try
+            {
+                density = Int32.Parse(ScaleField.Text) * 1000;
+            }
+            catch
+            {
+                density = 1000;
+            }
+
+            // Generation
+
+            gen.Flatten(0);
+            gen.PopulatePoints(density, seed);
+            gen.GenerateMountains(seed);
+
             // End
 
+            parentform.RenderGraphics(parentform.project.GetGraphics());
             Close();
         }
 
