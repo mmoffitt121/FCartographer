@@ -53,6 +53,8 @@ namespace FCartographer.Window
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.ScaleField = new System.Windows.Forms.TextBox();
             this.ScaleLabel = new System.Windows.Forms.Label();
+            this.SteepnessLabel = new System.Windows.Forms.Label();
+            this.SteepnessField = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -327,23 +329,27 @@ namespace FCartographer.Window
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 4;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.82269F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.82269F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.82269F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.39007F));
             this.tableLayoutPanel6.Controls.Add(this.ScaleField, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.ScaleLabel, 0, 0);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(88, 141);
+            this.tableLayoutPanel6.Controls.Add(this.SteepnessLabel, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.SteepnessField, 3, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(85, 138);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(696, 26);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(705, 32);
             this.tableLayoutPanel6.TabIndex = 9;
             // 
             // ScaleField
             // 
-            this.ScaleField.Location = new System.Drawing.Point(177, 3);
+            this.ScaleField.Location = new System.Drawing.Point(178, 3);
             this.ScaleField.Name = "ScaleField";
             this.ScaleField.Size = new System.Drawing.Size(168, 23);
             this.ScaleField.TabIndex = 0;
@@ -358,6 +364,24 @@ namespace FCartographer.Window
             this.ScaleLabel.Size = new System.Drawing.Size(34, 15);
             this.ScaleLabel.TabIndex = 1;
             this.ScaleLabel.Text = "Scale";
+            // 
+            // SteepnessLabel
+            // 
+            this.SteepnessLabel.AutoSize = true;
+            this.SteepnessLabel.Location = new System.Drawing.Point(353, 3);
+            this.SteepnessLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.SteepnessLabel.Name = "SteepnessLabel";
+            this.SteepnessLabel.Size = new System.Drawing.Size(59, 15);
+            this.SteepnessLabel.TabIndex = 2;
+            this.SteepnessLabel.Text = "Steepness";
+            // 
+            // SteepnessField
+            // 
+            this.SteepnessField.Location = new System.Drawing.Point(528, 3);
+            this.SteepnessField.Name = "SteepnessField";
+            this.SteepnessField.Size = new System.Drawing.Size(171, 23);
+            this.SteepnessField.TabIndex = 3;
+            this.SteepnessField.Text = "5";
             // 
             // LandscapeGeneratorWindow
             // 
@@ -409,5 +433,7 @@ namespace FCartographer.Window
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.TextBox ScaleField;
         private System.Windows.Forms.Label ScaleLabel;
+        private System.Windows.Forms.Label SteepnessLabel;
+        private System.Windows.Forms.TextBox SteepnessField;
     }
 }

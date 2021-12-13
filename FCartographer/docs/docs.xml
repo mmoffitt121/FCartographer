@@ -367,7 +367,7 @@
             Draws points for debug use of specified color
             </summary>
         </member>
-        <member name="M:FCartographer.LandscapeGenerator.GenerateMountains(System.Int32)">
+        <member name="M:FCartographer.LandscapeGenerator.GenerateMountains(System.Int32,System.Int32)">
             <summary>
             Generates mountains on internal bitmap
             </summary>

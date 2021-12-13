@@ -79,11 +79,21 @@ namespace FCartographer.Window
                 density = 1000;
             }
 
+            int steepness;
+            try
+            {
+                steepness = Math.Clamp(Int32.Parse(SteepnessField.Text), 0, 255);
+            }
+            catch
+            {
+                steepness = 5;
+            }
+
             // Generation
 
             gen.Flatten(0);
             gen.PopulatePoints(density, seed);
-            gen.GenerateMountains(seed);
+            gen.GenerateMountains(steepness, seed);
 
             // End
 
