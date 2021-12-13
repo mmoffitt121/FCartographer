@@ -4,50 +4,6 @@
         <name>FCartographer</name>
     </assembly>
     <members>
-        <member name="T:FCartographer.AddLayerMenu">
-            <summary>
-            Window for adding a new layer with specified settings.
-            
-            This class, when instantiated, takes the parent form as input, and interfaces with the project.
-            </summary>
-        </member>
-        <member name="F:FCartographer.AddLayerMenu.parentform">
-            <summary>
-            Holds the reference to the parent Form1 object, aka the main program.
-            </summary>
-        </member>
-        <member name="M:FCartographer.AddLayerMenu.CreateLayerButton_Click(System.Object,System.EventArgs)">
-            <summary>
-            Adds a layer based on the layer type name in the LayerToAdd text input box
-            </summary>
-        </member>
-        <member name="M:FCartographer.AddLayerMenu.CancelCreateLayerButton_Click(System.Object,System.EventArgs)">
-            <summary>
-            Closes window
-            </summary>
-        </member>
-        <member name="M:FCartographer.AddLayerMenu.#ctor(FCartographer.Form1)">
-            <summary>
-            Constructor, takes parent Form1 as input.
-            </summary>
-        </member>
-        <member name="F:FCartographer.AddLayerMenu.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:FCartographer.AddLayerMenu.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:FCartographer.AddLayerMenu.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="T:FCartographer.Form1">
             <summary>
             Partial Class: Form1
@@ -802,6 +758,16 @@
             Shader that extends terrainshader, shades terrain based on input direction.
             </summary>
         </member>
+        <member name="T:FCartographer.NationStrokeRenderer">
+            <summary>
+            Renderer class, used to render parts of layers. Will usually utilize unsafe functions.
+            </summary>
+        </member>
+        <member name="T:FCartographer.Renderer">
+            <summary>
+            Renderer class, used to render parts of layers. Will usually utilize unsafe functions.
+            </summary>
+        </member>
         <member name="T:FCartographer.TerrainShader">
             <summary>
             Shader responsible for terrain layers
@@ -965,6 +931,67 @@
         <member name="M:FCartographer.ImageTypeConverter.BmpToByte(System.Drawing.Bitmap)">
             <summary>
             Converts bitmap to byte array
+            </summary>
+        </member>
+        <member name="T:FCartographer.AddLayerMenu">
+            <summary>
+            Window for adding a new layer with specified settings.
+            
+            This class, when instantiated, takes the parent form as input, and interfaces with the project.
+            </summary>
+        </member>
+        <member name="F:FCartographer.AddLayerMenu.parentform">
+            <summary>
+            Holds the reference to the parent Form1 object, aka the main program.
+            </summary>
+        </member>
+        <member name="M:FCartographer.AddLayerMenu.CreateLayerButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Adds a layer based on the layer type name in the LayerToAdd text input box
+            </summary>
+        </member>
+        <member name="M:FCartographer.AddLayerMenu.CancelCreateLayerButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Closes window
+            </summary>
+        </member>
+        <member name="M:FCartographer.AddLayerMenu.#ctor(FCartographer.Form1)">
+            <summary>
+            Constructor, takes parent Form1 as input.
+            </summary>
+        </member>
+        <member name="F:FCartographer.AddLayerMenu.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:FCartographer.AddLayerMenu.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:FCartographer.AddLayerMenu.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:FCartographer.Window.LandscapeGeneratorWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Window.LandscapeGeneratorWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:FCartographer.Window.LandscapeGeneratorWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
     </members>
