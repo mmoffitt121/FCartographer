@@ -255,30 +255,32 @@ namespace FCartographer
         /// <summary>
         /// Expands given point, making a mountain shape on the image.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
         public unsafe void ExpandMountain(int x, int y)
         {
             int w = width - 1;
             int h = height - 1;
 
+            int variance = 5;
+
             int radius = 1;
-            while (radius < 30)
+            while (radius < 2 * (255 / steepness))
             {
                 int i, j, clr;
                 for (i = Math.Clamp(x - radius+1, 0, w); i <= Math.Clamp(x + radius, 0, w); i++)
                 {
+                    // Top of region
+
                     j = Math.Clamp(y - radius, 0, h);
-                    clr = Math.Clamp(PointerOps.PointToPointer(i, Math.Clamp(j + 1, 0, h), top, pixsiz, stride)[0] - 10, 0, 255);
-                    //clr = 255;
+                    clr = Math.Clamp(PointerOps.PointToPointer(i, Math.Clamp(j + 1, 0, h), top, pixsiz, stride)[0] - steepness + rand.Next(-1*variance, variance), 0, 255);
                     if (clr > PointerOps.PointToPointer(i, j, top, pixsiz, stride)[0])
                     {
                         PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
                     }
                     
+                    // Bottom of region
+
                     j = Math.Clamp(y + radius, 0, h);
-                    clr = Math.Clamp(PointerOps.PointToPointer(i, Math.Clamp(j - 1, 0, h), top, pixsiz, stride)[0] - 10, 0, 255);
-                    //clr = 255;
+                    clr = Math.Clamp(PointerOps.PointToPointer(i, Math.Clamp(j - 1, 0, h), top, pixsiz, stride)[0] - steepness + rand.Next(-1*variance, variance), 0, 255);
                     if (clr > PointerOps.PointToPointer(i, j, top, pixsiz, stride)[0])
                     {
                         PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
@@ -287,22 +289,26 @@ namespace FCartographer
 
                 for (j = Math.Clamp(y - radius+1, 0, h); j <= Math.Clamp(y + radius, 0, w); j++)
                 {
+                    // Right of region
+
                     i = Math.Clamp(x - radius, 0, w);
-                    clr = Math.Clamp(PointerOps.PointToPointer(Math.Clamp(i + 1, 0, w), j, top, pixsiz, stride)[0] - 10, 0, 255);
-                    //clr = 255;
+                    clr = Math.Clamp(PointerOps.PointToPointer(Math.Clamp(i + 1, 0, w), j, top, pixsiz, stride)[0] - steepness + rand.Next(-1*variance, variance), 0, 255);
                     if (clr > PointerOps.PointToPointer(i, j, top, pixsiz, stride)[0])
                     {
                         PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
                     }
 
+                    // Left of region
+
                     i = Math.Clamp(x + radius, 0, w);
-                    clr = Math.Clamp(PointerOps.PointToPointer(Math.Clamp(i - 1, 0, w), j, top, pixsiz, stride)[0] - 10, 0, 255);
-                    //clr = 255;
+                    clr = Math.Clamp(PointerOps.PointToPointer(Math.Clamp(i - 1, 0, w), j, top, pixsiz, stride)[0] - steepness + rand.Next(-1*variance, variance), 0, 255);
                     if (clr > PointerOps.PointToPointer(i, j, top, pixsiz, stride)[0])
                     {
                         PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
                     }
                 }
+
+                // Top left corner
 
                 i = Math.Clamp(x - radius, 0, w);
                 j = Math.Clamp(y - radius, 0, h);
@@ -312,6 +318,8 @@ namespace FCartographer
                     PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
                 }
 
+                // Top right corner
+
                 i = Math.Clamp(x + radius, 0, w);
                 j = Math.Clamp(y - radius, 0, h);
                 clr = Math.Clamp(PointerOps.PointToPointer(i - 1, j + 1, top, pixsiz, stride)[0] - 10, 0, 255);
@@ -320,6 +328,8 @@ namespace FCartographer
                     PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
                 }
 
+                // Bottom left corner
+
                 i = Math.Clamp(x - radius, 0, w);
                 j = Math.Clamp(y + radius, 0, h);
                 clr = Math.Clamp(PointerOps.PointToPointer(i + 1, j - 1, top, pixsiz, stride)[0] - 10, 0, 255);
@@ -327,6 +337,8 @@ namespace FCartographer
                 {
                     PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
                 }
+
+                // Bottom right corner
 
                 i = Math.Clamp(x + radius, 0, w);
                 j = Math.Clamp(y + radius, 0, h);

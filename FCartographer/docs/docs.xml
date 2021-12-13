@@ -372,6 +372,11 @@
             Generates mountains on internal bitmap
             </summary>
         </member>
+        <member name="M:FCartographer.LandscapeGenerator.ExpandMountain(System.Int32,System.Int32)">
+            <summary>
+            Expands given point, making a mountain shape on the image.
+            </summary>
+        </member>
         <member name="M:FCartographer.LandscapeGenerator.Flatten(System.Int32)">
             <summary>
             Fills image to given height
