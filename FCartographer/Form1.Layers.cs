@@ -25,6 +25,7 @@ namespace FCartographer
         {
             layermenu = new AddLayerMenu(this);
         }
+
         /// <summary>
         /// Adds a layer to the project
         /// </summary>

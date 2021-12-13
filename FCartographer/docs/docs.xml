@@ -18,6 +18,9 @@
             This part of Form1 is used for the bar at the top of the form, handling File, Edit, View, etc.
             </summary>
             <summary>
+            This part of Form one handles interaction with the landscape generation menu.
+            </summary>
+            <summary>
             This part of Form1 is used for Layer control
             </summary>
             <summary>
@@ -337,6 +340,16 @@
         <member name="F:FCartographer.Form1.ToolSelected.fill">
             <summary>
             Fill tool
+            </summary>
+        </member>
+        <member name="T:FCartographer.Generator">
+            <summary>
+            Generator base class, used to generate layers. Will use unsafe functions.
+            </summary>
+        </member>
+        <member name="T:FCartographer.LandscapeGenerator">
+            <summary>
+            Landscape generator class, used to generate a custom landscape based on a seed, and user defined options. Will use unsafe functions.
             </summary>
         </member>
         <member name="T:FCartographer.HeightLayer">
@@ -975,6 +988,31 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:FCartographer.Window.LandscapeGeneratorWindow">
+            <summary>
+            Window that handles the user's interface with the landscape generator.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Window.LandscapeGeneratorWindow.GenerateRandomSeed">
+            <summary>
+            Generates a random seed for the landscape generator, called the first time the window is opened.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Window.LandscapeGeneratorWindow.GenerateButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Activates the generator.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Window.LandscapeGeneratorWindow.randomSeedButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Gives user a random seed when button pressed.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Window.LandscapeGeneratorWindow.#ctor(FCartographer.Form1)">
+            <summary>
+            Constructor, takes parent form as argument for interaction.
             </summary>
         </member>
         <member name="F:FCartographer.Window.LandscapeGeneratorWindow.components">

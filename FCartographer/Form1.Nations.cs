@@ -152,7 +152,6 @@ namespace FCartographer
             {
                 if (lyr.IsSelected(i))
                 {
-                    System.Diagnostics.Debug.WriteLine(i);
                     NationPane.Controls[i].BackColor = Color.White;
                 }
                 else

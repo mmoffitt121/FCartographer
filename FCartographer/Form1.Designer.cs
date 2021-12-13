@@ -66,6 +66,7 @@ namespace FCartographer
             this.landscapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.randomNationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Navigation = new System.Windows.Forms.Panel();
             this.LayerPane = new System.Windows.Forms.FlowLayoutPanel();
             this.ZoomOut = new System.Windows.Forms.Button();
@@ -76,7 +77,6 @@ namespace FCartographer
             this.HorizontalScroll = new System.Windows.Forms.HScrollBar();
             this.VerticalScroll = new System.Windows.Forms.VScrollBar();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.renderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsPanel.SuspendLayout();
             this.BitmapTools.SuspendLayout();
             this.ElevationSettings.SuspendLayout();
@@ -426,6 +426,7 @@ namespace FCartographer
             this.landscapeToolStripMenuItem.Name = "landscapeToolStripMenuItem";
             this.landscapeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.landscapeToolStripMenuItem.Text = "Landscape";
+            this.landscapeToolStripMenuItem.Click += new System.EventHandler(this.landscapeToolStripMenuItem_Click);
             // 
             // nationsToolStripMenuItem
             // 
@@ -440,6 +441,12 @@ namespace FCartographer
             this.randomNationsToolStripMenuItem.Name = "randomNationsToolStripMenuItem";
             this.randomNationsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.randomNationsToolStripMenuItem.Text = "Random Nations";
+            // 
+            // renderToolStripMenuItem
+            // 
+            this.renderToolStripMenuItem.Name = "renderToolStripMenuItem";
+            this.renderToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.renderToolStripMenuItem.Text = "Render";
             // 
             // Navigation
             // 
@@ -548,12 +555,6 @@ namespace FCartographer
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1705, 899);
             this.tableLayoutPanel1.TabIndex = 3;
-            // 
-            // renderToolStripMenuItem
-            // 
-            this.renderToolStripMenuItem.Name = "renderToolStripMenuItem";
-            this.renderToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.renderToolStripMenuItem.Text = "Render";
             // 
             // Form1
             // 
