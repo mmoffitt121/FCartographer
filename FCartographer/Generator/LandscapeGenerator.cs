@@ -28,6 +28,8 @@ namespace FCartographer
 
         private int density;
         private int steepness;
+        private int ridgelength;
+        private int numbranches;
 
         /// <summary>
         /// Populates points on the bitmap for generation
@@ -84,9 +86,17 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Recursively generates sides of mountains
+        /// </summary>
+        public unsafe void GenerateMountainSides(int x0, int y0, int x1, int y1)
+        {
+
+        }
+
+        /// <summary>
         /// Generates mountains on internal bitmap
         /// </summary>
-        public unsafe void GenerateMountains(int _steepness, int seed)
+        public unsafe void GenerateMountains(int _steepness, int seed, int _numbranches)
         {
             BitmapData dat = data.LockBits(new Rectangle(0, 0, data.Width, data.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, data.PixelFormat);
             top = (byte*)dat.Scan0.ToPointer();
@@ -97,6 +107,7 @@ namespace FCartographer
             height = dat.Height;
 
             steepness = _steepness;
+            numbranches = _numbranches;
 
             rand = new Random(seed);
 
@@ -130,22 +141,22 @@ namespace FCartographer
                 {
                     if (cur1.X > cur2.X)
                     {
-                        DrawRidgeLow(cur2.X, cur2.Y, cur1.X, cur1.Y);
+                        DrawRidgeLow(cur2.X, cur2.Y, cur1.X, cur1.Y, 255, 255);
                     }
                     else
                     {
-                        DrawRidgeLow(cur1.X, cur1.Y, cur2.X, cur2.Y);
+                        DrawRidgeLow(cur1.X, cur1.Y, cur2.X, cur2.Y, 255, 255);
                     }
                 }
                 else
                 {
                     if (cur1.Y > cur2.Y)
                     {
-                        DrawRidgeHigh(cur2.X, cur2.Y, cur1.X, cur1.Y);
+                        DrawRidgeHigh(cur2.X, cur2.Y, cur1.X, cur1.Y, 255, 255);
                     }
                     else
                     {
-                        DrawRidgeHigh(cur1.X, cur1.Y, cur2.X, cur2.Y);
+                        DrawRidgeHigh(cur1.X, cur1.Y, cur2.X, cur2.Y, 255, 255);
                     }
                 }
 
@@ -157,7 +168,7 @@ namespace FCartographer
             //DrawPoints(Color.Red);
         }
 
-        private unsafe void DrawRidgeLow(int x0, int y0, int x1, int y1)
+        private unsafe void DrawRidgeLow(int x0, int y0, int x1, int y1, int clr0, int clr1)
         {
             int x, y, d, dx, dy, chg;
 
@@ -189,7 +200,9 @@ namespace FCartographer
                 ydeviation = Math.Clamp(Math.Clamp(ydeviation + rand.Next(-1, 2), -16, 16), -1 * Math.Abs(x1 - x), Math.Abs(x1 - x));
                 xp = Math.Clamp(x + xdeviation, 0, height - 1);
                 yp = Math.Clamp(y + ydeviation, 0, width - 1);
-                PointerOps.ChangeColor(top, xp, yp, Color.White, pixsiz, stride);
+
+                int clr = CalculateRidgeColor(x, x0, x1);
+                ExpandMountainCircular(xp, yp, clr);
 
                 ExpandMountain(xp, yp);
 
@@ -205,7 +218,7 @@ namespace FCartographer
             }
         }
 
-        private unsafe void DrawRidgeHigh(int x0, int y0, int x1, int y1)
+        private unsafe void DrawRidgeHigh(int x0, int y0, int x1, int y1, int clr0, int clr1)
         {
             int x, y, d, dx, dy, chg;
 
@@ -236,9 +249,9 @@ namespace FCartographer
                 ydeviation = Math.Clamp(Math.Clamp(ydeviation + rand.Next(-1, 2), -12, 12), -1 * Math.Abs(x1 - x), Math.Abs(x1 - x));
                 xp = Math.Clamp(x + xdeviation, 0, height - 1);
                 yp = Math.Clamp(y + ydeviation, 0, width - 1);
-                PointerOps.ChangeColor(top, xp, yp, Color.White, pixsiz, stride);
 
-                ExpandMountain(xp, yp);
+                int clr = CalculateRidgeColor(y, y0, y1);
+                ExpandMountainCircular(xp, yp, clr);
 
                 if (d > 0)
                 {
@@ -253,6 +266,20 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Calculates the ridge color based on the distance between two points, and the class' internal steepness.
+        /// </summary>
+        /// <param name="x"> The midpoint </param>
+        /// <param name="x0"> Upper or lower bound </param>
+        /// <param name="x1"> Upper or lower bound </param>
+        /// <returns></returns>
+        public int CalculateRidgeColor(int x, int x0, int x1)
+        {
+            int linearheight = Math.Max((int)(255f - Math.Abs((float)x - (float)x1) / Math.Abs((float)x - (float)x0) * 255f), (int)(255f - Math.Abs((float)x - (float)x0) / Math.Abs((float)x1 - (float)x0) * 255f));
+            int lowerbound = (int)(1f / (float)steepness * 255f);
+            return Math.Max(linearheight, lowerbound);
+        }
+
+        /// <summary>
         /// Expands given point, making a mountain shape on the image.
         /// </summary>
         public unsafe void ExpandMountain(int x, int y)
@@ -260,10 +287,8 @@ namespace FCartographer
             int w = width - 1;
             int h = height - 1;
 
-            int variance = 5;
-
             int radius = 1;
-            while (radius < 2 * (255 / steepness))
+            /*while (radius < 2 * (255 / steepness))
             {
                 int i, j, clr;
                 for (i = Math.Clamp(x - radius+1, 0, w); i <= Math.Clamp(x + radius, 0, w); i++)
@@ -271,7 +296,7 @@ namespace FCartographer
                     // Top of region
 
                     j = Math.Clamp(y - radius, 0, h);
-                    clr = Math.Clamp(PointerOps.PointToPointer(i, Math.Clamp(j + 1, 0, h), top, pixsiz, stride)[0] - steepness + rand.Next(-1*variance, variance), 0, 255);
+                    clr = Math.Clamp(PointerOps.PointToPointer(i, Math.Clamp(j + 1, 0, h), top, pixsiz, stride)[0] - steepness, 0, 255);
                     if (clr > PointerOps.PointToPointer(i, j, top, pixsiz, stride)[0])
                     {
                         PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
@@ -280,7 +305,7 @@ namespace FCartographer
                     // Bottom of region
 
                     j = Math.Clamp(y + radius, 0, h);
-                    clr = Math.Clamp(PointerOps.PointToPointer(i, Math.Clamp(j - 1, 0, h), top, pixsiz, stride)[0] - steepness + rand.Next(-1*variance, variance), 0, 255);
+                    clr = Math.Clamp(PointerOps.PointToPointer(i, Math.Clamp(j - 1, 0, h), top, pixsiz, stride)[0] - steepness, 0, 255);
                     if (clr > PointerOps.PointToPointer(i, j, top, pixsiz, stride)[0])
                     {
                         PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
@@ -292,7 +317,7 @@ namespace FCartographer
                     // Right of region
 
                     i = Math.Clamp(x - radius, 0, w);
-                    clr = Math.Clamp(PointerOps.PointToPointer(Math.Clamp(i + 1, 0, w), j, top, pixsiz, stride)[0] - steepness + rand.Next(-1*variance, variance), 0, 255);
+                    clr = Math.Clamp(PointerOps.PointToPointer(Math.Clamp(i + 1, 0, w), j, top, pixsiz, stride)[0] - steepness, 0, 255);
                     if (clr > PointerOps.PointToPointer(i, j, top, pixsiz, stride)[0])
                     {
                         PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
@@ -301,7 +326,7 @@ namespace FCartographer
                     // Left of region
 
                     i = Math.Clamp(x + radius, 0, w);
-                    clr = Math.Clamp(PointerOps.PointToPointer(Math.Clamp(i - 1, 0, w), j, top, pixsiz, stride)[0] - steepness + rand.Next(-1*variance, variance), 0, 255);
+                    clr = Math.Clamp(PointerOps.PointToPointer(Math.Clamp(i - 1, 0, w), j, top, pixsiz, stride)[0] - steepness, 0, 255);
                     if (clr > PointerOps.PointToPointer(i, j, top, pixsiz, stride)[0])
                     {
                         PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
@@ -349,6 +374,25 @@ namespace FCartographer
                 }
 
                 radius++;
+            }*/
+        }
+
+        private unsafe void ExpandMountainCircular(int x, int y, int _clr)
+        {
+            int rad = (int)Math.Ceiling((decimal)(_clr / steepness));
+            float dist;
+            int clr;
+            for (int i = Math.Clamp(x - rad, 0, width - 1); i < Math.Clamp(x + rad, 0, width - 1); i++)
+            {
+                for (int j = Math.Clamp(y - rad, 0, height - 1); j < Math.Clamp(y + rad, 0, height - 1); j++)
+                {
+                    dist = (float)Math.Sqrt(Math.Pow(i - x, 2) + Math.Pow(j - y, 2));
+                    clr = 255 - (int)(dist / rad * 255);
+                    if (dist < rad && PointerOps.PointToPointer(i, j, top, pixsiz, stride)[0] < clr)
+                    {
+                        PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
+                    }
+                }
             }
         }
 

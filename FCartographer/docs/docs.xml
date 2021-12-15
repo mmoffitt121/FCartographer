@@ -367,10 +367,30 @@
             Draws points for debug use of specified color
             </summary>
         </member>
+        <member name="M:FCartographer.LandscapeGenerator.GenerateMountains(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Generates mountains on internal bitmap
+            </summary>
+            <param name="seed"></param>
+        </member>
+        <member name="M:FCartographer.LandscapeGenerator.GenerateMountainSides(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Recursively generates sides of mountains
+            </summary>
+        </member>
         <member name="M:FCartographer.LandscapeGenerator.GenerateMountains(System.Int32,System.Int32)">
             <summary>
             Generates mountains on internal bitmap
             </summary>
+        </member>
+        <member name="M:FCartographer.LandscapeGenerator.CalculateRidgeColor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Calculates the ridge color based on the distance between two points, and the class' internal steepness.
+            </summary>
+            <param name="x"> The midpoint </param>
+            <param name="x0"> Upper or lower bound </param>
+            <param name="x1"> Upper or lower bound </param>
+            <returns></returns>
         </member>
         <member name="M:FCartographer.LandscapeGenerator.ExpandMountain(System.Int32,System.Int32)">
             <summary>
