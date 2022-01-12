@@ -93,6 +93,7 @@ namespace FCartographer.Window
 
             gen.Flatten(0);
             gen.PopulatePoints(density, seed);
+            //gen.DrawPoints(Color.Red);
             gen.GenerateMountains(steepness, seed, 5);
 
             // End

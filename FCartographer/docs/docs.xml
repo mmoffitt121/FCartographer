@@ -377,9 +377,15 @@
             Generates mountains on internal bitmap
             </summary>
         </member>
-        <member name="M:FCartographer.LandscapeGenerator.CalculateRidgeColor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:FCartographer.LandscapeGenerator.CalculateRidgeColor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Calculates the ridge color based on the distance between two points, and the class' internal steepness.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FCartographer.LandscapeGenerator.LineDistance(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns the double-typed value of the distance between two points
             </summary>
             <returns></returns>
         </member>

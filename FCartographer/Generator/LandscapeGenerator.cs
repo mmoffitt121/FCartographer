@@ -16,6 +16,7 @@ namespace FCartographer
     {
         private Bitmap data;
         private List<Point> points;
+        private List<byte> colors;
 
         private byte* top;
         private int pixsiz;
@@ -30,6 +31,8 @@ namespace FCartographer
         private int steepness;
         private int ridgelength;
         private int numbranches;
+
+        private int crackfactor;
 
         /// <summary>
         /// Populates points on the bitmap for generation
@@ -52,6 +55,7 @@ namespace FCartographer
                     if (rand.Next(density) == 0)
                     {
                         points.Add(new Point(i, j));
+                        colors.Add((byte)rand.Next(200, 255));
                     }
                 }
             }
@@ -114,32 +118,38 @@ namespace FCartographer
             // Draws initial lines between points
 
             Point cur1, cur2;
+            byte clr1, clr2;
 
             while (points.Count > 1)
             {
                 // Get the closest adjacent point
                 cur1 = points[0];
                 cur2 = points[1];
+                clr1 = colors[0];
+                clr2 = colors[1];
                 for (int i = 1; i < points.Count; i++)
                 {
                     // Comparison of distance formulas
                     if (Math.Sqrt(Math.Pow(points[i].X - cur1.X, 2) + Math.Pow(points[i].Y - cur1.Y, 2)) < Math.Sqrt(Math.Pow(cur2.X - cur1.X, 2) + Math.Pow(cur2.Y - cur1.Y, 2)))
                     {
                         cur2 = points[i];
+                        clr2 = colors[i];
                     }
                 }
 
-                if (Math.Sqrt(Math.Pow(cur2.X - cur1.X, 2) + Math.Pow(cur2.Y - cur1.Y, 2)) > density / 5)
+                if (Math.Sqrt(Math.Pow(cur2.X - cur1.X, 2) + Math.Pow(cur2.Y - cur1.Y, 2)) > density * 3)
                 {
                     points.Remove(cur1);
+                    colors.Remove(clr1);
                     continue;
                 }
 
                 // Draws lines between the points.
 
-                DrawRidge(cur1.X, cur1.Y, cur2.X, cur2.Y, 200, 200, 30);
+                DrawRidge(cur1.X, cur1.Y, cur2.X, cur2.Y, clr1, clr2, 30, 20);
 
                 points.Remove(cur1);
+                colors.Remove(clr1);
             }
 
             data.UnlockBits(dat);
@@ -147,43 +157,99 @@ namespace FCartographer
             //DrawPoints(Color.Red);
         }
 
-        private unsafe void DrawRidge(int x0, int y0, int x1, int y1, int clr0, int clr1, int seg)
+        private unsafe void DrawRidge(int x0, int y0, int x1, int y1, int clr0, int clr1, int seg, int depth)
         {
+            // Base return case
+            if (depth < 1)
+            {
+                return;
+            }
+
+            // If segmentation is less than one, return.
             if (seg < 1)
             {
                 seg = 1;
             }
 
-            int m = (int)(((float)y1 - (float)y0) / ((float)x1 - (float)x0));
-            int b = y0 - m * x0;
+            // Initialize values for ridge line division
 
-            int xx0, xx1, yy0, yy1;
+            double segmentation = LineDistance(x0, y0, x1, y1) / seg;
+
+            double dx = Math.Abs(x0 - x1) / segmentation;
+            double dy = Math.Abs(y0 - y1) / segmentation;
+
+            int xx0, xx1, yy0, yy1, xprev, yprev, cc0, cc1, xout0, yout0, xout1, yout1;
+            xx0 = x0;
+            yy0 = y0;
+            cc0 = clr0;
+            xout0 = x0;
+            yout0 = y0;
+            xprev = x0;
+            yprev = y0;
+
+            // Divide ridge line, color each segment
+
             for (int i = 0; i < Math.Sqrt(Math.Pow(x1 - x0, 2) + Math.Pow(y1 - y0, 2)) / seg; i++)
             {
-                
-            }
+                // Calculate position of next point
+                xx1 = xx0 + (int)Math.Round(dx);
+                yy1 = yy0 + (int)Math.Round(dy);
+                xout1 = xx1 + Math.Clamp(rand.Next(-depth, depth + 1), 0, width);
+                yout1 = yy1 + Math.Clamp(rand.Next(-depth, depth + 1), 0, height);
 
-            if (Math.Abs(y1- y0) < Math.Abs(x1 - x0))
-            {
-                if (x0 > x1)
+                cc1 = Math.Clamp(CalculateRidgeColor(xx0, x0, x1, yy0, y0, y1, clr0, clr1) + rand.Next(-(int)segmentation, (int)segmentation), 0, 255);
+
+                // Draw line between point and previous
+                if (Math.Abs(yout1 - yout0) < Math.Abs(xout1 - xout0))
                 {
-                    DrawRidgeLow(x1, y1, x0, y0, 200, 200);
+                    if (xout0 > xout1)
+                    {
+                        DrawRidgeLow(xout1, yout1, xout0, yout0, cc0, cc1);
+                    }
+                    else
+                    {
+                        DrawRidgeLow(xout0, yout0, xout1, yout1, cc0, cc1);
+                    }
                 }
                 else
                 {
-                    DrawRidgeLow(x0, y0, x1, y1, 200, 200);
+                    if (yout0 > yout1)
+                    {
+                        DrawRidgeHigh(xout1, yout1, xout0, yout0, cc0, cc1);
+                    }
+                    else
+                    {
+                        DrawRidgeHigh(xout0, yout0, xout1, yout1, cc0, cc1);
+                    }
                 }
-            }
-            else
-            {
-                if (y0 > y1)
+
+                // Secondary ridges at joints
+
+                if (!(xx0 == xprev && yy0 == yprev))
                 {
-                    DrawRidgeHigh(x1, y1, x0, y0, 200, 200);
+                    int vx1, vy1, vx2, vy2;
+                    vx1 = xprev - xx0;
+                    vy1 = yprev - yy0;
+                    vx2 = xx1 - xx0;
+                    vy2 = yy1 - yy0;
+                    double angle = Math.Acos((vx1 * vx2 + vy1 * vy2) / (LineDistance(0, 0, vx1, vy1) * LineDistance(0, 0, vx2, vy2))) + 180;
+
+                    int newx = Math.Clamp((int)(10 * seg * Math.Cos(angle)), 0, width-1);
+                    int newy = Math.Clamp((int)(10 * seg * Math.Sin(angle)), 0, height-1);
+
+                    int newclr = cc1 - 10;
+
+                    DrawRidge(xx0, yy0, newx, newy, cc0, newclr, (int)(seg / 2), depth - 5);
                 }
-                else
-                {
-                    DrawRidgeHigh(x0, y0, x1, y1, 200, 200);
-                }
+
+                // Set values for next point
+                xprev = xx0;
+                yprev = yy0;
+                xout0 = xout1;
+                yout0 = yout1;
+                xx0 = xx1;
+                yy0 = yy1;
+
             }
         }
 
@@ -213,14 +279,14 @@ namespace FCartographer
             int xp;
             int yp;
 
-            for (x = x0; x <= x1; x = x + 2)
+            for (x = x0; x <= x1; x = x + 1)
             {
                 xdeviation = Math.Clamp(Math.Clamp(xdeviation + rand.Next(-1, 2), -16, 16), -1 * Math.Abs(x1 - x), Math.Abs(x1 - x));
                 ydeviation = Math.Clamp(Math.Clamp(ydeviation + rand.Next(-1, 2), -16, 16), -1 * Math.Abs(x1 - x), Math.Abs(x1 - x));
                 xp = Math.Clamp(x + xdeviation, 0, height - 1);
                 yp = Math.Clamp(y + ydeviation, 0, width - 1);
 
-                int clr = CalculateRidgeColor(x, x0, x1, clr0, clr1);
+                int clr = CalculateRidgeColor(x, x0, x1, y, y0, y1, clr0, clr1);
 
                 PointerOps.ChangeColor(top, xp, yp, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
                 //ExpandMountainCircular(xp, yp, clr);
@@ -262,14 +328,14 @@ namespace FCartographer
             int xp;
             int yp;
 
-            for (y = y0; y <= y1; y = y + 2)
+            for (y = y0; y <= y1; y = y + 1)
             {
                 xdeviation = Math.Clamp(Math.Clamp(xdeviation + rand.Next(-1, 2), -12, 12), -1 * Math.Abs(x1 - x), Math.Abs(x1 - x));
                 ydeviation = Math.Clamp(Math.Clamp(ydeviation + rand.Next(-1, 2), -12, 12), -1 * Math.Abs(x1 - x), Math.Abs(x1 - x));
                 xp = Math.Clamp(x + xdeviation, 0, height - 1);
                 yp = Math.Clamp(y + ydeviation, 0, width - 1);
 
-                int clr = CalculateRidgeColor(y, y0, y1, clr0, clr1);
+                int clr = CalculateRidgeColor(x, x0, x1, y, y0, y1, clr0, clr1);
 
                 PointerOps.ChangeColor(top, xp, yp, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
                 //ExpandMountainCircular(xp, yp, clr);
@@ -290,11 +356,23 @@ namespace FCartographer
         /// Calculates the ridge color based on the distance between two points, and the class' internal steepness.
         /// </summary>
         /// <returns></returns>
-        public int CalculateRidgeColor(int x, int x0, int x1, int c0, int c1)
+        public int CalculateRidgeColor(int x, int x0, int x1, int y, int y0, int y1, int c0, int c1)
         {
-            int linearheight = Math.Max((int)(255f - Math.Abs((float)x - (float)x1) / Math.Abs((float)x - (float)x0) * 255f), (int)(255f - Math.Abs((float)x - (float)x0) / Math.Abs((float)x1 - (float)x0) * 255f));
-            int lowerbound = Math.Min(c0, c1);
-            return Math.Max(linearheight, lowerbound);
+            if (LineDistance(x0, y0, x1, y1) == 0)
+            {
+                return c0;
+            }
+            double remaining = Math.Round(LineDistance(x, y, x1, y1) / LineDistance(x0, y0, x1, y1), 5);
+            return Math.Clamp(Math.Abs((int)Math.Round(c0 * remaining + c1 * (1 - remaining))), 1, 255);
+        }
+
+        /// <summary>
+        /// Returns the double-typed value of the distance between two points
+        /// </summary>
+        /// <returns></returns>
+        public double LineDistance(int x0, int y0, int x1, int y1)
+        {
+            return Math.Sqrt(Math.Pow(x1 - x0, 2) + Math.Pow(y1 - y0, 2));
         }
 
         /// <summary>
@@ -432,7 +510,9 @@ namespace FCartographer
         public LandscapeGenerator(Bitmap _data)
         {
             data = _data;
+            crackfactor = 10;
             points = new List<Point>();
+            colors = new List<byte>();
         }
     }
 }
