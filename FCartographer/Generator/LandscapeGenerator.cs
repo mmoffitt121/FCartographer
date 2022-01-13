@@ -11,8 +11,10 @@ namespace FCartographer
 {
     /// <summary>
     /// Landscape generator class, used to generate a custom landscape based on a seed, and user defined options. Will use unsafe functions.
+    /// 
+    /// Defunct, works horribly. Do not use.
     /// </summary>
-    public unsafe class LandscapeGenerator : Generator
+    /*public unsafe class LandscapeGenerator : Generator
     {
         private Bitmap data;
         private List<Point> points;
@@ -472,7 +474,7 @@ namespace FCartographer
                 radius++;
             }
         }*/
-
+    /*
         private unsafe void ExpandMountainCircular(int x, int y, int _clr)
         {
             int rad = (int)Math.Ceiling((decimal)(_clr / steepness));
@@ -507,12 +509,12 @@ namespace FCartographer
         /// Generator constructor
         /// </summary>
         /// <param name="_data"></param>
-        public LandscapeGenerator(Bitmap _data)
+        public LandscapeGenerator(Bitmap _data) : Generator(_data)
         {
             data = _data;
             crackfactor = 10;
             points = new List<Point>();
             colors = new List<byte>();
         }
-    }
+    }*/
 }

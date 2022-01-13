@@ -226,7 +226,7 @@ namespace FCartographer.Window
             this.layerNameField.Name = "layerNameField";
             this.layerNameField.Size = new System.Drawing.Size(699, 23);
             this.layerNameField.TabIndex = 6;
-            this.layerNameField.Text = "NewLayer";
+            this.layerNameField.Text = "New Landscape Layer";
             // 
             // layerNameLabel
             // 

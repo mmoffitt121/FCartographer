@@ -44,10 +44,6 @@ namespace FCartographer.Window
             parentform.project.CurrentLayer().SetName(layerNameField.Text);
             Bitmap data = parentform.project.CurrentLayer().GetData();
 
-            // Generator
-
-            LandscapeGenerator gen = new LandscapeGenerator(data);
-
             // Get data for generation
 
             string stringseed = seedBox.Text;
@@ -57,46 +53,11 @@ namespace FCartographer.Window
                 seed += System.Convert.ToInt32(c);
             }
 
-            int min, max;
-            try
-            {
-                min = Math.Clamp(Int32.Parse(MinHeightField.Text), 0, 255);
-                max = Math.Clamp(Int32.Parse(MaxHeightField.Text), min, 255);
-            }
-            catch
-            {
-                min = 0;
-                max = 255;
-            }
-
-            int density;
-            try
-            {
-                density = Int32.Parse(ScaleField.Text) * 1000;
-            }
-            catch
-            {
-                density = 1000;
-            }
-
-            int steepness;
-            try
-            {
-                steepness = Math.Clamp(Int32.Parse(SteepnessField.Text), 0, 255);
-            }
-            catch
-            {
-                steepness = 5;
-            }
-
             // Generation
 
-            gen.Flatten(0);
-            gen.PopulatePoints(density, seed);
-            //gen.DrawPoints(Color.Red);
-            gen.GenerateMountains(steepness, seed, 5);
-
-            // End
+            LandGenerator lgen = new LandGenerator(data);
+            lgen.SetRandom(seed);
+            lgen.Generate();
 
             parentform.RenderGraphics(parentform.project.GetGraphics());
             Close();

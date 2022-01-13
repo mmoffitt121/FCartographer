@@ -342,68 +342,119 @@
             Fill tool
             </summary>
         </member>
+        <member name="T:FCartographer.ErosionSimulator">
+            <summary>
+            Landscape generator class, used to generate a custom landscape based on a seed, and user defined options. Will use unsafe functions.
+            </summary>
+        </member>
+        <member name="M:FCartographer.ErosionSimulator.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            ErosionSimulator constructor
+            </summary>
+            <param name="_data"></param>
+        </member>
         <member name="T:FCartographer.Generator">
             <summary>
             Generator base class, used to generate layers. Will use unsafe functions.
             </summary>
         </member>
-        <member name="T:FCartographer.LandscapeGenerator">
+        <member name="M:FCartographer.Generator.Generate">
             <summary>
-            Landscape generator class, used to generate a custom landscape based on a seed, and user defined options. Will use unsafe functions.
+            Overwritable function that performs the layer processes.
             </summary>
         </member>
-        <member name="M:FCartographer.LandscapeGenerator.PopulatePoints(System.Int32,System.Int32)">
+        <member name="M:FCartographer.Generator.SetRandom(System.Int32)">
             <summary>
-            Populates points on the bitmap for generation
+            Sets the random number generator to an input seed
             </summary>
+            <param name="seed"></param>
         </member>
-        <member name="M:FCartographer.LandscapeGenerator.DrawPoints">
+        <member name="M:FCartographer.Generator.SetRandom(System.Random)">
             <summary>
-            Draws points for debug use
+            Sets the random seed
             </summary>
+            <param name="_rand"></param>
         </member>
-        <member name="M:FCartographer.LandscapeGenerator.DrawPoints(System.Drawing.Color)">
+        <member name="M:FCartographer.Generator.GetRandom">
             <summary>
-            Draws points for debug use of specified color
-            </summary>
-        </member>
-        <member name="M:FCartographer.LandscapeGenerator.GenerateMountainSides(System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Recursively generates sides of mountains
-            </summary>
-        </member>
-        <member name="M:FCartographer.LandscapeGenerator.GenerateMountains(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Generates mountains on internal bitmap
-            </summary>
-        </member>
-        <member name="M:FCartographer.LandscapeGenerator.CalculateRidgeColor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Calculates the ridge color based on the distance between two points, and the class' internal steepness.
+            Returns the inner random number generator
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FCartographer.LandscapeGenerator.LineDistance(System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:FCartographer.Generator.GetData">
             <summary>
-            Returns the double-typed value of the distance between two points
+            Returns the bitmap data reference stored in the generator
             </summary>
             <returns></returns>
         </member>
-        <member name="M:FCartographer.LandscapeGenerator.ExpandMountainCircular(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Expands given point, making a mountain shape on the image.
-            </summary>
-        </member>
-        <member name="M:FCartographer.LandscapeGenerator.Flatten(System.Int32)">
-            <summary>
-            Fills image to given height
-            </summary>
-        </member>
-        <member name="M:FCartographer.LandscapeGenerator.#ctor(System.Drawing.Bitmap)">
+        <member name="M:FCartographer.Generator.#ctor(System.Drawing.Bitmap)">
             <summary>
             Generator constructor
             </summary>
             <param name="_data"></param>
+        </member>
+        <member name="T:FCartographer.LandGenerator">
+            <summary>
+            Generator base class, used to generate layers. Will use unsafe functions.
+            </summary>
+        </member>
+        <member name="M:FCartographer.LandGenerator.Generate">
+            <summary>
+            Overwritable function that performs the layer processes.
+            </summary>
+        </member>
+        <member name="M:FCartographer.LandGenerator.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Generator constructor
+            </summary>
+            <param name="_data"></param>
+        </member>
+        <member name="T:FCartographer.NoiseGenerator">
+            <summary>
+            Generator base class, used to generate layers. Will use unsafe functions.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NoiseGenerator.Generate">
+            <summary>
+            Overwritable function that performs the layer processes.
+            </summary>
+        </member>
+        <member name="M:FCartographer.NoiseGenerator.PerlinNoise">
+            <summary>
+            Perlin noise function
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:FCartographer.NoiseGenerator.hash">
+            <summary>
+            Hash table for Perlin hash function
+            </summary>
+        </member>
+        <member name="M:FCartographer.NoiseGenerator.PerlinHash(System.Int32)">
+            <summary>
+            Grabs hash value
+            </summary>
+        </member>
+        <member name="M:FCartographer.NoiseGenerator.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Generator constructor
+            </summary>
+            <param name="_data"></param>
+        </member>
+        <member name="T:FCartographer.NoiseGenerator.NoiseMode">
+            <summary>
+            Enum for type of noise to generate
+            </summary>
+        </member>
+        <member name="F:FCartographer.NoiseGenerator.NoiseMode.Perlin">
+            <summary>
+            Perlin Noise setting, layered
+            </summary>
+        </member>
+        <member name="F:FCartographer.NoiseGenerator.NoiseMode.White">
+            <summary>
+            White Noise setting
+            </summary>
         </member>
         <member name="T:FCartographer.HeightLayer">
             <summary>
