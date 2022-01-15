@@ -425,21 +425,48 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="F:FCartographer.NoiseGenerator.hash">
+        <member name="M:FCartographer.NoiseGenerator.Randomize(System.Int32)">
             <summary>
-            Hash table for Perlin hash function
+            Randomizes the perlin noise based on an input seed.
             </summary>
         </member>
-        <member name="M:FCartographer.NoiseGenerator.PerlinHash(System.Int32)">
+        <member name="M:FCartographer.NoiseGenerator.Randomize">
             <summary>
-            Grabs hash value
+            Randomizes the perlin noise based on an input seed.
             </summary>
+        </member>
+        <member name="M:FCartographer.NoiseGenerator.Shuffle(System.Int32[],System.Random)">
+            <summary>
+            Shuffles an integer array
+            </summary>
+            <param name="toshuffle"></param>
+            <param name="rand"></param>
+        </member>
+        <member name="M:FCartographer.NoiseGenerator.Swap(System.Int32[],System.Int32,System.Int32)">
+            <summary>
+            Swaps two elements in an integer array
+            </summary>
+            <param name="arr"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:FCartographer.NoiseGenerator.SetOctives(System.Int32)">
+            <summary>
+            Sets the amount of octives to use in the noise generation
+            </summary>
+            <param name="_octives"></param>
         </member>
         <member name="M:FCartographer.NoiseGenerator.#ctor(System.Drawing.Bitmap)">
             <summary>
             Generator constructor
             </summary>
             <param name="_data"></param>
+        </member>
+        <member name="M:FCartographer.NoiseGenerator.#ctor(System.Drawing.Bitmap,System.Random)">
+            <summary>
+            Generator constructor
+            </summary>
+            <param name="_data"></param><param name="rand"></param>
         </member>
         <member name="T:FCartographer.NoiseGenerator.NoiseMode">
             <summary>

@@ -18,8 +18,9 @@ namespace FCartographer
         /// </summary>
         public override void Generate()
         {
-            NoiseGenerator noisegen = new NoiseGenerator(GetData());
-            noisegen.SetRandom(GetRandom());
+            NoiseGenerator noisegen = new NoiseGenerator(GetData(), GetRandom());
+            noisegen.SetOctives(8);
+            noisegen.SetPersistance(0.4);
             noisegen.Generate();
 
             ErosionSimulator erosiongen = new ErosionSimulator(GetData());

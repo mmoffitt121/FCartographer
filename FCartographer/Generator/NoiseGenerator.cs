@@ -16,8 +16,12 @@ namespace FCartographer
         private int octives;
         private NoiseMode noisemode;
 
+        private int[] perlinhash;
+
         private int width;
         private int height;
+
+        private double persistence;
 
         /// <summary>
         /// Overwritable function that performs the layer processes.
@@ -90,37 +94,58 @@ namespace FCartographer
             {
                 for (int j = 0; j < height; j++)
                 {
-                    outputarray[j * width + i] = (byte)(255 * PerlinPoint((double)i/200, (double)j/200));
+                    double total = 0;
+                    double freq = 1;
+                    double amp = 1;
+                    double max = 0;
+                    for (int k = 0; k < octives; k++)
+                    {
+                        total += PerlinPoint((double)i / 200 * freq, (double)j / 200 * freq) * amp;
+
+                        max += amp;
+
+                        amp *= persistence;
+                        freq *= 2;
+                    }
+                    outputarray[j * width + i] = (byte)(total * 255 / max);
                 }
             }
 
             return outputarray;
         }
 
+        /// <summary>
+        /// Function that calculates a single point of perlin noise
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         private double PerlinPoint(double x, double y)
         {
-            int x0 = (int)x & 255;
-            int y0 = (int)y & 255;
+            int xi = (int)x & 255;
+            int yi = (int)y & 255;
 
-            double xfloat = x - (int)x;
-            double yfloat = y - (int)y;
+            double xf = x - (int)x;
+            double yf = y - (int)y;
 
-            double xfaded = Fade(xfloat);
-            double yfaded = Fade(yfloat);
+            double u = Fade(xf);
+            double v = Fade(yf);
 
             int oo, oi, io, ii;
 
-            oo = PerlinHash(PerlinHash(x0) + y0);
-            oi = PerlinHash(PerlinHash(x0) + y0 + 1);
-            io = PerlinHash(PerlinHash(x0 + 1) + y0);
-            ii = PerlinHash(PerlinHash(x0 + 1) + y0 + 1);
+            oo = PerlinHash(PerlinHash(xi) + yi);
+            oi = PerlinHash(PerlinHash(xi) + yi + 1);
+            io = PerlinHash(PerlinHash(xi + 1) + yi);
+            ii = PerlinHash(PerlinHash(xi + 1) + yi + 1);
 
-            return Lerp(Lerp(Gradient(oo, xfloat, yfloat), Gradient(oi, xfloat-1, yfloat), xfaded), Lerp(Gradient(io, xfloat, yfloat-1), Gradient(ii, xfloat-1, yfloat-1), xfaded), yfaded);
+            return (Lerp(Lerp(Gradient(oo, xf, yf), Gradient(io, xf - 1, yf), u), Lerp(Gradient(oi, xf, yf - 1), Gradient(ii, xf - 1, yf - 1), u), v) + 1) / 2;
         }
+
+        // Perlin noise helper functions
 
         private double Gradient(int hash, double x, double y)
         {
-            /*switch (hash & 0x3)
+            switch (hash & 0x3)
             {
                 case 0:
                     return x + y;
@@ -132,9 +157,7 @@ namespace FCartographer
                     return -x - y;
                 default:
                     return 0;
-            }*/
-            Point[] grads = new Point[] {new Point(0, 1), new Point(1, 1), new Point(1, 0), new Point(1, -1), new Point(0, -1), new Point(-1, -1), new Point(-1, 0), new Point(-1, 1)};
-            return grads[hash%8].X * x + grads[hash%8].Y * y;
+            }
         }
 
         private double Fade(double a)
@@ -142,37 +165,84 @@ namespace FCartographer
             return a * a * a  * (a * (a * 6 - 15) + 10);
         }
 
-        private double Lerp(double a, double b, double c)
+        private double Lerp(double a, double b, double x)
         {
-            return c * (b - a) + a;
+            return a + x * (b - a);
+        }
+
+        private int PerlinHash(int i)
+        {
+            return perlinhash[i % perlinhash.Length];
         }
 
         /// <summary>
-        /// Hash table for Perlin hash function
+        /// Randomizes the perlin noise based on an input seed.
         /// </summary>
-        private static int[] hash =
+        public void Randomize(int size)
         {
-            151,160,137,91,90,15,
-            131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
-            190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
-            88,237,149,56,87,174,20,125,136,171,168, 68,175,74,165,71,134,139,48,27,166,
-            77,146,158,231,83,111,229,122,60,211,133,230,220,105,92,41,55,46,245,40,244,
-            102,143,54, 65,25,63,161, 1,216,80,73,209,76,132,187,208, 89,18,169,200,196,
-            135,130,116,188,159,86,164,100,109,198,173,186, 3,64,52,217,226,250,124,123,
-            5,202,38,147,118,126,255,82,85,212,207,206,59,227,47,16,58,17,182,189,28,42,
-            223,183,170,213,119,248,152, 2,44,154,163, 70,221,153,101,155,167, 43,172,9,
-            129,22,39,253, 19,98,108,110,79,113,224,232,178,185, 112,104,218,246,97,228,
-            251,34,242,193,238,210,144,12,191,179,162,241, 81,51,145,235,249,14,239,107,
-            49,192,214, 31,181,199,106,157,184, 84,204,176,115,121,50,45,127, 4,150,254,
-            138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180
-        };
+            perlinhash = new int[size];
+            for (int i = 0; i < size; i++)
+            {
+                perlinhash[i] = i;
+            }
+
+            Shuffle(perlinhash, GetRandom());
+        }
 
         /// <summary>
-        /// Grabs hash value
+        /// Randomizes the perlin noise based on an input seed.
         /// </summary>
-        private int PerlinHash(int i)
+        public void Randomize()
         {
-            return hash[i%256];
+            int size = 256;
+
+            perlinhash = new int[size];
+            for (int i = 0; i < size; i++)
+            {
+                perlinhash[i] = i;
+            }
+
+            Shuffle(perlinhash, GetRandom());
+        }
+
+        /// <summary>
+        /// Shuffles an integer array
+        /// </summary>
+        /// <param name="toshuffle"></param>
+        /// <param name="rand"></param>
+        public void Shuffle(int[] toshuffle, Random rand)
+        {
+            for (int i = 0; i < toshuffle.Length; i++)
+            {
+                Swap(toshuffle, i, rand.Next(0, toshuffle.Length));
+            }
+        }
+
+        /// <summary>
+        /// Swaps two elements in an integer array
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void Swap(int[] arr, int x, int y)
+        {
+            int temp = arr[x];
+            arr[x] = arr[y];
+            arr[y] = arr[x];
+        }
+
+        /// <summary>
+        /// Sets the amount of octives to use in the noise generation
+        /// </summary>
+        /// <param name="_octives"></param>
+        public void SetOctives(int _octives)
+        {
+            octives = _octives;
+        }
+
+        public void SetPersistance(double _persistence)
+        {
+            persistence = _persistence;
         }
 
         /// <summary>
@@ -182,7 +252,25 @@ namespace FCartographer
         public NoiseGenerator(Bitmap _data) : base(_data)
         {
             octives = 5;
+            persistence = 0.2;
             noisemode = NoiseMode.Perlin;
+
+            SetRandom(new Random(1));
+            Randomize();
+        }
+
+        /// <summary>
+        /// Generator constructor
+        /// </summary>
+        /// <param name="_data"></param><param name="rand"></param>
+        public NoiseGenerator(Bitmap _data, Random rand) : base(_data)
+        {
+            octives = 5;
+            persistence = 0.2;
+            noisemode = NoiseMode.Perlin;
+
+            SetRandom(rand);
+            Randomize();
         }
 
         /// <summary>

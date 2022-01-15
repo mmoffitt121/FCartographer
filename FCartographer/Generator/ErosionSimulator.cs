@@ -14,7 +14,18 @@ namespace FCartographer
     /// </summary>
     public unsafe class ErosionSimulator : Generator
     {
+        private int width;
+        private int height;
 
+        public override void Generate()
+        {
+            SimulateErosion();
+        }
+
+        private void SimulateErosion()
+        {
+
+        }
 
         /// <summary>
         /// ErosionSimulator constructor
