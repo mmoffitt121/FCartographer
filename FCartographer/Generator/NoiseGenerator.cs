@@ -36,35 +36,12 @@ namespace FCartographer
             switch (noisemode)
             {
                 case NoiseMode.Perlin:
-                    DrawNoise(data, PerlinNoise());
+                    BitmapDataConverter.DrawImage(data, PerlinNoise());
                     break;
                 case NoiseMode.White:
-                    DrawNoise(data, WhiteNoise());
+                    BitmapDataConverter.DrawImage(data, WhiteNoise());
                     break;
             }
-        }
-
-        private unsafe void DrawNoise(Bitmap data, byte[] noise)
-        {
-            BitmapData dat = data.LockBits(new Rectangle(0, 0, data.Width, data.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, data.PixelFormat);
-            byte* top = (byte*)dat.Scan0.ToPointer();
-            int pixsiz = Image.GetPixelFormatSize(dat.PixelFormat) / 8;
-            int stride = dat.Stride;
-
-            int width = dat.Width;
-            int height = dat.Height;
-
-            byte clr;
-            for (int i = 0; i < width; i++)
-            {
-                for (int j = 0; j < height; j++)
-                {
-                    clr = noise[j * width + i];
-                    PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
-                }
-            }
-
-            data.UnlockBits(dat);
         }
 
         private unsafe byte[] WhiteNoise()
@@ -240,6 +217,10 @@ namespace FCartographer
             octives = _octives;
         }
 
+        /// <summary>
+        /// Sets the persistence value of lower levels of noise
+        /// </summary>
+        /// <param name="_persistence"></param>
         public void SetPersistance(double _persistence)
         {
             persistence = _persistence;

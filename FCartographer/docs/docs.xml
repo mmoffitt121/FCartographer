@@ -425,6 +425,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:FCartographer.NoiseGenerator.PerlinPoint(System.Double,System.Double)">
+            <summary>
+            Function that calculates a single point of perlin noise
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
         <member name="M:FCartographer.NoiseGenerator.Randomize(System.Int32)">
             <summary>
             Randomizes the perlin noise based on an input seed.
@@ -1066,6 +1074,23 @@
             <summary>
             Brush preset constructor.
             </summary>
+        </member>
+        <member name="T:FCartographer.BitmapDataConverter">
+            <summary>
+            Responsible for converting bitmaps to different data types and vice versa.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BitmapDataConverter.GreyscaleBitmapToByteArray(System.Drawing.Bitmap)">
+            <summary>
+            Converts greyscale bitmap to byte array
+            </summary>
+        </member>
+        <member name="M:FCartographer.BitmapDataConverter.DrawImage(System.Drawing.Bitmap,System.Byte[])">
+            <summary>
+            Draws a byte array onto a bitmap
+            </summary>
+            <param name="data"></param>
+            <param name="bytes"></param>
         </member>
         <member name="T:FCartographer.ImageTypeConverter">
             <summary>
