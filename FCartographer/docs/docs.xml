@@ -354,6 +354,51 @@
             Landscape generator class, used to generate a custom landscape based on a seed, and user defined options. Will use unsafe functions.
             </summary>
         </member>
+        <member name="F:FCartographer.ErosionSimulator.drops">
+            <summary>
+            Specifies the number of drops to simulate on the image
+            </summary>
+        </member>
+        <member name="F:FCartographer.ErosionSimulator.dropsmodifier">
+            <summary>
+            User-input multiplier for number of drops
+            </summary>
+        </member>
+        <member name="F:FCartographer.ErosionSimulator.droplifetime">
+            <summary>
+            How many iterations a drop lasts
+            </summary>
+        </member>
+        <member name="F:FCartographer.ErosionSimulator.sedcapfactor">
+            <summary>
+            Max sediment carried by a droplet
+            </summary>
+        </member>
+        <member name="F:FCartographer.ErosionSimulator.erosionspeed">
+            <summary>
+            Speed at which erosion takes place
+            </summary>
+        </member>
+        <member name="F:FCartographer.ErosionSimulator.depositspeed">
+            <summary>
+            Speed at which depositing takes place
+            </summary>
+        </member>
+        <member name="F:FCartographer.ErosionSimulator.inertia">
+            <summary>
+            Inertia of drop
+            </summary>
+        </member>
+        <member name="F:FCartographer.ErosionSimulator.evaporatespeed">
+            <summary>
+            Speed at which the drop evaporates
+            </summary>
+        </member>
+        <member name="F:FCartographer.ErosionSimulator.gravity">
+            <summary>
+            Gravitational force on drop
+            </summary>
+        </member>
         <member name="M:FCartographer.ErosionSimulator.#ctor(System.Drawing.Bitmap)">
             <summary>
             ErosionSimulator constructor

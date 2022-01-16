@@ -16,16 +16,6 @@ namespace FCartographer
     /// </summary>
     public partial class Form1 : Form
     {
-        /// <summary>
-        /// Create new file
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Quit
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

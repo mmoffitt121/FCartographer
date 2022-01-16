@@ -19,7 +19,7 @@ namespace FCartographer
         public override void Generate()
         {
             NoiseGenerator noisegen = new NoiseGenerator(GetData(), GetRandom());
-            noisegen.SetOctives(10);
+            noisegen.SetOctives(8);
             noisegen.SetPersistance(0.4);
             noisegen.Generate();
 

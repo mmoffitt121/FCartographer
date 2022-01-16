@@ -333,43 +333,42 @@ namespace FCartographer
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.newToolStripMenuItem.Text = "New";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(111, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(111, 6);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -402,30 +401,30 @@ namespace FCartographer
             this.toolStripSeparator1,
             this.landscapeToolStripMenuItem});
             this.generateToolStripMenuItem1.Name = "generateToolStripMenuItem1";
-            this.generateToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            this.generateToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.generateToolStripMenuItem1.Text = "Terrain";
             // 
             // tectonicPlatesOutlineToolStripMenuItem
             // 
             this.tectonicPlatesOutlineToolStripMenuItem.Name = "tectonicPlatesOutlineToolStripMenuItem";
-            this.tectonicPlatesOutlineToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.tectonicPlatesOutlineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.tectonicPlatesOutlineToolStripMenuItem.Text = "Tectonic Plates";
             // 
             // terrainFromPlatesToolStripMenuItem
             // 
             this.terrainFromPlatesToolStripMenuItem.Name = "terrainFromPlatesToolStripMenuItem";
-            this.terrainFromPlatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.terrainFromPlatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.terrainFromPlatesToolStripMenuItem.Text = "Terrain From Plates";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // landscapeToolStripMenuItem
             // 
             this.landscapeToolStripMenuItem.Name = "landscapeToolStripMenuItem";
-            this.landscapeToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.landscapeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.landscapeToolStripMenuItem.Text = "Landscape";
             this.landscapeToolStripMenuItem.Click += new System.EventHandler(this.landscapeToolStripMenuItem_Click);
             // 
@@ -434,13 +433,13 @@ namespace FCartographer
             this.nationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.randomNationsToolStripMenuItem});
             this.nationsToolStripMenuItem.Name = "nationsToolStripMenuItem";
-            this.nationsToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.nationsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nationsToolStripMenuItem.Text = "Nations";
             // 
             // randomNationsToolStripMenuItem
             // 
             this.randomNationsToolStripMenuItem.Name = "randomNationsToolStripMenuItem";
-            this.randomNationsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.randomNationsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.randomNationsToolStripMenuItem.Text = "Random Nations";
             // 
             // renderToolStripMenuItem
