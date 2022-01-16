@@ -27,11 +27,12 @@ namespace FCartographer
         /// </summary>
         private void CreateLayerButton_Click(object sender, EventArgs e)
         {
-            if (LayerToAdd.Text.Equals("Nations"))
+            
+            if (LayerToAdd.SelectedIndex.Equals(1))
             {
                 parentform.project.AddLayer(Layer.LayerType.NationMap, NameOfNewLayer.Text);
             }
-            if (LayerToAdd.Text.Equals("Terrain"))
+            if (LayerToAdd.SelectedIndex.Equals(0))
             {
                 parentform.project.AddLayer(Layer.LayerType.HeightMap, NameOfNewLayer.Text);
             }
@@ -45,6 +46,28 @@ namespace FCartographer
         private void CancelCreateLayerButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void LayerToAdd_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateDescription();
+        }
+
+        private void AddLayerMenu_Shown(object sender, EventArgs e)
+        {
+            UpdateDescription();
+        }
+
+        private void UpdateDescription()
+        {
+            if (LayerToAdd.SelectedIndex.Equals(1))
+            {
+                DescriptionBox.Text = "A nation layer is a layer where the user can draw and render colored, outlined, and/or textured regions of space on the canvas.";
+            }
+            if (LayerToAdd.SelectedIndex.Equals(0))
+            {
+                DescriptionBox.Text = "A terrain layer is a layer that represents a given height on an image.";
+            }
         }
 
         /// <summary>

@@ -21,8 +21,19 @@ namespace FCartographer
 
         private Bitmap data;
         private Bitmap tempdata;
+        private Bitmap outdata;
 
         private LayerType type;
+
+        /// <summary>
+        /// The name of the type of layer
+        /// </summary>
+        public readonly string typename;
+
+        /// <summary>
+        /// Describes the type of layer
+        /// </summary>
+        public readonly string typedescription;
 
         /// <summary>
         /// Graphics Object for interfacing with layer data.
@@ -159,7 +170,7 @@ namespace FCartographer
         /// <summary>
         /// Unnamed constructor, creates layer of size x and y.
         /// </summary>
-        public Layer(int x, int y)
+        public Layer(int x, int y, string _typename, string _typedesc)
         {
             width = x;
             height = y;
@@ -167,12 +178,15 @@ namespace FCartographer
             tempdata = new Bitmap(x, y);
             data_g = Graphics.FromImage(data);
             g = Graphics.FromImage(tempdata);
+
+            typename = _typename;
+            typedescription = _typedesc;
         }
 
         /// <summary>
         /// Named constructor, creates layer of size x and y, and an input name.
         /// </summary>
-        public Layer(int x, int y, string _name)
+        public Layer(int x, int y, string _name, string _typename, string _typedesc)
         {
             width = x;
             height = y;
@@ -181,6 +195,9 @@ namespace FCartographer
             data_g = Graphics.FromImage(data);
             g = Graphics.FromImage(tempdata);
             SetName(_name);
+
+            typename = _typename;
+            typedescription = _typedesc;
         }
 
         /// <summary>

@@ -36,6 +36,8 @@ namespace FCartographer
             this.NewLayerTypeLabel = new System.Windows.Forms.Label();
             this.CreateLayerButton = new System.Windows.Forms.Button();
             this.CancelCreateLayerButton = new System.Windows.Forms.Button();
+            this.DescriptionBox = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +55,7 @@ namespace FCartographer
             this.tableLayoutPanel1.Controls.Add(this.NewLayerTypeLabel, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.CreateLayerButton, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.CancelCreateLayerButton, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.DescriptionBox, 2, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -89,6 +92,7 @@ namespace FCartographer
             this.LayerToAdd.Size = new System.Drawing.Size(187, 23);
             this.LayerToAdd.TabIndex = 4;
             this.LayerToAdd.Text = "Nations";
+            this.LayerToAdd.SelectedIndexChanged += new System.EventHandler(this.LayerToAdd_SelectedIndexChanged);
             // 
             // NewLayerNameLabel
             // 
@@ -130,6 +134,19 @@ namespace FCartographer
             this.CancelCreateLayerButton.UseVisualStyleBackColor = true;
             this.CancelCreateLayerButton.Click += new System.EventHandler(this.CancelCreateLayerButton_Click);
             // 
+            // DescriptionBox
+            // 
+            this.DescriptionBox.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.DescriptionBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DescriptionBox.ForeColor = System.Drawing.Color.DarkRed;
+            this.DescriptionBox.Location = new System.Drawing.Point(77, 70);
+            this.DescriptionBox.Multiline = true;
+            this.DescriptionBox.Name = "DescriptionBox";
+            this.DescriptionBox.ReadOnly = true;
+            this.DescriptionBox.Size = new System.Drawing.Size(187, 143);
+            this.DescriptionBox.TabIndex = 8;
+            this.DescriptionBox.Text = "Description";
+            // 
             // AddLayerMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -139,6 +156,7 @@ namespace FCartographer
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AddLayerMenu";
             this.Text = "Add Layer";
+            this.Shown += new System.EventHandler(this.AddLayerMenu_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -154,5 +172,7 @@ namespace FCartographer
         private System.Windows.Forms.Label NewLayerNameLabel;
         private System.Windows.Forms.Button CreateLayerButton;
         private System.Windows.Forms.Button CancelCreateLayerButton;
+        private System.Windows.Forms.TextBox DescriptionBox;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

@@ -66,7 +66,7 @@ namespace FCartographer
         /// <summary>
         /// Unnamed constructor, creates layer of size x and y. Inherits base constructor.
         /// </summary>
-        public HeightLayer(int x, int y) : base(x, y)
+        public HeightLayer(int x, int y) : base(x, y, "Terrain Layer", "Terrain Layer Description")
         {
             SetType(LayerType.HeightMap);
             SetName("Terrain layer");
@@ -75,7 +75,7 @@ namespace FCartographer
         /// <summary>
         /// Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
         /// </summary>
-        public HeightLayer(int x, int y, string _name) : base(x, y, _name)
+        public HeightLayer(int x, int y, string _name) : base(x, y, _name, "Terrain Layer", "Terrain Layer Description")
         {
             SetType(LayerType.HeightMap);
         }

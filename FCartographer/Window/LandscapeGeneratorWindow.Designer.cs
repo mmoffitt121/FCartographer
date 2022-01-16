@@ -37,10 +37,6 @@ namespace FCartographer.Window
             this.seedBox = new System.Windows.Forms.TextBox();
             this.randomSeedButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.MaxHeightField = new System.Windows.Forms.TextBox();
-            this.MinHeightField = new System.Windows.Forms.TextBox();
-            this.MinHeightLabel = new System.Windows.Forms.Label();
-            this.MaxHeightLabel = new System.Windows.Forms.Label();
             this.layerNameField = new System.Windows.Forms.TextBox();
             this.layerNameLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -51,14 +47,11 @@ namespace FCartographer.Window
             this.MesasLabel = new System.Windows.Forms.Label();
             this.MountainsLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.ScaleField = new System.Windows.Forms.TextBox();
             this.ScaleLabel = new System.Windows.Forms.Label();
-            this.SteepnessLabel = new System.Windows.Forms.Label();
-            this.SteepnessField = new System.Windows.Forms.TextBox();
+            this.ScaleField = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
@@ -172,10 +165,6 @@ namespace FCartographer.Window
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.Controls.Add(this.MaxHeightField, 3, 0);
-            this.tableLayoutPanel5.Controls.Add(this.MinHeightField, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.MinHeightLabel, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.MaxHeightLabel, 2, 0);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(85, 170);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -183,42 +172,6 @@ namespace FCartographer.Window
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(702, 32);
             this.tableLayoutPanel5.TabIndex = 5;
-            // 
-            // MaxHeightField
-            // 
-            this.MaxHeightField.Location = new System.Drawing.Point(528, 3);
-            this.MaxHeightField.Name = "MaxHeightField";
-            this.MaxHeightField.Size = new System.Drawing.Size(171, 23);
-            this.MaxHeightField.TabIndex = 0;
-            this.MaxHeightField.Text = "255";
-            // 
-            // MinHeightField
-            // 
-            this.MinHeightField.Location = new System.Drawing.Point(178, 3);
-            this.MinHeightField.Name = "MinHeightField";
-            this.MinHeightField.Size = new System.Drawing.Size(169, 23);
-            this.MinHeightField.TabIndex = 1;
-            this.MinHeightField.Text = "0";
-            // 
-            // MinHeightLabel
-            // 
-            this.MinHeightLabel.AutoSize = true;
-            this.MinHeightLabel.Location = new System.Drawing.Point(3, 3);
-            this.MinHeightLabel.Margin = new System.Windows.Forms.Padding(3);
-            this.MinHeightLabel.Name = "MinHeightLabel";
-            this.MinHeightLabel.Size = new System.Drawing.Size(99, 15);
-            this.MinHeightLabel.TabIndex = 2;
-            this.MinHeightLabel.Text = "Minimum Height";
-            // 
-            // MaxHeightLabel
-            // 
-            this.MaxHeightLabel.AutoSize = true;
-            this.MaxHeightLabel.Location = new System.Drawing.Point(353, 3);
-            this.MaxHeightLabel.Margin = new System.Windows.Forms.Padding(3);
-            this.MaxHeightLabel.Name = "MaxHeightLabel";
-            this.MaxHeightLabel.Size = new System.Drawing.Size(101, 15);
-            this.MaxHeightLabel.TabIndex = 3;
-            this.MaxHeightLabel.Text = "Maximum Height";
             // 
             // layerNameField
             // 
@@ -335,8 +288,6 @@ namespace FCartographer.Window
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.39007F));
             this.tableLayoutPanel6.Controls.Add(this.ScaleField, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.ScaleLabel, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.SteepnessLabel, 2, 0);
-            this.tableLayoutPanel6.Controls.Add(this.SteepnessField, 3, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(85, 138);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
@@ -346,14 +297,6 @@ namespace FCartographer.Window
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(705, 32);
             this.tableLayoutPanel6.TabIndex = 9;
-            // 
-            // ScaleField
-            // 
-            this.ScaleField.Location = new System.Drawing.Point(178, 3);
-            this.ScaleField.Name = "ScaleField";
-            this.ScaleField.Size = new System.Drawing.Size(168, 23);
-            this.ScaleField.TabIndex = 0;
-            this.ScaleField.Text = "100";
             // 
             // ScaleLabel
             // 
@@ -365,23 +308,13 @@ namespace FCartographer.Window
             this.ScaleLabel.TabIndex = 1;
             this.ScaleLabel.Text = "Scale";
             // 
-            // SteepnessLabel
+            // ScaleField
             // 
-            this.SteepnessLabel.AutoSize = true;
-            this.SteepnessLabel.Location = new System.Drawing.Point(353, 3);
-            this.SteepnessLabel.Margin = new System.Windows.Forms.Padding(3);
-            this.SteepnessLabel.Name = "SteepnessLabel";
-            this.SteepnessLabel.Size = new System.Drawing.Size(59, 15);
-            this.SteepnessLabel.TabIndex = 2;
-            this.SteepnessLabel.Text = "Steepness";
-            // 
-            // SteepnessField
-            // 
-            this.SteepnessField.Location = new System.Drawing.Point(528, 3);
-            this.SteepnessField.Name = "SteepnessField";
-            this.SteepnessField.Size = new System.Drawing.Size(171, 23);
-            this.SteepnessField.TabIndex = 3;
-            this.SteepnessField.Text = "5";
+            this.ScaleField.Location = new System.Drawing.Point(178, 3);
+            this.ScaleField.Name = "ScaleField";
+            this.ScaleField.Size = new System.Drawing.Size(168, 23);
+            this.ScaleField.TabIndex = 0;
+            this.ScaleField.Text = "100";
             // 
             // LandscapeGeneratorWindow
             // 
@@ -397,8 +330,6 @@ namespace FCartographer.Window
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
@@ -417,10 +348,6 @@ namespace FCartographer.Window
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Button randomSeedButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.TextBox MaxHeightField;
-        private System.Windows.Forms.TextBox MinHeightField;
-        private System.Windows.Forms.Label MinHeightLabel;
-        private System.Windows.Forms.Label MaxHeightLabel;
         private System.Windows.Forms.TextBox layerNameField;
         private System.Windows.Forms.Label layerNameLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -431,9 +358,7 @@ namespace FCartographer.Window
         private System.Windows.Forms.Label MesasLabel;
         private System.Windows.Forms.Label MountainsLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.TextBox ScaleField;
         private System.Windows.Forms.Label ScaleLabel;
-        private System.Windows.Forms.Label SteepnessLabel;
-        private System.Windows.Forms.TextBox SteepnessField;
+        private System.Windows.Forms.TextBox ScaleField;
     }
 }

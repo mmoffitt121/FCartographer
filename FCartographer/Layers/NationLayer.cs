@@ -172,7 +172,7 @@ namespace FCartographer
         /// <summary>
         /// Unnamed constructor, creates layer of size x and y. Inherits base constructor.
         /// </summary>
-        public NationLayer(int x, int y) : base(x, y)
+        public NationLayer(int x, int y) : base(x, y, "Nations Layer", "Nations Layer Description")
         {
             SetType(LayerType.NationMap);
             SetName("Nation layer");
@@ -188,7 +188,7 @@ namespace FCartographer
         /// <summary>
         /// Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
         /// </summary>
-        public NationLayer(int x, int y, string _name) : base(x, y, _name)
+        public NationLayer(int x, int y, string _name) : base(x, y, _name, "Nations Layer", "Nations Layer Description")
         {
             SetType(LayerType.NationMap);
 

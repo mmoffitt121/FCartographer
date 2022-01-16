@@ -13,6 +13,23 @@ namespace FCartographer
     /// </summary>
     public class Renderer
     {
+        Bitmap data;
 
+        /// <summary>
+        /// Responsible for rendering layer based on input data.
+        /// </summary>
+        public virtual void Render()
+        {
+
+        }
+
+        /// <summary>
+        /// Renderer constructor, passes a reference of the data to render into the renderer object.
+        /// </summary>
+        /// <param name="_data"></param>
+        public Renderer(Bitmap _data)
+        {
+            data = _data;
+        }
     }
 }
