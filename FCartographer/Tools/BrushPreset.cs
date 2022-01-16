@@ -28,6 +28,10 @@ namespace FCartographer
         public void SetImage(string brushpath, int input_opacity, Color clr)
         {
             source_bitmap = (Bitmap)Image.FromFile(brushpath);
+            if (source_bitmap == null)
+            {
+                source_bitmap = new Bitmap(255, 255);
+            }
             CalculateOutputBrush();
         }
 
@@ -37,6 +41,10 @@ namespace FCartographer
         public void SetImage(Bitmap input)
         {
             source_bitmap = new Bitmap(input);
+            if (source_bitmap == null)
+            {
+                source_bitmap = new Bitmap(255, 255);
+            }
             CalculateOutputBrush();
         }
 
@@ -46,6 +54,10 @@ namespace FCartographer
         public void SetImage(string brushpath)
         {
             source_bitmap = (Bitmap)Image.FromFile(brushpath);
+            if (source_bitmap == null)
+            {
+                source_bitmap = new Bitmap(255, 255);
+            }
             CalculateOutputBrush();
         }
 
@@ -142,6 +154,10 @@ namespace FCartographer
 
             
             //output_bitmap = new Bitmap(source_bitmap.Width, source_bitmap.Height);
+            if (output_bitmap == null)
+            {
+                return;
+            }
             Graphics output_g = Graphics.FromImage(output_bitmap);
             output_g.Clear(Color.FromArgb(0, 0, 0, 0));
 
@@ -170,6 +186,10 @@ namespace FCartographer
             try
             {
                 source_bitmap = (Bitmap)Image.FromFile(brushpath);
+                if (source_bitmap == null)
+                {
+                    source_bitmap = new Bitmap(255, 255);
+                }
                 output_bitmap = new Bitmap(source_bitmap);
                 opacity = opac;
                 color = clr;
