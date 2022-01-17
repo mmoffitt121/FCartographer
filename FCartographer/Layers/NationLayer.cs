@@ -30,6 +30,12 @@ namespace FCartographer
             data_g.InterpolationMode = InterpolationMode.NearestNeighbor;
             data_g.DrawImage(GetTempData(), 0, 0, GetData().Width, GetData().Height);
             g.Clear(Color.FromArgb(0, 0, 0, 0));
+
+            if (ToRender())
+            {
+                NationStrokeRenderer nsr = new NationStrokeRenderer(GetData(), GetOutData());
+                nsr.Render();
+            }
         }
 
         /// <summary>

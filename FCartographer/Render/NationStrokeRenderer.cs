@@ -14,12 +14,41 @@ namespace FCartographer
     public class NationStrokeRenderer : Renderer
     {
         /// <summary>
+        /// Holds the width of the stroke
+        /// </summary>
+        public int stokewidth;
+        /// <summary>
+        /// Holds the color of the stroke
+        /// </summary>
+        public Color color;
+
+        /// <summary>
+        /// Renders the stroke layer
+        /// </summary>
+        public override void Render()
+        {
+            RenderStroke();
+        }
+
+        private unsafe void RenderStroke()
+        {
+            byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData());
+            byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput());
+            System.Diagnostics.Debug.WriteLine("HEY");
+            System.Diagnostics.Debug.WriteLine(inp[0] + " " + inp[1] + " " + inp[2] + " " + inp[3] + " " + inp[4]);
+
+            for (int i = 0; i < GetData().Width * GetData().Height; i += 4)
+            {
+                
+            }
+        }
+
+        /// <summary>
         /// Constructor, takes bitmap for reading
         /// </summary>
-        /// <param name="_data"></param>
-        public NationStrokeRenderer(Bitmap _data) : base(_data)
+        public NationStrokeRenderer(Bitmap _data, Bitmap _output) : base(_data, _output)
         {
-
+            color = Color.FromArgb(255, 0, 0, 0);
         }
     }
 }

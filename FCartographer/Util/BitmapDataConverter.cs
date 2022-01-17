@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Runtime.InteropServices;
 
 namespace FCartographer
 {
@@ -19,7 +20,7 @@ namespace FCartographer
         /// </summary>
         public static unsafe byte[] GreyscaleBitmapToByteArray(Bitmap bitmap)
         {
-            BitmapData dat = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            BitmapData dat = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
             byte* top = (byte*)dat.Scan0.ToPointer();
             int pixsiz = Image.GetPixelFormatSize(dat.PixelFormat) / 8;
             int stride = dat.Stride;
@@ -49,7 +50,7 @@ namespace FCartographer
         /// <param name="bytes"></param>
         public static unsafe void DrawImage(Bitmap data, byte[] bytes)
         {
-            BitmapData dat = data.LockBits(new Rectangle(0, 0, data.Width, data.Height), System.Drawing.Imaging.ImageLockMode.ReadWrite, data.PixelFormat);
+            BitmapData dat = data.LockBits(new Rectangle(0, 0, data.Width, data.Height), ImageLockMode.ReadWrite, data.PixelFormat);
             byte* top = (byte*)dat.Scan0.ToPointer();
             int pixsiz = Image.GetPixelFormatSize(dat.PixelFormat) / 8;
             int stride = dat.Stride;
@@ -68,6 +69,24 @@ namespace FCartographer
             }
 
             data.UnlockBits(dat);
+        }
+
+        /// <summary>
+        /// Converts bitmap to byte array
+        /// </summary>
+        public static byte[] BitmapToByteArray(Bitmap bitmap)
+        {
+            BitmapData dat = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            IntPtr top = dat.Scan0;
+            int bytecount = dat.Stride * bitmap.Height;
+
+            byte[] output = new byte[bitmap.Width * bitmap.Height * 4];
+
+            Marshal.Copy(top, output, 0, bytecount);
+
+            bitmap.UnlockBits(dat);
+
+            return output;
         }
     }
 }

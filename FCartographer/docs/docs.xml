@@ -983,11 +983,25 @@
             Renderer class, used to render parts of layers. Will usually utilize unsafe functions.
             </summary>
         </member>
-        <member name="M:FCartographer.NationStrokeRenderer.#ctor(System.Drawing.Bitmap)">
+        <member name="F:FCartographer.NationStrokeRenderer.stokewidth">
+            <summary>
+            Holds the width of the stroke
+            </summary>
+        </member>
+        <member name="F:FCartographer.NationStrokeRenderer.color">
+            <summary>
+            Holds the color of the stroke
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationStrokeRenderer.Render">
+            <summary>
+            Renders the stroke layer
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationStrokeRenderer.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
             <summary>
             Constructor, takes bitmap for reading
             </summary>
-            <param name="_data"></param>
         </member>
         <member name="T:FCartographer.Renderer">
             <summary>
@@ -999,11 +1013,22 @@
             Responsible for rendering layer based on input data.
             </summary>
         </member>
-        <member name="M:FCartographer.Renderer.#ctor(System.Drawing.Bitmap)">
+        <member name="M:FCartographer.Renderer.GetData">
+            <summary>
+            Returns the base data held in the renderer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FCartographer.Renderer.GetOutput">
+            <summary>
+            Returns the output data held in the renderer
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FCartographer.Renderer.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
             <summary>
             Renderer constructor, passes a reference of the data to render into the renderer object.
             </summary>
-            <param name="_data"></param>
         </member>
         <member name="T:FCartographer.TerrainShader">
             <summary>
@@ -1177,9 +1202,16 @@
             <param name="data"></param>
             <param name="bytes"></param>
         </member>
+        <member name="M:FCartographer.BitmapDataConverter.BitmapToByteArray(System.Drawing.Bitmap)">
+            <summary>
+            Converts bitmap to byte array
+            </summary>
+        </member>
         <member name="T:FCartographer.ImageTypeConverter">
             <summary>
             Responsible for selecting an area on canvas based on color difference
+            
+            !!! - OBSOLETE - !!!
             </summary>
         </member>
         <member name="M:FCartographer.ImageTypeConverter.BmpToByte(System.Drawing.Bitmap)">

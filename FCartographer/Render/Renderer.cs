@@ -13,7 +13,8 @@ namespace FCartographer
     /// </summary>
     public class Renderer
     {
-        Bitmap data;
+        private Bitmap data;
+        private Bitmap output;
 
         /// <summary>
         /// Responsible for rendering layer based on input data.
@@ -24,12 +25,30 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Returns the base data held in the renderer
+        /// </summary>
+        /// <returns></returns>
+        public Bitmap GetData()
+        {
+            return data;
+        }
+
+        /// <summary>
+        /// Returns the output data held in the renderer
+        /// </summary>
+        /// <returns></returns>
+        public Bitmap GetOutput()
+        {
+            return output;
+        }
+
+        /// <summary>
         /// Renderer constructor, passes a reference of the data to render into the renderer object.
         /// </summary>
-        /// <param name="_data"></param>
-        public Renderer(Bitmap _data)
+        public Renderer(Bitmap _data, Bitmap _output)
         {
             data = _data;
+            output = _output;
         }
     }
 }

@@ -10,6 +10,8 @@ namespace FCartographer
 {
     /// <summary>
     /// Responsible for selecting an area on canvas based on color difference
+    /// 
+    /// !!! - OBSOLETE - !!!
     /// </summary>
     public static class ImageTypeConverter
     {
