@@ -228,7 +228,7 @@ namespace FCartographer
         public Form1()
         {
             InitializeComponent();
-            NewProject(1000, 1000);
+            NewProject(1200, 700);
         }
     }
 }

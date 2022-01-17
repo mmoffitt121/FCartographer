@@ -61,7 +61,7 @@ namespace FCartographer.ErosionSimulation
         int currentMapSize;
 
         // Initialization creates a System.Random object and precomputes indices and weights of erosion brush
-        private void Initialize(int mapSize, bool resetSeed)
+        private void Initialize(int xSize, int ySize, bool resetSeed)
         {
             if (resetSeed || prng == null || currentSeed != seed)
             {
@@ -69,11 +69,11 @@ namespace FCartographer.ErosionSimulation
                 currentSeed = seed;
             }
 
-            if (erosionBrushIndices == null || currentErosionRadius != erosionRadius || currentMapSize != mapSize)
+            if (erosionBrushIndices == null || currentErosionRadius != erosionRadius || currentMapSize != xSize * ySize)
             {
-                InitializeBrushIndices(mapSize, erosionRadius);
+                InitializeBrushIndices(xSize, ySize, erosionRadius);
                 currentErosionRadius = erosionRadius;
-                currentMapSize = mapSize;
+                currentMapSize = xSize * ySize;
             }
         }
 
@@ -82,13 +82,15 @@ namespace FCartographer.ErosionSimulation
             seed = _seed;
         }
 
-        public float[] Erode(float[] inputmap, int mapSize, int numIterations = 1, bool resetSeed = false)
+        public float[] Erode(float[] inputmap, int xSize, int ySize, int numIterations = 1, bool resetSeed = false)
         {
-            Initialize(mapSize, resetSeed);
-            
-            float[] map = new float[mapSize * mapSize];
+            Initialize(xSize, ySize, resetSeed);
 
-            for (int i = 0; i < mapSize * mapSize; i++)
+            int mapSize = xSize;
+            
+            float[] map = new float[xSize * ySize];
+
+            for (int i = 0; i < xSize * ySize; i++)
             {
                 map[i] = inputmap[i];
             }
@@ -96,8 +98,8 @@ namespace FCartographer.ErosionSimulation
             for (int iteration = 0; iteration < numIterations; iteration++)
             {
                 // Create water droplet at random point on map
-                float posX = prng.Next(0, mapSize - 1);
-                float posY = prng.Next(0, mapSize - 1);
+                float posX = prng.Next(0, xSize - 1);
+                float posY = prng.Next(0, ySize - 1);
                 float dirX = 0;
                 float dirY = 0;
                 float speed = initialSpeed;
@@ -108,13 +110,13 @@ namespace FCartographer.ErosionSimulation
                 {
                     int nodeX = (int)posX;
                     int nodeY = (int)posY;
-                    int dropletIndex = nodeY * mapSize + nodeX;
+                    int dropletIndex = nodeY * xSize + nodeX;
                     // Calculate droplet's offset inside the cell (0,0) = at NW node, (1,1) = at SE node
                     float cellOffsetX = posX - nodeX;
                     float cellOffsetY = posY - nodeY;
 
                     // Calculate droplet's height and direction of flow with bilinear interpolation of surrounding heights
-                    HeightAndGradient heightAndGradient = CalculateHeightAndGradient(map, mapSize, posX, posY);
+                    HeightAndGradient heightAndGradient = CalculateHeightAndGradient(map, xSize, posX, posY);
 
                     // Update the droplet's direction and position (move position 1 unit regardless of speed)
                     dirX = (dirX * inertia - heightAndGradient.gradientX * (1 - inertia));
@@ -130,13 +132,13 @@ namespace FCartographer.ErosionSimulation
                     posY += dirY;
 
                     // Stop simulating droplet if it's not moving or has flowed over edge of map
-                    if ((dirX == 0 && dirY == 0) || posX < 0 || posX >= mapSize - 1 || posY < 0 || posY >= mapSize - 1)
+                    if ((dirX == 0 && dirY == 0) || posX < 0 || posX >= xSize - 1 || posY < 0 || posY >= ySize - 1)
                     {
                         break;
                     }
 
                     // Find the droplet's new height and calculate the deltaHeight
-                    float newHeight = CalculateHeightAndGradient(map, mapSize, posX, posY).height;
+                    float newHeight = CalculateHeightAndGradient(map, xSize, posX, posY).height;
                     float deltaHeight = newHeight - heightAndGradient.height;
 
                     // Calculate the droplet's sediment capacity (higher when moving fast down a slope and contains lots of water)
@@ -153,8 +155,8 @@ namespace FCartographer.ErosionSimulation
                         // Deposition is not distributed over a radius (like erosion) so that it can fill small pits
                         map[dropletIndex] += amountToDeposit * (1 - cellOffsetX) * (1 - cellOffsetY);
                         map[dropletIndex + 1] += amountToDeposit * cellOffsetX * (1 - cellOffsetY);
-                        map[dropletIndex + mapSize] += amountToDeposit * (1 - cellOffsetX) * cellOffsetY;
-                        map[dropletIndex + mapSize + 1] += amountToDeposit * cellOffsetX * cellOffsetY;
+                        map[dropletIndex + xSize] += amountToDeposit * (1 - cellOffsetX) * cellOffsetY;
+                        map[dropletIndex + xSize + 1] += amountToDeposit * cellOffsetX * cellOffsetY;
                     }
                     else
                     {
@@ -207,10 +209,10 @@ namespace FCartographer.ErosionSimulation
             return new HeightAndGradient() { height = height, gradientX = gradientX, gradientY = gradientY };
         }
 
-        private void InitializeBrushIndices(int mapSize, int radius)
+        private void InitializeBrushIndices(int xSize, int ySize, int radius)
         {
-            erosionBrushIndices = new int[mapSize * mapSize][];
-            erosionBrushWeights = new float[mapSize * mapSize][];
+            erosionBrushIndices = new int[xSize * ySize][];
+            erosionBrushWeights = new float[xSize * ySize][];
 
             int[] xOffsets = new int[radius * radius * 4];
             int[] yOffsets = new int[radius * radius * 4];
@@ -220,10 +222,10 @@ namespace FCartographer.ErosionSimulation
 
             for (int i = 0; i < erosionBrushIndices.GetLength(0); i++)
             {
-                int centreX = i % mapSize;
-                int centreY = i / mapSize;
+                int centreX = i % xSize;
+                int centreY = i / xSize;
 
-                if (centreY <= radius || centreY >= mapSize - radius || centreX <= radius + 1 || centreX >= mapSize - radius)
+                if (centreY <= radius || centreY >= ySize - radius || centreX <= radius + 1 || centreX >= xSize - radius)
                 {
                     weightSum = 0;
                     addIndex = 0;
@@ -237,7 +239,7 @@ namespace FCartographer.ErosionSimulation
                                 int coordX = centreX + x;
                                 int coordY = centreY + y;
 
-                                if (coordX >= 0 && coordX < mapSize && coordY >= 0 && coordY < mapSize)
+                                if (coordX >= 0 && coordX < xSize && coordY >= 0 && coordY < ySize)
                                 {
                                     float weight = 1 - MathF.Sqrt(sqrDst) / radius;
                                     weightSum += weight;
@@ -257,7 +259,7 @@ namespace FCartographer.ErosionSimulation
 
                 for (int j = 0; j < numEntries; j++)
                 {
-                    erosionBrushIndices[i][j] = (yOffsets[j] + centreY) * mapSize + xOffsets[j] + centreX;
+                    erosionBrushIndices[i][j] = (yOffsets[j] + centreY) * xSize + xOffsets[j] + centreX;
                     erosionBrushWeights[i][j] = weights[j] / weightSum;
                 }
             }

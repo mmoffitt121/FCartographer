@@ -36,7 +36,7 @@ namespace FCartographer
 
             Erosion e = new Erosion();
             e.SetSeed(GetRandom().Next(0, 2147483646));
-            map = e.Erode(map, width, width * height * 3);
+            map = e.Erode(map, width, height, width * height * 2);
 
             for (int i = 0; i < width * height; i++)
             {
