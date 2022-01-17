@@ -9,7 +9,7 @@ using System.Drawing.Drawing2D;
 namespace FCartographer
 {
     /// <summary>
-    /// Generator base class, used to generate layers. Will use unsafe functions.
+    /// Generator base class, used to generate layers.
     /// </summary>
     public class Generator
     {

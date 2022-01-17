@@ -13,6 +13,13 @@ namespace FCartographer
     /// </summary>
     public class NationStrokeRenderer : Renderer
     {
+        /// <summary>
+        /// Constructor, takes bitmap for reading
+        /// </summary>
+        /// <param name="_data"></param>
+        public NationStrokeRenderer(Bitmap _data) : base(_data)
+        {
 
+        }
     }
 }

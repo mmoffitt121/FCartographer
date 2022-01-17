@@ -9,7 +9,7 @@ using System.Drawing.Drawing2D;
 namespace FCartographer
 {
     /// <summary>
-    /// Generator base class, used to generate layers. Will use unsafe functions.
+    /// Generator base class, used to generate layers.
     /// </summary>
     public class NoiseGenerator : Generator
     {
@@ -44,7 +44,7 @@ namespace FCartographer
             }
         }
 
-        private unsafe byte[] WhiteNoise()
+        private byte[] WhiteNoise()
         {
             byte[] noise = new byte[width * height];
 
@@ -63,7 +63,7 @@ namespace FCartographer
         /// Perlin noise function
         /// </summary>
         /// <returns></returns>
-        private unsafe byte[] PerlinNoise()
+        private byte[] PerlinNoise()
         {
             byte[] outputarray = new byte[width * height];
 
@@ -120,7 +120,7 @@ namespace FCartographer
 
         // Perlin noise helper functions
 
-        private double Gradient(int hash, double x, double y)
+        private static double Gradient(int hash, double x, double y)
         {
             switch (hash & 0x3)
             {
@@ -137,12 +137,12 @@ namespace FCartographer
             }
         }
 
-        private double Fade(double a)
+        private static double Fade(double a)
         {
             return a * a * a  * (a * (a * 6 - 15) + 10);
         }
 
-        private double Lerp(double a, double b, double x)
+        private static double Lerp(double a, double b, double x)
         {
             return a + x * (b - a);
         }
@@ -201,7 +201,7 @@ namespace FCartographer
         /// <param name="arr"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void Swap(int[] arr, int x, int y)
+        public static void Swap(int[] arr, int x, int y)
         {
             int temp = arr[x];
             arr[x] = arr[y];

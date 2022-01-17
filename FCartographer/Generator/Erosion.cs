@@ -31,10 +31,7 @@ Modified for the needs of FCartogropher.
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace FCartographer.ErosionSimulation
 {
@@ -64,7 +61,7 @@ namespace FCartographer.ErosionSimulation
         int currentMapSize;
 
         // Initialization creates a System.Random object and precomputes indices and weights of erosion brush
-        void Initialize(int mapSize, bool resetSeed)
+        private void Initialize(int mapSize, bool resetSeed)
         {
             if (resetSeed || prng == null || currentSeed != seed)
             {
@@ -80,17 +77,22 @@ namespace FCartographer.ErosionSimulation
             }
         }
 
+        public void SetSeed(int _seed)
+        {
+            seed = _seed;
+        }
+
         public float[] Erode(float[] inputmap, int mapSize, int numIterations = 1, bool resetSeed = false)
         {
             Initialize(mapSize, resetSeed);
-
+            
             float[] map = new float[mapSize * mapSize];
 
             for (int i = 0; i < mapSize * mapSize; i++)
             {
                 map[i] = inputmap[i];
             }
-
+            
             for (int iteration = 0; iteration < numIterations; iteration++)
             {
                 // Create water droplet at random point on map
@@ -153,7 +155,6 @@ namespace FCartographer.ErosionSimulation
                         map[dropletIndex + 1] += amountToDeposit * cellOffsetX * (1 - cellOffsetY);
                         map[dropletIndex + mapSize] += amountToDeposit * (1 - cellOffsetX) * cellOffsetY;
                         map[dropletIndex + mapSize + 1] += amountToDeposit * cellOffsetX * cellOffsetY;
-
                     }
                     else
                     {
@@ -180,7 +181,7 @@ namespace FCartographer.ErosionSimulation
             return map;
         }
 
-        HeightAndGradient CalculateHeightAndGradient(float[] nodes, int mapSize, float posX, float posY)
+        private static HeightAndGradient CalculateHeightAndGradient(float[] nodes, int mapSize, float posX, float posY)
         {
             int coordX = (int)posX;
             int coordY = (int)posY;
@@ -206,7 +207,7 @@ namespace FCartographer.ErosionSimulation
             return new HeightAndGradient() { height = height, gradientX = gradientX, gradientY = gradientY };
         }
 
-        void InitializeBrushIndices(int mapSize, int radius)
+        private void InitializeBrushIndices(int mapSize, int radius)
         {
             erosionBrushIndices = new int[mapSize * mapSize][];
             erosionBrushWeights = new float[mapSize * mapSize][];
@@ -262,7 +263,7 @@ namespace FCartographer.ErosionSimulation
             }
         }
 
-        struct HeightAndGradient
+        private struct HeightAndGradient
         {
             public float height;
             public float gradientX;

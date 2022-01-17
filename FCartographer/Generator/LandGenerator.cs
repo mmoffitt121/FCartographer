@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Diagnostics;
 
 namespace FCartographer
 {
@@ -18,14 +19,19 @@ namespace FCartographer
         /// </summary>
         public override void Generate()
         {
+            // Debug.WriteLine(Process.GetCurrentProcess().PrivateMemorySize64);
             NoiseGenerator noisegen = new NoiseGenerator(GetData(), GetRandom());
             noisegen.SetOctives(10);
             noisegen.SetPersistance(0.4);
             noisegen.Generate();
 
+            // Debug.WriteLine(Process.GetCurrentProcess().PrivateMemorySize64);
+
             ErosionSimulator erosiongen = new ErosionSimulator(GetData());
             erosiongen.SetRandom(GetRandom());
             erosiongen.Generate();
+
+            // Debug.WriteLine(Process.GetCurrentProcess().PrivateMemorySize64);
         }
 
         /// <summary>

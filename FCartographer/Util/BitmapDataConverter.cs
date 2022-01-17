@@ -12,7 +12,7 @@ namespace FCartographer
     /// <summary>
     /// Responsible for converting bitmaps to different data types and vice versa.
     /// </summary>
-    public static class BitmapDataConverter
+    public static unsafe class BitmapDataConverter
     {
         /// <summary>
         /// Converts greyscale bitmap to byte array

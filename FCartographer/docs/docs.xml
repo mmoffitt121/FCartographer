@@ -351,7 +351,12 @@
         </member>
         <member name="T:FCartographer.ErosionSimulator">
             <summary>
-            Landscape generator class, used to generate a custom landscape based on a seed, and user defined options. Will use unsafe functions.
+            Erosion simulator class, simulates erosion on a heightmap.
+            </summary>
+        </member>
+        <member name="M:FCartographer.ErosionSimulator.Generate">
+            <summary>
+            Performs erosion simulation 
             </summary>
         </member>
         <member name="M:FCartographer.ErosionSimulator.#ctor(System.Drawing.Bitmap)">
@@ -362,7 +367,7 @@
         </member>
         <member name="T:FCartographer.Generator">
             <summary>
-            Generator base class, used to generate layers. Will use unsafe functions.
+            Generator base class, used to generate layers.
             </summary>
         </member>
         <member name="M:FCartographer.Generator.Generate">
@@ -418,7 +423,7 @@
         </member>
         <member name="T:FCartographer.NoiseGenerator">
             <summary>
-            Generator base class, used to generate layers. Will use unsafe functions.
+            Generator base class, used to generate layers.
             </summary>
         </member>
         <member name="M:FCartographer.NoiseGenerator.Generate">
@@ -549,6 +554,16 @@
             Abstract class that holds the base data for all layertypes.
             </summary>
         </member>
+        <member name="F:FCartographer.Layer.typename">
+            <summary>
+            The name of the type of layer
+            </summary>
+        </member>
+        <member name="F:FCartographer.Layer.typedescription">
+            <summary>
+            Describes the type of layer
+            </summary>
+        </member>
         <member name="F:FCartographer.Layer.data_g">
             <summary>
             Graphics Object for interfacing with layer data.
@@ -634,12 +649,12 @@
             Overridden in subclasses, called to fill a region in data.
             </summary>
         </member>
-        <member name="M:FCartographer.Layer.#ctor(System.Int32,System.Int32)">
+        <member name="M:FCartographer.Layer.#ctor(System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Unnamed constructor, creates layer of size x and y.
             </summary>
         </member>
-        <member name="M:FCartographer.Layer.#ctor(System.Int32,System.Int32,System.String)">
+        <member name="M:FCartographer.Layer.#ctor(System.Int32,System.Int32,System.String,System.String,System.String)">
             <summary>
             Named constructor, creates layer of size x and y, and an input name.
             </summary>
@@ -928,10 +943,27 @@
             Renderer class, used to render parts of layers. Will usually utilize unsafe functions.
             </summary>
         </member>
+        <member name="M:FCartographer.NationStrokeRenderer.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Constructor, takes bitmap for reading
+            </summary>
+            <param name="_data"></param>
+        </member>
         <member name="T:FCartographer.Renderer">
             <summary>
             Renderer class, used to render parts of layers. Will usually utilize unsafe functions.
             </summary>
+        </member>
+        <member name="M:FCartographer.Renderer.Render">
+            <summary>
+            Responsible for rendering layer based on input data.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Renderer.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Renderer constructor, passes a reference of the data to render into the renderer object.
+            </summary>
+            <param name="_data"></param>
         </member>
         <member name="T:FCartographer.TerrainShader">
             <summary>
