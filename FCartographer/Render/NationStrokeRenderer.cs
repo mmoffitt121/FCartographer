@@ -30,16 +30,23 @@ namespace FCartographer
             RenderStroke();
         }
 
-        private unsafe void RenderStroke()
+        private void RenderStroke()
         {
             byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData());
             byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput());
             System.Diagnostics.Debug.WriteLine("HEY");
             System.Diagnostics.Debug.WriteLine(inp[0] + " " + inp[1] + " " + inp[2] + " " + inp[3] + " " + inp[4]);
 
-            for (int i = 0; i < GetData().Width * GetData().Height; i += 4)
+            int wid = GetData().Width;
+
+            for (int i = 0; i < GetData().Width * GetData().Height * 4; i += 4)
             {
-                
+                int a = i + 3;
+                int r = i + 2;
+                int g = i + 1;
+                int b = i;
+
+                // Lotta math to do here
             }
         }
 
