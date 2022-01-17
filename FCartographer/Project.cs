@@ -239,7 +239,19 @@ namespace FCartographer
 
             for (int i = 0; i < layers.Count; i++)
             {
-                outg.DrawImage(layers[i].GetData(), 0, 0, width, height);
+                if (!layers[i].Visible())
+                {
+                    continue;
+                }
+                if (layers[i].ToRender())
+                {
+                    outg.DrawImage(layers[i].GetOutData(), 0, 0, width, height);
+                }
+                else
+                {
+                    outg.DrawImage(layers[i].GetData(), 0, 0, width, height);
+                }
+                
             }
 
             return output;

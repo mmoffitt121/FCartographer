@@ -115,6 +115,22 @@ namespace FCartographer
                     Height = 15
                 };
 
+                CheckBox visible = new CheckBox()
+                {
+                    Checked = project.GetLayer(i).Visible(),
+                    Location = new Point(48, 32),
+                    Width = 15,
+                    Height = 15
+                };
+
+                CheckBox torender = new CheckBox()
+                {
+                    Checked = project.GetLayer(i).ToRender(),
+                    Location = new Point(63, 32),
+                    Width = 15,
+                    Height = 15
+                };
+
                 text.Click += LayerPanelChild_Select;
                 icon.Click += LayerPanelChild_Select;
 
@@ -122,11 +138,16 @@ namespace FCartographer
                 upbutton.Click += LayerUp_Click;
                 downbutton.Click += LayerDown_Click;
 
+                visible.Click += ToggleVis_Click;
+                torender.Click += ToggleRender_Click;
+
                 panel.Controls.Add(delbutton);
                 panel.Controls.Add(upbutton);
                 panel.Controls.Add(downbutton);
                 panel.Controls.Add(text);
                 panel.Controls.Add(icon);
+                panel.Controls.Add(visible);
+                panel.Controls.Add(torender);
 
                 panel.Click += LayerPanel_Select;
 
@@ -279,6 +300,39 @@ namespace FCartographer
                 DisplayLayers();
                 RenderGraphics(project.GetGraphics());
                 UpdateLayerBrushes();
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void ToggleVis_Click(object sender, EventArgs e)
+        {
+            Control csender;
+            try
+            {
+                csender = (Control)sender;
+                project.GetLayer(csender.Parent.TabIndex).ToggleVisible();
+                DisplayLayers();
+                RenderGraphics(project.GetGraphics());
+            }
+            catch
+            {
+                return;
+            }
+            
+        }
+
+        private void ToggleRender_Click(object sender, EventArgs e)
+        {
+            Control csender;
+            try
+            {
+                csender = (Control)sender;
+                project.GetLayer(csender.Parent.TabIndex).ToggleRender();
+                DisplayLayers();
+                RenderGraphics(project.GetGraphics());
             }
             catch
             {

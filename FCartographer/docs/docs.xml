@@ -584,6 +584,40 @@
             Returns the Height.
             </summary>
         </member>
+        <member name="M:FCartographer.Layer.ToRender">
+            <summary>
+            Returns whether the layer will be rendered or not
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FCartographer.Layer.SetToRender(System.Boolean)">
+            <summary>
+            Sets whether the layer will be rendered or not
+            </summary>
+            <param name="_torender"></param>
+        </member>
+        <member name="M:FCartographer.Layer.ToggleRender">
+            <summary>
+            Toggles whether layer is rendered
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.Visible">
+            <summary>
+            Returns whether the layer will be visible or not
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FCartographer.Layer.SetVisible(System.Boolean)">
+            <summary>
+            Sets whether the layer will be rendered or not
+            </summary>
+            <param name="_visible"></param>
+        </member>
+        <member name="M:FCartographer.Layer.ToggleVisible">
+            <summary>
+            Toggles whether the layer is visible
+            </summary>
+        </member>
         <member name="M:FCartographer.Layer.Render">
             <summary>
             Overridden in subclasses, called to composite changes and render output.
@@ -598,6 +632,12 @@
             <summary>
             Returns the tempdata, where changes are temporarily stored before being applied to the base data.
             </summary>
+        </member>
+        <member name="M:FCartographer.Layer.GetOutData">
+            <summary>
+            Returns reference to the post-rendering data
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:FCartographer.Layer.SetType(FCartographer.Layer.LayerType)">
             <summary>

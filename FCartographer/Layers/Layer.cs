@@ -47,6 +47,9 @@ namespace FCartographer
 
         private bool disposedValue;
 
+        private bool visible;
+        private bool torender;
+
         /// <summary>
         /// Returns the width of the layer.
         /// </summary>
@@ -61,6 +64,58 @@ namespace FCartographer
         public int GetHeight()
         {
             return height;
+        }
+
+        /// <summary>
+        /// Returns whether the layer will be rendered or not
+        /// </summary>
+        /// <returns></returns>
+        public bool ToRender()
+        {
+            return torender;
+        }
+
+        /// <summary>
+        /// Sets whether the layer will be rendered or not
+        /// </summary>
+        /// <param name="_torender"></param>
+        public void SetToRender(bool _torender)
+        {
+            torender = _torender;
+        }
+
+        /// <summary>
+        /// Toggles whether layer is rendered
+        /// </summary>
+        public void ToggleRender()
+        {
+            torender = !torender;
+        }
+
+        /// <summary>
+        /// Returns whether the layer will be visible or not
+        /// </summary>
+        /// <returns></returns>
+        public bool Visible()
+        {
+            return visible;
+        }
+
+        /// <summary>
+        /// Sets whether the layer will be rendered or not
+        /// </summary>
+        /// <param name="_visible"></param>
+        public void SetVisible(bool _visible)
+        {
+            visible = _visible;
+        }
+
+        /// <summary>
+        /// Toggles whether the layer is visible
+        /// </summary>
+        public void ToggleVisible()
+        {
+            visible = !visible;
         }
 
         /// <summary>
@@ -85,6 +140,15 @@ namespace FCartographer
         public Bitmap GetTempData()
         {
             return tempdata;
+        }
+
+        /// <summary>
+        /// Returns reference to the post-rendering data
+        /// </summary>
+        /// <returns></returns>
+        public Bitmap GetOutData()
+        {
+            return outdata;
         }
 
         /// <summary>
@@ -176,11 +240,16 @@ namespace FCartographer
             height = y;
             data = new Bitmap(x, y);
             tempdata = new Bitmap(x, y);
+            outdata = new Bitmap(x, y);
             data_g = Graphics.FromImage(data);
             g = Graphics.FromImage(tempdata);
 
+            SetVisible(true);
+            SetToRender(false);
+
             typename = _typename;
             typedescription = _typedesc;
+
         }
 
         /// <summary>
@@ -192,9 +261,13 @@ namespace FCartographer
             height = y;
             data = new Bitmap(x, y);
             tempdata = new Bitmap(x, y);
+            outdata = new Bitmap(x, y);
             data_g = Graphics.FromImage(data);
             g = Graphics.FromImage(tempdata);
             SetName(_name);
+
+            SetVisible(true);
+            SetToRender(false);
 
             typename = _typename;
             typedescription = _typedesc;
