@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,11 +45,12 @@ namespace FCartographer
         }
 
         /// <summary>
-        /// Draws a byte array onto a bitmap
+        /// Draws a byte array onto a bitmap. Greyscale or argb depending on greyscale param
         /// </summary>
         /// <param name="data"></param>
         /// <param name="bytes"></param>
-        public static unsafe void DrawImage(Bitmap data, byte[] bytes)
+        /// <param name="color"></param>
+        public static unsafe void DrawImage(Bitmap data, byte[] bytes, bool color = false)
         {
             BitmapData dat = data.LockBits(new Rectangle(0, 0, data.Width, data.Height), ImageLockMode.ReadWrite, data.PixelFormat);
             byte* top = (byte*)dat.Scan0.ToPointer();
@@ -58,15 +60,34 @@ namespace FCartographer
             int width = dat.Width;
             int height = dat.Height;
 
-            byte clr;
-            for (int i = 0; i < width; i++)
+            if (color)
             {
-                for (int j = 0; j < height; j++)
+                byte a;
+                byte r;
+                byte g;
+                byte b;
+                for (int i = 0; i < width * height * 4; i += 4)
                 {
-                    clr = bytes[j * width + i];
-                    PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
+                    top[i + 3] = bytes[i + 3]; // A
+                    top[i + 2] = bytes[i + 2]; // R
+                    top[i + 1] = bytes[i + 1]; // G
+                    top[i + 0] = bytes[i + 0]; // B
                 }
             }
+            else
+            {
+                byte clr;
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < height; j++)
+                    {
+                        clr = bytes[j * width + i];
+                        PointerOps.ChangeColor(top, i, j, Color.FromArgb(255, clr, clr, clr), pixsiz, stride);
+                    }
+                }
+            }
+
+            
 
             data.UnlockBits(dat);
         }
@@ -87,6 +108,19 @@ namespace FCartographer
             bitmap.UnlockBits(dat);
 
             return output;
+        }
+
+        /// <summary>
+        /// Converts from byte array to bitmap
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static Bitmap ByteArrayToBitmap(byte[] bytes)
+        {
+            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            {
+                return (Bitmap)Image.FromStream(memoryStream);
+            } 
         }
     }
 }

@@ -46,8 +46,47 @@ namespace FCartographer
                 int g = i + 1;
                 int b = i;
 
-                // Lotta math to do here
+                bool tocolor = false;
+                while (true)
+                {
+                    // North
+                    int loc = i - wid * 4;
+                    if ((loc > 0))
+                    {
+                        // North
+                        if (!(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                        {
+                            tocolor = true;
+                            break;
+                        }
+
+                        loc -= 4;
+                        if ((loc > 0) && !(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                        {
+                            tocolor = true;
+                            break;
+                        }
+
+                        loc += 8;
+                        if ((loc > 0 && loc % (wid * 4) != 0) && !(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                        {
+                            tocolor = true;
+                            break;
+                        }
+
+                    }
+
+                    // Mid
+                    loc = i;
+
+                    // South
+                    loc = i + wid * 4;
+
+                    break;
+                }
             }
+
+            BitmapDataConverter.DrawImage(GetOutput(), outp, true);
         }
 
         /// <summary>

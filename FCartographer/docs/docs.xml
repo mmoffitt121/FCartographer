@@ -1195,17 +1195,25 @@
             Converts greyscale bitmap to byte array
             </summary>
         </member>
-        <member name="M:FCartographer.BitmapDataConverter.DrawImage(System.Drawing.Bitmap,System.Byte[])">
+        <member name="M:FCartographer.BitmapDataConverter.DrawImage(System.Drawing.Bitmap,System.Byte[],System.Boolean)">
             <summary>
-            Draws a byte array onto a bitmap
+            Draws a byte array onto a bitmap. Greyscale or argb depending on greyscale param
             </summary>
             <param name="data"></param>
             <param name="bytes"></param>
+            <param name="color"></param>
         </member>
         <member name="M:FCartographer.BitmapDataConverter.BitmapToByteArray(System.Drawing.Bitmap)">
             <summary>
             Converts bitmap to byte array
             </summary>
+        </member>
+        <member name="M:FCartographer.BitmapDataConverter.ByteArrayToBitmap(System.Byte[])">
+            <summary>
+            Converts from byte array to bitmap
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
         </member>
         <member name="T:FCartographer.ImageTypeConverter">
             <summary>
