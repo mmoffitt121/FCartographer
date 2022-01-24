@@ -45,6 +45,11 @@ namespace FCartographer
         /// </summary>
         public Graphics g;
 
+        /// <summary>
+        /// Graphics object for interfacing with 
+        /// </summary>
+        public Graphics render_g;
+
         private bool disposedValue;
 
         private bool visible;
@@ -243,6 +248,7 @@ namespace FCartographer
             outdata = new Bitmap(x, y);
             data_g = Graphics.FromImage(data);
             g = Graphics.FromImage(tempdata);
+            render_g = Graphics.FromImage(outdata);
 
             SetVisible(true);
             SetToRender(false);
@@ -264,6 +270,7 @@ namespace FCartographer
             outdata = new Bitmap(x, y);
             data_g = Graphics.FromImage(data);
             g = Graphics.FromImage(tempdata);
+            render_g = Graphics.FromImage(outdata);
             SetName(_name);
 
             SetVisible(true);

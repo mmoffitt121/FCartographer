@@ -41,10 +41,10 @@ namespace FCartographer
 
             for (int i = 0; i < GetData().Width * GetData().Height * 4; i += 4)
             {
-                int a = i + 3;
-                int r = i + 2;
-                int g = i + 1;
-                int b = i;
+                int a = inp[i + 3];
+                int r = inp[i + 2];
+                int g = inp[i + 1];
+                int b = inp[i];
 
                 bool tocolor = false;
                 while (true)
@@ -83,6 +83,14 @@ namespace FCartographer
                     loc = i + wid * 4;
 
                     break;
+                }
+
+                if (tocolor)
+                {
+                    outp[i + 3] = color.A;
+                    outp[i + 2] = color.R;
+                    outp[i + 1] = color.G;
+                    outp[i + 0] = color.B;
                 }
             }
 

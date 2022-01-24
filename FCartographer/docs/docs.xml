@@ -574,6 +574,11 @@
             Graphics Object for interfacing with temporary layer data.
             </summary>
         </member>
+        <member name="F:FCartographer.Layer.render_g">
+            <summary>
+            Graphics object for interfacing with 
+            </summary>
+        </member>
         <member name="M:FCartographer.Layer.GetWidth">
             <summary>
             Returns the width of the layer.
