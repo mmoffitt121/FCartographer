@@ -3,34 +3,28 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
 
 namespace FCartographer
 {
     /// <summary>
-    /// Renderer class, used to render parts of layers. Will usually utilize unsafe functions.
+    /// Shader responsible for terrain layers
     /// </summary>
-    public class NationStrokeRenderer : Renderer
+    public class ContourRenderer : Renderer
     {
         /// <summary>
-        /// Holds the width of the stroke
-        /// </summary>
-        public int stokewidth;
-        /// <summary>
-        /// Holds the color of the stroke
+        /// Color to draw contour lines
         /// </summary>
         public Color color;
 
         /// <summary>
-        /// Renders the stroke layer
+        /// Renders contour lines onto internal data
         /// </summary>
         public override void Render()
         {
-            RenderStroke();
+            RenderContour();
         }
 
-        private void RenderStroke()
+        private void RenderContour()
         {
             byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData());
             byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput());
@@ -38,12 +32,14 @@ namespace FCartographer
             int wid = GetData().Width;
             int hei = GetData().Height;
 
+            outp[5] = 50;
+            outp[9] = 50;
+            outp[5 + wid * 4] = 50;
+            outp[9 + wid * 4] = 50;
+
             for (int i = 0; i < wid * hei * 4; i += 4)
             {
-                int a = inp[i + 3];
-                int r = inp[i + 2];
-                int g = inp[i + 1];
-                int b = inp[i];
+                int v = inp[i];
 
                 bool tocolor = false;
                 while (true)
@@ -53,7 +49,7 @@ namespace FCartographer
                     if ((loc > 0))
                     {
                         // North
-                        if (!(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                        if (!(inp[loc] == v))
                         {
                             tocolor = true;
                             break;
@@ -61,7 +57,7 @@ namespace FCartographer
 
                         // NW
                         loc -= 4;
-                        if ((loc > 0) && (((loc / 4) % wid) != 0) && !(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                        if ((loc > 0) && !(inp[loc] == v))
                         {
                             tocolor = true;
                             break;
@@ -69,7 +65,7 @@ namespace FCartographer
 
                         // NE
                         loc += 8;
-                        if ((loc > 0) && (((loc / 4) % wid) != 1) && (loc % (wid * 4) != 0) && !(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                        if ((loc > 0) && !(inp[loc] == v))
                         {
                             tocolor = true;
                             break;
@@ -82,7 +78,7 @@ namespace FCartographer
 
                     // W
                     loc -= 4;
-                    if ((loc > 0) && (((loc / 4) % wid) != 0) && !(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                    if ((loc > 0) && !(inp[loc] == v))
                     {
                         tocolor = true;
                         break;
@@ -90,7 +86,7 @@ namespace FCartographer
 
                     // E
                     loc += 8;
-                    if ((loc < wid * hei * 4) && (((loc / 4) % wid) != 1) && (loc % (wid * 4) != 0) && !(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                    if ((loc < wid * hei * 4) && !(inp[loc] == v))
                     {
                         tocolor = true;
                         break;
@@ -102,7 +98,7 @@ namespace FCartographer
                     if ((loc < wid * hei * 4))
                     {
                         // South East
-                        if (!(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                        if (!(inp[loc] == v))
                         {
                             tocolor = true;
                             break;
@@ -110,7 +106,7 @@ namespace FCartographer
 
                         // South
                         loc += 4;
-                        if ((loc < wid * hei * 4) && !(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                        if ((loc < wid * hei * 4) && !(inp[loc] == v))
                         {
                             tocolor = true;
                             break;
@@ -118,7 +114,7 @@ namespace FCartographer
 
                         // South West
                         loc += 4;
-                        if ((loc < wid * hei * 4) && (loc % (wid * 4) != 0) && !(inp[loc + 3] == a && inp[loc + 2] == r && inp[loc + 1] == g && inp[loc + 0] == b))
+                        if ((loc < wid * hei * 4) && !(inp[loc] == v))
                         {
                             tocolor = true;
                             break;
@@ -142,9 +138,11 @@ namespace FCartographer
         }
 
         /// <summary>
-        /// Constructor, takes bitmap for reading
+        /// Contour renderer constructor
         /// </summary>
-        public NationStrokeRenderer(Bitmap _data, Bitmap _output) : base(_data, _output)
+        /// <param name="_data"></param>
+        /// <param name="_output"></param>
+        public ContourRenderer(Bitmap _data, Bitmap _output) : base(_data, _output)
         {
             color = Color.FromArgb(255, 0, 0, 0);
         }

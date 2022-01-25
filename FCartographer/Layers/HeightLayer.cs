@@ -13,7 +13,7 @@ namespace FCartographer
     /// </summary>
     public class HeightLayer : Layer
     {
-        //private TerrainShader shader;
+        private ContourRenderer ctr;
 
         /// <summary>
         /// Override void that composits temp data to the layer.
@@ -23,6 +23,12 @@ namespace FCartographer
             data_g.InterpolationMode = InterpolationMode.NearestNeighbor;
             data_g.DrawImage(GetTempData(), 0, 0, GetData().Width, GetData().Height);
             g.Clear(Color.FromArgb(0, 0, 0, 0));
+
+            if (ToRender())
+            {
+                render_g.Clear(Color.FromArgb(255, 255, 255, 255));
+                ctr.Render();
+            }
         }
 
         /// <summary>
@@ -70,6 +76,11 @@ namespace FCartographer
         {
             SetType(LayerType.HeightMap);
             SetName("Terrain layer");
+
+            data_g.Clear(Color.FromArgb(255, 0, 0, 0));
+            
+            ctr = new ContourRenderer(GetData(), GetOutData());
+            Render();
         }
 
         /// <summary>
@@ -78,6 +89,11 @@ namespace FCartographer
         public HeightLayer(int x, int y, string _name) : base(x, y, _name, "Terrain Layer", "Terrain Layer Description")
         {
             SetType(LayerType.HeightMap);
+
+            data_g.Clear(Color.FromArgb(255, 0, 0, 0));
+            
+            ctr = new ContourRenderer(GetData(), GetOutData());
+            Render();
         }
     }
 }

@@ -9,8 +9,11 @@ namespace FCartographer
     /// <summary>
     /// Shader responsible for terrain layers
     /// </summary>
-    public class TerrainShader
+    public class TerrainShader : Renderer
     {
+        public TerrainShader(Bitmap _data, Bitmap _output) : base(_data, _output)
+        {
 
+        }
     }
 }

@@ -11,6 +11,9 @@ namespace FCartographer
     /// </summary>
     public class DirectionalTerrainShader : TerrainShader
     {
+        public DirectionalTerrainShader(Bitmap _data, Bitmap _output) : base(_data, _output)
+        {
 
+        }
     }
 }

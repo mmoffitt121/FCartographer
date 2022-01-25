@@ -978,6 +978,28 @@
             Project Settings Constructor, default variables.
             </summary>
         </member>
+        <member name="T:FCartographer.ContourRenderer">
+            <summary>
+            Shader responsible for terrain layers
+            </summary>
+        </member>
+        <member name="F:FCartographer.ContourRenderer.color">
+            <summary>
+            Color to draw contour lines
+            </summary>
+        </member>
+        <member name="M:FCartographer.ContourRenderer.Render">
+            <summary>
+            Renders contour lines onto internal data
+            </summary>
+        </member>
+        <member name="M:FCartographer.ContourRenderer.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
+            <summary>
+            Contour renderer constructor
+            </summary>
+            <param name="_data"></param>
+            <param name="_output"></param>
+        </member>
         <member name="T:FCartographer.DirectionalTerrainShader">
             <summary>
             Shader that extends terrainshader, shades terrain based on input direction.

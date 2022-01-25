@@ -95,6 +95,10 @@ namespace FCartographer
         public void ToggleRender()
         {
             torender = !torender;
+            if (torender)
+            {
+                Render();
+            }
         }
 
         /// <summary>
