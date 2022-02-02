@@ -999,9 +999,29 @@
             Shader responsible for terrain layers
             </summary>
         </member>
-        <member name="F:FCartographer.ContourRenderer.color">
+        <member name="F:FCartographer.ContourRenderer.minorcolor">
             <summary>
-            Color to draw contour lines
+            Color to draw minor lines
+            </summary>
+        </member>
+        <member name="F:FCartographer.ContourRenderer.majorcolor">
+            <summary>
+            Color to draw major contour lines
+            </summary>
+        </member>
+        <member name="F:FCartographer.ContourRenderer.minorinterval">
+            <summary>
+            Interval at which lines are drawn
+            </summary>
+        </member>
+        <member name="F:FCartographer.ContourRenderer.majorinterval">
+            <summary>
+            Interval at which major lines are drawn
+            </summary>
+        </member>
+        <member name="F:FCartographer.ContourRenderer.startpoint">
+            <summary>
+            Lowest level at which lines are drawn
             </summary>
         </member>
         <member name="M:FCartographer.ContourRenderer.Render">

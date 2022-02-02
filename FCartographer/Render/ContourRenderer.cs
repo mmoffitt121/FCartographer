@@ -12,9 +12,27 @@ namespace FCartographer
     public class ContourRenderer : Renderer
     {
         /// <summary>
-        /// Color to draw contour lines
+        /// Color to draw minor lines
         /// </summary>
-        public Color color;
+        public Color minorcolor;
+        /// <summary>
+        /// Color to draw major contour lines
+        /// </summary>
+        public Color majorcolor;
+
+        /// <summary>
+        /// Interval at which lines are drawn
+        /// </summary>
+        public int minorinterval;
+        /// <summary>
+        /// Interval at which major lines are drawn
+        /// </summary>
+        public int majorinterval;
+
+        /// <summary>
+        /// Lowest level at which lines are drawn
+        /// </summary>
+        public int startpoint;
 
         /// <summary>
         /// Renders contour lines onto internal data
@@ -29,103 +47,102 @@ namespace FCartographer
             byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData());
             byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput());
 
-            int wid = GetData().Width;
+            int wid = GetData().Width * 4;
             int hei = GetData().Height;
 
-            for (int i = 0; i < wid * hei * 4; i += 4)
+            for (int i = 0; i < wid * hei; i += 4)
             {
                 int v = inp[i];
 
-                bool tocolor = false;
-                while (true)
+                bool major;
+                bool minor;
+
+                int[,] adj = new int[,] { { -1, -1, -1 }, { -1, -1, -1 }, { -1, -1, -1 } };
+
+                // Build matrix of adjacent bytes
+                adj[1, 1] = inp[i];
+
+                // Check if up and down valid
+                bool upvalid = i - wid > 0;
+                bool downvalid = i + wid < inp.Length;
+
+                if (upvalid) 
                 {
-                    // North
-                    int loc = i - wid * 4;
-                    if ((loc > 0))
-                    {
-                        // North
-                        if (!(inp[loc] == v))
-                        {
-                            tocolor = true;
-                            break;
-                        }
-
-                        // NW
-                        loc -= 4;
-                        if ((loc > 0) && !(inp[loc] == v))
-                        {
-                            tocolor = true;
-                            break;
-                        }
-
-                        // NE
-                        loc += 8;
-                        if ((loc > 0) && !(inp[loc] == v))
-                        {
-                            tocolor = true;
-                            break;
-                        }
-
-                    }
-
-                    // Mid
-                    loc = i;
-
-                    // W
-                    loc -= 4;
-                    if ((loc > 0) && !(inp[loc] == v))
-                    {
-                        tocolor = true;
-                        break;
-                    }
-
-                    // E
-                    loc += 8;
-                    if ((loc < wid * hei * 4) && !(inp[loc] == v))
-                    {
-                        tocolor = true;
-                        break;
-                    }
-
-                    // South
-                    loc = i + wid * 4 - 4;
-
-                    if ((loc < wid * hei * 4))
-                    {
-                        // South East
-                        if (!(inp[loc] == v))
-                        {
-                            tocolor = true;
-                            break;
-                        }
-
-                        // South
-                        loc += 4;
-                        if ((loc < wid * hei * 4) && !(inp[loc] == v))
-                        {
-                            tocolor = true;
-                            break;
-                        }
-
-                        // South West
-                        loc += 4;
-                        if ((loc < wid * hei * 4) && !(inp[loc] == v))
-                        {
-                            tocolor = true;
-                            break;
-                        }
-
-                    }
-
-                    break;
+                    adj[1, 0] = inp[i - wid];
                 }
 
-                if (tocolor)
+                if (downvalid)
                 {
-                    outp[i + 3] = color.A;
-                    outp[i + 2] = color.R;
-                    outp[i + 1] = color.G;
-                    outp[i + 0] = color.B;
+                    adj[1, 2] = inp[i + wid];
+                }
+
+                if (i % wid > 0)  // Check if left valid
+                {
+                    adj[0, 1] = inp[i - 4];
+
+                    if (upvalid)
+                    {
+                        adj[0, 0] = inp[i - wid - 4];
+                    }
+
+                    if (downvalid)
+                    {
+                        adj[0, 2] = inp[i + wid - 4];
+                    }
+                }
+
+                if (i % wid != wid - 4)  // Check if right valid
+                {
+                    adj[2, 1] = inp[i + 4];
+
+                    if (upvalid)
+                    {
+                        adj[2, 0] = inp[i - wid + 4];
+                    }
+
+                    if (downvalid)
+                    {
+                        adj[2, 2] = inp[i + wid + 4];
+                    }
+                }
+
+                major = false;
+                minor = false;
+
+                foreach (int j in adj)
+                {
+                    // System.Diagnostics.Debug.WriteLine(j + " " + v);
+                    if (v > j && ((int)(v / (minorinterval * majorinterval))) * minorinterval * majorinterval > j)
+                    {
+                        major = true;
+                    }
+
+                    if (v > j && ((int)(v / minorinterval)) * minorinterval > j)
+                    {
+                        minor = true;
+                    }
+                }
+
+                if (major)
+                {
+                    outp[i + 3] = majorcolor.A;
+                    outp[i + 2] = majorcolor.R;
+                    outp[i + 1] = majorcolor.G;
+                    outp[i + 0] = majorcolor.B;
+                }
+                else if (minor)
+                {
+                    outp[i + 3] = minorcolor.A;
+                    outp[i + 2] = minorcolor.R;
+                    outp[i + 1] = minorcolor.G;
+                    outp[i + 0] = minorcolor.B;
+                }
+                else
+                {
+                    outp[i + 3] = 0;
+                    outp[i + 2] = 0;
+                    outp[i + 1] = 0;
+                    outp[i + 0] = 0;
                 }
             }
 
@@ -139,7 +156,11 @@ namespace FCartographer
         /// <param name="_output"></param>
         public ContourRenderer(Bitmap _data, Bitmap _output) : base(_data, _output)
         {
-            color = Color.FromArgb(255, 0, 0, 0);
+            majorcolor = Color.FromArgb(255, 0, 0, 0);
+            minorcolor = Color.FromArgb(100, 0, 0, 0);
+
+            majorinterval = 2;
+            minorinterval = 10;
         }
     }
 }
