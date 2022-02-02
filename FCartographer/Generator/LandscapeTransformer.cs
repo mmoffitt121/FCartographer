@@ -69,7 +69,7 @@ namespace FCartographer
 
             for (int i = 0; i < bytes.Length; i++)
             {
-                bytes[i] = (byte)(((float)(bytes[i] - oldmin)) / (oldmax - oldmin) * (newmax - newmin) + newmin);
+                bytes[i] = (byte)Math.Clamp((((float)(bytes[i] - oldmin)) / (oldmax - oldmin) * (newmax - newmin) + newmin), 0, 255);
             }
 
             BitmapDataConverter.DrawImage(GetData(), bytes);
