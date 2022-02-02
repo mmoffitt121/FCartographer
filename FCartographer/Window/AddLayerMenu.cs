@@ -62,10 +62,12 @@ namespace FCartographer
         {
             if (LayerToAdd.SelectedIndex.Equals(1))
             {
+                NameOfNewLayer.Text = "New Nation Layer";
                 DescriptionBox.Text = "A nation layer is a layer where the user can draw and render colored, outlined, and/or textured regions of space on the canvas.";
             }
             if (LayerToAdd.SelectedIndex.Equals(0))
             {
+                NameOfNewLayer.Text = "New Terrain Layer";
                 DescriptionBox.Text = "A terrain layer is a layer that represents a given height on an image.";
             }
         }
