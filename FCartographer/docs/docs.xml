@@ -734,16 +734,6 @@
             Reference, for imported images/annotations/sketches
             </summary>
         </member>
-        <member name="M:FCartographer.Layer.Dispose(System.Boolean)">
-            <summary>
-            Inherits IDisposable, needs to be overridden in all subclasses.
-            </summary>
-        </member>
-        <member name="M:FCartographer.Layer.Dispose">
-            <summary>
-            Function to call for disposal.
-            </summary>
-        </member>
         <member name="T:FCartographer.Nation">
             <summary>
             Class that holds the data for a particular nation.
@@ -1003,6 +993,26 @@
         <member name="T:FCartographer.DirectionalTerrainShader">
             <summary>
             Shader that extends terrainshader, shades terrain based on input direction.
+            </summary>
+        </member>
+        <member name="T:FCartographer.NationFillRenderer">
+            <summary>
+            Renderer class, used to render parts of layers. Will usually utilize unsafe functions.
+            </summary>
+        </member>
+        <member name="F:FCartographer.NationFillRenderer.alpha">
+            <summary>
+            Holds the transparency of the nation
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationFillRenderer.Render">
+            <summary>
+            Renders the stroke layer
+            </summary>
+        </member>
+        <member name="M:FCartographer.NationFillRenderer.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
+            <summary>
+            Constructor, takes bitmap for reading
             </summary>
         </member>
         <member name="T:FCartographer.NationStrokeRenderer">

@@ -71,7 +71,7 @@ namespace FCartographer
             {
                 Layer layer = layers[to_delete];
                 layers.RemoveAt(to_delete);
-                layer.Dispose();
+                //layer.Dispose();
             }
             catch
             {

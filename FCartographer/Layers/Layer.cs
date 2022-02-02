@@ -11,7 +11,7 @@ namespace FCartographer
     /// <summary>
     /// Abstract class that holds the base data for all layertypes.
     /// </summary>
-    public abstract class Layer : IDisposable
+    public abstract class Layer/* : IDisposable*/
     {
         private String name;
         //private bool visible;
@@ -315,7 +315,7 @@ namespace FCartographer
             Reference
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Inherits IDisposable, needs to be overridden in all subclasses.
         /// </summary>
         protected virtual void Dispose(bool disposing)
@@ -341,6 +341,6 @@ namespace FCartographer
         {
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
-        }
+        }*/
     }
 }

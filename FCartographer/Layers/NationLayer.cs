@@ -22,6 +22,7 @@ namespace FCartographer
         private Color brushcolor;
 
         NationStrokeRenderer nsr;
+        NationFillRenderer nfr;
 
         /// <summary>
         /// Override void that composits temp data to the layer.
@@ -36,6 +37,7 @@ namespace FCartographer
             if (ToRender())
             {
                 render_g.Clear(Color.FromArgb(0, 0, 0, 0));
+                nfr.Render();
                 nsr.Render();
             }
         }
@@ -190,6 +192,7 @@ namespace FCartographer
             pen.Width = 20;
 
             nsr = new NationStrokeRenderer(GetData(), GetOutData());
+            nfr = new NationFillRenderer(GetData(), GetOutData());
 
             nations = new List<Nation>();
             NewNation();
@@ -207,6 +210,7 @@ namespace FCartographer
             pen.Width = 20;
 
             nsr = new NationStrokeRenderer(GetData(), GetOutData());
+            nfr = new NationFillRenderer(GetData(), GetOutData());
 
             nations = new List<Nation>();
             NewNation();
