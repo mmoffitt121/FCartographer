@@ -148,10 +148,10 @@ namespace FCartographer
                 }
                 else
                 {
-                    outp[i + 3] = (byte)Math.Round(Lerp(lowcolor.A, highcolor.A, ((float)v) / 255), minorinterval);
-                    outp[i + 2] = (byte)Math.Round(Lerp(lowcolor.R, highcolor.R, ((float)v) / 255), minorinterval);
-                    outp[i + 1] = (byte)Math.Round(Lerp(lowcolor.G, highcolor.G, ((float)v) / 255), minorinterval);
-                    outp[i + 0] = (byte)Math.Round(Lerp(lowcolor.B, highcolor.B, ((float)v) / 255), minorinterval);
+                    outp[i + 3] = (byte)Math.Clamp(Math.Round(Lerp(lowcolor.A, highcolor.A, ((float)v) / 255), minorinterval), 0, 255);
+                    outp[i + 2] = (byte)Math.Clamp(Math.Round(Lerp(lowcolor.R, highcolor.R, ((float)v) / 255), minorinterval), 0, 255);
+                    outp[i + 1] = (byte)Math.Clamp(Math.Round(Lerp(lowcolor.G, highcolor.G, ((float)v) / 255), minorinterval), 0, 255);
+                    outp[i + 0] = (byte)Math.Clamp(Math.Round(Lerp(lowcolor.B, highcolor.B, ((float)v) / 255), minorinterval), 0, 255);
                 }
             }
 
@@ -173,8 +173,8 @@ namespace FCartographer
             majorcolor = Color.FromArgb(255, 0, 0, 0);
             minorcolor = Color.FromArgb(255, 50, 50, 50);
 
-            majorinterval = 5;
-            minorinterval = 5;
+            majorinterval = 4;
+            minorinterval = 10;
 
             highcolor = Color.FromArgb(255, 255, 230, 160);
             lowcolor = Color.FromArgb(255, 100, 60, 30);
