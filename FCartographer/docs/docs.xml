@@ -1019,6 +1019,16 @@
             Interval at which major lines are drawn
             </summary>
         </member>
+        <member name="F:FCartographer.ContourRenderer.highcolor">
+            <summary>
+            Color of higher regions
+            </summary>
+        </member>
+        <member name="F:FCartographer.ContourRenderer.lowcolor">
+            <summary>
+            Color that lower regions fade to
+            </summary>
+        </member>
         <member name="F:FCartographer.ContourRenderer.startpoint">
             <summary>
             Lowest level at which lines are drawn

@@ -30,6 +30,15 @@ namespace FCartographer
         public int majorinterval;
 
         /// <summary>
+        /// Color of higher regions
+        /// </summary>
+        public Color highcolor;
+        /// <summary>
+        /// Color that lower regions fade to
+        /// </summary>
+        public Color lowcolor;
+
+        /// <summary>
         /// Lowest level at which lines are drawn
         /// </summary>
         public int startpoint;
@@ -139,14 +148,19 @@ namespace FCartographer
                 }
                 else
                 {
-                    outp[i + 3] = 0;
-                    outp[i + 2] = 0;
-                    outp[i + 1] = 0;
-                    outp[i + 0] = 0;
+                    outp[i + 3] = (byte)Math.Round(Lerp(lowcolor.A, highcolor.A, ((float)v) / 255), minorinterval);
+                    outp[i + 2] = (byte)Math.Round(Lerp(lowcolor.R, highcolor.R, ((float)v) / 255), minorinterval);
+                    outp[i + 1] = (byte)Math.Round(Lerp(lowcolor.G, highcolor.G, ((float)v) / 255), minorinterval);
+                    outp[i + 0] = (byte)Math.Round(Lerp(lowcolor.B, highcolor.B, ((float)v) / 255), minorinterval);
                 }
             }
 
             BitmapDataConverter.DrawImage(GetOutput(), outp, true);
+        }
+
+        private static double Lerp(double a, double b, double x)
+        {
+            return a + x * (b - a);
         }
 
         /// <summary>
@@ -157,10 +171,13 @@ namespace FCartographer
         public ContourRenderer(Bitmap _data, Bitmap _output) : base(_data, _output)
         {
             majorcolor = Color.FromArgb(255, 0, 0, 0);
-            minorcolor = Color.FromArgb(100, 0, 0, 0);
+            minorcolor = Color.FromArgb(255, 50, 50, 50);
 
-            majorinterval = 2;
-            minorinterval = 10;
+            majorinterval = 5;
+            minorinterval = 5;
+
+            highcolor = Color.FromArgb(255, 255, 230, 160);
+            lowcolor = Color.FromArgb(255, 100, 60, 30);
         }
     }
 }
