@@ -32,11 +32,6 @@ namespace FCartographer
             int wid = GetData().Width;
             int hei = GetData().Height;
 
-            outp[5] = 50;
-            outp[9] = 50;
-            outp[5 + wid * 4] = 50;
-            outp[9 + wid * 4] = 50;
-
             for (int i = 0; i < wid * hei * 4; i += 4)
             {
                 int v = inp[i];

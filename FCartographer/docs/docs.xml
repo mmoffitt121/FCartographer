@@ -421,6 +421,32 @@
             </summary>
             <param name="_data"></param>
         </member>
+        <member name="T:FCartographer.LandscapeTransformer">
+            <summary>
+            Generator base class, used to generate layers.
+            </summary>
+        </member>
+        <member name="F:FCartographer.LandscapeTransformer.min">
+            <summary>
+            Specifies minimum value for heightmap to have
+            </summary>
+        </member>
+        <member name="F:FCartographer.LandscapeTransformer.max">
+            <summary>
+            Specifies maximum value for heightmap to have
+            </summary>
+        </member>
+        <member name="M:FCartographer.LandscapeTransformer.Generate">
+            <summary>
+            Overwritable function that performs the layer processes.
+            </summary>
+        </member>
+        <member name="M:FCartographer.LandscapeTransformer.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Generator constructor
+            </summary>
+            <param name="_data"></param>
+        </member>
         <member name="T:FCartographer.NoiseGenerator">
             <summary>
             Generator base class, used to generate layers.
