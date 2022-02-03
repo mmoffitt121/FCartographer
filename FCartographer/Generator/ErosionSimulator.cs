@@ -17,6 +17,11 @@ namespace FCartographer
     public class ErosionSimulator : Generator
     {
         /// <summary>
+        /// Amount of droplets used in erosion = width * height * erosionfactor
+        /// </summary>
+        public int erosionfactor;
+
+        /// <summary>
         /// Performs erosion simulation 
         /// </summary>
         public override void Generate()
@@ -36,7 +41,7 @@ namespace FCartographer
 
             Erosion e = new Erosion();
             e.SetSeed(GetRandom().Next(0, 2147483646));
-            map = e.Erode(map, width, height, width * height * 2);
+            map = e.Erode(map, width, height, width * height * erosionfactor);
 
             for (int i = 0; i < width * height; i++)
             {
@@ -52,7 +57,7 @@ namespace FCartographer
         /// <param name="_data"></param>
         public ErosionSimulator(Bitmap _data) : base(_data)
         {
-
+            erosionfactor = 2;
         }
     }
 }

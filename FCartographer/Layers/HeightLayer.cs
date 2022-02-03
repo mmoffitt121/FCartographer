@@ -14,6 +14,7 @@ namespace FCartographer
     public class HeightLayer : Layer
     {
         private ContourRenderer ctr;
+        private Renderer shader;
 
         /// <summary>
         /// Override void that composits temp data to the layer.
@@ -28,6 +29,7 @@ namespace FCartographer
             {
                 render_g.Clear(Color.FromArgb(255, 255, 255, 255));
                 ctr.Render();
+                shader.Render();
             }
         }
 
@@ -80,6 +82,7 @@ namespace FCartographer
             data_g.Clear(Color.FromArgb(255, 0, 0, 0));
             
             ctr = new ContourRenderer(GetData(), GetOutData());
+            shader = new DirectionalTerrainShader(GetData(), GetOutData());
             Render();
         }
 
@@ -93,6 +96,7 @@ namespace FCartographer
             data_g.Clear(Color.FromArgb(255, 0, 0, 0));
             
             ctr = new ContourRenderer(GetData(), GetOutData());
+            shader = new DirectionalTerrainShader(GetData(), GetOutData());
             Render();
         }
     }

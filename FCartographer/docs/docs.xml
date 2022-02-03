@@ -354,6 +354,11 @@
             Erosion simulator class, simulates erosion on a heightmap.
             </summary>
         </member>
+        <member name="F:FCartographer.ErosionSimulator.erosionfactor">
+            <summary>
+            Amount of droplets used in erosion = width * height * erosionfactor
+            </summary>
+        </member>
         <member name="M:FCartographer.ErosionSimulator.Generate">
             <summary>
             Performs erosion simulation 
@@ -1050,6 +1055,33 @@
             <summary>
             Shader that extends terrainshader, shades terrain based on input direction.
             </summary>
+        </member>
+        <member name="T:FCartographer.GradientTerrainShader">
+            <summary>
+            Shader responsible for terrain layers
+            </summary>
+        </member>
+        <member name="F:FCartographer.GradientTerrainShader.intensity">
+            <summary>
+            Intensity of light source
+            </summary>
+        </member>
+        <member name="F:FCartographer.GradientTerrainShader.angle">
+            <summary>
+            Angle of light source
+            </summary>
+        </member>
+        <member name="M:FCartographer.GradientTerrainShader.Render">
+            <summary>
+            Render override function
+            </summary>
+        </member>
+        <member name="M:FCartographer.GradientTerrainShader.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
+            <summary>
+            GradientTerrainShader constructor
+            </summary>
+            <param name="_data"></param>
+            <param name="_output"></param>
         </member>
         <member name="T:FCartographer.NationFillRenderer">
             <summary>

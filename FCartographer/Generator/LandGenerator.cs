@@ -26,6 +26,7 @@ namespace FCartographer
 
             ErosionSimulator erosiongen = new ErosionSimulator(GetData());
             erosiongen.SetRandom(GetRandom());
+            erosiongen.erosionfactor = 2;
             erosiongen.Generate();
 
             LandscapeTransformer trans = new LandscapeTransformer(GetData());
