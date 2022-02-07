@@ -17,6 +17,11 @@ namespace FCartographer
         private Bitmap output;
 
         /// <summary>
+        /// Number between 0 and 1 that controls the opacity of the layer
+        /// </summary>
+        public float opacity;
+
+        /// <summary>
         /// Responsible for rendering layer based on input data.
         /// </summary>
         public virtual void Render()
@@ -49,6 +54,7 @@ namespace FCartographer
         {
             data = _data;
             output = _output;
+            opacity = 1f;
         }
     }
 }

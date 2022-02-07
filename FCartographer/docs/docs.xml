@@ -1133,6 +1133,11 @@
             Renderer class, used to render parts of layers. Will usually utilize unsafe functions.
             </summary>
         </member>
+        <member name="F:FCartographer.Renderer.opacity">
+            <summary>
+            Number between 0 and 1 that controls the opacity of the layer
+            </summary>
+        </member>
         <member name="M:FCartographer.Renderer.Render">
             <summary>
             Responsible for rendering layer based on input data.

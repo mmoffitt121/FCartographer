@@ -22,11 +22,6 @@ namespace FCartographer
         public float angle;
 
         /// <summary>
-        /// Number between 0 and 1 that controls the opacity of the layer
-        /// </summary>
-        public float opacity;
-
-        /// <summary>
         /// Render override function
         /// </summary>
         public override void Render()
@@ -106,9 +101,9 @@ namespace FCartographer
                 // Write to output
 
                 outp[i + 3] = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
-                outp[i + 2] = (byte)Lerper.Lerp(Math.Clamp(dir * magnitude + 128, 0, 255), outp[i + 2], opacity);
-                outp[i + 1] = (byte)Lerper.Lerp(Math.Clamp(dir * magnitude + 128, 0, 255), outp[i + 1], opacity);
-                outp[i + 0] = (byte)Lerper.Lerp(Math.Clamp(dir * magnitude + 128, 0, 255), outp[i + 0], opacity);
+                outp[i + 2] = (byte)Lerper.Lerp(Math.Clamp(dir * magnitude + 128, 0, 255), outp[i + 2], 1 - opacity);
+                outp[i + 1] = (byte)Lerper.Lerp(Math.Clamp(dir * magnitude + 128, 0, 255), outp[i + 1], 1 - opacity);
+                outp[i + 0] = (byte)Lerper.Lerp(Math.Clamp(dir * magnitude + 128, 0, 255), outp[i + 0], 1 - opacity);
             }
 
             BitmapDataConverter.DrawImage(GetOutput(), outp, true);
@@ -122,8 +117,7 @@ namespace FCartographer
         public GradientTerrainShader(Bitmap _data, Bitmap _output) : base(_data, _output)
         {
             intensity = 30;
-            angle = 45f;
-            opacity = 0f;
+            angle = -30f;
         }
     }
 }

@@ -29,6 +29,7 @@ namespace FCartographer
             {
                 render_g.Clear(Color.FromArgb(255, 255, 255, 255));
                 ctr.Render();
+                shader.opacity = 0.5f;
                 shader.Render();
             }
         }
