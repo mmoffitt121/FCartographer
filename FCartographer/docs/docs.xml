@@ -1143,6 +1143,11 @@
             Vertical angle of light source
             </summary>
         </member>
+        <member name="F:FCartographer.RayTerrainShader.dropoff">
+            <summary>
+            How much the light drops off around corners;
+            </summary>
+        </member>
         <member name="M:FCartographer.RayTerrainShader.Render">
             <summary>
             Render override function
