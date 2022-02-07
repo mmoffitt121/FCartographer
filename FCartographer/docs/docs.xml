@@ -1352,6 +1352,20 @@
             Converts bitmap to byte array
             </summary>
         </member>
+        <member name="T:FCartographer.Lerper">
+            <summary>
+            Class that lerps your inputs
+            </summary>
+        </member>
+        <member name="M:FCartographer.Lerper.Lerp(System.Double,System.Double,System.Double)">
+            <summary>
+            Lerps your inputs
+            </summary>
+            <param name="a">Value 1</param>
+            <param name="b">Value 2</param>
+            <param name="x">Higher values pull the result closer to value 2</param>
+            <returns></returns>
+        </member>
         <member name="T:FCartographer.PointerOps">
             <summary>
             Class holding pointer helper conversion functions. Uses unsafe functions.

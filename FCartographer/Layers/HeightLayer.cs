@@ -82,7 +82,7 @@ namespace FCartographer
             data_g.Clear(Color.FromArgb(255, 0, 0, 0));
             
             ctr = new ContourRenderer(GetData(), GetOutData());
-            shader = new DirectionalTerrainShader(GetData(), GetOutData());
+            shader = new GradientTerrainShader(GetData(), GetOutData());
             Render();
         }
 
@@ -96,7 +96,7 @@ namespace FCartographer
             data_g.Clear(Color.FromArgb(255, 0, 0, 0));
             
             ctr = new ContourRenderer(GetData(), GetOutData());
-            shader = new DirectionalTerrainShader(GetData(), GetOutData());
+            shader = new GradientTerrainShader(GetData(), GetOutData());
             Render();
         }
     }
