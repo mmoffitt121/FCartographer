@@ -1051,11 +1051,6 @@
             <param name="_data"></param>
             <param name="_output"></param>
         </member>
-        <member name="T:FCartographer.DirectionalTerrainShader">
-            <summary>
-            Shader that extends terrainshader, shades terrain based on input direction.
-            </summary>
-        </member>
         <member name="T:FCartographer.GradientTerrainShader">
             <summary>
             Shader responsible for terrain layers
@@ -1128,6 +1123,38 @@
             Constructor, takes bitmap for reading
             </summary>
         </member>
+        <member name="T:FCartographer.RayTerrainShader">
+            <summary>
+            Shader responsible for terrain layers
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayTerrainShader.intensity">
+            <summary>
+            Intensity of light source
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayTerrainShader.direction">
+            <summary>
+            Angle of light source
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayTerrainShader.angle">
+            <summary>
+            Vertical angle of light source
+            </summary>
+        </member>
+        <member name="M:FCartographer.RayTerrainShader.Render">
+            <summary>
+            Render override function
+            </summary>
+        </member>
+        <member name="M:FCartographer.RayTerrainShader.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
+            <summary>
+            GradientTerrainShader constructor
+            </summary>
+            <param name="_data"></param>
+            <param name="_output"></param>
+        </member>
         <member name="T:FCartographer.Renderer">
             <summary>
             Renderer class, used to render parts of layers. Will usually utilize unsafe functions.
@@ -1158,11 +1185,6 @@
         <member name="M:FCartographer.Renderer.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
             <summary>
             Renderer constructor, passes a reference of the data to render into the renderer object.
-            </summary>
-        </member>
-        <member name="T:FCartographer.TerrainShader">
-            <summary>
-            Shader responsible for terrain layers
             </summary>
         </member>
         <member name="T:FCartographer.AreaSelector">
