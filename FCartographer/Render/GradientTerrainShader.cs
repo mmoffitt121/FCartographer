@@ -22,6 +22,12 @@ namespace FCartographer
         public float angle;
 
         /// <summary>
+        /// 0 = precise
+        /// 1 = smooth
+        /// </summary>
+        public int vectormode;
+
+        /// <summary>
         /// Render override function
         /// </summary>
         public override void Render()

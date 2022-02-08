@@ -24,10 +24,10 @@ namespace FCartographer
             noisegen.SetPersistance(0.4);
             noisegen.Generate();
 
-            /*ErosionSimulator erosiongen = new ErosionSimulator(GetData());
+            ErosionSimulator erosiongen = new ErosionSimulator(GetData());
             erosiongen.SetRandom(GetRandom());
             erosiongen.erosionfactor = 2;
-            erosiongen.Generate();*/
+            erosiongen.Generate();
 
             LandscapeTransformer trans = new LandscapeTransformer(GetData());
             trans.min = 0;

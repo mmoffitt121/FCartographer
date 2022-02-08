@@ -1066,6 +1066,12 @@
             Angle of light source
             </summary>
         </member>
+        <member name="F:FCartographer.GradientTerrainShader.vectormode">
+            <summary>
+            0 = precise
+            1 = smooth
+            </summary>
+        </member>
         <member name="M:FCartographer.GradientTerrainShader.Render">
             <summary>
             Render override function
@@ -1133,6 +1139,11 @@
             Intensity of light source
             </summary>
         </member>
+        <member name="F:FCartographer.RayTerrainShader.ambient">
+            <summary>
+            Intensity of ambient light source
+            </summary>
+        </member>
         <member name="F:FCartographer.RayTerrainShader.direction">
             <summary>
             Angle of light source
@@ -1140,12 +1151,24 @@
         </member>
         <member name="F:FCartographer.RayTerrainShader.angle">
             <summary>
-            Vertical angle of light source
+            Vertical angle of light source from horizon.
+            
+            Corresponding values assume direction = 0
+            0 = sunset in the west
+            45 = afternoon
+            90 = noon, sun directly overhead
+            135 = morning
+            180 = sunrise in the east
             </summary>
         </member>
         <member name="F:FCartographer.RayTerrainShader.dropoff">
             <summary>
             How much the light drops off around corners;
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayTerrainShader.bias">
+            <summary>
+            Amount of pixels above to account shadows for
             </summary>
         </member>
         <member name="M:FCartographer.RayTerrainShader.Render">
