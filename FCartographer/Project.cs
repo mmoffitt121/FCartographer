@@ -35,6 +35,9 @@ namespace FCartographer
                 case Layer.LayerType.NationMap:
                     layers.Add(new NationLayer(width, height));
                     break;
+                case Layer.LayerType.Ocean:
+                    layers.Add(new WaterLayer(width, height));
+                    break;
                 default:
                     break;
             }
@@ -54,6 +57,9 @@ namespace FCartographer
                     break;
                 case Layer.LayerType.NationMap:
                     layers.Add(new NationLayer(width, height, _name));
+                    break;
+                case Layer.LayerType.Ocean:
+                    layers.Add(new WaterLayer(width, height, _name));
                     break;
                 default:
                     break;
@@ -225,6 +231,14 @@ namespace FCartographer
         public Bitmap GetGraphics()
         {
             return CompositeLayers();
+        }
+
+        public void UpdateConnections()
+        {
+            for (int i = 0; i < layers.Count; i++)
+            {
+                layers[i].FormConnections();
+            }
         }
 
         private Bitmap output;

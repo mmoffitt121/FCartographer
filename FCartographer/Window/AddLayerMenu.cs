@@ -36,6 +36,12 @@ namespace FCartographer
             {
                 parentform.project.AddLayer(Layer.LayerType.HeightMap, NameOfNewLayer.Text);
             }
+            if (LayerToAdd.SelectedIndex.Equals(2))
+            {
+                parentform.project.AddLayer(Layer.LayerType.Ocean, NameOfNewLayer.Text);
+            }
+
+            parentform.RenderGraphics(parentform.project.GetGraphics());
 
             Close();
         }
@@ -69,6 +75,11 @@ namespace FCartographer
             {
                 NameOfNewLayer.Text = "New Terrain Layer";
                 DescriptionBox.Text = "A terrain layer is a layer that represents a given height on an image.";
+            }
+            if (LayerToAdd.SelectedIndex.Equals(2))
+            {
+                NameOfNewLayer.Text = "New Water Layer";
+                DescriptionBox.Text = "A water layer creates and renders a sea of water at a specified height based on a Terrain Layer. To reference a Terrain Layer, a Water Layer must be above it in the layer heiarchy.";
             }
         }
 

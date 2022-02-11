@@ -899,6 +899,46 @@
             Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
             </summary>
         </member>
+        <member name="T:FCartographer.WaterLayer">
+            <summary>
+            Layer that contains water information and renders water layers.
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterLayer.level">
+            <summary>
+            Level at which water is displayed.
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterLayer.color1">
+            <summary>
+            Water render color 1
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterLayer.color2">
+            <summary>
+            Water render color 2
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterLayer.color3">
+            <summary>
+            Water render color 3
+            </summary>
+        </member>
+        <member name="M:FCartographer.WaterLayer.Render">
+            <summary>
+            Override void that composits temp data to the layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.WaterLayer.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Unnamed constructor, creates layer of size x and y. Inherits base constructor.
+            </summary>
+        </member>
+        <member name="M:FCartographer.WaterLayer.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
+            </summary>
+        </member>
         <member name="M:FCartographer.Program.Main">
             <summary>
              The main entry point for the application.
@@ -1214,6 +1254,33 @@
             <summary>
             Renderer constructor, passes a reference of the data to render into the renderer object.
             </summary>
+        </member>
+        <member name="T:FCartographer.Smoother">
+            <summary>
+            Shader responsible for terrain layers
+            </summary>
+        </member>
+        <member name="M:FCartographer.Smoother.AverageSmooth(System.Byte[],System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:FCartographer.WaterWavesRenderer">
+            <summary>
+            Render class that renders optionally lit water.
+            </summary>
+        </member>
+        <member name="M:FCartographer.WaterWavesRenderer.Render">
+            <summary>
+            Override Render function
+            </summary>
+        </member>
+        <member name="M:FCartographer.WaterWavesRenderer.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_data"></param>
+            <param name="_output"></param>
         </member>
         <member name="T:FCartographer.AreaSelector">
             <summary>

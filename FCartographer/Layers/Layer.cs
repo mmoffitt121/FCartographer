@@ -50,10 +50,15 @@ namespace FCartographer
         /// </summary>
         public Graphics render_g;
 
-        private bool disposedValue;
-
         private bool visible;
         private bool torender;
+
+        /// <summary>
+        /// Holds all layer connections.
+        /// 
+        /// Can be empty
+        /// </summary>
+        public Layer[] connections;
 
         /// <summary>
         /// Returns the width of the layer.
@@ -241,6 +246,14 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Forms the necessary connections with other layers.
+        /// </summary>
+        public virtual void FormConnections(Layer[] layers)
+        {
+
+        }
+
+        /// <summary>
         /// Unnamed constructor, creates layer of size x and y.
         /// </summary>
         public Layer(int x, int y, string _typename, string _typedesc)
@@ -314,33 +327,5 @@ namespace FCartographer
             /// </summary>
             Reference
         }
-
-        /*/// <summary>
-        /// Inherits IDisposable, needs to be overridden in all subclasses.
-        /// </summary>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    data.Dispose();
-                    tempdata.Dispose();
-
-                    g.Dispose();
-                    data_g.Dispose();
-                }
-                disposedValue = true;
-            }
-        }
-
-        /// <summary>
-        /// Function to call for disposal.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }*/
     }
 }
