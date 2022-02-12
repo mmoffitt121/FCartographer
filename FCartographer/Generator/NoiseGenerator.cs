@@ -16,6 +16,8 @@ namespace FCartographer
         private int octives;
         private NoiseMode noisemode;
 
+        private int scale;
+
         private int[] perlinhash;
 
         private int width;
@@ -75,7 +77,7 @@ namespace FCartographer
                     double freq = 1;
                     double amp = 1;
                     double max = 0;
-                    for (int k = 0; k < octives; k++)
+                    for (int k = scale; k < scale + octives; k++)
                     {
                         total += PerlinPoint((double)i / 200 * freq, (double)j / 200 * freq) * amp;
 
@@ -224,6 +226,15 @@ namespace FCartographer
         public void SetPersistance(double _persistence)
         {
             persistence = _persistence;
+        }
+
+        /// <summary>
+        /// Sets the scale of the noise
+        /// </summary>
+        /// <param name="_scale"></param>
+        public void SetScale(int _scale)
+        {
+            scale = _scale;
         }
 
         /// <summary>

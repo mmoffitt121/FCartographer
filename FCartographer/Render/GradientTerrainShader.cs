@@ -47,9 +47,6 @@ namespace FCartographer
             {
                 int v = inp[i];
 
-                bool major;
-                bool minor;
-
                 int[,] adj = new int[,] { { -1, -1}, { -1, -1}};
 
                 // Build matrix of adjacent bytes

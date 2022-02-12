@@ -513,6 +513,12 @@
             </summary>
             <param name="_persistence"></param>
         </member>
+        <member name="M:FCartographer.NoiseGenerator.SetScale(System.Int32)">
+            <summary>
+            Sets the scale of the noise
+            </summary>
+            <param name="_scale"></param>
+        </member>
         <member name="M:FCartographer.NoiseGenerator.#ctor(System.Drawing.Bitmap)">
             <summary>
             Generator constructor
@@ -725,6 +731,11 @@
             Overridden in subclasses, called to fill a region in data.
             </summary>
         </member>
+        <member name="M:FCartographer.Layer.FormConnections(System.Collections.Generic.IList{FCartographer.Layer},System.Int32)">
+            <summary>
+            Forms the necessary connections with other layers.
+            </summary>
+        </member>
         <member name="M:FCartographer.Layer.#ctor(System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Unnamed constructor, creates layer of size x and y.
@@ -924,10 +935,21 @@
             Water render color 3
             </summary>
         </member>
+        <member name="F:FCartographer.WaterLayer.heightlayer">
+            <summary>
+            Layer that holds the height data, used as a mask
+            </summary>
+        </member>
         <member name="M:FCartographer.WaterLayer.Render">
             <summary>
             Override void that composits temp data to the layer.
             </summary>
+        </member>
+        <member name="M:FCartographer.WaterLayer.FormConnections(System.Collections.Generic.IList{FCartographer.Layer},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="layers"></param>
         </member>
         <member name="M:FCartographer.WaterLayer.#ctor(System.Int32,System.Int32)">
             <summary>
@@ -1017,6 +1039,11 @@
         <member name="M:FCartographer.Project.GetGraphics">
             <summary>
             Returns all layers rendered and composited.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Project.UpdateConnections">
+            <summary>
+            Calls each layer to form connections between it and other layers for conditional data and processing.
             </summary>
         </member>
         <member name="M:FCartographer.Project.CompositeLayers">
@@ -1270,10 +1297,41 @@
             Render class that renders optionally lit water.
             </summary>
         </member>
+        <member name="F:FCartographer.WaterWavesRenderer.c1">
+            <summary>
+            First water color
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterWavesRenderer.c2">
+            <summary>
+            Second water color
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterWavesRenderer.c3">
+            <summary>
+            Third water color
+            </summary>
+        </member>
         <member name="M:FCartographer.WaterWavesRenderer.Render">
             <summary>
             Override Render function
             </summary>
+        </member>
+        <member name="M:FCartographer.WaterWavesRenderer.RenderWater">
+            <summary>
+            Masks and renders the water according to an internal sun
+            </summary>
+        </member>
+        <member name="M:FCartographer.WaterWavesRenderer.MaskWater">
+            <summary>
+            Masks water to terrain layer
+            </summary>
+        </member>
+        <member name="M:FCartographer.WaterWavesRenderer.SetTerrain(FCartographer.HeightLayer)">
+            <summary>
+            Sets the terrain reference for masking
+            </summary>
+            <param name="_terrain"></param>
         </member>
         <member name="M:FCartographer.WaterWavesRenderer.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
             <summary>

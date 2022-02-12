@@ -116,6 +116,7 @@ namespace FCartographer
         /// </summary>
         public void SelectLayer(int layer)
         {
+            UpdateConnections();
             try
             {
                 g = Graphics.FromImage(layers[layer].GetData());
@@ -233,11 +234,14 @@ namespace FCartographer
             return CompositeLayers();
         }
 
+        /// <summary>
+        /// Calls each layer to form connections between it and other layers for conditional data and processing.
+        /// </summary>
         public void UpdateConnections()
         {
             for (int i = 0; i < layers.Count; i++)
             {
-                layers[i].FormConnections();
+                layers[i].FormConnections(layers, i);
             }
         }
 

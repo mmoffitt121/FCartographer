@@ -62,10 +62,6 @@ namespace FCartographer
 
             if (color)
             {
-                byte a;
-                byte r;
-                byte g;
-                byte b;
                 for (int i = 0; i < width * height * 4; i += 4)
                 {
                     top[i + 3] = bytes[i + 3]; // A

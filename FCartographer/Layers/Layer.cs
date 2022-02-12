@@ -54,13 +54,6 @@ namespace FCartographer
         private bool torender;
 
         /// <summary>
-        /// Holds all layer connections.
-        /// 
-        /// Can be empty
-        /// </summary>
-        public Layer[] connections;
-
-        /// <summary>
         /// Returns the width of the layer.
         /// </summary>
         public int GetWidth()
@@ -248,7 +241,7 @@ namespace FCartographer
         /// <summary>
         /// Forms the necessary connections with other layers.
         /// </summary>
-        public virtual void FormConnections(Layer[] layers)
+        public virtual void FormConnections(IList<Layer> layers, int i)
         {
 
         }
@@ -272,7 +265,6 @@ namespace FCartographer
 
             typename = _typename;
             typedescription = _typedesc;
-
         }
 
         /// <summary>
