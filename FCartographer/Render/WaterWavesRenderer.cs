@@ -66,7 +66,7 @@ namespace FCartographer
         {
             GradientTerrainShader shader = new GradientTerrainShader(GetData(), GetOutput());
             shader.angle = lightangle;
-            shader.lightcolor = lightcolor.GetBrightness();
+            shader.lightcolor = lightcolor;
             shader.Render();
         }
 

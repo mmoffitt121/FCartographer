@@ -1561,6 +1561,63 @@
             <param name="bytes"></param>
             <returns></returns>
         </member>
+        <member name="T:FCartographer.ColorUtility.ColorHSL">
+            <summary>
+            Class that handles color converisons
+            </summary>
+        </member>
+        <member name="F:FCartographer.ColorUtility.ColorHSL.A">
+            <summary>
+            Alpha value of color, range = 0 -> 255
+            </summary>
+        </member>
+        <member name="F:FCartographer.ColorUtility.ColorHSL.H">
+            <summary>
+            Hue value of color, range = 1 -> 360
+            </summary>
+        </member>
+        <member name="F:FCartographer.ColorUtility.ColorHSL.S">
+            <summary>
+            Saturation value of color, range = 0 -> 1
+            </summary>
+        </member>
+        <member name="F:FCartographer.ColorUtility.ColorHSL.L">
+            <summary>
+            Lightness value of color, range = 0 -> 1
+            </summary>
+        </member>
+        <member name="M:FCartographer.ColorUtility.ColorHSL.ToARGB">
+            <summary>
+            Converts hsl to rgb
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FCartographer.ColorUtility.ColorHSL.FromARGB(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Returns an hsl type color from an rgb type color
+            </summary>
+            <param name="a"></param>
+            <param name="r"></param>
+            <param name="g"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FCartographer.ColorUtility.ColorHSL.FromARGB(System.Drawing.Color)">
+            <summary>
+            Returns an hsl type color from an rgb type color
+            </summary>
+            <param name="clr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FCartographer.ColorUtility.ColorHSL.#ctor(System.Byte,System.Int32,System.Single,System.Single)">
+            <summary>
+            Struct constructor, each param corresponds to a hsl color value
+            </summary>
+            <param name="a"></param>
+            <param name="h"></param>
+            <param name="s"></param>
+            <param name="l"></param>
+        </member>
         <member name="T:FCartographer.ImageTypeConverter">
             <summary>
             Responsible for selecting an area on canvas based on color difference
