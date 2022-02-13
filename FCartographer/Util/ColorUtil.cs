@@ -101,7 +101,7 @@ namespace FCartographer.ColorUtility
         /// <param name="g"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public ColorHSL FromARGB(byte a, byte r, byte g, byte b)
+        public static ColorHSL FromARGB(byte a, byte r, byte g, byte b)
         {
             int min = Math.Min(r, Math.Min(g, b));
             int max = Math.Max(r, Math.Max(g, b));
@@ -139,7 +139,6 @@ namespace FCartographer.ColorUtility
             }
 
             return new ColorHSL(a, hue, saturation, lightness);
-
         }
 
         /// <summary>
@@ -147,7 +146,7 @@ namespace FCartographer.ColorUtility
         /// </summary>
         /// <param name="clr"></param>
         /// <returns></returns>
-        public ColorHSL FromARGB(Color clr)
+        public static ColorHSL FromARGB(Color clr)
         {
             return FromARGB(clr.A, clr.R, clr.G, clr.B);
         }

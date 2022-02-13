@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using FCartographer.ColorUtility;
 
 namespace FCartographer
 {
@@ -66,7 +67,14 @@ namespace FCartographer
         {
             GradientTerrainShader shader = new GradientTerrainShader(GetData(), GetOutput());
             shader.angle = lightangle;
-            shader.lightcolor = Color.FromArgb(1, 1, 1, 1);
+
+            ColorHSL lightcolorHSL = ColorHSL.FromARGB(lightcolor);
+
+            ColorHSL brightside = ColorHSL.FromARGB(c1);
+
+            brightside.L = (float)Lerper.Lerp(brightside.L, lightcolorHSL.L, brightness);
+
+            shader.lightcolor = brightside.ToARGB();
             shader.Render();
         }
 
