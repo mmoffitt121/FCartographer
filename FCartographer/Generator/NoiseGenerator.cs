@@ -25,6 +25,8 @@ namespace FCartographer
 
         private double persistence;
 
+        private int repeat;
+
         /// <summary>
         /// Overwritable function that performs the layer processes.
         /// </summary>
@@ -101,6 +103,12 @@ namespace FCartographer
         /// <returns></returns>
         private double PerlinPoint(double x, double y)
         {
+            if (repeat > 0)
+            {
+                x %= repeat;
+                y %= repeat;
+            }
+
             int xi = (int)x & 255;
             int yi = (int)y & 255;
 
@@ -113,9 +121,9 @@ namespace FCartographer
             int oo, oi, io, ii;
 
             oo = PerlinHash(PerlinHash(xi) + yi);
-            oi = PerlinHash(PerlinHash(xi) + yi + 1);
-            io = PerlinHash(PerlinHash(xi + 1) + yi);
-            ii = PerlinHash(PerlinHash(xi + 1) + yi + 1);
+            oi = PerlinHash(PerlinHash(xi) + Increment(yi));
+            io = PerlinHash(PerlinHash(Increment(xi)) + yi);
+            ii = PerlinHash(PerlinHash(Increment(xi)) + Increment(yi));
 
             return (Lerp(Lerp(Gradient(oo, xf, yf), Gradient(io, xf - 1, yf), u), Lerp(Gradient(oi, xf, yf - 1), Gradient(ii, xf - 1, yf - 1), u), v) + 1) / 2;
         }
@@ -152,6 +160,17 @@ namespace FCartographer
         private int PerlinHash(int i)
         {
             return perlinhash[i % perlinhash.Length];
+        }
+
+        private int Increment(int toinc)
+        {
+            toinc++;
+            if (repeat > 0)
+            {
+                toinc %= repeat;
+            }
+
+            return toinc;
         }
 
         /// <summary>
@@ -235,6 +254,11 @@ namespace FCartographer
         public void SetScale(int _scale)
         {
             scale = _scale;
+        }
+
+        public void SetRepeat(int _repeat)
+        {
+            repeat = _repeat;
         }
 
         /// <summary>

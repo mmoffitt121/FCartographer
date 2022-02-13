@@ -32,6 +32,11 @@ namespace FCartographer
         public Color color3;
 
         /// <summary>
+        /// Color of incident light
+        /// </summary>
+        public Color lightcolor;
+
+        /// <summary>
         /// Layer that holds the height data, used as a mask
         /// </summary>
         public HeightLayer heightlayer;
@@ -54,32 +59,53 @@ namespace FCartographer
             {
                 render_g.Clear(Color.FromArgb(0, 0, 0, 0));
                 wwr.SetTerrain(terrain);
+                wwr.SetAngle(45);
                 wwr.level = level;
+                wwr.c1 = color1;
+                wwr.c2 = color2;
+                wwr.c3 = color3;
                 wwr.Render();
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="layers"></param>
+        /// <param name="layers"></param
+        /// <param name="i"></param>
         public override void FormConnections(IList<Layer> layers, int i)
         {
             terrain = null;
 
+            System.Diagnostics.Debug.WriteLine("Forming Connections");
+
             for (int j = 0; j < layers.Count; j++)
             {
-                if (layers[i].GetType() == Layer.LayerType.HeightMap)
-                {
-                    terrain = (HeightLayer)layers[i];
-                    break;
-                }
-
                 if (j > i)
                 {
                     break;
                 }
+
+                if (layers[j].GetType() == Layer.LayerType.HeightMap)
+                {
+                    System.Diagnostics.Debug.WriteLine("Connected with terrain");
+                    terrain = (HeightLayer)layers[j];
+                    break;
+                }
             }
+        }
+
+        /// <summary>
+        /// Creates the noise for the water layer. 
+        /// </summary>
+        public void RenderNoise()
+        {
+            ngen = new NoiseGenerator(noise);
+            ngen.SetScale(1);
+            ngen.SetOctives(6);
+            ngen.SetPersistance(0.5);
+            ngen.SetRepeat(25);
+            ngen.Generate();
         }
 
         /// <summary>
@@ -92,14 +118,12 @@ namespace FCartographer
 
             level = 50;
             color1 = Color.FromArgb(255, 10, 30, 60);
+            color2 = Color.FromArgb(255, 10, 30, 60);
+            color3 = Color.FromArgb(255, 10, 30, 60);
 
             noise = new Bitmap(GetData());
 
-            ngen = new NoiseGenerator(noise);
-            ngen.SetScale(1);
-            ngen.SetOctives(6);
-            ngen.SetPersistance(0.9);
-            ngen.Generate();
+            RenderNoise();
 
             wwr = new WaterWavesRenderer(noise, GetOutData());
 
@@ -115,16 +139,14 @@ namespace FCartographer
 
             level = 50;
             color1 = Color.FromArgb(255, 10, 30, 60);
+            color2 = Color.FromArgb(255, 10, 30, 60);
+            color3 = Color.FromArgb(255, 10, 30, 60);
 
             wwr = new WaterWavesRenderer(GetData(), GetOutData());
 
             noise = new Bitmap(GetData());
 
-            ngen = new NoiseGenerator(noise);
-            ngen.SetScale(1);
-            ngen.SetOctives(6);
-            ngen.SetPersistance(0.9);
-            ngen.Generate();
+            RenderNoise();
 
             wwr = new WaterWavesRenderer(noise, GetOutData());
 

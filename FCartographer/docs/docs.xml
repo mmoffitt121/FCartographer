@@ -935,6 +935,11 @@
             Water render color 3
             </summary>
         </member>
+        <member name="F:FCartographer.WaterLayer.lightcolor">
+            <summary>
+            Color of incident light
+            </summary>
+        </member>
         <member name="F:FCartographer.WaterLayer.heightlayer">
             <summary>
             Layer that holds the height data, used as a mask
@@ -945,11 +950,11 @@
             Override void that composits temp data to the layer.
             </summary>
         </member>
-        <member name="M:FCartographer.WaterLayer.FormConnections(System.Collections.Generic.IList{FCartographer.Layer},System.Int32)">
+        <!-- Badly formed XML comment ignored for member "M:FCartographer.WaterLayer.FormConnections(System.Collections.Generic.IList{FCartographer.Layer},System.Int32)" -->
+        <member name="M:FCartographer.WaterLayer.RenderNoise">
             <summary>
-            
+            Creates the noise for the water layer. 
             </summary>
-            <param name="layers"></param>
         </member>
         <member name="M:FCartographer.WaterLayer.#ctor(System.Int32,System.Int32)">
             <summary>
@@ -1139,6 +1144,16 @@
             1 = smooth
             </summary>
         </member>
+        <member name="F:FCartographer.GradientTerrainShader.lightcolor">
+            <summary>
+            Color of light source
+            </summary>
+        </member>
+        <member name="F:FCartographer.GradientTerrainShader.darkcolor">
+            <summary>
+            Color of shadows
+            </summary>
+        </member>
         <member name="M:FCartographer.GradientTerrainShader.Render">
             <summary>
             Render override function
@@ -1297,19 +1312,39 @@
             Render class that renders optionally lit water.
             </summary>
         </member>
+        <member name="F:FCartographer.WaterWavesRenderer.lightangle">
+            <summary>
+            Angle at which sunlight comes from
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterWavesRenderer.level">
+            <summary>
+            Level at which the water sits on the terrain
+            </summary>
+        </member>
         <member name="F:FCartographer.WaterWavesRenderer.c1">
             <summary>
-            First water color
+            Average water color
             </summary>
         </member>
         <member name="F:FCartographer.WaterWavesRenderer.c2">
             <summary>
-            Second water color
+            Darkest water color
             </summary>
         </member>
         <member name="F:FCartographer.WaterWavesRenderer.c3">
             <summary>
             Third water color
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterWavesRenderer.lightcolor">
+            <summary>
+            Color of incident light
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterWavesRenderer.brightness">
+            <summary>
+            Float between 0 and 1 that dictates how bright the incident light is
             </summary>
         </member>
         <member name="M:FCartographer.WaterWavesRenderer.Render">
@@ -1332,6 +1367,12 @@
             Sets the terrain reference for masking
             </summary>
             <param name="_terrain"></param>
+        </member>
+        <member name="M:FCartographer.WaterWavesRenderer.SetAngle(System.Single)">
+            <summary>
+            Sets the incedent light angle, re-renders
+            </summary>
+            <param name="_lightangle"></param>
         </member>
         <member name="M:FCartographer.WaterWavesRenderer.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
             <summary>

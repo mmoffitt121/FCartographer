@@ -28,6 +28,15 @@ namespace FCartographer
         public int vectormode;
 
         /// <summary>
+        /// Color of light source
+        /// </summary>
+        public Color lightcolor;
+        /// <summary>
+        /// Color of shadows
+        /// </summary>
+        public Color darkcolor;
+
+        /// <summary>
         /// Render override function
         /// </summary>
         public override void Render()
@@ -104,9 +113,9 @@ namespace FCartographer
                 // Write to output
 
                 outp[i + 3] = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
-                outp[i + 2] = (byte)Lerper.Lerp(Math.Clamp(dir * magnitude + 128, 0, 255), outp[i + 2], 1 - opacity);
-                outp[i + 1] = (byte)Lerper.Lerp(Math.Clamp(dir * magnitude + 128, 0, 255), outp[i + 1], 1 - opacity);
-                outp[i + 0] = (byte)Lerper.Lerp(Math.Clamp(dir * magnitude + 128, 0, 255), outp[i + 0], 1 - opacity);
+                outp[i + 2] = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.R, darkcolor.R, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 2], 1 - opacity);
+                outp[i + 1] = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.G, darkcolor.G, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 1], 1 - opacity);
+                outp[i + 0] = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.B, darkcolor.B, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 0], 1 - opacity);
             }
 
             BitmapDataConverter.DrawImage(GetOutput(), outp, true);
@@ -121,6 +130,9 @@ namespace FCartographer
         {
             intensity = 30;
             angle = -30f;
+
+            lightcolor = Color.White;
+            darkcolor = Color.Black;
         }
     }
 }

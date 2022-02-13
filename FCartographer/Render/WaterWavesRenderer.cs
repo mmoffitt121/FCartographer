@@ -13,22 +13,38 @@ namespace FCartographer
     /// </summary>
     public class WaterWavesRenderer : Renderer
     {
-        public float lightangle;
+        /// <summary>
+        /// Angle at which sunlight comes from
+        /// </summary>
+        private float lightangle;
+        /// <summary>
+        /// Level at which the water sits on the terrain
+        /// </summary>
         public byte level;
         private HeightLayer terrain;
 
         /// <summary>
-        /// First water color
+        /// Average water color
         /// </summary>
         public Color c1;
         /// <summary>
-        /// Second water color
+        /// Darkest water color
         /// </summary>
         public Color c2;   
         /// <summary>
         /// Third water color
         /// </summary>
         public Color c3;
+
+        /// <summary>
+        /// Color of incident light
+        /// </summary>
+        public Color lightcolor;
+
+        /// <summary>
+        /// Float between 0 and 1 that dictates how bright the incident light is
+        /// </summary>
+        public float brightness;
 
         /// <summary>
         /// Override Render function
@@ -38,6 +54,7 @@ namespace FCartographer
             RenderWater();
             if (terrain != null)
             {
+                System.Diagnostics.Debug.WriteLine("Found Terrain");
                 MaskWater();
             }
         }
@@ -49,6 +66,7 @@ namespace FCartographer
         {
             GradientTerrainShader shader = new GradientTerrainShader(GetData(), GetOutput());
             shader.angle = lightangle;
+            shader.lightcolor = lightcolor.GetBrightness();
             shader.Render();
         }
 
@@ -67,6 +85,8 @@ namespace FCartographer
                     outp[i + 3] = 0;
                 }
             }
+
+            BitmapDataConverter.DrawImage(GetOutput(), outp, true);
         }
 
         /// <summary>
@@ -79,13 +99,29 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Sets the incedent light angle, re-renders
+        /// </summary>
+        /// <param name="_lightangle"></param>
+        public void SetAngle(float _lightangle)
+        {
+            lightangle = _lightangle;
+            Render();
+        }
+
+        /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="_data"></param>
         /// <param name="_output"></param>
         public WaterWavesRenderer(Bitmap _data, Bitmap _output) : base(_data, _output)
         {
-            lightangle = 45;
+            c1 = Color.CadetBlue;
+            c2 = Color.BlueViolet;
+            c3 = Color.CornflowerBlue;
+
+            lightcolor = Color.FromArgb(255, 255, 255, 240);
+            brightness = 0.9f;
+            SetAngle(45);
         }
     }
 }
