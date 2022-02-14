@@ -158,6 +158,15 @@ namespace FCartographer.ColorUtility
         }
 
         /// <summary>
+        /// Returns the struct as a string for printing
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return "[ " + H + " " + S + " " + L + " ]";
+        }
+
+        /// <summary>
         /// Struct constructor, each param corresponds to a hsl color value
         /// </summary>
         /// <param name="a"></param>

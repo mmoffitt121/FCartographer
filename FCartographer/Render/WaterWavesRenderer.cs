@@ -59,16 +59,22 @@ namespace FCartographer
             GradientTerrainShader shader = new GradientTerrainShader(GetData(), GetOutput());
             shader.angle = lightangle;
 
-            System.Diagnostics.Debug.WriteLine("( " + lightcolor.R + " " + lightcolor.G + " " + lightcolor.B + " ) -> ( " + ColorHSL.FromARGB(lightcolor).H + " " + ColorHSL.FromARGB(lightcolor).S + " " + ColorHSL.FromARGB(lightcolor).L + " ) -> " + ColorHSL.FromARGB(lightcolor).ToARGB().R + " " + ColorHSL.FromARGB(lightcolor).ToARGB().G + " " + ColorHSL.FromARGB(lightcolor).ToARGB().B);
-
             ColorHSL lightcolorHSL = ColorHSL.FromARGB(lightcolor);
 
             ColorHSL brightside = ColorHSL.FromARGB(c1);
             ColorHSL darkside = ColorHSL.FromARGB(c1);
 
-            //brightside.L = (float)Lerper.Lerp(brightside.L, lightcolorHSL.L, brightness);
+            brightside.H = (brightside.H + 40) % 360;
+            brightside.L = Math.Clamp(brightside.L + 0.15, 0, 1);
+
+            darkside.H = (darkside.H - 40) % 360;
+            darkside.L = Math.Clamp(darkside.L - 0.15, 0, 1);
+
+            System.Diagnostics.Debug.WriteLine(brightside.ToString() + " + " + darkside.ToString());
+
             shader.lightcolor = brightside.ToARGB();
-            shader.darkcolor = c1;
+            shader.darkcolor = darkside.ToARGB();
+
             shader.Render();
         }
 

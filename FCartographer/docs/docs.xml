@@ -1600,6 +1600,12 @@
             <param name="clr"></param>
             <returns></returns>
         </member>
+        <member name="M:FCartographer.ColorUtility.ColorHSL.ToString">
+            <summary>
+            Returns the struct as a string for printing
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:FCartographer.ColorUtility.ColorHSL.#ctor(System.Byte,System.Int32,System.Double,System.Double)">
             <summary>
             Struct constructor, each param corresponds to a hsl color value
