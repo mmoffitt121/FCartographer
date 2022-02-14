@@ -13,8 +13,33 @@ namespace FCartographer
     /// </summary>
     public class HeightLayer : Layer
     {
-        private ContourRenderer ctr;
-        private Renderer shader;
+        /// <summary>
+        /// Renders the contour of the terrain layer
+        /// </summary>
+        public ContourRenderer ctr;
+
+        /// <summary>
+        /// Fast light shader
+        /// </summary>
+        public GradientTerrainShader gts;
+
+        /// <summary>
+        /// Slow light shader
+        /// </summary>
+        public RayTerrainShader rts;
+
+        /// <summary>
+        /// Determines if contour renderer is used
+        /// </summary>
+        public bool render_contour;
+        /// <summary>
+        /// Determines if gradient renderer is used
+        /// </summary>
+        public bool render_gradient;
+        /// <summary>
+        /// determines if ray renderer is used
+        /// </summary>
+        public bool render_rays;
 
         /// <summary>
         /// Override void that composits temp data to the layer.
@@ -28,9 +53,22 @@ namespace FCartographer
             if (ToRender())
             {
                 render_g.Clear(Color.FromArgb(255, 255, 255, 255));
-                ctr.Render();
-                shader.opacity = 0.5f;
-                shader.Render();
+                if (render_contour)
+                {
+                    ctr.Render();
+                }
+                
+                if (render_gradient)
+                {
+                    gts.opacity = 0.5f;
+                    gts.Render();
+                }
+                
+                if (render_rays)
+                {
+                    rts.opacity = 0.5f;
+                    rts.Render();
+                }
             }
         }
 
@@ -72,20 +110,28 @@ namespace FCartographer
 
         }
 
+        private void Construct()
+        {
+            SetType(LayerType.HeightMap);
+
+            data_g.Clear(Color.FromArgb(255, 0, 0, 0));
+
+            ctr = new ContourRenderer(GetData(), GetOutData());
+            gts = new GradientTerrainShader(GetData(), GetOutData());
+            rts = new RayTerrainShader(GetData(), GetOutData());
+
+            render_contour = true;
+            render_rays = true;
+            Render();
+        }
+
         /// <summary>
         /// Unnamed constructor, creates layer of size x and y. Inherits base constructor.
         /// </summary>
         public HeightLayer(int x, int y) : base(x, y, "Terrain Layer", "Terrain Layer Description")
         {
-            SetType(LayerType.HeightMap);
+            Construct();
             SetName("Terrain layer");
-
-            data_g.Clear(Color.FromArgb(255, 0, 0, 0));
-            
-            ctr = new ContourRenderer(GetData(), GetOutData());
-            //shader = new GradientTerrainShader(GetData(), GetOutData());
-            shader = new RayTerrainShader(GetData(), GetOutData());
-            Render();
         }
 
         /// <summary>
@@ -93,14 +139,7 @@ namespace FCartographer
         /// </summary>
         public HeightLayer(int x, int y, string _name) : base(x, y, _name, "Terrain Layer", "Terrain Layer Description")
         {
-            SetType(LayerType.HeightMap);
-
-            data_g.Clear(Color.FromArgb(255, 0, 0, 0));
-            
-            ctr = new ContourRenderer(GetData(), GetOutData());
-            //shader = new GradientTerrainShader(GetData(), GetOutData());
-            shader = new RayTerrainShader(GetData(), GetOutData());
-            Render();
+            Construct();
         }
     }
 }

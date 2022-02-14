@@ -551,6 +551,36 @@
             Layer that holds and interfaces with data for heightmaps.
             </summary>
         </member>
+        <member name="F:FCartographer.HeightLayer.ctr">
+            <summary>
+            Renders the contour of the terrain layer
+            </summary>
+        </member>
+        <member name="F:FCartographer.HeightLayer.gts">
+            <summary>
+            Fast light shader
+            </summary>
+        </member>
+        <member name="F:FCartographer.HeightLayer.rts">
+            <summary>
+            Slow light shader
+            </summary>
+        </member>
+        <member name="F:FCartographer.HeightLayer.render_contour">
+            <summary>
+            Determines if contour renderer is used
+            </summary>
+        </member>
+        <member name="F:FCartographer.HeightLayer.render_gradient">
+            <summary>
+            Determines if gradient renderer is used
+            </summary>
+        </member>
+        <member name="F:FCartographer.HeightLayer.render_rays">
+            <summary>
+            determines if ray renderer is used
+            </summary>
+        </member>
         <member name="M:FCartographer.HeightLayer.Render">
             <summary>
             Override void that composits temp data to the layer.
@@ -935,6 +965,12 @@
             Layer that holds the height data, used as a mask
             </summary>
         </member>
+        <member name="F:FCartographer.WaterLayer.mode">
+            <summary>
+            0 = basic shadowed water
+            1 = advanced shadowed transparent depth water
+            </summary>
+        </member>
         <member name="M:FCartographer.WaterLayer.Render">
             <summary>
             Override void that composits temp data to the layer.
@@ -1262,6 +1298,103 @@
         <member name="M:FCartographer.RayTerrainShader.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
             <summary>
             GradientTerrainShader constructor
+            </summary>
+            <param name="_data"></param>
+            <param name="_output"></param>
+        </member>
+        <member name="T:FCartographer.RayWaterShader">
+            <summary>
+            Render class that renders optionally lit water.
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.intensity">
+            <summary>
+            Intensity of light source
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.ambient">
+            <summary>
+            Intensity of ambient light source
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.direction">
+            <summary>
+            Angle of light source
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.angle">
+            <summary>
+            Vertical angle of light source from horizon.
+            
+            Corresponding values assume direction = 0
+            0 = sunset in the west
+            45 = afternoon
+            90 = noon, sun directly overhead
+            135 = morning
+            180 = sunrise in the east
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.dropoff">
+            <summary>
+            How much the light drops off around corners;
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.bias">
+            <summary>
+            Amount of pixels above to account shadows for
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.level">
+            <summary>
+            Level at which the water sits on the terrain
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.c1">
+            <summary>
+            Color of water
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.lightcolor">
+            <summary>
+            Color of incident light
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.brightness">
+            <summary>
+            Float between 0 and 1 that dictates how bright the incident light is
+            </summary>
+        </member>
+        <member name="M:FCartographer.RayWaterShader.Render">
+            <summary>
+            Override Render function
+            </summary>
+        </member>
+        <member name="M:FCartographer.RayWaterShader.RenderWater">
+            <summary>
+            Masks and renders the water according to an internal sun
+            </summary>
+        </member>
+        <member name="M:FCartographer.RayWaterShader.MaskWater">
+            <summary>
+            Masks water to terrain layer
+            </summary>
+        </member>
+        <member name="M:FCartographer.RayWaterShader.SetTerrain(FCartographer.HeightLayer)">
+            <summary>
+            Sets the terrain reference for masking
+            </summary>
+            <param name="_terrain"></param>
+        </member>
+        <member name="M:FCartographer.RayWaterShader.SetAngles(System.Single,System.Single)">
+            <summary>
+            Sets the incedent light angle, re-renders
+            </summary>
+            <param name="_lightdirection"></param>
+            <param name="_lightangle"></param>
+        </member>
+        <member name="M:FCartographer.RayWaterShader.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
+            <summary>
+            Constructor
             </summary>
             <param name="_data"></param>
             <param name="_output"></param>

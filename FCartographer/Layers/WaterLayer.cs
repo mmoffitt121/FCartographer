@@ -33,7 +33,14 @@ namespace FCartographer
         /// </summary>
         public HeightLayer heightlayer;
 
+        /// <summary>
+        /// 0 = basic shadowed water
+        /// 1 = advanced shadowed transparent depth water
+        /// </summary>
+        public int mode;
+
         private WaterWavesRenderer wwr;
+        private RayWaterShader rws;
 
         private HeightLayer terrain;
 
@@ -50,11 +57,39 @@ namespace FCartographer
             if (ToRender())
             {
                 render_g.Clear(Color.FromArgb(0, 0, 0, 0));
-                wwr.SetTerrain(terrain);
-                wwr.SetAngle(45);
-                wwr.level = level;
-                wwr.c1 = color1;
-                wwr.Render();
+                switch (mode)
+                {
+                    case 0:
+                        wwr.SetTerrain(terrain);
+                        if (terrain == null)
+                        {
+                            wwr.SetAngle(45);
+                        }
+                        else
+                        {
+                            wwr.SetAngle(terrain.gts.angle);
+                        }
+                        
+                        wwr.level = level;
+                        wwr.c1 = color1;
+                        wwr.Render();
+                        break;
+                    case 1:
+                        rws.SetTerrain(terrain);
+                        if (terrain == null)
+                        {
+                            rws.SetAngles(45, -45);
+                        }
+                        else
+                        {
+                            rws.SetAngles(terrain.rts.direction, terrain.rts.angle);
+                        }
+
+                        rws.level = level;
+                        rws.c1 = color1;
+                        rws.Render();
+                        break;
+                }
             }
         }
 
@@ -110,6 +145,7 @@ namespace FCartographer
             RenderNoise();
 
             wwr = new WaterWavesRenderer(noise, GetOutData());
+            rws = new RayWaterShader(noise, GetOutData());
 
             Render();
         }

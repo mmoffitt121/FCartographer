@@ -132,7 +132,7 @@ namespace FCartographer
         public GradientTerrainShader(Bitmap _data, Bitmap _output) : base(_data, _output)
         {
             intensity = 30;
-            angle = -30f;
+            angle = 220f;
 
             lightcolor = Color.White;
             darkcolor = Color.Black;
