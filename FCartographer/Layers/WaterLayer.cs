@@ -147,6 +147,8 @@ namespace FCartographer
             wwr = new WaterWavesRenderer(noise, GetOutData());
             rws = new RayWaterShader(noise, GetOutData());
 
+            mode = 1;
+
             Render();
         }
 

@@ -57,12 +57,9 @@ namespace FCartographer
 
             for (int i = 0; i < wid * hei; i += 4)
             {
-                int v = inp[i];
-
                 int[,] adj = new int[,] { { -1, -1}, { -1, -1}};
 
                 // Build matrix of adjacent bytes
-                adj[1, 1] = inp[i];
 
                 // Check if down valid
                 bool downvalid = i + wid < inp.Length;
