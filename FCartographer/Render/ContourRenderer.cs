@@ -21,6 +21,11 @@ namespace FCartographer
         public Color majorcolor;
 
         /// <summary>
+        /// Determines whether the contour lines will be drawn
+        /// </summary>
+        public bool drawlines;
+
+        /// <summary>
         /// Interval at which lines are drawn
         /// </summary>
         public int minorinterval;
@@ -178,6 +183,8 @@ namespace FCartographer
 
             highcolor = Color.FromArgb(255, 200, 230, 255);
             lowcolor = Color.FromArgb(255, 30, 60, 100);
+
+            drawlines = true;
         }
     }
 }

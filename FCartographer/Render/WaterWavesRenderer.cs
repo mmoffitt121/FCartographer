@@ -25,17 +25,9 @@ namespace FCartographer
         private HeightLayer terrain;
 
         /// <summary>
-        /// Average water color
+        /// Color of water
         /// </summary>
         public Color c1;
-        /// <summary>
-        /// Darkest water color
-        /// </summary>
-        public Color c2;   
-        /// <summary>
-        /// Third water color
-        /// </summary>
-        public Color c3;
 
         /// <summary>
         /// Color of incident light
@@ -55,7 +47,6 @@ namespace FCartographer
             RenderWater();
             if (terrain != null)
             {
-                System.Diagnostics.Debug.WriteLine("Found Terrain");
                 MaskWater();
             }
         }
@@ -68,13 +59,16 @@ namespace FCartographer
             GradientTerrainShader shader = new GradientTerrainShader(GetData(), GetOutput());
             shader.angle = lightangle;
 
+            System.Diagnostics.Debug.WriteLine("( " + lightcolor.R + " " + lightcolor.G + " " + lightcolor.B + " ) -> ( " + ColorHSL.FromARGB(lightcolor).H + " " + ColorHSL.FromARGB(lightcolor).S + " " + ColorHSL.FromARGB(lightcolor).L + " ) -> " + ColorHSL.FromARGB(lightcolor).ToARGB().R + " " + ColorHSL.FromARGB(lightcolor).ToARGB().G + " " + ColorHSL.FromARGB(lightcolor).ToARGB().B);
+
             ColorHSL lightcolorHSL = ColorHSL.FromARGB(lightcolor);
 
             ColorHSL brightside = ColorHSL.FromARGB(c1);
+            ColorHSL darkside = ColorHSL.FromARGB(c1);
 
-            brightside.L = (float)Lerper.Lerp(brightside.L, lightcolorHSL.L, brightness);
-
+            //brightside.L = (float)Lerper.Lerp(brightside.L, lightcolorHSL.L, brightness);
             shader.lightcolor = brightside.ToARGB();
+            shader.darkcolor = c1;
             shader.Render();
         }
 
@@ -123,12 +117,10 @@ namespace FCartographer
         /// <param name="_output"></param>
         public WaterWavesRenderer(Bitmap _data, Bitmap _output) : base(_data, _output)
         {
-            c1 = Color.CadetBlue;
-            c2 = Color.BlueViolet;
-            c3 = Color.CornflowerBlue;
+            c1 = Color.FromArgb(255, 0, 39, 232);
 
-            lightcolor = Color.FromArgb(255, 255, 255, 240);
-            brightness = 0.9f;
+            lightcolor = Color.FromArgb(255, 120, 130, 140);
+            brightness = 0.5f;
             SetAngle(45);
         }
     }

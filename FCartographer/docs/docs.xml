@@ -925,16 +925,6 @@
             Water render color 1
             </summary>
         </member>
-        <member name="F:FCartographer.WaterLayer.color2">
-            <summary>
-            Water render color 2
-            </summary>
-        </member>
-        <member name="F:FCartographer.WaterLayer.color3">
-            <summary>
-            Water render color 3
-            </summary>
-        </member>
         <member name="F:FCartographer.WaterLayer.lightcolor">
             <summary>
             Color of incident light
@@ -950,7 +940,13 @@
             Override void that composits temp data to the layer.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:FCartographer.WaterLayer.FormConnections(System.Collections.Generic.IList{FCartographer.Layer},System.Int32)" -->
+        <member name="M:FCartographer.WaterLayer.FormConnections(System.Collections.Generic.IList{FCartographer.Layer},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="layers"></param>
+            <param name="i"></param>
+        </member>
         <member name="M:FCartographer.WaterLayer.RenderNoise">
             <summary>
             Creates the noise for the water layer. 
@@ -1084,6 +1080,11 @@
         <member name="F:FCartographer.ContourRenderer.majorcolor">
             <summary>
             Color to draw major contour lines
+            </summary>
+        </member>
+        <member name="F:FCartographer.ContourRenderer.drawlines">
+            <summary>
+            Determines whether the contour lines will be drawn
             </summary>
         </member>
         <member name="F:FCartographer.ContourRenderer.minorinterval">
@@ -1324,17 +1325,7 @@
         </member>
         <member name="F:FCartographer.WaterWavesRenderer.c1">
             <summary>
-            Average water color
-            </summary>
-        </member>
-        <member name="F:FCartographer.WaterWavesRenderer.c2">
-            <summary>
-            Darkest water color
-            </summary>
-        </member>
-        <member name="F:FCartographer.WaterWavesRenderer.c3">
-            <summary>
-            Third water color
+            Color of water
             </summary>
         </member>
         <member name="F:FCartographer.WaterWavesRenderer.lightcolor">
@@ -1609,7 +1600,7 @@
             <param name="clr"></param>
             <returns></returns>
         </member>
-        <member name="M:FCartographer.ColorUtility.ColorHSL.#ctor(System.Byte,System.Int32,System.Single,System.Single)">
+        <member name="M:FCartographer.ColorUtility.ColorHSL.#ctor(System.Byte,System.Int32,System.Double,System.Double)">
             <summary>
             Struct constructor, each param corresponds to a hsl color value
             </summary>

@@ -41,7 +41,10 @@ namespace FCartographer
         /// </summary>
         public override void Render()
         {
-            RenderShadows();
+            if (vectormode == 0)
+            {
+                RenderShadows();
+            }
         }
 
         private void RenderShadows()

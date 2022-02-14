@@ -22,14 +22,6 @@ namespace FCartographer
         /// Water render color 1
         /// </summary>
         public Color color1;
-        /// <summary>
-        /// Water render color 2
-        /// </summary>
-        public Color color2;
-        /// <summary>
-        /// Water render color 3
-        /// </summary>
-        public Color color3;
 
         /// <summary>
         /// Color of incident light
@@ -62,8 +54,6 @@ namespace FCartographer
                 wwr.SetAngle(45);
                 wwr.level = level;
                 wwr.c1 = color1;
-                wwr.c2 = color2;
-                wwr.c3 = color3;
                 wwr.Render();
             }
         }
@@ -71,7 +61,7 @@ namespace FCartographer
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="layers"></param
+        /// <param name="layers"></param>
         /// <param name="i"></param>
         public override void FormConnections(IList<Layer> layers, int i)
         {
@@ -108,18 +98,12 @@ namespace FCartographer
             ngen.Generate();
         }
 
-        /// <summary>
-        /// Unnamed constructor, creates layer of size x and y. Inherits base constructor.
-        /// </summary>
-        public WaterLayer(int x, int y) : base(x, y, "Nations Layer", "Nations Layer Description")
+        private void Construct()
         {
             SetType(LayerType.Ocean);
-            SetName("Water layer");
 
             level = 50;
-            color1 = Color.FromArgb(255, 10, 30, 60);
-            color2 = Color.FromArgb(255, 10, 30, 60);
-            color3 = Color.FromArgb(255, 10, 30, 60);
+            color1 = Color.FromArgb(255, 19, 42, 41);
 
             noise = new Bitmap(GetData());
 
@@ -131,26 +115,20 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Unnamed constructor, creates layer of size x and y. Inherits base constructor.
+        /// </summary>
+        public WaterLayer(int x, int y) : base(x, y, "Nations Layer", "Nations Layer Description")
+        {
+            SetName("Water layer");
+            Construct();
+        }
+
+        /// <summary>
         /// Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
         /// </summary>
         public WaterLayer(int x, int y, string _name) : base(x, y, _name, "Nations Layer", "Nations Layer Description")
         {
-            SetType(LayerType.Ocean);
-
-            level = 50;
-            color1 = Color.FromArgb(255, 10, 30, 60);
-            color2 = Color.FromArgb(255, 10, 30, 60);
-            color3 = Color.FromArgb(255, 10, 30, 60);
-
-            wwr = new WaterWavesRenderer(GetData(), GetOutData());
-
-            noise = new Bitmap(GetData());
-
-            RenderNoise();
-
-            wwr = new WaterWavesRenderer(noise, GetOutData());
-
-            Render();
+            Construct();
         }
     }
 }

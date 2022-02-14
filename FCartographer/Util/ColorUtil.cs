@@ -25,11 +25,11 @@ namespace FCartographer.ColorUtility
         /// <summary>
         /// Saturation value of color, range = 0 -> 1
         /// </summary>
-        public float S;
+        public double S;
         /// <summary>
         /// Lightness value of color, range = 0 -> 1
         /// </summary>
-        public float L;
+        public double L;
 
         /// <summary>
         /// Converts hsl to rgb
@@ -37,15 +37,13 @@ namespace FCartographer.ColorUtility
         /// <returns></returns>
         public Color ToARGB()
         {
-            int h = H;
-
             if (S == 0)
             {
                 return Color.FromArgb(A, (byte)(L * 255), (byte)(L * 255), (byte)(L * 255));
             }
 
-            float v1;
-            float v2;
+            double v1;
+            double v2;
             float hue = (float)H / 360;
 
             if (L < 0.5)
@@ -59,11 +57,15 @@ namespace FCartographer.ColorUtility
 
             v1 = 2 * L - v2;
 
-            return Color.FromArgb(A, (byte)(255 * ConvertHueToRGB(v1, v2, hue + (1.0f / 3))), (byte)(255 * ConvertHueToRGB(v1, v2, hue)), (byte)(255 * ConvertHueToRGB(v1, v2, hue - (1.0f / 3))));
+            byte r = (byte)(255 * ConvertHueToRGB(v1, v2, hue + (1.0f / 3)));
+            byte g = (byte)(255 * ConvertHueToRGB(v1, v2, hue));
+            byte b = (byte)(255 * ConvertHueToRGB(v1, v2, hue - (1.0f / 3)));
+
+            return Color.FromArgb(A, r, g, b);
 
         }
 
-        private float ConvertHueToRGB(float v1, float v2, float h)
+        private double ConvertHueToRGB(double v1, double v2, double h)
         {
             if (h < 0)
             {
@@ -101,41 +103,45 @@ namespace FCartographer.ColorUtility
         /// <param name="g"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static ColorHSL FromARGB(byte a, byte r, byte g, byte b)
+        public static ColorHSL FromARGB(byte a, byte _r, byte _g, byte _b)
         {
-            int min = Math.Min(r, Math.Min(g, b));
-            int max = Math.Max(r, Math.Max(g, b));
-            int range = max - min;
+            double r = ((double)_r) / 255;
+            double g = ((double)_g) / 255;
+            double b = ((double)_b) / 255;
 
-            int hue = 0;
-            float saturation;
-            float lightness = max / 255;
+            double min = Math.Min(r, Math.Min(g, b));
+            double max = Math.Max(r, Math.Max(g, b));
+            double d = max - min;
 
-            if (max == 0 || range == 0) // if the max or range equals zero, the hue and saturation should be 0. The color is white/grey/black.
+            int hue;
+            double saturation;
+            double lightness = (min + max) / 2;
+
+            if (max == 0 || d == 0) // if the max or range equals zero, the hue and saturation should be 0. The color is white/grey/black.
             {
                 return new ColorHSL(a, 0, 0, lightness);
             }
 
-            if (min == 0)
+            if (d == 0)
             {
                 saturation = 1;
             }
             else
             {
-                saturation = (float)range / max;
+                saturation = ((double)d) / (1 - Math.Abs(2 * lightness - 1));
             }
 
             if (r == max)
             {
-                hue = (int)((float)(g - b) / range);
+                hue = (int)(60 * (((double)(g - b)) / d % 6));
             }
             else if (g == max)
             {
-                hue = 120 + (int)((float)(b - r) / range);
+                hue = (int)(60 * (2 + (((double)(b - r)) / d)));
             }
             else
             {
-                hue = 240 + (int)((float)(r - g) / range);
+                hue = (int)(60 * (4 + (((double)(r - g)) / d)));
             }
 
             return new ColorHSL(a, hue, saturation, lightness);
@@ -158,7 +164,7 @@ namespace FCartographer.ColorUtility
         /// <param name="h"></param>
         /// <param name="s"></param>
         /// <param name="l"></param>
-        public ColorHSL(byte a, int h, float s, float l)
+        public ColorHSL(byte a, int h, double s, double l)
         {
             A = a;
             H = h;

@@ -9,11 +9,11 @@ using System.Runtime.ExceptionServices;
 
 namespace FCartographer
 {
-    /// <summary>
-    /// Landscape generator class, used to generate a custom landscape based on a seed, and user defined options. Will use unsafe functions.
-    /// 
-    /// Defunct, works horribly. Do not use.
-    /// </summary>
+    // <summary>
+    // Landscape generator class, used to generate a custom landscape based on a seed, and user defined options. Will use unsafe functions.
+    // 
+    // Defunct, works horribly. Do not use.
+    // </summary>
     /*public unsafe class LandscapeGenerator : Generator
     {
         private Bitmap data;
