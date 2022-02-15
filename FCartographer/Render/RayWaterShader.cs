@@ -91,8 +91,33 @@ namespace FCartographer
             int wid = GetData().Width * 4;
             int hei = GetData().Height;
 
+            byte[] terr = null;
+            if (terrain != null)
+            {
+                terr = BitmapDataConverter.BitmapToByteArray(terrain.GetData());
+            }
+
+            float dx = MathF.Cos((180 + direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
+            float dy = MathF.Sin((180 + direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
+            float dh = MathF.Cos((angle + 90) * MathF.PI / 180);
+
+            dropoff = 0.1f;
+            direction = -20f;
+            angle = -30f;
+            bias = 0;
+            intensity = 0.5f;
+
             for (int i = 0; i < wid * hei; i += 4)
             {
+                // ---
+                // Mask calculation
+                // ---
+                if (terr != null && terr[i] > level)
+                {
+                    outp[i + 3] = 0;
+                    continue;
+                }
+
                 int[,] adj = new int[,] { { -1, -1 }, { -1, -1 } };
 
                 // Build matrix of adjacent bytes
@@ -136,6 +161,10 @@ namespace FCartographer
 
                 // Direction of pixel vector in relation to light source vector (Whether the magnitude is positive or negative)
 
+                // ---
+                // Ray lighting calculation
+                // ---
+
                 int dir;
                 if (MathF.Abs(xf + xl) < MathF.Abs(xf))
                 {
@@ -146,15 +175,44 @@ namespace FCartographer
                     dir = -1;
                 }
 
+                byte a = 255;
+                byte r = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.R, lightcolor.R, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 2], 1 - opacity);
+                byte g = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.G, lightcolor.G, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 1], 1 - opacity);
+                byte b = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.B, lightcolor.B, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 0], 1 - opacity);
+
+                if (terr != null)
+                {
+                    x = i % wid / 4;
+                    y = i / wid;
+                    float h = inp[i];
+                    float luminosity = 1f;
+                    while (x < wid / 4 && x >= 0 && y < hei && y >= 0 && h <= 255 && h >= 0 && luminosity > 0)
+                    {
+                        if (luminosity > 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]))
+                        {
+                            luminosity = 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]);
+                        }
+
+                        x += dx;
+                        y += dy;
+                        h += dh;
+                    }
+
+                    a = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
+                    r = (byte)Math.Max(Math.Clamp(255 * luminosity * intensity + ambient, 0, 255), r);
+                    g = (byte)Math.Max(Math.Clamp(255 * luminosity * intensity + ambient, 0, 255), g);
+                    b = (byte)Math.Max(Math.Clamp(255 * luminosity * intensity + ambient, 0, 255), b);
+                }
+
                 // Write to output
 
-                outp[i + 3] = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
-                outp[i + 2] = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.R, darkcolor.R, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 2], 1 - opacity);
-                outp[i + 1] = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.G, darkcolor.G, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 1], 1 - opacity);
-                outp[i + 0] = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.B, darkcolor.B, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 0], 1 - opacity);
-            }
-        }
+                outp[i + 3] = a;
+                outp[i + 2] = r;
+                outp[i + 1] = g;
+                outp[i + 0] = b;
 
+                BitmapDataConverter.DrawImage(GetOutput(), outp, true);
+            }
         }
 
         /// <summary>
