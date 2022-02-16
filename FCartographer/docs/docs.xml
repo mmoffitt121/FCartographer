@@ -15,6 +15,17 @@
             </summary>
             <param name="project"></param>
         </member>
+        <member name="T:FCartographer.FileHandling.NewProjectHandler">
+            <summary>
+            Class that handles the creation of a new project
+            </summary>
+        </member>
+        <member name="M:FCartographer.FileHandling.NewProjectHandler.CreateProject">
+            <summary>
+            Creates a new project
+            </summary>
+            <param name="project"></param>
+        </member>
         <member name="T:FCartographer.Form1">
             <summary>
             Partial Class: Form1
@@ -134,6 +145,11 @@
             Creates a new project
             Input:  int width -> Project width
                     int height -> Project height
+            </summary>
+        </member>
+        <member name="M:FCartographer.Form1.InitializeProjectSettings">
+            <summary>
+            Initializes the settings when opening/creating a project
             </summary>
         </member>
         <member name="M:FCartographer.Form1.#ctor">
@@ -1036,6 +1052,16 @@
         <member name="T:FCartographer.Project">
             <summary>
             Holds project data including dimensions, layers, and data interfaces.
+            </summary>
+        </member>
+        <member name="F:FCartographer.Project.width">
+            <summary>
+            Width and height of project
+            </summary>
+        </member>
+        <member name="F:FCartographer.Project.height">
+            <summary>
+            Width and height of project
             </summary>
         </member>
         <member name="M:FCartographer.Project.AddLayer(FCartographer.Layer.LayerType)">
@@ -1947,6 +1973,36 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:FCartographer.Window.NewProjectWindow.projectname">
+            <summary>
+            Name of project to create
+            </summary>
+        </member>
+        <member name="F:FCartographer.Window.NewProjectWindow.heightmappath">
+            <summary>
+            Path of heightmap to import
+            </summary>
+        </member>
+        <member name="F:FCartographer.Window.NewProjectWindow.heightmap">
+            <summary>
+            Heightmap to import
+            </summary>
+        </member>
+        <member name="F:FCartographer.Window.NewProjectWindow.width">
+            <summary>
+            width of new project
+            </summary>
+        </member>
+        <member name="F:FCartographer.Window.NewProjectWindow.height">
+            <summary>
+            Height of new project
+            </summary>
+        </member>
+        <member name="M:FCartographer.Window.NewProjectWindow.#ctor">
+            <summary>
+            Constructor
             </summary>
         </member>
         <member name="F:FCartographer.Window.NewProjectWindow.components">

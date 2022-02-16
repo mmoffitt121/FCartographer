@@ -47,8 +47,8 @@ namespace FCartographer.Window
             this.MesasLabel = new System.Windows.Forms.Label();
             this.MountainsLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.ScaleLabel = new System.Windows.Forms.Label();
             this.ScaleField = new System.Windows.Forms.TextBox();
+            this.ScaleLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -298,6 +298,14 @@ namespace FCartographer.Window
             this.tableLayoutPanel6.Size = new System.Drawing.Size(705, 32);
             this.tableLayoutPanel6.TabIndex = 9;
             // 
+            // ScaleField
+            // 
+            this.ScaleField.Location = new System.Drawing.Point(178, 3);
+            this.ScaleField.Name = "ScaleField";
+            this.ScaleField.Size = new System.Drawing.Size(168, 23);
+            this.ScaleField.TabIndex = 0;
+            this.ScaleField.Text = "100";
+            // 
             // ScaleLabel
             // 
             this.ScaleLabel.AutoSize = true;
@@ -307,14 +315,6 @@ namespace FCartographer.Window
             this.ScaleLabel.Size = new System.Drawing.Size(34, 15);
             this.ScaleLabel.TabIndex = 1;
             this.ScaleLabel.Text = "Scale";
-            // 
-            // ScaleField
-            // 
-            this.ScaleField.Location = new System.Drawing.Point(178, 3);
-            this.ScaleField.Name = "ScaleField";
-            this.ScaleField.Size = new System.Drawing.Size(168, 23);
-            this.ScaleField.TabIndex = 0;
-            this.ScaleField.Text = "100";
             // 
             // LandscapeGeneratorWindow
             // 

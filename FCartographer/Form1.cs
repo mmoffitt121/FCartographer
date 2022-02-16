@@ -223,6 +223,43 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Initializes the settings when opening/creating a project
+        /// </summary>
+        public void InitializeProjectSettings()
+        {
+            // Settings Initialization
+            ProjectSettings settings = new ProjectSettings();
+
+            // Control Initialization
+            painting = false;
+
+            // Canvas Initialization
+            Canvas.Width = project.width;
+            Canvas.Height = project.height;
+            SetScrollMargin(100);
+            SetScrollIncrement(50);
+            SetScrollbarDimensions();
+            CenterCanvas();
+
+            // Brush Initialization
+            NationLayer lyr = (NationLayer)(project.CurrentLayer());
+            terrain_brushpreset = new TerrainBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), false);
+            nations_brushpreset = new NationsBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, lyr.GetNation(0).GetDataColor(), true);
+
+            // Tool Initialization
+            BrushSelect_Click(new object(), new EventArgs());
+
+            // Canvas Interface Initialization
+            g = Canvas.CreateGraphics();
+
+            // Layer Control Initialization
+            DisplayLayers();
+            InitializeLayerAdder();
+
+            ReadySettingsPanels(project.CurrentLayer());
+        }
+
+        /// <summary>
         /// Initializes Form1
         /// </summary>
         public Form1()

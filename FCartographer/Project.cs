@@ -20,7 +20,10 @@ namespace FCartographer
 
         private Graphics g;
 
-        private int width, height;
+        /// <summary>
+        /// Width and height of project
+        /// </summary>
+        public int width, height;
 
         /// <summary>
         /// Adds nameless layer based on input type enum value

@@ -24,7 +24,13 @@ namespace FCartographer
         /// <param name="e"></param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            Project newproject = NewProjectHandler.CreateProject();
+            if (newproject != null)
+            {
+                project = newproject;
+            }
+
+            InitializeProjectSettings();
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
