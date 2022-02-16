@@ -145,15 +145,10 @@ namespace FCartographer
             int range = max - min;
 
             Color litcolor;
-            ColorHSL litcolorHSL, lightsourceHSL;
+            ColorHSL litcolorHSL;
 
             litcolorHSL = ColorHSL.FromARGB(c1);
-            lightsourceHSL = ColorHSL.FromARGB(lightcolor);
-
-            litcolorHSL.H = litcolorHSL.H;
-            litcolorHSL.S = litcolorHSL.S;
             litcolorHSL.L = Math.Clamp(litcolorHSL.L + watercontrast, 0, 1);
-
             litcolor = litcolorHSL.ToARGB();
 
             for (int i = 0; i < wid * hei; i += 4)
@@ -167,74 +162,77 @@ namespace FCartographer
                     continue;
                 }
 
-                byte a;
-                byte r;
-                byte g;
-                byte b;
+                byte a = c1.A;
+                byte r = c1.R;
+                byte g = c1.G;
+                byte b = c1.B;
 
                 // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
                 // Wave rendering
                 // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
 
-                int[,] adj = new int[,] { { -1, -1 }, { -1, -1 } };
-
-                // Build matrix of adjacent bytes
-
-                // Check if down valid
-                bool downvalid = i + wid < inp.Length;
-                bool rightvalid = i % wid != wid - 4;
-
-                adj[0, 0] = inp[i];
-
-                if (downvalid)
+                if (render_waves)
                 {
-                    adj[0, 1] = inp[i + wid];
+                    int[,] adj = new int[,] { { -1, -1 }, { -1, -1 } };
+
+                    // Build matrix of adjacent bytes
+
+                    // Check if down valid
+                    bool downvalid = i + wid < inp.Length;
+                    bool rightvalid = i % wid != wid - 4;
+
+                    adj[0, 0] = inp[i];
+
+                    if (downvalid)
+                    {
+                        adj[0, 1] = inp[i + wid];
+                    }
+
+                    if (rightvalid)
+                    {
+                        adj[1, 0] = inp[i + 4];
+                    }
+
+                    if (downvalid && rightvalid)
+                    {
+                        adj[1, 1] = inp[i + wid + 4];
+                    }
+
+                    // X and Y of current pixel vector
+
+                    float x = ((adj[0, 0] + adj[1, 0]) / 2 - (adj[0, 1] + adj[1, 1]) / 2) * intensity;
+                    float y = ((adj[0, 0] + adj[0, 1]) / 2 - (adj[1, 0] + adj[1, 1]) / 2) * intensity;
+
+                    // X and Y of light source vector
+
+                    float xl = MathF.Cos((angle + 90) * MathF.PI / 180);
+                    float yl = MathF.Sin((angle + 90) * MathF.PI / 180);
+
+                    // Projection magnitude of pixel vector and light source vector
+
+                    float xf = (x * xl + y * yl) * xl;
+                    float yf = (x * xl + y * yl) * yl;
+                    float magnitude = MathF.Sqrt(MathF.Pow(xf, 2) + MathF.Pow(yf, 2));
+
+                    // Direction of pixel vector in relation to light source vector (Whether the magnitude is positive or negative)
+
+                    int dir;
+                    if (MathF.Abs(xf + xl) < MathF.Abs(xf))
+                    {
+                        dir = 1;
+                    }
+                    else
+                    {
+                        dir = -1;
+                    }
+
+                    // Write to output
+
+                    a = 255;
+                    r = (byte)Lerper.Lerp(litcolor.R, c1.R, Math.Clamp(dir * magnitude + 128, 0, 255) / 256);
+                    g = (byte)Lerper.Lerp(litcolor.G, c1.G, Math.Clamp(dir * magnitude + 128, 0, 255) / 256);
+                    b = (byte)Lerper.Lerp(litcolor.B, c1.B, Math.Clamp(dir * magnitude + 128, 0, 255) / 256);
                 }
-
-                if (rightvalid)
-                {
-                    adj[1, 0] = inp[i + 4];
-                }
-
-                if (downvalid && rightvalid)
-                {
-                    adj[1, 1] = inp[i + wid + 4];
-                }
-
-                // X and Y of current pixel vector
-
-                float x = ((adj[0, 0] + adj[1, 0]) / 2 - (adj[0, 1] + adj[1, 1]) / 2) * intensity;
-                float y = ((adj[0, 0] + adj[0, 1]) / 2 - (adj[1, 0] + adj[1, 1]) / 2) * intensity;
-
-                // X and Y of light source vector
-
-                float xl = MathF.Cos((angle + 90) * MathF.PI / 180);
-                float yl = MathF.Sin((angle + 90) * MathF.PI / 180);
-
-                // Projection magnitude of pixel vector and light source vector
-
-                float xf = (x * xl + y * yl) * xl;
-                float yf = (x * xl + y * yl) * yl;
-                float magnitude = MathF.Sqrt(MathF.Pow(xf, 2) + MathF.Pow(yf, 2));
-
-                // Direction of pixel vector in relation to light source vector (Whether the magnitude is positive or negative)
-
-                int dir;
-                if (MathF.Abs(xf + xl) < MathF.Abs(xf))
-                {
-                    dir = 1;
-                }
-                else
-                {
-                    dir = -1;
-                }
-
-                // Write to output
-
-                a = 255;
-                r = (byte)Lerper.Lerp(litcolor.R, c1.R, Math.Clamp(dir * magnitude + 128, 0, 255) / 256);
-                g = (byte)Lerper.Lerp(litcolor.G, c1.G, Math.Clamp(dir * magnitude + 128, 0, 255) / 256);
-                b = (byte)Lerper.Lerp(litcolor.B, c1.B, Math.Clamp(dir * magnitude + 128, 0, 255) / 256);
 
                 if (terr != null)
                 {
@@ -247,8 +245,8 @@ namespace FCartographer
 
                     if (render_rays)
                     {
-                        x = i % wid / 4;
-                        y = i / wid;
+                        float x = i % wid / 4;
+                        float y = i / wid;
 
                         float h;
                         render_waves = true;
@@ -309,8 +307,6 @@ namespace FCartographer
                 outp[i + 2] = r;
                 outp[i + 1] = g;
                 outp[i + 0] = b;
-
-                
             }
 
             BitmapDataConverter.DrawImage(GetOutput(), outp, true);

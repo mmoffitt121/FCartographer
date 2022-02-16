@@ -126,12 +126,12 @@ namespace FCartographer
                 foreach (int j in adj)
                 {
                     // System.Diagnostics.Debug.WriteLine(j + " " + v);
-                    if (v > j && ((int)(v / (minorinterval * majorinterval))) * minorinterval * majorinterval > j)
+                    if (v > j && ((int)(v / (minorinterval * majorinterval))) * minorinterval * majorinterval > j && drawlines)
                     {
                         major = true;
                     }
 
-                    if (v > j && ((int)(v / minorinterval)) * minorinterval > j)
+                    if (v > j && ((int)(v / minorinterval)) * minorinterval > j && drawlines)
                     {
                         minor = true;
                     }
