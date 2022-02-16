@@ -181,8 +181,8 @@ namespace FCartographer
             majorinterval = 4;
             minorinterval = 10;
 
-            highcolor = Color.FromArgb(255, 200, 230, 255);
-            lowcolor = Color.FromArgb(255, 30, 60, 100);
+            highcolor = Color.FromArgb(255, 255, 230, 220);
+            lowcolor = Color.FromArgb(255, 100, 60, 30);
 
             drawlines = true;
         }

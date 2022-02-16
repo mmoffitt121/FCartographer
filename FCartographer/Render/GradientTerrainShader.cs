@@ -112,6 +112,8 @@ namespace FCartographer
 
                 // Write to output
 
+                System.Diagnostics.Debug.WriteLine(magnitude + " " + dir);
+
                 outp[i + 3] = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
                 outp[i + 2] = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.R, darkcolor.R, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 2], 1 - opacity);
                 outp[i + 1] = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.G, darkcolor.G, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 1], 1 - opacity);

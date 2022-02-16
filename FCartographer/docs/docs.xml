@@ -965,10 +965,29 @@
             Layer that holds the height data, used as a mask
             </summary>
         </member>
-        <member name="F:FCartographer.WaterLayer.mode">
+        <member name="F:FCartographer.WaterLayer.render_waves">
             <summary>
-            0 = basic shadowed water
-            1 = advanced shadowed transparent depth water
+            Whether or not to render waves
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterLayer.render_rays">
+            <summary>
+            Whether or not to render ray-based shadows and lighting
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterLayer.render_depth">
+            <summary>
+            Whether or not to render the depth of the water
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterLayer.render_sun_reflection">
+            <summary>
+            Whether or not to render the reflection of the sun on the waves
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterLayer.waveamplitude">
+            <summary>
+            Determines how high a wave will be, range = 0 - 128
             </summary>
         </member>
         <member name="M:FCartographer.WaterLayer.Render">
@@ -1362,6 +1381,26 @@
         <member name="F:FCartographer.RayWaterShader.brightness">
             <summary>
             Float between 0 and 1 that dictates how bright the incident light is
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.render_waves">
+            <summary>
+            Whether or not to render waves
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.render_rays">
+            <summary>
+            Whether or not to render ray-based shadows and lighting
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.render_depth">
+            <summary>
+            Whether or not to render the depth of the water
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.render_sun_reflection">
+            <summary>
+            Whether or not to render the reflection of the sun on the waves
             </summary>
         </member>
         <member name="M:FCartographer.RayWaterShader.Render">

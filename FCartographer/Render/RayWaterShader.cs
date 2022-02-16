@@ -17,7 +17,7 @@ namespace FCartographer
         /// <summary>
         /// Intensity of light source
         /// </summary>
-        public float intensity;
+        public float intensity = 30;
         /// <summary>
         /// Intensity of ambient light source
         /// </summary>
@@ -69,15 +69,28 @@ namespace FCartographer
         public float brightness;
 
         /// <summary>
+        /// Whether or not to render waves
+        /// </summary>
+        public bool render_waves;
+        /// <summary>
+        /// Whether or not to render ray-based shadows and lighting
+        /// </summary>
+        public bool render_rays;
+        /// <summary>
+        /// Whether or not to render the depth of the water
+        /// </summary>
+        public bool render_depth;
+        /// <summary>
+        /// Whether or not to render the reflection of the sun on the waves
+        /// </summary>
+        public bool render_sun_reflection;
+
+        /// <summary>
         /// Override Render function
         /// </summary>
         public override void Render()
         {
             RenderWater();
-            if (terrain != null)
-            {
-                MaskWater();
-            }
         }
 
         /// <summary>
@@ -105,7 +118,38 @@ namespace FCartographer
             direction = -20f;
             angle = -30f;
             bias = 0;
-            intensity = 0.5f;
+
+            int min = 255;
+            int max = 0;
+            for (int i = 0; i < inp.Length; i++)
+            {
+                if (inp[i] < min)
+                {
+                    min = inp[i];
+                }
+                if (inp[i] > max)
+                {
+                    max = inp[i];
+                }
+            }
+
+            int range = max - min;
+
+            Color litcolor, shadedcolor;
+            ColorHSL litcolorHSL, shadedcolorHSL, lightsourceHSL;
+
+            litcolorHSL = ColorHSL.FromARGB(c1);
+            shadedcolorHSL = ColorHSL.FromARGB(c1);
+            lightsourceHSL = ColorHSL.FromARGB(lightcolor);
+
+            litcolorHSL.L = Lerper.Lerp(litcolorHSL.L, lightsourceHSL.L, brightness);
+            litcolorHSL.H = (int)Lerper.Lerp(litcolorHSL.H, lightsourceHSL.H, brightness);
+
+            shadedcolorHSL.L = Lerper.Lerp(litcolorHSL.L, -lightsourceHSL.L, brightness);
+            shadedcolorHSL.H = (int)Lerper.Lerp(litcolorHSL.H, -lightsourceHSL.H, brightness);
+
+            litcolor = litcolorHSL.ToARGB();
+            shadedcolor = shadedcolorHSL.ToARGB();
 
             for (int i = 0; i < wid * hei; i += 4)
             {
@@ -117,6 +161,15 @@ namespace FCartographer
                     outp[i + 3] = 0;
                     continue;
                 }
+
+                byte a;
+                byte r;
+                byte g;
+                byte b;
+
+                // ---
+                // Wave rendering
+                // ---
 
                 int[,] adj = new int[,] { { -1, -1 }, { -1, -1 } };
 
@@ -161,10 +214,6 @@ namespace FCartographer
 
                 // Direction of pixel vector in relation to light source vector (Whether the magnitude is positive or negative)
 
-                // ---
-                // Ray lighting calculation
-                // ---
-
                 int dir;
                 if (MathF.Abs(xf + xl) < MathF.Abs(xf))
                 {
@@ -175,22 +224,41 @@ namespace FCartographer
                     dir = -1;
                 }
 
-                byte a = 255;
-                byte r = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.R, lightcolor.R, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 2], 1 - opacity);
-                byte g = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.G, lightcolor.G, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 1], 1 - opacity);
-                byte b = (byte)Lerper.Lerp(Lerper.Lerp(lightcolor.B, lightcolor.B, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 0], 1 - opacity);
+                // Write to output
+
+                //System.Diagnostics.Debug.WriteLine(magnitude + " " + dir);
+
+                a = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
+                r = (byte)Lerper.Lerp(Lerper.Lerp(litcolor.R, shadedcolor.R, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 2], 1 - opacity);
+                g = (byte)Lerper.Lerp(Lerper.Lerp(litcolor.G, shadedcolor.G, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 1], 1 - opacity);
+                b = (byte)Lerper.Lerp(Lerper.Lerp(litcolor.B, shadedcolor.B, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 0], 1 - opacity);
+
+                // ---
+                // Ray lighting calculation
+                // ---
 
                 if (terr != null)
                 {
                     x = i % wid / 4;
                     y = i / wid;
-                    float h = inp[i];
+
+                    float h;
+                    render_waves = true;
+                    if (render_waves)
+                    {
+                        h = inp[i] / range * 10 + level;
+                    }
+                    else
+                    {
+                        h = level;
+                    }
+                    
                     float luminosity = 1f;
                     while (x < wid / 4 && x >= 0 && y < hei && y >= 0 && h <= 255 && h >= 0 && luminosity > 0)
                     {
-                        if (luminosity > 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]))
+                        if (luminosity > 1 + dropoff * (h - bias - terr[wid * (int)y + 4 * (int)x]))
                         {
-                            luminosity = 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]);
+                            luminosity = 1 + dropoff * (h - bias - terr[wid * (int)y + 4 * (int)x]);
                         }
 
                         x += dx;
@@ -199,9 +267,9 @@ namespace FCartographer
                     }
 
                     a = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
-                    r = (byte)Math.Max(Math.Clamp(255 * luminosity * intensity + ambient, 0, 255), r);
-                    g = (byte)Math.Max(Math.Clamp(255 * luminosity * intensity + ambient, 0, 255), g);
-                    b = (byte)Math.Max(Math.Clamp(255 * luminosity * intensity + ambient, 0, 255), b);
+                    r = (byte)Lerper.Lerp(Math.Clamp(255 * luminosity * brightness + ambient, 0, 255), r, 0.5);
+                    g = (byte)Lerper.Lerp(Math.Clamp(255 * luminosity * brightness + ambient, 0, 255), g, 0.5);
+                    b = (byte)Lerper.Lerp(Math.Clamp(255 * luminosity * brightness + ambient, 0, 255), b, 0.5);
                 }
 
                 // Write to output
@@ -211,8 +279,10 @@ namespace FCartographer
                 outp[i + 1] = g;
                 outp[i + 0] = b;
 
-                BitmapDataConverter.DrawImage(GetOutput(), outp, true);
+                
             }
+
+            BitmapDataConverter.DrawImage(GetOutput(), outp, true);
         }
 
         /// <summary>
@@ -252,7 +322,6 @@ namespace FCartographer
         {
             direction = _lightdirection;
             angle = _lightangle;
-            Render();
         }
 
         /// <summary>
@@ -264,9 +333,10 @@ namespace FCartographer
         {
             c1 = Color.FromArgb(255, 0, 39, 232);
 
-            lightcolor = Color.FromArgb(255, 120, 130, 140);
+            lightcolor = Color.FromArgb(255, 255, 255, 255);
             brightness = 0.5f;
             SetAngles(45, -45);
+            intensity = 30;
         }
     }
 }
