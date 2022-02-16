@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FCartographer.FileHandling;
 
 namespace FCartographer
 {
@@ -23,7 +24,7 @@ namespace FCartographer
         /// <param name="e"></param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -40,6 +41,17 @@ namespace FCartographer
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             project.GetGraphics().Save("Output.png", System.Drawing.Imaging.ImageFormat.Png);
+        }
+
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        // Importing
+        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        private void heightMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileHandler.OpenHeightMap(project);
+
+            ReadySettingsPanels(project.CurrentLayer());
+            DisplayLayers();
         }
     }
 }

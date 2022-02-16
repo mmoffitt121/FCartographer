@@ -51,6 +51,9 @@ namespace FCartographer
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.heightMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -321,6 +324,8 @@ namespace FCartographer
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.importToolStripMenuItem,
             this.toolStripMenuItem1,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
@@ -342,6 +347,26 @@ namespace FCartographer
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.heightMapToolStripMenuItem});
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importToolStripMenuItem.Text = "Import";
+            // 
+            // heightMapToolStripMenuItem
+            // 
+            this.heightMapToolStripMenuItem.Name = "heightMapToolStripMenuItem";
+            this.heightMapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.heightMapToolStripMenuItem.Text = "Height Map";
+            this.heightMapToolStripMenuItem.Click += new System.EventHandler(this.heightMapToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -641,6 +666,9 @@ namespace FCartographer
         private System.Windows.Forms.ToolStripMenuItem nationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem randomNationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem heightMapToolStripMenuItem;
     }
 }
 

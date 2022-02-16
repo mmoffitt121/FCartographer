@@ -25,7 +25,7 @@ namespace FCartographer
         /// <summary>
         /// Adds nameless layer based on input type enum value
         /// </summary>
-        public void AddLayer(Layer.LayerType type)
+        public Layer AddLayer(Layer.LayerType type)
         {
             switch (type)
             {
@@ -43,6 +43,7 @@ namespace FCartographer
             }
 
             SelectLayer(layers.Count - 1);
+            return CurrentLayer();
         }
 
         /// <summary>

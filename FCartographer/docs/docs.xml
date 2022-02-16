@@ -4,6 +4,17 @@
         <name>FCartographer</name>
     </assembly>
     <members>
+        <member name="T:FCartographer.FileHandling.FileHandler">
+            <summary>
+            Class that handles file dialogues and file IO
+            </summary>
+        </member>
+        <member name="M:FCartographer.FileHandling.FileHandler.OpenHeightMap(FCartographer.Project)">
+            <summary>
+            Opens and adds a heightmap as a terrain layer from disk
+            </summary>
+            <param name="project"></param>
+        </member>
         <member name="T:FCartographer.Form1">
             <summary>
             Partial Class: Form1
