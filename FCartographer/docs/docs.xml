@@ -1403,6 +1403,20 @@
             Whether or not to render the reflection of the sun on the waves
             </summary>
         </member>
+        <member name="F:FCartographer.RayWaterShader.depthmode">
+            <summary>
+            Int representing how the program handles depth.
+            
+            0 = opacity mode
+            1 = falloff mode
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.watercontrast">
+            <summary>
+            Float representing the contrast of the water
+            0 - 1
+            </summary>
+        </member>
         <member name="M:FCartographer.RayWaterShader.Render">
             <summary>
             Override Render function

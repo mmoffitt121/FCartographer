@@ -17,7 +17,7 @@ namespace FCartographer
         /// <summary>
         /// Intensity of light source
         /// </summary>
-        public float intensity = 30;
+        public float intensity;
         /// <summary>
         /// Intensity of ambient light source
         /// </summary>
@@ -86,6 +86,20 @@ namespace FCartographer
         public bool render_sun_reflection;
 
         /// <summary>
+        /// Int representing how the program handles depth.
+        /// 
+        /// 0 = opacity mode
+        /// 1 = falloff mode
+        /// </summary>
+        public int depthmode;
+
+        /// <summary>
+        /// Float representing the contrast of the water
+        /// 0 - 1
+        /// </summary>
+        public float watercontrast = 0.1f;
+
+        /// <summary>
         /// Override Render function
         /// </summary>
         public override void Render()
@@ -114,11 +128,6 @@ namespace FCartographer
             float dy = MathF.Sin((180 + direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
             float dh = MathF.Cos((angle + 90) * MathF.PI / 180);
 
-            dropoff = 0.1f;
-            direction = -20f;
-            angle = -30f;
-            bias = 0;
-
             int min = 255;
             int max = 0;
             for (int i = 0; i < inp.Length; i++)
@@ -135,27 +144,23 @@ namespace FCartographer
 
             int range = max - min;
 
-            Color litcolor, shadedcolor;
-            ColorHSL litcolorHSL, shadedcolorHSL, lightsourceHSL;
+            Color litcolor;
+            ColorHSL litcolorHSL, lightsourceHSL;
 
             litcolorHSL = ColorHSL.FromARGB(c1);
-            shadedcolorHSL = ColorHSL.FromARGB(c1);
             lightsourceHSL = ColorHSL.FromARGB(lightcolor);
 
-            litcolorHSL.L = Lerper.Lerp(litcolorHSL.L, lightsourceHSL.L, brightness);
-            litcolorHSL.H = (int)Lerper.Lerp(litcolorHSL.H, lightsourceHSL.H, brightness);
-
-            shadedcolorHSL.L = Lerper.Lerp(litcolorHSL.L, -lightsourceHSL.L, brightness);
-            shadedcolorHSL.H = (int)Lerper.Lerp(litcolorHSL.H, -lightsourceHSL.H, brightness);
+            litcolorHSL.H = litcolorHSL.H;
+            litcolorHSL.S = litcolorHSL.S;
+            litcolorHSL.L = Math.Clamp(litcolorHSL.L + watercontrast, 0, 1);
 
             litcolor = litcolorHSL.ToARGB();
-            shadedcolor = shadedcolorHSL.ToARGB();
 
             for (int i = 0; i < wid * hei; i += 4)
             {
-                // ---
+                // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
                 // Mask calculation
-                // ---
+                // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
                 if (terr != null && terr[i] > level)
                 {
                     outp[i + 3] = 0;
@@ -167,9 +172,9 @@ namespace FCartographer
                 byte g;
                 byte b;
 
-                // ---
+                // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
                 // Wave rendering
-                // ---
+                // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
 
                 int[,] adj = new int[,] { { -1, -1 }, { -1, -1 } };
 
@@ -226,53 +231,79 @@ namespace FCartographer
 
                 // Write to output
 
-                //System.Diagnostics.Debug.WriteLine(magnitude + " " + dir);
-
-                a = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
-                r = (byte)Lerper.Lerp(Lerper.Lerp(litcolor.R, shadedcolor.R, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 2], 1 - opacity);
-                g = (byte)Lerper.Lerp(Lerper.Lerp(litcolor.G, shadedcolor.G, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 1], 1 - opacity);
-                b = (byte)Lerper.Lerp(Lerper.Lerp(litcolor.B, shadedcolor.B, Math.Clamp(dir * magnitude + 128, 0, 255) / 256), outp[i + 0], 1 - opacity);
-
-                // ---
-                // Ray lighting calculation
-                // ---
+                a = 255;
+                r = (byte)Lerper.Lerp(litcolor.R, c1.R, Math.Clamp(dir * magnitude + 128, 0, 255) / 256);
+                g = (byte)Lerper.Lerp(litcolor.G, c1.G, Math.Clamp(dir * magnitude + 128, 0, 255) / 256);
+                b = (byte)Lerper.Lerp(litcolor.B, c1.B, Math.Clamp(dir * magnitude + 128, 0, 255) / 256);
 
                 if (terr != null)
                 {
-                    x = i % wid / 4;
-                    y = i / wid;
+                    // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
+                    // Ray lighting calculation
+                    // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
 
-                    float h;
-                    render_waves = true;
-                    if (render_waves)
+                    render_rays = true;
+                    ambient = 20;
+
+                    if (render_rays)
                     {
-                        h = inp[i] / range * 10 + level;
+                        x = i % wid / 4;
+                        y = i / wid;
+
+                        float h;
+                        render_waves = true;
+                        if (render_waves)
+                        {
+                            h = inp[i] / range * 10 + level;
+                        }
+                        else
+                        {
+                            h = level;
+                        }
+
+                        float luminosity = 1f;
+                        while (x < wid / 4 && x >= 0 && y < hei && y >= 0 && h <= 255 && h >= 0 && luminosity > 0)
+                        {
+                            if (luminosity > 1 + dropoff * (h - bias - terr[wid * (int)y + 4 * (int)x]))
+                            {
+                                luminosity = 1 + dropoff * (h - bias - terr[wid * (int)y + 4 * (int)x]);
+                            }
+
+                            x += dx;
+                            y += dy;
+                            h += dh;
+                        }
+
+                        r = (byte)Lerper.Lerp(Color.Black.R, r, ((float)Math.Clamp(255 * luminosity * brightness + ambient, 0, 255)) / 255);
+                        g = (byte)Lerper.Lerp(Color.Black.R, g, ((float)Math.Clamp(255 * luminosity * brightness + ambient, 0, 255)) / 255);
+                        b = (byte)Lerper.Lerp(Color.Black.R, b, ((float)Math.Clamp(255 * luminosity * brightness + ambient, 0, 255)) / 255);
+                    }
+
+                    // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
+                    // Depth lighting calculation
+                    // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
+
+                    if (render_depth)
+                    {
+                        if (depthmode == 0)
+                        {
+                            a = (byte)Math.Clamp(-(terr[i] - level) + 160, 0, 255);
+                        }
+                        if (depthmode == 1)
+                        {
+
+                        }
                     }
                     else
                     {
-                        h = level;
+                        a = 255;
                     }
                     
-                    float luminosity = 1f;
-                    while (x < wid / 4 && x >= 0 && y < hei && y >= 0 && h <= 255 && h >= 0 && luminosity > 0)
-                    {
-                        if (luminosity > 1 + dropoff * (h - bias - terr[wid * (int)y + 4 * (int)x]))
-                        {
-                            luminosity = 1 + dropoff * (h - bias - terr[wid * (int)y + 4 * (int)x]);
-                        }
-
-                        x += dx;
-                        y += dy;
-                        h += dh;
-                    }
-
-                    a = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
-                    r = (byte)Lerper.Lerp(Math.Clamp(255 * luminosity * brightness + ambient, 0, 255), r, 0.5);
-                    g = (byte)Lerper.Lerp(Math.Clamp(255 * luminosity * brightness + ambient, 0, 255), g, 0.5);
-                    b = (byte)Lerper.Lerp(Math.Clamp(255 * luminosity * brightness + ambient, 0, 255), b, 0.5);
                 }
 
+                // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
                 // Write to output
+                // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
 
                 outp[i + 3] = a;
                 outp[i + 2] = r;
@@ -335,8 +366,15 @@ namespace FCartographer
 
             lightcolor = Color.FromArgb(255, 255, 255, 255);
             brightness = 0.5f;
+
             SetAngles(45, -45);
+
             intensity = 30;
+            ambient = 20;
+            dropoff = 0.1f;
+            direction = -20f;
+            angle = -30f;
+            bias = 0;
         }
     }
 }

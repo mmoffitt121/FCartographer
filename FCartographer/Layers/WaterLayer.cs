@@ -124,7 +124,7 @@ namespace FCartographer
         /// </summary>
         public void RenderNoise()
         {
-            ngen.SetScale(1);
+            ngen.SetScale(5);
             ngen.SetOctives(6);
             ngen.SetPersistance(0.5);
             ngen.SetRepeat(25);
@@ -141,7 +141,7 @@ namespace FCartographer
 
             level = 100;
             waveamplitude = 100;
-            color1 = Color.FromArgb(255, 19, 42, 41);
+            color1 = Color.FromArgb(255, 80, 100, 100);
 
             noise = new Bitmap(GetData());
             ngen = new NoiseGenerator(noise);
