@@ -26,10 +26,14 @@ namespace FCartographer.FileHandling
             {
                 if (pwindow.ShowDialog() == DialogResult.OK)
                 {
-
+                    int wid = pwindow.width;
+                    int hei = pwindow.height;
+                    project = new Project(wid, hei);
                 }
-
-                project = new Project(1, 1);
+                else
+                {
+                    project = null;
+                }
             }
 
             return project;

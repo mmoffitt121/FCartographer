@@ -437,6 +437,33 @@
             </summary>
             <param name="_data"></param>
         </member>
+        <member name="T:FCartographer.GreyScaler">
+            <summary>
+            Generator base class, used to generate layers.
+            </summary>
+        </member>
+        <member name="F:FCartographer.GreyScaler.mode">
+            <summary>
+            Channel for greyscale to be made from.
+            
+            0 = Alpha channel
+            1 = Red channel
+            2 = Green channel
+            3 = Blue channel
+            4 = RGB average
+            </summary>
+        </member>
+        <member name="M:FCartographer.GreyScaler.Generate">
+            <summary>
+            Overwritable function that performs the layer processes.
+            </summary>
+        </member>
+        <member name="M:FCartographer.GreyScaler.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Generator constructor
+            </summary>
+            <param name="_data"></param>
+        </member>
         <member name="T:FCartographer.LandGenerator">
             <summary>
             Generator base class, used to generate layers. Will use unsafe functions.
