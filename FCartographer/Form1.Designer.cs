@@ -490,7 +490,7 @@ namespace FCartographer
             // 
             // renderLayerButton
             // 
-            this.renderLayerButton.Location = new System.Drawing.Point(7, 4);
+            this.renderLayerButton.Location = new System.Drawing.Point(7, 415);
             this.renderLayerButton.Name = "renderLayerButton";
             this.renderLayerButton.Size = new System.Drawing.Size(178, 23);
             this.renderLayerButton.TabIndex = 5;
@@ -512,7 +512,7 @@ namespace FCartographer
             // 
             // ZoomOut
             // 
-            this.ZoomOut.Location = new System.Drawing.Point(38, 43);
+            this.ZoomOut.Location = new System.Drawing.Point(38, 7);
             this.ZoomOut.Name = "ZoomOut";
             this.ZoomOut.Size = new System.Drawing.Size(25, 25);
             this.ZoomOut.TabIndex = 1;
@@ -521,7 +521,7 @@ namespace FCartographer
             // 
             // ZoomIn
             // 
-            this.ZoomIn.Location = new System.Drawing.Point(7, 43);
+            this.ZoomIn.Location = new System.Drawing.Point(7, 7);
             this.ZoomIn.Name = "ZoomIn";
             this.ZoomIn.Size = new System.Drawing.Size(25, 25);
             this.ZoomIn.TabIndex = 0;

@@ -96,6 +96,9 @@ namespace FCartographer
                     case Layer.LayerType.NationMap:
                         project.Fill(e, nations_brushpreset);
                         break;
+                    case Layer.LayerType.Biome:
+                        project.Fill(e, nations_brushpreset);
+                        break;
                 }
                 
             }

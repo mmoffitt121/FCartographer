@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FCartographer.Window;
 
 namespace FCartographer
 {
@@ -132,7 +133,9 @@ namespace FCartographer
                 };
 
                 text.Click += LayerPanelChild_Select;
+                text.DoubleClick += LayerPanelChild_DoubleClick;
                 icon.Click += LayerPanelChild_Select;
+                icon.DoubleClick += LayerPanelChild_DoubleClick;
 
                 delbutton.Click += DeleteLayer_Click;
                 upbutton.Click += LayerUp_Click;
@@ -150,6 +153,7 @@ namespace FCartographer
                 panel.Controls.Add(torender);
 
                 panel.Click += LayerPanel_Select;
+                panel.DoubleClick += LayerPanel_DoubleClick;
 
                 LayerPane.Controls.Add(panel);
             }
@@ -210,6 +214,52 @@ namespace FCartographer
             project.SelectLayer(indx);
             DisplaySelectedLayer();
             UpdateLayerBrushes();
+        }
+
+        private void LayerPanelChild_DoubleClick(object sender, EventArgs e)
+        {
+            Control csender;
+            try
+            {
+                csender = (Control)sender;
+                LayerPanel_DoubleClick(csender.Parent, e);
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void LayerPanel_DoubleClick(object sender, EventArgs e)
+        {
+            Panel psender;
+            try
+            {
+                psender = (Panel)sender;
+            }
+            catch
+            {
+                return;
+            }
+
+            int indx = psender.TabIndex;
+
+            project.SelectLayer(indx);
+            DisplaySelectedLayer();
+            UpdateLayerBrushes();
+
+            LayerSettingsWindow lsw = new LayerSettingsWindow(project.CurrentLayer(), this);
+
+            lsw.ShowDialog();
+
+            if (lsw.DialogResult == DialogResult.OK)
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         /// <summary>

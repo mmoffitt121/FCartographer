@@ -1891,6 +1891,16 @@
             Brush preset constructor.
             </summary>
         </member>
+        <member name="T:FCartographer.AnglePicker">
+            <summary>
+            Shader responsible for terrain layers
+            </summary>
+        </member>
+        <member name="F:FCartographer.AnglePicker.angle">
+            <summary>
+            Float that represents the picked angle.
+            </summary>
+        </member>
         <member name="T:FCartographer.BitmapDataConverter">
             <summary>
             Responsible for converting bitmaps to different data types and vice versa.
@@ -2116,6 +2126,30 @@
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
         <member name="M:FCartographer.Window.LandscapeGeneratorWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Window.LayerSettingsWindow.#ctor(FCartographer.Layer,FCartographer.Form1)">
+            <summary>
+            Constructor that takes layer to change settings of and parent form as input
+            </summary>
+            <param name="_layer"></param>
+            <param name="_parentform"></param>
+        </member>
+        <member name="F:FCartographer.Window.LayerSettingsWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Window.LayerSettingsWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:FCartographer.Window.LayerSettingsWindow.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
