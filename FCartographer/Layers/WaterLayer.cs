@@ -104,13 +104,8 @@ namespace FCartographer
         {
             terrain = null;
 
-            for (int j = 0; j < layers.Count; j++)
+            for (int j = i; j >= 0; j--)
             {
-                if (j > i)
-                {
-                    break;
-                }
-
                 if (layers[j].GetType() == Layer.LayerType.HeightMap)
                 {
                     terrain = (HeightLayer)layers[j];
