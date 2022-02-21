@@ -67,14 +67,9 @@ namespace FCartographer
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tectonicPlatesOutlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.terrainFromPlatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.landscapeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.randomNationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Navigation = new System.Windows.Forms.Panel();
+            this.renderLayerButton = new System.Windows.Forms.Button();
             this.LayerPane = new System.Windows.Forms.FlowLayoutPanel();
             this.ZoomOut = new System.Windows.Forms.Button();
             this.ZoomIn = new System.Windows.Forms.Button();
@@ -132,7 +127,7 @@ namespace FCartographer
             this.waterTools.Controls.Add(this.label1);
             this.waterTools.Location = new System.Drawing.Point(0, 0);
             this.waterTools.Name = "waterTools";
-            this.waterTools.Size = new System.Drawing.Size(150, 350);
+            this.waterTools.Size = new System.Drawing.Size(150, 893);
             this.waterTools.TabIndex = 2;
             // 
             // waterLevelValue
@@ -358,8 +353,7 @@ namespace FCartographer
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
-            this.generateToolStripMenuItem,
-            this.renderToolStripMenuItem});
+            this.generateToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1705, 24);
@@ -460,8 +454,7 @@ namespace FCartographer
             // generateToolStripMenuItem
             // 
             this.generateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generateToolStripMenuItem1,
-            this.nationsToolStripMenuItem});
+            this.generateToolStripMenuItem1});
             this.generateToolStripMenuItem.Name = "generateToolStripMenuItem";
             this.generateToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.generateToolStripMenuItem.Text = "Generate";
@@ -469,61 +462,22 @@ namespace FCartographer
             // generateToolStripMenuItem1
             // 
             this.generateToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tectonicPlatesOutlineToolStripMenuItem,
-            this.terrainFromPlatesToolStripMenuItem,
-            this.toolStripSeparator1,
             this.landscapeToolStripMenuItem});
             this.generateToolStripMenuItem1.Name = "generateToolStripMenuItem1";
-            this.generateToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            this.generateToolStripMenuItem1.Size = new System.Drawing.Size(109, 22);
             this.generateToolStripMenuItem1.Text = "Terrain";
-            // 
-            // tectonicPlatesOutlineToolStripMenuItem
-            // 
-            this.tectonicPlatesOutlineToolStripMenuItem.Name = "tectonicPlatesOutlineToolStripMenuItem";
-            this.tectonicPlatesOutlineToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.tectonicPlatesOutlineToolStripMenuItem.Text = "Tectonic Plates";
-            // 
-            // terrainFromPlatesToolStripMenuItem
-            // 
-            this.terrainFromPlatesToolStripMenuItem.Name = "terrainFromPlatesToolStripMenuItem";
-            this.terrainFromPlatesToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.terrainFromPlatesToolStripMenuItem.Text = "Terrain From Plates";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
             // 
             // landscapeToolStripMenuItem
             // 
             this.landscapeToolStripMenuItem.Name = "landscapeToolStripMenuItem";
-            this.landscapeToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.landscapeToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.landscapeToolStripMenuItem.Text = "Landscape";
             this.landscapeToolStripMenuItem.Click += new System.EventHandler(this.landscapeToolStripMenuItem_Click);
-            // 
-            // nationsToolStripMenuItem
-            // 
-            this.nationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.randomNationsToolStripMenuItem});
-            this.nationsToolStripMenuItem.Name = "nationsToolStripMenuItem";
-            this.nationsToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
-            this.nationsToolStripMenuItem.Text = "Nations";
-            // 
-            // randomNationsToolStripMenuItem
-            // 
-            this.randomNationsToolStripMenuItem.Name = "randomNationsToolStripMenuItem";
-            this.randomNationsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.randomNationsToolStripMenuItem.Text = "Random Nations";
-            // 
-            // renderToolStripMenuItem
-            // 
-            this.renderToolStripMenuItem.Name = "renderToolStripMenuItem";
-            this.renderToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.renderToolStripMenuItem.Text = "Render";
             // 
             // Navigation
             // 
             this.Navigation.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.Navigation.Controls.Add(this.renderLayerButton);
             this.Navigation.Controls.Add(this.LayerPane);
             this.Navigation.Controls.Add(this.ZoomOut);
             this.Navigation.Controls.Add(this.ZoomIn);
@@ -533,6 +487,16 @@ namespace FCartographer
             this.Navigation.Name = "Navigation";
             this.Navigation.Size = new System.Drawing.Size(194, 893);
             this.Navigation.TabIndex = 3;
+            // 
+            // renderLayerButton
+            // 
+            this.renderLayerButton.Location = new System.Drawing.Point(7, 4);
+            this.renderLayerButton.Name = "renderLayerButton";
+            this.renderLayerButton.Size = new System.Drawing.Size(178, 23);
+            this.renderLayerButton.TabIndex = 5;
+            this.renderLayerButton.Text = "Render Layer";
+            this.renderLayerButton.UseVisualStyleBackColor = true;
+            this.renderLayerButton.Click += new System.EventHandler(this.renderLayerButton_Click);
             // 
             // LayerPane
             // 
@@ -548,7 +512,7 @@ namespace FCartographer
             // 
             // ZoomOut
             // 
-            this.ZoomOut.Location = new System.Drawing.Point(38, 7);
+            this.ZoomOut.Location = new System.Drawing.Point(38, 43);
             this.ZoomOut.Name = "ZoomOut";
             this.ZoomOut.Size = new System.Drawing.Size(25, 25);
             this.ZoomOut.TabIndex = 1;
@@ -557,7 +521,7 @@ namespace FCartographer
             // 
             // ZoomIn
             // 
-            this.ZoomIn.Location = new System.Drawing.Point(7, 7);
+            this.ZoomIn.Location = new System.Drawing.Point(7, 43);
             this.ZoomIn.Name = "ZoomIn";
             this.ZoomIn.Size = new System.Drawing.Size(25, 25);
             this.ZoomIn.TabIndex = 0;
@@ -709,13 +673,7 @@ namespace FCartographer
         private System.Windows.Forms.Button AddObjectButton;
         private System.Windows.Forms.ToolStripMenuItem generateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem tectonicPlatesOutlineToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem terrainFromPlatesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem landscapeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem randomNationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem renderToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem heightMapToolStripMenuItem;
@@ -723,6 +681,7 @@ namespace FCartographer
         private System.Windows.Forms.TrackBar waterLevelTrackbar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label waterLevelValue;
+        private System.Windows.Forms.Button renderLayerButton;
     }
 }
 

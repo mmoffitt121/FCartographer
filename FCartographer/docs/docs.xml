@@ -58,6 +58,9 @@
             This part of Form1 is used for navigating the canvas; zoom, scroll, etc.
             </summary>
             <summary>
+            This part of Form1 handles rendering interaction
+            </summary>
+            <summary>
             This part of Form1 controls the visibility of the panels
             </summary>
             <summary>
