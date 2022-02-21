@@ -18,20 +18,18 @@ namespace FCartographer
     {
         private void ReadySettingsPanels(Layer layer)
         {
+            DisableAllSettingsPanels();
             if (layer == null)
             {
-                DisableAllSettingsPanels();
                 return;
             }
             switch (layer.GetType())
             {
                 case Layer.LayerType.HeightMap:
-                    DisableAllSettingsPanels();
                     SetElevationSettingsActive(true);
                     SetBitmapToolsActive(true);
                     break;
                 case Layer.LayerType.NationMap:
-                    DisableAllSettingsPanels();
                     SetNationsSettingsActive(true);
                     SetBitmapToolsActive(true);
                     SetNationsPaneActive(true);
