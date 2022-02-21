@@ -34,14 +34,15 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.chooseFileButton = new System.Windows.Forms.Button();
             this.loseFileButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.heightmapPathBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.widthBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.heightBox = new System.Windows.Forms.TextBox();
+            this.createProjectButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -61,6 +62,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.createProjectButton, 2, 9);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -104,7 +106,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel2.Controls.Add(this.chooseFileButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.loseFileButton, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.heightmapPathBox, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(99, 43);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
@@ -123,6 +125,7 @@
             this.chooseFileButton.TabIndex = 0;
             this.chooseFileButton.Text = "Choose Heightmap";
             this.chooseFileButton.UseVisualStyleBackColor = true;
+            this.chooseFileButton.Click += new System.EventHandler(this.chooseFileButton_Click);
             // 
             // loseFileButton
             // 
@@ -133,14 +136,14 @@
             this.loseFileButton.Text = "X";
             this.loseFileButton.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // heightmapPathBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(496, 23);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "Heightmap: none";
+            this.heightmapPathBox.Location = new System.Drawing.Point(3, 3);
+            this.heightmapPathBox.Name = "heightmapPathBox";
+            this.heightmapPathBox.ReadOnly = true;
+            this.heightmapPathBox.Size = new System.Drawing.Size(496, 23);
+            this.heightmapPathBox.TabIndex = 2;
+            this.heightmapPathBox.Text = "No heightmap selected";
             // 
             // label2
             // 
@@ -158,7 +161,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel3.Controls.Add(this.textBox2, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.widthBox, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(99, 75);
@@ -169,19 +172,12 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(690, 32);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
-            // textBox2
+            // widthBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(175, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(166, 23);
-            this.textBox2.TabIndex = 0;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(175, 3);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(166, 23);
-            this.textBox3.TabIndex = 1;
+            this.widthBox.Location = new System.Drawing.Point(175, 3);
+            this.widthBox.Name = "widthBox";
+            this.widthBox.Size = new System.Drawing.Size(166, 23);
+            this.widthBox.TabIndex = 0;
             // 
             // label3
             // 
@@ -192,6 +188,25 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Width";
             // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 4;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel4.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.heightBox, 1, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(99, 107);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(690, 32);
+            this.tableLayoutPanel4.TabIndex = 5;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -201,24 +216,23 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Height";
             // 
-            // tableLayoutPanel4
+            // heightBox
             // 
-            this.tableLayoutPanel4.ColumnCount = 4;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel4.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.textBox3, 1, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(99, 107);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(690, 32);
-            this.tableLayoutPanel4.TabIndex = 5;
+            this.heightBox.Location = new System.Drawing.Point(175, 3);
+            this.heightBox.Name = "heightBox";
+            this.heightBox.Size = new System.Drawing.Size(166, 23);
+            this.heightBox.TabIndex = 1;
+            // 
+            // createProjectButton
+            // 
+            this.createProjectButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.createProjectButton.Location = new System.Drawing.Point(102, 406);
+            this.createProjectButton.Name = "createProjectButton";
+            this.createProjectButton.Size = new System.Drawing.Size(684, 26);
+            this.createProjectButton.TabIndex = 6;
+            this.createProjectButton.Text = "Create";
+            this.createProjectButton.UseVisualStyleBackColor = true;
+            this.createProjectButton.Click += new System.EventHandler(this.createProjectButton_Click);
             // 
             // NewProjectWindow
             // 
@@ -250,13 +264,14 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button chooseFileButton;
         private System.Windows.Forms.Button loseFileButton;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox heightmapPathBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox widthBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox heightBox;
+        private System.Windows.Forms.Button createProjectButton;
     }
 }

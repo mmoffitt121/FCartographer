@@ -31,6 +31,7 @@ namespace FCartographer
             }
 
             InitializeProjectSettings();
+            RenderGraphics(project.GetGraphics());
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

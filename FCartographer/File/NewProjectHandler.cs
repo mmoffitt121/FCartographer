@@ -29,6 +29,12 @@ namespace FCartographer.FileHandling
                     int wid = pwindow.width;
                     int hei = pwindow.height;
                     project = new Project(wid, hei);
+
+                    if (pwindow.heightmap != null)
+                    {
+                        project.AddLayer(Layer.LayerType.HeightMap);
+                        project.CurrentLayer().data_g.DrawImage(pwindow.heightmap, 0, 0);
+                    }
                 }
                 else
                 {
