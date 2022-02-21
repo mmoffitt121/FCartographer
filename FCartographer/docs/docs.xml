@@ -612,6 +612,108 @@
             White Noise setting
             </summary>
         </member>
+        <member name="T:FCartographer.Biome">
+            <summary>
+            Class that holds biome information.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Biome.#ctor(System.Collections.Generic.List{FCartographer.Nation})">
+            <summary>
+            Biome constructor
+            </summary>
+        </member>
+        <member name="T:FCartographer.BiomeLayer">
+            <summary>
+            Layer that holds and interfaces with data for nation maps.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.Render">
+            <summary>
+            Override void that composits temp data to the layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.Draw(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Override void that Draws on a temporary layer. Bitmap is cleared when drawing is complete.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.DrawTemp(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Override void that Draws on the display canvas. Bitmap is cleared when drawing is complete.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.Fill(System.Windows.Forms.MouseEventArgs,FCartographer.BrushPreset)">
+            <summary>
+            Fills contiguous region with pixels of selected nation.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.DrawToCanvas(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Generalized draw to canvas function, used by both Draw() and DrawTemp(). Used to draw on canvas based
+            on input brush settings, as well as mouse location and movement.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.SetColor(System.Drawing.Color)">
+            <summary>
+            Override void that sets the internal layer saved color.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.InitializeColor(System.Drawing.Color)">
+            <summary>
+            Override void that initializes the internal layer saved color without interacting with the layer's 
+            internal pen.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.SetSize(System.Int32)">
+            <summary>
+            Override void that sets the internal layer saved pen.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.UpdateBrushOptions(FCartographer.BrushPreset)">
+            <summary>
+            Grabs internal brush options from the input layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.NewNation">
+            <summary>
+            Creates new nation with random data color.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.GetNationCount">
+            <summary>
+            Returns the amount of items in the intenal nation list
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.GetSelected">
+            <summary>
+            Returns the index of the selected nation
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.SelectNation(System.Int32)">
+            <summary>
+            Changes the index of layer to be selected
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.IsSelected(System.Int32)">
+            <summary>
+            Checks if an index is selected
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.GetNation(System.Int32)">
+            <summary>
+            Gets a nation by it's index in the nations list. If index too high, return null.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Unnamed constructor, creates layer of size x and y. Inherits base constructor.
+            </summary>
+        </member>
+        <member name="M:FCartographer.BiomeLayer.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
+            </summary>
+        </member>
         <member name="T:FCartographer.HeightLayer">
             <summary>
             Layer that holds and interfaces with data for heightmaps.
@@ -865,6 +967,11 @@
         <member name="F:FCartographer.Layer.LayerType.Subdivision">
             <summary>
             Subdivision, for other subdivisions aside from NationMap.
+            </summary>
+        </member>
+        <member name="F:FCartographer.Layer.LayerType.Biome">
+            <summary>
+            Layer that contains data for world generation
             </summary>
         </member>
         <member name="F:FCartographer.Layer.LayerType.Reference">

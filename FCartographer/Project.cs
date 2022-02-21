@@ -41,6 +41,9 @@ namespace FCartographer
                 case Layer.LayerType.Ocean:
                     layers.Add(new WaterLayer(width, height));
                     break;
+                case Layer.LayerType.Biome:
+                    layers.Add(new BiomeLayer(width, height));
+                    break;
                 default:
                     break;
             }
@@ -64,6 +67,9 @@ namespace FCartographer
                     break;
                 case Layer.LayerType.Ocean:
                     layers.Add(new WaterLayer(width, height, _name));
+                    break;
+                case Layer.LayerType.Biome:
+                    layers.Add(new BiomeLayer(width, height, _name));
                     break;
                 default:
                     break;

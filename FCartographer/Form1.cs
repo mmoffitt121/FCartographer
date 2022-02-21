@@ -153,6 +153,10 @@ namespace FCartographer
                         project.Draw(nations_brushpreset, e, xprime, yprime);
                         project.DrawTemp(nations_brushpreset, e, g, xprime, yprime);
                         break;
+                    case Layer.LayerType.Biome:
+                        project.Draw(nations_brushpreset, e, xprime, yprime);
+                        project.DrawTemp(nations_brushpreset, e, g, xprime, yprime);
+                        break;
                 }
                 xprime = e.X;
                 yprime = e.Y;

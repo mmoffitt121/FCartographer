@@ -40,6 +40,10 @@ namespace FCartographer
             {
                 parentform.project.AddLayer(Layer.LayerType.Ocean, NameOfNewLayer.Text);
             }
+            if (LayerToAdd.SelectedIndex.Equals(3))
+            {
+                parentform.project.AddLayer(Layer.LayerType.Biome, NameOfNewLayer.Text);
+            }
 
             parentform.RenderGraphics(parentform.project.GetGraphics());
 
@@ -80,6 +84,11 @@ namespace FCartographer
             {
                 NameOfNewLayer.Text = "New Water Layer";
                 DescriptionBox.Text = "A water layer creates and renders a sea of water at a specified height based on a Terrain Layer. To reference a Terrain Layer, a Water Layer must be above it in the layer heiarchy.";
+            }
+            if (LayerToAdd.SelectedIndex.Equals(3))
+            {
+                NameOfNewLayer.Text = "New Biome Layer";
+                DescriptionBox.Text = "A biome layer is used primarily for world generation. Paint biomes, then select the layer and generate terrain from the layer.";
             }
         }
 

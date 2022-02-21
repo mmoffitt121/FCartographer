@@ -315,6 +315,11 @@ namespace FCartographer
             Subdivision,
 
             /// <summary>
+            /// Layer that contains data for world generation
+            /// </summary>
+            Biome,
+
+            /// <summary>
             /// Reference, for imported images/annotations/sketches
             /// </summary>
             Reference
