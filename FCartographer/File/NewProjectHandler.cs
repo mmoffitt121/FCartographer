@@ -33,7 +33,7 @@ namespace FCartographer.FileHandling
                     if (pwindow.heightmap != null)
                     {
                         project.AddLayer(Layer.LayerType.HeightMap);
-                        project.CurrentLayer().data_g.DrawImage(pwindow.heightmap, 0, 0);
+                        project.CurrentLayer().data_g.DrawImage(pwindow.heightmap, 0, 0, wid, hei);
                     }
                 }
                 else

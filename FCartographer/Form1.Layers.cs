@@ -258,6 +258,7 @@ namespace FCartographer
                 DisplayLayers();
                 RenderGraphics(project.GetGraphics());
                 UpdateLayerBrushes();
+                ReadySettingsPanels(project.CurrentLayer());
             }
             catch
             {

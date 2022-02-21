@@ -23,7 +23,7 @@ namespace FCartographer.FileHandling
             using (OpenFileDialog filedialog = new OpenFileDialog())
             {
                 filedialog.InitialDirectory = "c:\\";
-                filedialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF";
+                filedialog.Filter = "Image Files(*.PNG;*.BMP;*.JPG;*.GIF)|*.PNG;*.BMP;*.JPG;*.GIF";
                 filedialog.FilterIndex = 0;
                 filedialog.RestoreDirectory = true;
 
@@ -52,7 +52,7 @@ namespace FCartographer.FileHandling
             using (OpenFileDialog filedialog = new OpenFileDialog())
             {
                 filedialog.InitialDirectory = "c:\\";
-                filedialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF";
+                filedialog.Filter = "Image Files(*.PNG;*.BMP;*.JPG;*.GIF)|*.PNG;*.BMP;*.JPG;*.GIF";
                 filedialog.FilterIndex = 0;
                 filedialog.RestoreDirectory = true;
 

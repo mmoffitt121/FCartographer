@@ -63,6 +63,9 @@
             <summary>
             This part of Form1 is used for choosing what tool is selected
             </summary>
+            <summary>
+            This part of Form1 handles water layers and their settings.
+            </summary>
         </member>
         <member name="M:FCartographer.Form1.StrengthControl_Scroll(System.Object,System.EventArgs)">
             <summary>

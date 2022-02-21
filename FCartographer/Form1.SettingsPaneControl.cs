@@ -35,6 +35,11 @@ namespace FCartographer
                     SetNationsPaneActive(true);
                     DisplayNations();
                     break;
+                case Layer.LayerType.Ocean:
+                    SetWaterToolsActive(true);
+                    SetWaterLayerReference();
+                    UpdateWaterControls();
+                    break;
                 default:
                     break;
             }
@@ -46,6 +51,7 @@ namespace FCartographer
             SetNationsSettingsActive(false);
             SetBitmapToolsActive(false);
             SetNationsPaneActive(false);
+            SetWaterToolsActive(false);
         }
 
         private void SetElevationSettingsActive(bool active)
@@ -93,6 +99,18 @@ namespace FCartographer
             else
             {
                 ToolsPanel.Controls.Remove(NationPane);
+            }
+        }
+
+        private void SetWaterToolsActive(bool active)
+        {
+            if (active)
+            {
+                ToolsPanel.Controls.Add(waterTools);
+            }
+            else
+            {
+                ToolsPanel.Controls.Remove(waterTools);
             }
         }
     }

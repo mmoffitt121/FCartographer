@@ -31,6 +31,10 @@ namespace FCartographer
         {
             this.Canvas = new System.Windows.Forms.Panel();
             this.ToolsPanel = new System.Windows.Forms.Panel();
+            this.waterTools = new System.Windows.Forms.Panel();
+            this.waterLevelValue = new System.Windows.Forms.Label();
+            this.waterLevelTrackbar = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.NationPane = new System.Windows.Forms.FlowLayoutPanel();
             this.BitmapTools = new System.Windows.Forms.Panel();
             this.AddObjectButton = new System.Windows.Forms.Button();
@@ -81,6 +85,8 @@ namespace FCartographer
             this.VerticalScroll = new System.Windows.Forms.VScrollBar();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ToolsPanel.SuspendLayout();
+            this.waterTools.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.waterLevelTrackbar)).BeginInit();
             this.BitmapTools.SuspendLayout();
             this.ElevationSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HeightControl)).BeginInit();
@@ -110,6 +116,7 @@ namespace FCartographer
             // ToolsPanel
             // 
             this.ToolsPanel.BackColor = System.Drawing.Color.BlanchedAlmond;
+            this.ToolsPanel.Controls.Add(this.waterTools);
             this.ToolsPanel.Controls.Add(this.NationPane);
             this.ToolsPanel.Controls.Add(this.BitmapTools);
             this.ToolsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -117,6 +124,46 @@ namespace FCartographer
             this.ToolsPanel.Name = "ToolsPanel";
             this.ToolsPanel.Size = new System.Drawing.Size(150, 893);
             this.ToolsPanel.TabIndex = 1;
+            // 
+            // waterTools
+            // 
+            this.waterTools.Controls.Add(this.waterLevelValue);
+            this.waterTools.Controls.Add(this.waterLevelTrackbar);
+            this.waterTools.Controls.Add(this.label1);
+            this.waterTools.Location = new System.Drawing.Point(0, 0);
+            this.waterTools.Name = "waterTools";
+            this.waterTools.Size = new System.Drawing.Size(150, 350);
+            this.waterTools.TabIndex = 2;
+            // 
+            // waterLevelValue
+            // 
+            this.waterLevelValue.AutoSize = true;
+            this.waterLevelValue.Location = new System.Drawing.Point(105, 7);
+            this.waterLevelValue.Name = "waterLevelValue";
+            this.waterLevelValue.Size = new System.Drawing.Size(25, 15);
+            this.waterLevelValue.TabIndex = 2;
+            this.waterLevelValue.Text = "100";
+            // 
+            // waterLevelTrackbar
+            // 
+            this.waterLevelTrackbar.LargeChange = 50;
+            this.waterLevelTrackbar.Location = new System.Drawing.Point(4, 23);
+            this.waterLevelTrackbar.Maximum = 255;
+            this.waterLevelTrackbar.Name = "waterLevelTrackbar";
+            this.waterLevelTrackbar.Size = new System.Drawing.Size(140, 45);
+            this.waterLevelTrackbar.TabIndex = 1;
+            this.waterLevelTrackbar.TickFrequency = 32;
+            this.waterLevelTrackbar.Value = 100;
+            this.waterLevelTrackbar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Water Level";
             // 
             // NationPane
             // 
@@ -338,63 +385,63 @@ namespace FCartographer
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(111, 6);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.heightMapToolStripMenuItem});
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.importToolStripMenuItem.Text = "Import";
             // 
             // heightMapToolStripMenuItem
             // 
             this.heightMapToolStripMenuItem.Name = "heightMapToolStripMenuItem";
-            this.heightMapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.heightMapToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.heightMapToolStripMenuItem.Text = "Height Map";
             this.heightMapToolStripMenuItem.Click += new System.EventHandler(this.heightMapToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(111, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(111, 6);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -596,6 +643,9 @@ namespace FCartographer
             this.Text = "FCartographer";
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ToolsPanel.ResumeLayout(false);
+            this.waterTools.ResumeLayout(false);
+            this.waterTools.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.waterLevelTrackbar)).EndInit();
             this.BitmapTools.ResumeLayout(false);
             this.ElevationSettings.ResumeLayout(false);
             this.ElevationSettings.PerformLayout();
@@ -669,6 +719,10 @@ namespace FCartographer
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem heightMapToolStripMenuItem;
+        private System.Windows.Forms.Panel waterTools;
+        private System.Windows.Forms.TrackBar waterLevelTrackbar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label waterLevelValue;
     }
 }
 
