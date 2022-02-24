@@ -94,6 +94,11 @@ namespace FCartographer
         public int depthmode;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public int dropoffdepth;
+
+        /// <summary>
         /// Float representing the contrast of the water
         /// 0 - 1
         /// </summary>
@@ -285,7 +290,7 @@ namespace FCartographer
                     {
                         if (depthmode == 0)
                         {
-                            a = (byte)Math.Clamp(-(terr[i] - level) + 160, 0, 255);
+                            a = (byte)Math.Clamp(-(terr[i] - level) + dropoffdepth, 0, 255);
                         }
                         if (depthmode == 1)
                         {
@@ -371,6 +376,8 @@ namespace FCartographer
             direction = -20f;
             angle = -30f;
             bias = 0;
+
+            dropoffdepth = 160;
         }
     }
 }
