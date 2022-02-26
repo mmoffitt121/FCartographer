@@ -64,6 +64,11 @@ namespace FCartographer
         public Color lightcolor;
 
         /// <summary>
+        /// Color of shadow
+        /// </summary>
+        public Color shadowcolor;
+
+        /// <summary>
         /// Float between 0 and 1 that dictates how bright the incident light is
         /// </summary>
         public float brightness;

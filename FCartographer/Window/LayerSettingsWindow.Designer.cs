@@ -50,8 +50,8 @@ namespace FCartographer.Window
             this.contourRenderTab = new System.Windows.Forms.TabPage();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.wavesLighting = new System.Windows.Forms.TabPage();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.waterLighting = new System.Windows.Forms.TabPage();
+            this.wavesEnabled = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.previewButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
@@ -59,6 +59,7 @@ namespace FCartographer.Window
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabGroup.SuspendLayout();
             this.rayLightingTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
@@ -66,7 +67,7 @@ namespace FCartographer.Window
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.gradientLightingTab.SuspendLayout();
             this.contourRenderTab.SuspendLayout();
-            this.wavesLighting.SuspendLayout();
+            this.waterLighting.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabGroup
@@ -74,7 +75,7 @@ namespace FCartographer.Window
             this.tabGroup.Controls.Add(this.rayLightingTab);
             this.tabGroup.Controls.Add(this.gradientLightingTab);
             this.tabGroup.Controls.Add(this.contourRenderTab);
-            this.tabGroup.Controls.Add(this.wavesLighting);
+            this.tabGroup.Controls.Add(this.waterLighting);
             this.tabGroup.Location = new System.Drawing.Point(12, 45);
             this.tabGroup.Name = "tabGroup";
             this.tabGroup.SelectedIndex = 0;
@@ -83,6 +84,7 @@ namespace FCartographer.Window
             // 
             // rayLightingTab
             // 
+            this.rayLightingTab.Controls.Add(this.label10);
             this.rayLightingTab.Controls.Add(this.label9);
             this.rayLightingTab.Controls.Add(this.label8);
             this.rayLightingTab.Controls.Add(this.label4);
@@ -281,35 +283,35 @@ namespace FCartographer.Window
             this.label6.TabIndex = 5;
             this.label6.Text = "Enabled";
             // 
-            // wavesLighting
+            // waterLighting
             // 
-            this.wavesLighting.Controls.Add(this.checkBox4);
-            this.wavesLighting.Controls.Add(this.label7);
-            this.wavesLighting.Location = new System.Drawing.Point(4, 24);
-            this.wavesLighting.Name = "wavesLighting";
-            this.wavesLighting.Padding = new System.Windows.Forms.Padding(3);
-            this.wavesLighting.Size = new System.Drawing.Size(425, 520);
-            this.wavesLighting.TabIndex = 3;
-            this.wavesLighting.Text = "Waves";
-            this.wavesLighting.UseVisualStyleBackColor = true;
+            this.waterLighting.Controls.Add(this.wavesEnabled);
+            this.waterLighting.Controls.Add(this.label7);
+            this.waterLighting.Location = new System.Drawing.Point(4, 24);
+            this.waterLighting.Name = "waterLighting";
+            this.waterLighting.Padding = new System.Windows.Forms.Padding(3);
+            this.waterLighting.Size = new System.Drawing.Size(425, 520);
+            this.waterLighting.TabIndex = 3;
+            this.waterLighting.Text = "Water";
+            this.waterLighting.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // wavesEnabled
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(404, 6);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(15, 14);
-            this.checkBox4.TabIndex = 6;
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.wavesEnabled.AutoSize = true;
+            this.wavesEnabled.Location = new System.Drawing.Point(404, 6);
+            this.wavesEnabled.Name = "wavesEnabled";
+            this.wavesEnabled.Size = new System.Drawing.Size(15, 14);
+            this.wavesEnabled.TabIndex = 6;
+            this.wavesEnabled.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(7, 4);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(49, 15);
+            this.label7.Size = new System.Drawing.Size(79, 15);
             this.label7.TabIndex = 5;
-            this.label7.Text = "Enabled";
+            this.label7.Text = "Enable Waves";
             // 
             // previewButton
             // 
@@ -354,6 +356,15 @@ namespace FCartographer.Window
             this.textBox1.Size = new System.Drawing.Size(341, 23);
             this.textBox1.TabIndex = 5;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 300);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(36, 15);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Color";
+            // 
             // LayerSettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -377,8 +388,8 @@ namespace FCartographer.Window
             this.gradientLightingTab.PerformLayout();
             this.contourRenderTab.ResumeLayout(false);
             this.contourRenderTab.PerformLayout();
-            this.wavesLighting.ResumeLayout(false);
-            this.wavesLighting.PerformLayout();
+            this.waterLighting.ResumeLayout(false);
+            this.waterLighting.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -411,10 +422,11 @@ namespace FCartographer.Window
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TabPage wavesLighting;
-        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.TabPage waterLighting;
+        private System.Windows.Forms.CheckBox wavesEnabled;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
     }
 }

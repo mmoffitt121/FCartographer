@@ -1594,6 +1594,11 @@
             1 = falloff mode
             </summary>
         </member>
+        <member name="F:FCartographer.RayWaterShader.dropoffdepth">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:FCartographer.RayWaterShader.watercontrast">
             <summary>
             Float representing the contrast of the water
