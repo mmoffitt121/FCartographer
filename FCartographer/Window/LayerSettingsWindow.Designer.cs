@@ -31,6 +31,7 @@ namespace FCartographer.Window
         {
             this.tabGroup = new System.Windows.Forms.TabControl();
             this.rayLightingTab = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -59,7 +60,9 @@ namespace FCartographer.Window
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.trackBar4 = new System.Windows.Forms.TrackBar();
             this.tabGroup.SuspendLayout();
             this.rayLightingTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
@@ -68,6 +71,7 @@ namespace FCartographer.Window
             this.gradientLightingTab.SuspendLayout();
             this.contourRenderTab.SuspendLayout();
             this.waterLighting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
             this.SuspendLayout();
             // 
             // tabGroup
@@ -105,6 +109,15 @@ namespace FCartographer.Window
             this.rayLightingTab.TabIndex = 0;
             this.rayLightingTab.Text = "Ray Lighting";
             this.rayLightingTab.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 300);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(36, 15);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Color";
             // 
             // label9
             // 
@@ -285,6 +298,9 @@ namespace FCartographer.Window
             // 
             // waterLighting
             // 
+            this.waterLighting.Controls.Add(this.trackBar4);
+            this.waterLighting.Controls.Add(this.label12);
+            this.waterLighting.Controls.Add(this.label11);
             this.waterLighting.Controls.Add(this.wavesEnabled);
             this.waterLighting.Controls.Add(this.label7);
             this.waterLighting.Location = new System.Drawing.Point(4, 24);
@@ -356,14 +372,30 @@ namespace FCartographer.Window
             this.textBox1.Size = new System.Drawing.Size(341, 23);
             this.textBox1.TabIndex = 5;
             // 
-            // label10
+            // label11
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 300);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(36, 15);
-            this.label10.TabIndex = 13;
-            this.label10.Text = "Color";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(7, 41);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(34, 15);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Level";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(394, 41);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(25, 15);
+            this.label12.TabIndex = 8;
+            this.label12.Text = "255";
+            // 
+            // trackBar4
+            // 
+            this.trackBar4.Location = new System.Drawing.Point(82, 41);
+            this.trackBar4.Name = "trackBar4";
+            this.trackBar4.Size = new System.Drawing.Size(306, 45);
+            this.trackBar4.TabIndex = 9;
             // 
             // LayerSettingsWindow
             // 
@@ -390,6 +422,7 @@ namespace FCartographer.Window
             this.contourRenderTab.PerformLayout();
             this.waterLighting.ResumeLayout(false);
             this.waterLighting.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -428,5 +461,8 @@ namespace FCartographer.Window
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TrackBar trackBar4;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 }

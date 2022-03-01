@@ -15,6 +15,10 @@ namespace FCartographer
     public class RayWaterShader : Renderer
     {
         /// <summary>
+        /// intensity of light source on waves
+        /// </summary>
+        public float waveintensity;
+        /// <summary>
         /// Intensity of light source
         /// </summary>
         public float intensity;
@@ -110,6 +114,11 @@ namespace FCartographer
         public float watercontrast = 0.1f;
 
         /// <summary>
+        /// determines whether or not to use terrain lighting
+        /// </summary>
+        public bool independentlighting;
+
+        /// <summary>
         /// Override Render function
         /// </summary>
         public override void Render()
@@ -152,14 +161,30 @@ namespace FCartographer
                 }
             }
 
+            lightcolor = Color.FromArgb(255, 200, 255, 255);
+
+
             int range = max - min;
 
-            Color litcolor;
-            ColorHSL litcolorHSL;
+            byte lr = lightcolor.R;
+            byte lg = lightcolor.G;
+            byte lb = lightcolor.B;
+
+            float amb = ((float)ambient) / 255;
+
+            watercontrast = 0.017f;
+
+            Color litcolor = Color.FromArgb(
+                255,
+                (byte)Math.Clamp(amb * c1.R + watercontrast * lr * intensity * ((float)c1.R) / 255, 0, 255),
+                (byte)Math.Clamp(amb * c1.G + watercontrast * lg * intensity * ((float)c1.G) / 255, 0, 255),
+                (byte)Math.Clamp(amb * c1.B + watercontrast * lb * intensity * ((float)c1.B) / 255, 0, 255));
+
+            /*ColorHSL litcolorHSL;
 
             litcolorHSL = ColorHSL.FromARGB(c1);
             litcolorHSL.L = Math.Clamp(litcolorHSL.L + watercontrast, 0, 1);
-            litcolor = litcolorHSL.ToARGB();
+            litcolor = litcolorHSL.ToARGB();*/
 
             for (int i = 0; i < wid * hei; i += 4)
             {
@@ -210,8 +235,8 @@ namespace FCartographer
 
                     // X and Y of current pixel vector
 
-                    float x = ((adj[0, 0] + adj[1, 0]) / 2 - (adj[0, 1] + adj[1, 1]) / 2) * intensity;
-                    float y = ((adj[0, 0] + adj[0, 1]) / 2 - (adj[1, 0] + adj[1, 1]) / 2) * intensity;
+                    float x = ((adj[0, 0] + adj[1, 0]) / 2 - (adj[0, 1] + adj[1, 1]) / 2) * waveintensity;
+                    float y = ((adj[0, 0] + adj[0, 1]) / 2 - (adj[1, 0] + adj[1, 1]) / 2) * waveintensity;
 
                     // X and Y of light source vector
 
@@ -251,7 +276,6 @@ namespace FCartographer
                     // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
 
                     render_rays = true;
-                    ambient = 20;
 
                     if (render_rays)
                     {
@@ -282,9 +306,11 @@ namespace FCartographer
                             h += dh;
                         }
 
-                        r = (byte)Lerper.Lerp(Color.Black.R, r, ((float)Math.Clamp(255 * luminosity * brightness + ambient, 0, 255)) / 255);
-                        g = (byte)Lerper.Lerp(Color.Black.R, g, ((float)Math.Clamp(255 * luminosity * brightness + ambient, 0, 255)) / 255);
-                        b = (byte)Lerper.Lerp(Color.Black.R, b, ((float)Math.Clamp(255 * luminosity * brightness + ambient, 0, 255)) / 255);
+                        intensity = 0.6f;
+
+                        r = (byte)Math.Clamp(amb * r + luminosity * lr * intensity * ((float)r) / 255, 0, 255);
+                        g = (byte)Math.Clamp(amb * g + luminosity * lg * intensity * ((float)g) / 255, 0, 255);
+                        b = (byte)Math.Clamp(amb * b + luminosity * lb * intensity * ((float)b) / 255, 0, 255);
                     }
 
                     // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
@@ -375,12 +401,15 @@ namespace FCartographer
 
             SetAngles(45, -45);
 
-            intensity = 30;
+            waveintensity = 30;
+            intensity = 0.6f;
             ambient = 20;
             dropoff = 0.1f;
             direction = -20f;
             angle = -30f;
             bias = 0;
+
+            watercontrast = 0.015f;
 
             dropoffdepth = 160;
         }

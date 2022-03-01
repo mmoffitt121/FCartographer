@@ -17,7 +17,7 @@ namespace FCartographer
         /// </summary>
         public float intensity;
         /// <summary>
-        /// Intensity of ambient light source
+        /// Intensity of ambient light source, range = 0 - 255
         /// </summary>
         public int ambient;
         /// <summary>
@@ -46,6 +46,11 @@ namespace FCartographer
         public int bias;
 
         /// <summary>
+        /// Color of the light
+        /// </summary>
+        public Color lightcolor;
+
+        /// <summary>
         /// Render override function
         /// </summary>
         public override void Render()
@@ -61,17 +66,15 @@ namespace FCartographer
             int wid = GetData().Width * 4;
             int hei = GetData().Height;
 
-            float dx = MathF.Cos((180 + direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
-            float dy = MathF.Sin((180 + direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
-            float dh = MathF.Cos((angle + 90) * MathF.PI / 180);
+            float dx = MathF.Cos((180 - direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
+            float dy = MathF.Sin((180 - direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
+            float dh = MathF.Cos((angle + 90) * MathF.PI / 180);     
 
-            dropoff = 0.1f;
-            direction = -20f;
-            angle = -30f;
-            bias = 0;
-            intensity = 0.5f;
+            float amb = ((float)ambient) / 255;
 
-            byte[] output = new byte[wid * hei];
+            byte lr = lightcolor.R;
+            byte lg = lightcolor.G;
+            byte lb = lightcolor.B;
 
             float luminosity;
             for (int i = 0; i < wid * hei; i += 4)
@@ -92,22 +95,10 @@ namespace FCartographer
                     h += dh;
                 }
 
-                output[i + 3] = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
-                output[i + 2] = (byte)Math.Clamp(255 * luminosity * intensity + ambient, 0, 255);
-                output[i + 1] = (byte)Math.Clamp(255 * luminosity * intensity + ambient, 0, 255);
-                output[i + 0] = (byte)Math.Clamp(255 * luminosity * intensity + ambient, 0, 255);
-            }
-
-            Smoother.AverageSmooth(output, wid, hei, 4);
-
-            for (int i = 0; i < wid * hei; i += 4)
-            {
-                // Write to output
-
-                outp[i + 3] = 255;//(byte)(Math.Clamp(dir * magnitude, 0, 255));
-                outp[i + 2] = (byte)Lerper.Lerp(output[i + 2], outp[i + 2], 1 - opacity);
-                outp[i + 1] = (byte)Lerper.Lerp(output[i + 1], outp[i + 1], 1 - opacity);
-                outp[i + 0] = (byte)Lerper.Lerp(output[i + 0], outp[i + 0], 1 - opacity);
+                outp[i + 3] = 255;
+                outp[i + 2] = (byte)Math.Clamp(amb * outp[i + 2] + luminosity * lr * intensity * ((float)outp[i + 2]) / 255, 0, 255);
+                outp[i + 1] = (byte)Math.Clamp(amb * outp[i + 1] + luminosity * lg * intensity * ((float)outp[i + 1]) / 255, 0, 255);
+                outp[i + 0] = (byte)Math.Clamp(amb * outp[i + 0] + luminosity * lb * intensity * ((float)outp[i + 0]) / 255, 0, 255);
             }
 
             BitmapDataConverter.DrawImage(GetOutput(), outp, true);
@@ -120,15 +111,14 @@ namespace FCartographer
         /// <param name="_output"></param>
         public RayTerrainShader(Bitmap _data, Bitmap _output) : base(_data, _output)
         {
-            opacity = 0.5f;
+            lightcolor = Color.FromArgb(255, 255, 255, 255);
 
-            intensity = 1f;
-            ambient = 20;
-            
+            dropoff = 0.1f;
+            direction = 20f;
             angle = -30f;
-            direction = -10f;
-            dropoff = 0.5f;
-            bias = 1;
+            bias = 0;
+            intensity = 0.6f;
+            ambient = 100;
         }
     }
 }

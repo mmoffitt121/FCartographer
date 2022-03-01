@@ -1462,7 +1462,7 @@
         </member>
         <member name="F:FCartographer.RayTerrainShader.ambient">
             <summary>
-            Intensity of ambient light source
+            Intensity of ambient light source, range = 0 - 255
             </summary>
         </member>
         <member name="F:FCartographer.RayTerrainShader.direction">
@@ -1492,6 +1492,11 @@
             Amount of pixels above to account shadows for
             </summary>
         </member>
+        <member name="F:FCartographer.RayTerrainShader.lightcolor">
+            <summary>
+            Color of the light
+            </summary>
+        </member>
         <member name="M:FCartographer.RayTerrainShader.Render">
             <summary>
             Render override function
@@ -1507,6 +1512,11 @@
         <member name="T:FCartographer.RayWaterShader">
             <summary>
             Render class that renders optionally lit water.
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.waveintensity">
+            <summary>
+            intensity of light source on waves
             </summary>
         </member>
         <member name="F:FCartographer.RayWaterShader.intensity">
@@ -1561,6 +1571,11 @@
             Color of incident light
             </summary>
         </member>
+        <member name="F:FCartographer.RayWaterShader.shadowcolor">
+            <summary>
+            Color of shadow
+            </summary>
+        </member>
         <member name="F:FCartographer.RayWaterShader.brightness">
             <summary>
             Float between 0 and 1 that dictates how bright the incident light is
@@ -1603,6 +1618,11 @@
             <summary>
             Float representing the contrast of the water
             0 - 1
+            </summary>
+        </member>
+        <member name="F:FCartographer.RayWaterShader.independentlighting">
+            <summary>
+            determines whether or not to use terrain lighting
             </summary>
         </member>
         <member name="M:FCartographer.RayWaterShader.Render">
