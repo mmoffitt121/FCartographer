@@ -54,7 +54,7 @@ namespace FCartographer.Window
 
         private void RemoveAllOtherTabs(string[] tokeep)
         {
-            bool[] remove = new bool[tabGroup.TabCount];
+            List<TabPage> toremove = new List<TabPage>();
             foreach (TabPage t in tabGroup.TabPages)
             {
                 bool keep = false;
@@ -69,8 +69,13 @@ namespace FCartographer.Window
 
                 if (!keep)
                 {
-                    tabGroup.TabPages.Remove(t);
+                    toremove.Add(t);
                 }
+            }
+
+            foreach (TabPage t in toremove)
+            {
+                tabGroup.TabPages.Remove(t);
             }
         }
 
