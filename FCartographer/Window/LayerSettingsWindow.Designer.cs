@@ -89,6 +89,7 @@ namespace FCartographer.Window
             this.previewButton.TabIndex = 1;
             this.previewButton.Text = "Preview";
             this.previewButton.UseVisualStyleBackColor = true;
+            this.previewButton.Click += new System.EventHandler(this.previewButton_Click);
             // 
             // okButton
             // 
@@ -98,6 +99,7 @@ namespace FCartographer.Window
             this.okButton.TabIndex = 2;
             this.okButton.Text = "Ok";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
@@ -107,6 +109,7 @@ namespace FCartographer.Window
             this.cancelButton.TabIndex = 3;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // label1
             // 
@@ -467,6 +470,8 @@ namespace FCartographer.Window
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.previewButton);
             this.Controls.Add(this.tabGroup);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LayerSettingsWindow";
             this.Text = "Layer Settings";
             this.waterLightingTab.ResumeLayout(false);

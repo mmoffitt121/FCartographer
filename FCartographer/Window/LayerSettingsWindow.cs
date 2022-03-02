@@ -15,12 +15,25 @@ namespace FCartographer.Window
         private Layer layer;
         private Form1 parentform;
 
+        private bool old_torender;
+
         private bool raylighting_enabled;
         private float intensity;
         private int ambient;
         private float dropoff;
         private float direction;
         private float angle;
+        private Color raycolor;
+
+        private bool old_raylighting_enabled;
+        private float old_intensity;
+        private int old_ambient;
+        private float old_dropoff;
+        private float old_direction;
+        private float old_angle;
+        private Color old_raycolor;
+
+        private bool savechanges;
 
         /// <summary>
         /// Constructor that takes layer to change settings of and parent form as input
@@ -33,6 +46,8 @@ namespace FCartographer.Window
 
             layer = _layer;
             parentform = _parentform;
+
+            old_torender = layer.ToRender();
 
             switch (layer.GetType())
             {
@@ -48,6 +63,16 @@ namespace FCartographer.Window
                     dropoff = lyr.rts.dropoff;
                     direction = lyr.rts.direction;
                     angle = lyr.rts.angle;
+                    raycolor = lyr.rts.lightcolor;
+
+                    old_raylighting_enabled = lyr.render_rays;
+                    old_intensity = lyr.rts.intensity;
+                    old_ambient = lyr.rts.ambient;
+                    old_dropoff = lyr.rts.dropoff;
+                    old_direction = lyr.rts.direction;
+                    old_angle = lyr.rts.angle;
+                    old_raycolor = lyr.rts.lightcolor;
+
                     break;
             }
         }
@@ -87,6 +112,93 @@ namespace FCartographer.Window
             cd.ShowDialog();
 
             rayColorPanel.BackColor = cd.Color;
+            raycolor = cd.Color;
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            savechanges = false;
+            Close();
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            savechanges = true;
+            Close();
+        }
+
+        private void previewButton_Click(object sender, EventArgs e)
+        {
+            SetAndRender();
+        }
+
+        /// <summary>
+        /// What happens when the form closes. If savechanges is set to true, the changes in the form will be applied. If not, values reset to when form opened
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason != CloseReason.UserClosing)
+            {
+                return;
+            }
+
+            if (savechanges)
+            {
+                SetAndRender();
+            }
+            else
+            {
+                ResetAndRender();
+            }
+        }
+
+        private void ResetAndRender()
+        {
+            switch (layer.GetType())
+            {
+                case Layer.LayerType.HeightMap:
+                    HeightLayer lyr = (HeightLayer)layer;
+
+                    lyr.render_rays = old_raylighting_enabled;
+                    lyr.rts.intensity = old_intensity;
+                    lyr.rts.ambient = old_ambient;
+                    lyr.rts.dropoff = old_dropoff;
+                    lyr.rts.direction = old_direction;
+                    lyr.rts.angle = old_angle;
+                    lyr.rts.lightcolor = old_raycolor;
+
+                    lyr.SetToRender(true);
+                    lyr.Render();
+                    lyr.SetToRender(old_torender);
+                    parentform.RenderGraphics(parentform.project.GetGraphics());
+                    break;
+            }
+        }
+
+        private void SetAndRender()
+        {
+            switch (layer.GetType())
+            {
+                case Layer.LayerType.HeightMap:
+                    HeightLayer lyr = (HeightLayer)layer;
+
+                    lyr.render_rays = raylighting_enabled;
+                    lyr.rts.intensity = intensity;
+                    lyr.rts.ambient = ambient;
+                    lyr.rts.dropoff = dropoff;
+                    lyr.rts.direction = direction;
+                    lyr.rts.angle = angle;
+                    lyr.rts.lightcolor = raycolor;
+
+                    lyr.SetToRender(true);
+                    lyr.Render();
+                    lyr.SetToRender(old_torender);
+                    parentform.RenderGraphics(parentform.project.GetGraphics());
+                    break;
+            }
         }
     }
 }

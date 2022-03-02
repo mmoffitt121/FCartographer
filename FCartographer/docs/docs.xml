@@ -2180,6 +2180,12 @@
             <param name="_layer"></param>
             <param name="_parentform"></param>
         </member>
+        <member name="M:FCartographer.Window.LayerSettingsWindow.OnFormClosing(System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            What happens when the form closes. If savechanges is set to true, the changes in the form will be applied. If not, values reset to when form opened
+            </summary>
+            <param name="e"></param>
+        </member>
         <member name="F:FCartographer.Window.LayerSettingsWindow.components">
             <summary>
             Required designer variable.
