@@ -90,7 +90,6 @@ namespace FCartographer
 
                 rws.level = level;
                 rws.c1 = color1;
-                rws.intensity = 100;
                 rws.Render();
             }
         }

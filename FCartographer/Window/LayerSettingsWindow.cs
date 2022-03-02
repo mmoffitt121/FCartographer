@@ -15,6 +15,13 @@ namespace FCartographer.Window
         private Layer layer;
         private Form1 parentform;
 
+        private bool raylighting_enabled;
+        private float intensity;
+        private int ambient;
+        private float dropoff;
+        private float direction;
+        private float angle;
+
         /// <summary>
         /// Constructor that takes layer to change settings of and parent form as input
         /// </summary>
@@ -26,6 +33,55 @@ namespace FCartographer.Window
 
             layer = _layer;
             parentform = _parentform;
+
+            switch (layer.GetType())
+            {
+                case Layer.LayerType.HeightMap:
+                    string[] tokeep = { "Ray Lighting", "Gradient Lighting", "Contour Lines" };
+                    RemoveAllOtherTabs(tokeep);
+
+                    HeightLayer lyr = (HeightLayer)layer;
+
+                    raylighting_enabled = lyr.render_rays;
+                    intensity = lyr.rts.intensity;
+                    ambient = lyr.rts.ambient;
+                    dropoff = lyr.rts.dropoff;
+                    direction = lyr.rts.direction;
+                    angle = lyr.rts.angle;
+                    break;
+            }
+        }
+
+        private void RemoveAllOtherTabs(string[] tokeep)
+        {
+            bool[] remove = new bool[tabGroup.TabCount];
+            foreach (TabPage t in tabGroup.TabPages)
+            {
+                bool keep = false;
+                foreach (string s in tokeep)
+                {
+                    if (t.Text.Equals(s))
+                    {
+                        keep = true;
+                        break;
+                    }
+                }
+
+                if (!keep)
+                {
+                    tabGroup.TabPages.Remove(t);
+                }
+            }
+        }
+
+        private void rayColorPanel_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.Color = rayColorPanel.BackColor;
+
+            cd.ShowDialog();
+
+            rayColorPanel.BackColor = cd.Color;
         }
     }
 }

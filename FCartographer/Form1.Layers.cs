@@ -251,15 +251,6 @@ namespace FCartographer
             LayerSettingsWindow lsw = new LayerSettingsWindow(project.CurrentLayer(), this);
 
             lsw.ShowDialog();
-
-            if (lsw.DialogResult == DialogResult.OK)
-            {
-
-            }
-            else
-            {
-
-            }
         }
 
         /// <summary>

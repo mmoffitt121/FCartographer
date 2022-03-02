@@ -141,6 +141,13 @@ namespace FCartographer
             if (terrain != null)
             {
                 terr = BitmapDataConverter.BitmapToByteArray(terrain.GetData());
+
+                if (!independentlighting)
+                {
+                    angle = terrain.rts.angle;
+                    direction = terrain.rts.direction;
+                    lightcolor = terrain.rts.lightcolor;
+                }
             }
 
             float dx = MathF.Cos((180 + direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
@@ -161,9 +168,6 @@ namespace FCartographer
                 }
             }
 
-            lightcolor = Color.FromArgb(255, 200, 255, 255);
-
-
             int range = max - min;
 
             byte lr = lightcolor.R;
@@ -171,8 +175,6 @@ namespace FCartographer
             byte lb = lightcolor.B;
 
             float amb = ((float)ambient) / 255;
-
-            watercontrast = 0.017f;
 
             Color litcolor = Color.FromArgb(
                 255,
@@ -275,15 +277,13 @@ namespace FCartographer
                     // Ray lighting calculation
                     // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
 
-                    render_rays = true;
-
                     if (render_rays)
                     {
                         float x = i % wid / 4;
                         float y = i / wid;
 
                         float h;
-                        render_waves = true;
+
                         if (render_waves)
                         {
                             h = inp[i] / range * 10 + level;
@@ -305,8 +305,6 @@ namespace FCartographer
                             y += dy;
                             h += dh;
                         }
-
-                        intensity = 0.6f;
 
                         r = (byte)Math.Clamp(amb * r + luminosity * lr * intensity * ((float)r) / 255, 0, 255);
                         g = (byte)Math.Clamp(amb * g + luminosity * lg * intensity * ((float)g) / 255, 0, 255);
@@ -412,6 +410,11 @@ namespace FCartographer
             watercontrast = 0.015f;
 
             dropoffdepth = 160;
+
+            render_rays = true;
+            render_depth = true;
+            render_waves = true;
+            render_sun_reflection = true;
         }
     }
 }
