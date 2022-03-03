@@ -147,6 +147,9 @@ namespace FCartographer
                     angle = terrain.rts.angle;
                     direction = terrain.rts.direction;
                     lightcolor = terrain.rts.lightcolor;
+                    dropoff = terrain.rts.dropoff;
+                    ambient = terrain.rts.ambient;
+                    intensity = terrain.rts.intensity;
                 }
             }
 

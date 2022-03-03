@@ -84,6 +84,7 @@ namespace FCartographer.Window
                     dropOffSlider.Value = (int)(dropoff * 100);
                     directionSlider.Value = (int)direction;
                     angleSlider.Value = (int)angle;
+                    rayLightingEnabled.Checked = raylighting_enabled;
 
                     intensityDisplay.Text = (int)(intensity * 100) + " %";
                     ambientDisplay.Text = ambient + "";
@@ -125,6 +126,11 @@ namespace FCartographer.Window
         // ---
         // Ray Lighting Settings
         // ---
+
+        private void rayLightingEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            raylighting_enabled = rayLightingEnabled.Checked;
+        }
 
         private void intensitySlider_Scroll(object sender, EventArgs e)
         {

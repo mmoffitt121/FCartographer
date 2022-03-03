@@ -63,7 +63,7 @@ namespace FCartographer.Window
             this.intensityDisplay = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.ambientSlider = new System.Windows.Forms.TrackBar();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.rayLightingEnabled = new System.Windows.Forms.CheckBox();
             this.enabledControl = new System.Windows.Forms.Label();
             this.lightIntensityLabel = new System.Windows.Forms.Label();
             this.intensitySlider = new System.Windows.Forms.TrackBar();
@@ -262,7 +262,7 @@ namespace FCartographer.Window
             this.rayLightingTab.Controls.Add(this.intensityDisplay);
             this.rayLightingTab.Controls.Add(this.label2);
             this.rayLightingTab.Controls.Add(this.ambientSlider);
-            this.rayLightingTab.Controls.Add(this.checkBox1);
+            this.rayLightingTab.Controls.Add(this.rayLightingEnabled);
             this.rayLightingTab.Controls.Add(this.enabledControl);
             this.rayLightingTab.Controls.Add(this.lightIntensityLabel);
             this.rayLightingTab.Controls.Add(this.intensitySlider);
@@ -415,14 +415,15 @@ namespace FCartographer.Window
             this.ambientSlider.TickFrequency = 0;
             this.ambientSlider.Scroll += new System.EventHandler(this.ambientSlider_Scroll);
             // 
-            // checkBox1
+            // rayLightingEnabled
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(404, 6);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.rayLightingEnabled.AutoSize = true;
+            this.rayLightingEnabled.Location = new System.Drawing.Point(404, 6);
+            this.rayLightingEnabled.Name = "rayLightingEnabled";
+            this.rayLightingEnabled.Size = new System.Drawing.Size(15, 14);
+            this.rayLightingEnabled.TabIndex = 3;
+            this.rayLightingEnabled.UseVisualStyleBackColor = true;
+            this.rayLightingEnabled.CheckedChanged += new System.EventHandler(this.rayLightingEnabled_CheckedChanged);
             // 
             // enabledControl
             // 
@@ -534,7 +535,7 @@ namespace FCartographer.Window
         private System.Windows.Forms.Label intensityDisplay;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar ambientSlider;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox rayLightingEnabled;
         private System.Windows.Forms.Label enabledControl;
         private System.Windows.Forms.Label lightIntensityLabel;
         private System.Windows.Forms.TrackBar intensitySlider;

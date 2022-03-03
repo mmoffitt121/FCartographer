@@ -1163,6 +1163,16 @@
             Determines how high a wave will be, range = 0 - 128
             </summary>
         </member>
+        <member name="F:FCartographer.WaterLayer.angle">
+            <summary>
+            Angle from sky light hits
+            </summary>
+        </member>
+        <member name="F:FCartographer.WaterLayer.direction">
+            <summary>
+            Cardinal direction light hits
+            </summary>
+        </member>
         <member name="M:FCartographer.WaterLayer.Render">
             <summary>
             Override void that composits temp data to the layer.
