@@ -64,6 +64,15 @@ namespace FCartographer
         public int waveamplitude;
 
         /// <summary>
+        /// Angle from sky light hits
+        /// </summary>
+        public int angle;
+        /// <summary>
+        /// Cardinal direction light hits
+        /// </summary>
+        public int direction;
+
+        /// <summary>
         /// Override void that composits temp data to the layer.
         /// </summary>
         public override void Render()
@@ -76,7 +85,7 @@ namespace FCartographer
                 rws.SetTerrain(terrain);
                 if (terrain == null)
                 {
-                    rws.SetAngles(45, -45);
+                    rws.SetAngles(direction, angle);
                 }
                 else
                 {

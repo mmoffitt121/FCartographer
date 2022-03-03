@@ -150,8 +150,8 @@ namespace FCartographer
                 }
             }
 
-            float dx = MathF.Cos((180 + direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
-            float dy = MathF.Sin((180 + direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
+            float dx = MathF.Cos((180 - direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
+            float dy = MathF.Sin((180 - direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
             float dh = MathF.Cos((angle + 90) * MathF.PI / 180);
 
             int min = 255;
@@ -404,7 +404,7 @@ namespace FCartographer
             ambient = 20;
             dropoff = 0.1f;
             direction = -20f;
-            angle = -30f;
+            angle = 360f - 30f;
             bias = 0;
 
             watercontrast = 0.015f;

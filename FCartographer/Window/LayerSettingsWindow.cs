@@ -15,7 +15,11 @@ namespace FCartographer.Window
         private Layer layer;
         private Form1 parentform;
 
+        private bool savechanges;
+
         private bool old_torender;
+
+        // Ray Lighting
 
         private bool raylighting_enabled;
         private float intensity;
@@ -33,7 +37,9 @@ namespace FCartographer.Window
         private float old_angle;
         private Color old_raycolor;
 
-        private bool savechanges;
+        // Gradient Lighting
+
+
 
         /// <summary>
         /// Constructor that takes layer to change settings of and parent form as input
@@ -73,6 +79,18 @@ namespace FCartographer.Window
                     old_angle = lyr.rts.angle;
                     old_raycolor = lyr.rts.lightcolor;
 
+                    intensitySlider.Value = (int)(intensity * 100);
+                    ambientSlider.Value = ambient;
+                    dropOffSlider.Value = (int)(dropoff * 100);
+                    directionSlider.Value = (int)direction;
+                    angleSlider.Value = (int)angle;
+
+                    intensityDisplay.Text = (int)(intensity * 100) + " %";
+                    ambientDisplay.Text = ambient + "";
+                    dropoffDisplay.Text = (int)(dropoff * 100) + " %";
+                    directionDisplay.Text = direction + "";
+                    angleDisplay.Text = angle + "";
+
                     break;
             }
         }
@@ -104,6 +122,40 @@ namespace FCartographer.Window
             }
         }
 
+        // ---
+        // Ray Lighting Settings
+        // ---
+
+        private void intensitySlider_Scroll(object sender, EventArgs e)
+        {
+            intensity = ((float)intensitySlider.Value) / 100;
+            intensityDisplay.Text = (int)(intensity * 100) + " %";
+        }
+
+        private void ambientSlider_Scroll(object sender, EventArgs e)
+        {
+            ambient = ambientSlider.Value;
+            ambientDisplay.Text = ambient + "";
+        }
+
+        private void dropOffSlider_Scroll(object sender, EventArgs e)
+        {
+            dropoff = ((float)dropOffSlider.Value) / 100;
+            dropoffDisplay.Text = (int)(dropoff * 100) + " %";
+        }
+
+        private void directionSlider_Scroll(object sender, EventArgs e)
+        {
+            direction = directionSlider.Value;
+            directionDisplay.Text = direction + "";
+        }
+
+        private void angleSlider_Scroll(object sender, EventArgs e)
+        {
+            angle = angleSlider.Value;
+            angleDisplay.Text = angle + "";
+        }
+
         private void rayColorPanel_Click(object sender, EventArgs e)
         {
             ColorDialog cd = new ColorDialog();
@@ -114,6 +166,10 @@ namespace FCartographer.Window
             rayColorPanel.BackColor = cd.Color;
             raycolor = cd.Color;
         }
+
+        // ---
+        // Applying Changes
+        // ---
 
         private void cancelButton_Click(object sender, EventArgs e)
         {

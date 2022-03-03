@@ -50,13 +50,13 @@ namespace FCartographer.Window
             this.rayLightingTab = new System.Windows.Forms.TabPage();
             this.rayColorPanel = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.angleDisplay = new System.Windows.Forms.Label();
+            this.directionDisplay = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.angleSlider = new System.Windows.Forms.TrackBar();
             this.label15 = new System.Windows.Forms.Label();
             this.directionSlider = new System.Windows.Forms.TrackBar();
-            this.label4 = new System.Windows.Forms.Label();
+            this.dropoffDisplay = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dropOffSlider = new System.Windows.Forms.TrackBar();
             this.ambientDisplay = new System.Windows.Forms.Label();
@@ -249,13 +249,13 @@ namespace FCartographer.Window
             // 
             this.rayLightingTab.Controls.Add(this.rayColorPanel);
             this.rayLightingTab.Controls.Add(this.label9);
-            this.rayLightingTab.Controls.Add(this.label10);
-            this.rayLightingTab.Controls.Add(this.label13);
+            this.rayLightingTab.Controls.Add(this.angleDisplay);
+            this.rayLightingTab.Controls.Add(this.directionDisplay);
             this.rayLightingTab.Controls.Add(this.label14);
             this.rayLightingTab.Controls.Add(this.angleSlider);
             this.rayLightingTab.Controls.Add(this.label15);
             this.rayLightingTab.Controls.Add(this.directionSlider);
-            this.rayLightingTab.Controls.Add(this.label4);
+            this.rayLightingTab.Controls.Add(this.dropoffDisplay);
             this.rayLightingTab.Controls.Add(this.label3);
             this.rayLightingTab.Controls.Add(this.dropOffSlider);
             this.rayLightingTab.Controls.Add(this.ambientDisplay);
@@ -294,23 +294,23 @@ namespace FCartographer.Window
             this.label9.TabIndex = 18;
             this.label9.Text = "Color";
             // 
-            // label10
+            // angleDisplay
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(379, 238);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(25, 15);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "360";
+            this.angleDisplay.AutoSize = true;
+            this.angleDisplay.Location = new System.Drawing.Point(379, 238);
+            this.angleDisplay.Name = "angleDisplay";
+            this.angleDisplay.Size = new System.Drawing.Size(25, 15);
+            this.angleDisplay.TabIndex = 16;
+            this.angleDisplay.Text = "360";
             // 
-            // label13
+            // directionDisplay
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(380, 187);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(25, 15);
-            this.label13.TabIndex = 15;
-            this.label13.Text = "360";
+            this.directionDisplay.AutoSize = true;
+            this.directionDisplay.Location = new System.Drawing.Point(380, 187);
+            this.directionDisplay.Name = "directionDisplay";
+            this.directionDisplay.Size = new System.Drawing.Size(25, 15);
+            this.directionDisplay.TabIndex = 15;
+            this.directionDisplay.Text = "360";
             // 
             // label14
             // 
@@ -329,6 +329,7 @@ namespace FCartographer.Window
             this.angleSlider.Size = new System.Drawing.Size(266, 45);
             this.angleSlider.TabIndex = 13;
             this.angleSlider.TickFrequency = 0;
+            this.angleSlider.Scroll += new System.EventHandler(this.angleSlider_Scroll);
             // 
             // label15
             // 
@@ -347,24 +348,25 @@ namespace FCartographer.Window
             this.directionSlider.Size = new System.Drawing.Size(266, 45);
             this.directionSlider.TabIndex = 11;
             this.directionSlider.TickFrequency = 0;
+            this.directionSlider.Scroll += new System.EventHandler(this.directionSlider_Scroll);
             // 
-            // label4
+            // dropoffDisplay
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(379, 136);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 15);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "10 %";
+            this.dropoffDisplay.AutoSize = true;
+            this.dropoffDisplay.Location = new System.Drawing.Point(379, 136);
+            this.dropoffDisplay.Name = "dropoffDisplay";
+            this.dropoffDisplay.Size = new System.Drawing.Size(32, 15);
+            this.dropoffDisplay.TabIndex = 10;
+            this.dropoffDisplay.Text = "10 %";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(7, 136);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 15);
+            this.label3.Size = new System.Drawing.Size(66, 15);
             this.label3.TabIndex = 9;
-            this.label3.Text = "Dropoff";
+            this.label3.Text = "Persistence";
             // 
             // dropOffSlider
             // 
@@ -374,6 +376,7 @@ namespace FCartographer.Window
             this.dropOffSlider.Size = new System.Drawing.Size(266, 45);
             this.dropOffSlider.TabIndex = 8;
             this.dropOffSlider.TickFrequency = 0;
+            this.dropOffSlider.Scroll += new System.EventHandler(this.dropOffSlider_Scroll);
             // 
             // ambientDisplay
             // 
@@ -410,6 +413,7 @@ namespace FCartographer.Window
             this.ambientSlider.Size = new System.Drawing.Size(266, 45);
             this.ambientSlider.TabIndex = 4;
             this.ambientSlider.TickFrequency = 0;
+            this.ambientSlider.Scroll += new System.EventHandler(this.ambientSlider_Scroll);
             // 
             // checkBox1
             // 
@@ -446,6 +450,7 @@ namespace FCartographer.Window
             this.intensitySlider.Size = new System.Drawing.Size(266, 45);
             this.intensitySlider.TabIndex = 0;
             this.intensitySlider.TickFrequency = 0;
+            this.intensitySlider.Scroll += new System.EventHandler(this.intensitySlider_Scroll);
             // 
             // tabGroup
             // 
@@ -516,13 +521,13 @@ namespace FCartographer.Window
         private System.Windows.Forms.TabPage rayLightingTab;
         private System.Windows.Forms.Panel rayColorPanel;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label angleDisplay;
+        private System.Windows.Forms.Label directionDisplay;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TrackBar angleSlider;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TrackBar directionSlider;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label dropoffDisplay;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TrackBar dropOffSlider;
         private System.Windows.Forms.Label ambientDisplay;

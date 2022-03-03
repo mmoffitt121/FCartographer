@@ -115,7 +115,7 @@ namespace FCartographer
 
             dropoff = 0.1f;
             direction = 20f;
-            angle = -30f;
+            angle = 360f - 30f;
             bias = 0;
             intensity = 0.6f;
             ambient = 100;
