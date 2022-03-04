@@ -4,9 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Diagnostics;
-using OpenCL.Net.Extensions;
-using OpenCL.Net;
-using System.Linq;
+using OpenCL;
 
 namespace FCartographer
 {
@@ -125,24 +123,6 @@ namespace FCartographer
             byte lr = lightcolor.R;
             byte lg = lightcolor.G;
             byte lb = lightcolor.B;
-
-            Event event0;
-            ErrorCode err;
-            Platform[] platforms = Cl.GetPlatformIDs(out err);
-            Device[] devices = Cl.GetDeviceIDs(platforms[0], DeviceType.Gpu, out err);
-            Device device = devices[0];
-            Context context = Cl.CreateContext(null, 1, devices, null, IntPtr.Zero, out err);
-            CommandQueue cmdQueue = Cl.CreateCommandQueue(context, device, CommandQueueProperties.None, out err);
-
-            // Create and build a program from our OpenCL-C source code !!! BYTE WON'T WORK?? !!!
-            string programSource = @"
-            __kernel void doubleMe(__global byte* input, __global float* output)
-            {
-                size_t i = get_global_id(0);
-                output = input + input;
-            };";
-            OpenCL.Net.Program program = Cl.CreateProgramWithSource(context, 1, new[] { programSource }, null, out err);
-            Cl.BuildProgram(program, 0, null, string.Empty, null, IntPtr.Zero);  //"-cl-mad-enable"
 
             float luminosity;
             for (int i = 0; i < wid * hei; i += 4)

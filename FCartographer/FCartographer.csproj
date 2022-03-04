@@ -9,7 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenCL.Net" Version="2.2.9" />
+    <PackageReference Include="Cloo.clSharp" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="lib\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="OpenCLlib">
+      <HintPath>..\..\ClooTest\ClooTest\lib\OpenCLlib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
