@@ -1507,6 +1507,14 @@
             Color of the light
             </summary>
         </member>
+        <member name="F:FCartographer.RayTerrainShader.rendermode">
+            <summary>
+            0 if default
+            1 if accelerated by CPU only
+            2 if accelerated by OpenCL
+            3 if accelerated by CUDA
+            </summary>
+        </member>
         <member name="M:FCartographer.RayTerrainShader.Render">
             <summary>
             Render override function

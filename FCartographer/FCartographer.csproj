@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
 	<DocumentationFile>docs/docs.xml</DocumentationFile>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -10,12 +10,6 @@
 
   <ItemGroup>
     <PackageReference Include="ILGPU" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="OpenCLlib">
-      <HintPath>..\..\ClooTest\ClooTest\lib\OpenCLlib.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

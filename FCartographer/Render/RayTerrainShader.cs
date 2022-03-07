@@ -5,6 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Diagnostics;
 using ILGPU;
+using ILGPU.Runtime;
+using ILGPU.Runtime.CPU;
+using ILGPU.Runtime.Cuda;
+using ILGPU.Runtime.OpenCL;
 
 namespace FCartographer
 {
@@ -52,12 +56,24 @@ namespace FCartographer
         public Color lightcolor;
 
         /// <summary>
+        /// 0 if default
+        /// 1 if accelerated by CPU only
+        /// 2 if accelerated by OpenCL
+        /// 3 if accelerated by CUDA
+        /// </summary>
+        public int rendermode;
+
+        private Context context;
+        private Accelerator accelerator;
+        private System.Action<Index1D, int, ArrayView<byte>> renderraykernel;
+
+        /// <summary>
         /// Render override function
         /// </summary>
         public override void Render()
         {
-            OpenCLRenderShadows();
-            //RenderShadows();
+            rendermode = 3;
+            RenderShadows();
         }
 
         private void RenderShadows()
@@ -65,52 +81,23 @@ namespace FCartographer
             byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData());
             byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput());
 
-            int wid = GetData().Width * 4;
-            int hei = GetData().Height;
-
-            float dx = MathF.Cos((180 - direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
-            float dy = MathF.Sin((180 - direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
-            float dh = MathF.Cos((angle + 90) * MathF.PI / 180);     
-
-            float amb = ((float)ambient) / 255;
-
-            byte lr = lightcolor.R;
-            byte lg = lightcolor.G;
-            byte lb = lightcolor.B;
-
-            float luminosity;
-            for (int i = 0; i < wid * hei; i += 4)
+            switch (rendermode)
             {
-                float x = i % wid / 4;
-                float y = i / wid;
-                float h = inp[i];
-                luminosity = 1f;
-                while (x < wid / 4 && x >= 0 && y < hei && y >= 0 && h <= 255 && h >= 0 && luminosity > 0)
-                {
-                    if (luminosity > 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]))
-                    {
-                        luminosity = 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]);
-                    }
-
-                    x += dx;
-                    y += dy;
-                    h += dh;
-                }
-
-                outp[i + 3] = 255;
-                outp[i + 2] = (byte)Math.Clamp(amb * outp[i + 2] + luminosity * lr * intensity * ((float)outp[i + 2]) / 255, 0, 255);
-                outp[i + 1] = (byte)Math.Clamp(amb * outp[i + 1] + luminosity * lg * intensity * ((float)outp[i + 1]) / 255, 0, 255);
-                outp[i + 0] = (byte)Math.Clamp(amb * outp[i + 0] + luminosity * lb * intensity * ((float)outp[i + 0]) / 255, 0, 255);
+                case 0:
+                    DefaultRenderShadows(inp, outp);
+                    break;
+                case 1:
+                case 2:
+                case 3:
+                    AcceleratedRenderShadows(inp, outp);
+                    break;
             }
 
             BitmapDataConverter.DrawImage(GetOutput(), outp, true);
         }
 
-        private void OpenCLRenderShadows()
+        private void DefaultRenderShadows(byte[] inp, byte[] outp)
         {
-            byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData());
-            byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput());
-
             int wid = GetData().Width * 4;
             int hei = GetData().Height;
 
@@ -148,8 +135,53 @@ namespace FCartographer
                 outp[i + 1] = (byte)Math.Clamp(amb * outp[i + 1] + luminosity * lg * intensity * ((float)outp[i + 1]) / 255, 0, 255);
                 outp[i + 0] = (byte)Math.Clamp(amb * outp[i + 0] + luminosity * lb * intensity * ((float)outp[i + 0]) / 255, 0, 255);
             }
+        }
 
-            BitmapDataConverter.DrawImage(GetOutput(), outp, true);
+        private void CompileKernel()
+        {
+            context = Context.CreateDefault();
+            
+            switch (rendermode)
+            {
+                case 1:
+                    accelerator = context.CreateCPUAccelerator(0);
+                    break;
+                case 2:
+                    context = Context.Create(builder => { builder.Assertions().Verify().OpenCL(); });
+                    accelerator = context.CreateCLAccelerator(0);
+                    break;
+                case 3:
+                    accelerator = context.CreateCudaAccelerator(0);
+                    break;
+            }
+
+            Debug.WriteLine(accelerator.ToString());
+
+            renderraykernel = accelerator.LoadAutoGroupedStreamKernel<Index1D, int, ArrayView<byte>>(RenderRayKernel);
+        }
+
+        private void AcceleratedRenderShadows(byte[] inp, byte[] outp)
+        {
+            Stopwatch sw = Stopwatch.StartNew();
+            MemoryBuffer1D<byte, Stride1D.Dense> output = accelerator.Allocate1D<byte>(outp.Length);
+            Debug.WriteLine("0 " + sw.ElapsedMilliseconds);
+
+            renderraykernel(outp.Length, outp.Length, output.View);
+            Debug.WriteLine("1 " + sw.ElapsedMilliseconds);
+            accelerator.Synchronize();
+            Debug.WriteLine("2 " + sw.ElapsedMilliseconds);
+            
+            Array.Copy(output.GetAsArray1D<byte>(), outp, outp.Length);
+            Debug.WriteLine("3 " + sw.ElapsedMilliseconds);
+        }
+
+        static void RenderRayKernel(Index1D index, int len, ArrayView<byte> bytes)
+        {
+            bytes[index] = (byte)(255 * ((int)index) / len);
+            if (index % 4 == 3)
+            {
+                bytes[index] = 255;
+            }
         }
 
         /// <summary>
@@ -167,6 +199,9 @@ namespace FCartographer
             bias = 0;
             intensity = 0.6f;
             ambient = 100;
+
+            rendermode = 3;
+            CompileKernel();
         }
     }
 }
