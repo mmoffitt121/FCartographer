@@ -18,8 +18,11 @@ namespace FCartographer
     {
         private void renderLayerButton_Click(object sender, EventArgs e)
         {
-            project.CurrentLayer().Render();
-            RenderGraphics(project.GetGraphics());
+            if (project.CurrentLayer() != null)
+            {
+                project.CurrentLayer().Render();
+                RenderGraphics(project.GetGraphics());
+            }
         }
     }
 }
