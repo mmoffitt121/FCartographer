@@ -9,11 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cloo.clSharp" Version="1.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="lib\" />
+    <PackageReference Include="ILGPU" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Diagnostics;
-using OpenCL;
+using ILGPU;
 
 namespace FCartographer
 {
