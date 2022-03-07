@@ -85,6 +85,7 @@ namespace FCartographer.Window
                     directionSlider.Value = (int)direction;
                     angleSlider.Value = (int)angle;
                     rayLightingEnabled.Checked = raylighting_enabled;
+                    rayColorPanel.BackColor = raycolor;
 
                     intensityDisplay.Text = (int)(intensity * 100) + " %";
                     ambientDisplay.Text = ambient + "";
