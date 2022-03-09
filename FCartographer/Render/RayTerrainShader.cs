@@ -147,20 +147,14 @@ namespace FCartographer
                     break;
             }
 
-            Debug.WriteLine(accelerator.ToString());
-
             renderraykernel = accelerator.LoadAutoGroupedStreamKernel<Index1D, ArrayView<byte>, ArrayView<byte>, int, int, float, float, float, float, byte, byte, byte, float, int, float>(RenderRayKernel);
         }
 
         private void AcceleratedRenderShadows(byte[] inp, byte[] outp)
         {
-            Stopwatch sw = Stopwatch.StartNew();
             using (MemoryBuffer1D<byte, Stride1D.Dense> output = accelerator.Allocate1D<byte>(outp))
             using (MemoryBuffer1D<byte, Stride1D.Dense> input = accelerator.Allocate1D<byte>(inp))
             {
-                Debug.WriteLine("0 " + sw.ElapsedMilliseconds);
-                sw.Restart();
-
                 int wid = GetData().Width;
                 int hei = GetData().Height;
 
@@ -175,16 +169,9 @@ namespace FCartographer
                 byte lb = lightcolor.B;
 
                 renderraykernel(wid * hei, input.View, output.View, wid, hei, dx, dy, dh, amb, lr, lg, lb, dropoff, bias, intensity);
-                Debug.WriteLine("1 " + sw.ElapsedMilliseconds);
                 accelerator.Synchronize();
-                sw.Restart();
-                Debug.WriteLine("2 " + sw.ElapsedMilliseconds);
-                sw.Restart();
 
                 Array.Copy(output.GetAsArray1D<byte>(), outp, outp.Length);
-                Debug.WriteLine("3 " + sw.ElapsedMilliseconds);
-
-                Debug.WriteLine("-=-=-");
             }  
         }
 

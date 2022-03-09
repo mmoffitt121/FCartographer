@@ -22,7 +22,7 @@ namespace FCartographer
         /// 2 if accelerated by OpenCL
         /// 3 if accelerated by CUDA
         /// </summary>
-        public int rendermode;
+        public static int rendermode;
 
         /// <summary>
         /// Number between 0 and 1 that controls the opacity of the layer
