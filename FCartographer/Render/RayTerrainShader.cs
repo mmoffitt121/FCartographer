@@ -65,7 +65,7 @@ namespace FCartographer
 
         private Context context;
         private Accelerator accelerator;
-        private System.Action<Index1D, int, ArrayView<byte>> renderraykernel;
+        private System.Action<Index1D, ArrayView<byte>, ArrayView<byte>, int, int, float, float, float, float, byte, byte, byte, float, int, float> renderraykernel;
 
         /// <summary>
         /// Render override function
@@ -157,31 +157,106 @@ namespace FCartographer
 
             Debug.WriteLine(accelerator.ToString());
 
-            renderraykernel = accelerator.LoadAutoGroupedStreamKernel<Index1D, int, ArrayView<byte>>(RenderRayKernel);
+            renderraykernel = accelerator.LoadAutoGroupedStreamKernel<Index1D, ArrayView<byte>, ArrayView<byte>, int, int, float, float, float, float, byte, byte, byte, float, int, float>(RenderRayKernel);
         }
 
         private void AcceleratedRenderShadows(byte[] inp, byte[] outp)
         {
             Stopwatch sw = Stopwatch.StartNew();
-            MemoryBuffer1D<byte, Stride1D.Dense> output = accelerator.Allocate1D<byte>(outp.Length);
-            Debug.WriteLine("0 " + sw.ElapsedMilliseconds);
+            using (MemoryBuffer1D<byte, Stride1D.Dense> output = accelerator.Allocate1D<byte>(outp))
+            using (MemoryBuffer1D<byte, Stride1D.Dense> input = accelerator.Allocate1D<byte>(inp))
+            {
+                Debug.WriteLine("0 " + sw.ElapsedMilliseconds);
+                sw.Restart();
 
-            renderraykernel(outp.Length, outp.Length, output.View);
-            Debug.WriteLine("1 " + sw.ElapsedMilliseconds);
-            accelerator.Synchronize();
-            Debug.WriteLine("2 " + sw.ElapsedMilliseconds);
-            
-            Array.Copy(output.GetAsArray1D<byte>(), outp, outp.Length);
-            Debug.WriteLine("3 " + sw.ElapsedMilliseconds);
+                int wid = GetData().Width;
+                int hei = GetData().Height;
+
+                float dx = MathF.Cos((180 - direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
+                float dy = MathF.Sin((180 - direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
+                float dh = MathF.Cos((angle + 90) * MathF.PI / 180);
+
+                float amb = ((float)ambient) / 255;
+
+                byte lr = lightcolor.R;
+                byte lg = lightcolor.G;
+                byte lb = lightcolor.B;
+
+                renderraykernel(wid * hei, input.View, output.View, wid, hei, dx, dy, dh, amb, lr, lg, lb, dropoff, bias, intensity);
+                Debug.WriteLine("1 " + sw.ElapsedMilliseconds);
+                accelerator.Synchronize();
+                sw.Restart();
+                Debug.WriteLine("2 " + sw.ElapsedMilliseconds);
+                sw.Restart();
+
+                Array.Copy(output.GetAsArray1D<byte>(), outp, outp.Length);
+                Debug.WriteLine("3 " + sw.ElapsedMilliseconds);
+
+                Debug.WriteLine("-=-=-");
+            }  
         }
 
-        static void RenderRayKernel(Index1D index, int len, ArrayView<byte> bytes)
+        static void RenderRayKernel(Index1D index, ArrayView<byte> inp, ArrayView<byte> outp, int wid, int hei, float dx, float dy, float dh, float amb, byte lr, byte lg, byte lb, float dropoff, int bias, float intensity)
         {
-            bytes[index] = (byte)(255 * ((int)index) / len);
-            if (index % 4 == 3)
+            int i = index * 4;
+            float x = index % wid;
+            float y = index / wid;
+            float h = inp[i];
+            float luminosity = 1f;
+            while (x < wid / 4 && x >= 0 && y < hei && y >= 0 && h <= 255 && h >= 0 && luminosity > 0)
             {
-                bytes[index] = 255;
+                if (luminosity > 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]))
+                {
+                    luminosity = 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]);
+                }
+
+                x += dx;
+                y += dy;
+                h += dh;
             }
+
+            float outr = amb * outp[i + 2] + luminosity * lr * intensity * ((float)outp[i + 2]) / 255;
+            float outg = amb * outp[i + 1] + luminosity * lg * intensity * ((float)outp[i + 1]) / 255;
+            float outb = amb * outp[i + 0] + luminosity * lb * intensity * ((float)outp[i + 0]) / 255;
+
+            /*outp[i + 2] = (byte)IntrinsicMath.Clamp(outr, 0, 255);
+            outp[i + 1] = (byte)IntrinsicMath.Clamp(outg, 0, 255);
+            outp[i + 0] = (byte)IntrinsicMath.Clamp(outb, 0, 255);*/
+
+            if (outr > 255)
+            {
+                outr = 255;
+            }
+            if (outr < 0)
+            {
+                outr = 0;
+            }
+            outp[i + 2] = (byte)outr;
+
+            if (outg > 255)
+            {
+                outg = 255;
+            }
+            if (outg < 0)
+            {
+                outg = 0;
+            }
+            outp[i + 1] = (byte)outg;
+
+            if (outb > 255)
+            {
+                outb = 255;
+            }
+            if (outb < 0)
+            {
+                outb = 0;
+            }
+            outp[i + 0] = (byte)outb;
+
+            outp[i + 3] = 255;
+            //outp[i + 2] = (byte)Math.Clamp(amb * outp[i + 2] + luminosity * lr * intensity * ((float)outp[i + 2]) / 255, 0, 255);
+            //outp[i + 1] = (byte)Math.Clamp(amb * outp[i + 1] + luminosity * lg * intensity * ((float)outp[i + 1]) / 255, 0, 255);
+            //outp[i + 0] = (byte)Math.Clamp(amb * outp[i + 0] + luminosity * lb * intensity * ((float)outp[i + 0]) / 255, 0, 255);
         }
 
         /// <summary>
