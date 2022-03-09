@@ -17,6 +17,14 @@ namespace FCartographer
         private Bitmap output;
 
         /// <summary>
+        /// 0 if default
+        /// 1 if accelerated by CPU only
+        /// 2 if accelerated by OpenCL
+        /// 3 if accelerated by CUDA
+        /// </summary>
+        public int rendermode;
+
+        /// <summary>
         /// Number between 0 and 1 that controls the opacity of the layer
         /// </summary>
         public float opacity;

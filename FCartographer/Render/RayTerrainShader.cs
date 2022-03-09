@@ -55,14 +55,6 @@ namespace FCartographer
         /// </summary>
         public Color lightcolor;
 
-        /// <summary>
-        /// 0 if default
-        /// 1 if accelerated by CPU only
-        /// 2 if accelerated by OpenCL
-        /// 3 if accelerated by CUDA
-        /// </summary>
-        public int rendermode;
-
         private Context context;
         private Accelerator accelerator;
         private System.Action<Index1D, ArrayView<byte>, ArrayView<byte>, int, int, float, float, float, float, byte, byte, byte, float, int, float> renderraykernel;
@@ -72,7 +64,6 @@ namespace FCartographer
         /// </summary>
         public override void Render()
         {
-            rendermode = 3;
             RenderShadows();
         }
 
@@ -93,7 +84,8 @@ namespace FCartographer
                     break;
             }
 
-            BitmapDataConverter.DrawImage(GetOutput(), outp, true);
+            //BitmapDataConverter.DrawImage(GetOutput(), outp, true);
+            BitmapDataConverter.DrawByteArrayToBitmap(GetOutput(), outp);
         }
 
         private void DefaultRenderShadows(byte[] inp, byte[] outp)

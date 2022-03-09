@@ -1507,14 +1507,6 @@
             Color of the light
             </summary>
         </member>
-        <member name="F:FCartographer.RayTerrainShader.rendermode">
-            <summary>
-            0 if default
-            1 if accelerated by CPU only
-            2 if accelerated by OpenCL
-            3 if accelerated by CUDA
-            </summary>
-        </member>
         <member name="M:FCartographer.RayTerrainShader.Render">
             <summary>
             Render override function
@@ -1681,6 +1673,14 @@
         <member name="T:FCartographer.Renderer">
             <summary>
             Renderer class, used to render parts of layers. Will usually utilize unsafe functions.
+            </summary>
+        </member>
+        <member name="F:FCartographer.Renderer.rendermode">
+            <summary>
+            0 if default
+            1 if accelerated by CPU only
+            2 if accelerated by OpenCL
+            3 if accelerated by CUDA
             </summary>
         </member>
         <member name="F:FCartographer.Renderer.opacity">
@@ -1965,6 +1965,11 @@
         <member name="M:FCartographer.BitmapDataConverter.BitmapToByteArray(System.Drawing.Bitmap)">
             <summary>
             Converts bitmap to byte array
+            </summary>
+        </member>
+        <member name="M:FCartographer.BitmapDataConverter.DrawByteArrayToBitmap(System.Drawing.Bitmap,System.Byte[])">
+            <summary>
+            Marshals byte array to bitmap
             </summary>
         </member>
         <member name="M:FCartographer.BitmapDataConverter.ByteArrayToBitmap(System.Byte[])">

@@ -94,16 +94,24 @@ namespace FCartographer
         public static byte[] BitmapToByteArray(Bitmap bitmap)
         {
             BitmapData dat = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
-            IntPtr top = dat.Scan0;
-            int bytecount = dat.Stride * bitmap.Height;
-
             byte[] output = new byte[bitmap.Width * bitmap.Height * 4];
 
-            Marshal.Copy(top, output, 0, bytecount);
+            Marshal.Copy(dat.Scan0, output, 0, dat.Stride * bitmap.Height);
 
             bitmap.UnlockBits(dat);
 
             return output;
+        }
+
+        /// <summary>
+        /// Marshals byte array to bitmap
+        /// </summary>
+        public static void DrawByteArrayToBitmap(Bitmap bitmap, byte[] bytes)
+        {
+            BitmapData dat = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+            Marshal.Copy(bytes, 0, dat.Scan0, bytes.Length);
+
+            bitmap.UnlockBits(dat);
         }
 
         /// <summary>
