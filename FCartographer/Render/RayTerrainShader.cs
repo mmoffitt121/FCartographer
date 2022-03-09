@@ -203,11 +203,11 @@ namespace FCartographer
             float y = index / wid;
             float h = inp[i];
             float luminosity = 1f;
-            while (x < wid / 4 && x >= 0 && y < hei && y >= 0 && h <= 255 && h >= 0 && luminosity > 0)
+            while (x < wid && x >= 0 && y < hei && y >= 0 && h <= 255 && h >= 0 && luminosity > 0)
             {
-                if (luminosity > 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]))
+                if (luminosity > 1 + dropoff * (h - bias - inp[wid * (int)y * 4 + (int)x * 4]))
                 {
-                    luminosity = 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]);
+                    luminosity = 1 + dropoff * (h - bias - inp[wid * (int)y * 4 + (int)x * 4]);
                 }
 
                 x += dx;
