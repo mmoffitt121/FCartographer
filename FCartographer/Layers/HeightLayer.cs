@@ -29,6 +29,11 @@ namespace FCartographer
         public RayTerrainShader rts;
 
         /// <summary>
+        /// Layer that controls the water rendering
+        /// </summary>
+        public WaterLayer waterlayer;
+
+        /// <summary>
         /// Determines if contour renderer is used
         /// </summary>
         public bool render_contour;
@@ -68,6 +73,30 @@ namespace FCartographer
                 {
                     rts.opacity = 0.5f;
                     rts.Render();
+                }
+
+                if (waterlayer != null)
+                {
+                    waterlayer.Render();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="layers"></param>
+        /// <param name="i"></param>
+        public override void FormConnections(IList<Layer> layers, int i)
+        {
+            waterlayer = null;
+
+            for (int j = i; j < layers.Count; j++)
+            {
+                if (layers[j].GetType() == Layer.LayerType.Ocean)
+                {
+                    waterlayer = (WaterLayer)layers[j];
+                    break;
                 }
             }
         }

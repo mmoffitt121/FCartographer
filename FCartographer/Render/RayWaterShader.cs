@@ -185,12 +185,6 @@ namespace FCartographer
                 (byte)Math.Clamp(amb * c1.G + watercontrast * lg * intensity * ((float)c1.G) / 255, 0, 255),
                 (byte)Math.Clamp(amb * c1.B + watercontrast * lb * intensity * ((float)c1.B) / 255, 0, 255));
 
-            /*ColorHSL litcolorHSL;
-
-            litcolorHSL = ColorHSL.FromARGB(c1);
-            litcolorHSL.L = Math.Clamp(litcolorHSL.L + watercontrast, 0, 1);
-            litcolor = litcolorHSL.ToARGB();*/
-
             for (int i = 0; i < wid * hei; i += 4)
             {
                 // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---

@@ -254,7 +254,6 @@ namespace FCartographer
             intensity = 0.6f;
             ambient = 100;
 
-            rendermode = 3;
             CompileKernel();
         }
     }

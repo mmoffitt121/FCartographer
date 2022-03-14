@@ -734,6 +734,11 @@
             Slow light shader
             </summary>
         </member>
+        <member name="F:FCartographer.HeightLayer.waterlayer">
+            <summary>
+            Layer that controls the water rendering
+            </summary>
+        </member>
         <member name="F:FCartographer.HeightLayer.render_contour">
             <summary>
             Determines if contour renderer is used
@@ -753,6 +758,13 @@
             <summary>
             Override void that composits temp data to the layer.
             </summary>
+        </member>
+        <member name="M:FCartographer.HeightLayer.FormConnections(System.Collections.Generic.IList{FCartographer.Layer},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="layers"></param>
+            <param name="i"></param>
         </member>
         <member name="M:FCartographer.HeightLayer.Draw(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
