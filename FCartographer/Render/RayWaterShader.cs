@@ -314,6 +314,9 @@ namespace FCartographer
                             h += dh;
                         }
 
+                        luminosity = Math.Clamp(luminosity, 0, 1);
+
+                        amb = 1f;
                         r = (byte)Math.Clamp(amb * r + luminosity * lr * intensity * ((float)r) / 255, 0, 255);
                         g = (byte)Math.Clamp(amb * g + luminosity * lg * intensity * ((float)g) / 255, 0, 255);
                         b = (byte)Math.Clamp(amb * b + luminosity * lb * intensity * ((float)b) / 255, 0, 255);

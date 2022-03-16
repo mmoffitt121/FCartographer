@@ -121,6 +121,8 @@ namespace FCartographer
                     h += dh;
                 }
 
+                luminosity = Math.Clamp(luminosity, 0, 1);
+
                 outp[i + 3] = 255;
                 outp[i + 2] = (byte)Math.Clamp(amb * outp[i + 2] + luminosity * lr * intensity * ((float)outp[i + 2]) / 255, 0, 255);
                 outp[i + 1] = (byte)Math.Clamp(amb * outp[i + 1] + luminosity * lg * intensity * ((float)outp[i + 1]) / 255, 0, 255);
@@ -191,6 +193,15 @@ namespace FCartographer
                 x += dx;
                 y += dy;
                 h += dh;
+            }
+
+            if (luminosity > 1)
+            {
+                luminosity = 1;
+            }
+            if (luminosity < 0)
+            {
+                luminosity = 0;
             }
 
             float outr = amb * outp[i + 2] + luminosity * lr * intensity * ((float)outp[i + 2]) / 255;

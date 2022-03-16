@@ -1409,6 +1409,11 @@
             Angle of light source
             </summary>
         </member>
+        <member name="F:FCartographer.GradientTerrainShader.flatten">
+            <summary>
+            Factor by which to flatten the lighting
+            </summary>
+        </member>
         <member name="F:FCartographer.GradientTerrainShader.vectormode">
             <summary>
             0 = precise
@@ -1418,11 +1423,6 @@
         <member name="F:FCartographer.GradientTerrainShader.lightcolor">
             <summary>
             Color of light source
-            </summary>
-        </member>
-        <member name="F:FCartographer.GradientTerrainShader.darkcolor">
-            <summary>
-            Color of shadows
             </summary>
         </member>
         <member name="M:FCartographer.GradientTerrainShader.Render">

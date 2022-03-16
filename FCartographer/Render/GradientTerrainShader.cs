@@ -211,6 +211,7 @@ namespace FCartographer
             intensity = 0.6f;
 
             persistance = 1;
+            flatten = 5;
 
             lightcolor = Color.White;
         }
