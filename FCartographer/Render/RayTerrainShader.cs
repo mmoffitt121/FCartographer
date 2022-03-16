@@ -84,7 +84,6 @@ namespace FCartographer
                     break;
             }
 
-            //BitmapDataConverter.DrawImage(GetOutput(), outp, true);
             BitmapDataConverter.DrawByteArrayToBitmap(GetOutput(), outp);
         }
 
@@ -198,10 +197,6 @@ namespace FCartographer
             float outg = amb * outp[i + 1] + luminosity * lg * intensity * ((float)outp[i + 1]) / 255;
             float outb = amb * outp[i + 0] + luminosity * lb * intensity * ((float)outp[i + 0]) / 255;
 
-            /*outp[i + 2] = (byte)IntrinsicMath.Clamp(outr, 0, 255);
-            outp[i + 1] = (byte)IntrinsicMath.Clamp(outg, 0, 255);
-            outp[i + 0] = (byte)IntrinsicMath.Clamp(outb, 0, 255);*/
-
             if (outr > 255)
             {
                 outr = 255;
@@ -233,9 +228,6 @@ namespace FCartographer
             outp[i + 0] = (byte)outb;
 
             outp[i + 3] = 255;
-            //outp[i + 2] = (byte)Math.Clamp(amb * outp[i + 2] + luminosity * lr * intensity * ((float)outp[i + 2]) / 255, 0, 255);
-            //outp[i + 1] = (byte)Math.Clamp(amb * outp[i + 1] + luminosity * lg * intensity * ((float)outp[i + 1]) / 255, 0, 255);
-            //outp[i + 0] = (byte)Math.Clamp(amb * outp[i + 0] + luminosity * lb * intensity * ((float)outp[i + 0]) / 255, 0, 255);
         }
 
         /// <summary>
