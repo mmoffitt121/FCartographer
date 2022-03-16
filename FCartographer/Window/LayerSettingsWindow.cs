@@ -39,6 +39,20 @@ namespace FCartographer.Window
 
         // Gradient Lighting
 
+        private bool gradientlighting_enabled;
+        private float gintensity;
+        private float gangle;
+        private int gvectormode;
+        private Color glightcolor;
+        private Color gdarkcolor;
+
+        private bool old_gradientlighting_enabled;
+        private float old_gintensity;
+        private float old_gangle;
+        private int old_gvectormode;
+        private Color old_glightcolor;
+        private Color old_gdarkcolor;
+
 
 
         /// <summary>
@@ -62,6 +76,8 @@ namespace FCartographer.Window
                     RemoveAllOtherTabs(tokeep);
 
                     HeightLayer lyr = (HeightLayer)layer;
+
+                    // Ray lighting
 
                     raylighting_enabled = lyr.render_rays;
                     intensity = lyr.rts.intensity;
@@ -92,6 +108,20 @@ namespace FCartographer.Window
                     dropoffDisplay.Text = (int)(dropoff * 100) + " %";
                     directionDisplay.Text = direction + "";
                     angleDisplay.Text = angle + "";
+
+                    // Gradient lighting
+
+                    gradientlighting_enabled = lyr.render_gradient;
+                    gintensity = lyr.gts.intensity;
+                    gangle = lyr.gts.angle;
+                    gvectormode = lyr.gts.vectormode;
+                    glightcolor = lyr.gts.lightcolor;
+
+                    old_gradientlighting_enabled = lyr.render_gradient;
+                    old_gintensity = lyr.gts.intensity;
+                    old_gangle = lyr.gts.angle;
+                    old_gvectormode = lyr.gts.vectormode;
+                    old_glightcolor = lyr.gts.lightcolor;
 
                     break;
             }
@@ -125,8 +155,10 @@ namespace FCartographer.Window
         }
 
         // ---
-        // Ray Lighting Settings
+        // Lighting Settings
         // ---
+
+        // Ray
 
         private void rayLightingEnabled_CheckedChanged(object sender, EventArgs e)
         {
@@ -172,6 +204,13 @@ namespace FCartographer.Window
 
             rayColorPanel.BackColor = cd.Color;
             raycolor = cd.Color;
+        }
+
+        // Gradient
+
+        private void gradientLightingEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            gradientlighting_enabled = gradientLightingEnabled.Checked;
         }
 
         // ---
@@ -225,6 +264,8 @@ namespace FCartographer.Window
                 case Layer.LayerType.HeightMap:
                     HeightLayer lyr = (HeightLayer)layer;
 
+                    // Ray
+
                     lyr.render_rays = old_raylighting_enabled;
                     lyr.rts.intensity = old_intensity;
                     lyr.rts.ambient = old_ambient;
@@ -232,6 +273,10 @@ namespace FCartographer.Window
                     lyr.rts.direction = old_direction;
                     lyr.rts.angle = old_angle;
                     lyr.rts.lightcolor = old_raycolor;
+
+                    // Gradient
+
+                    lyr.render_gradient = old_gradientlighting_enabled;
 
                     lyr.SetToRender(true);
                     lyr.Render();
@@ -248,6 +293,8 @@ namespace FCartographer.Window
                 case Layer.LayerType.HeightMap:
                     HeightLayer lyr = (HeightLayer)layer;
 
+                    // Ray
+
                     lyr.render_rays = raylighting_enabled;
                     lyr.rts.intensity = intensity;
                     lyr.rts.ambient = ambient;
@@ -255,6 +302,10 @@ namespace FCartographer.Window
                     lyr.rts.direction = direction;
                     lyr.rts.angle = angle;
                     lyr.rts.lightcolor = raycolor;
+
+                    // Gradient
+
+                    lyr.render_gradient = gradientlighting_enabled;
 
                     lyr.SetToRender(true);
                     lyr.Render();

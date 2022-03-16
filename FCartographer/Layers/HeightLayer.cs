@@ -150,8 +150,8 @@ namespace FCartographer
             rts = new RayTerrainShader(GetData(), GetOutData());
 
             render_contour = true;
-            render_gradient = false;
-            render_rays = true;
+            render_gradient = true;
+            render_rays = false;
             Render();
         }
 

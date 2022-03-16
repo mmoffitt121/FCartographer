@@ -150,6 +150,7 @@ namespace FCartographer
                     dropoff = terrain.rts.dropoff;
                     ambient = terrain.rts.ambient;
                     intensity = terrain.rts.intensity;
+                    render_rays = terrain.render_rays;
                 }
             }
 

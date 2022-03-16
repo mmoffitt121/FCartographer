@@ -1394,6 +1394,16 @@
             Intensity of light source
             </summary>
         </member>
+        <member name="F:FCartographer.GradientTerrainShader.ambient">
+            <summary>
+            Ambient lighting value
+            </summary>
+        </member>
+        <member name="F:FCartographer.GradientTerrainShader.persistance">
+            <summary>
+            Persistance of light
+            </summary>
+        </member>
         <member name="F:FCartographer.GradientTerrainShader.angle">
             <summary>
             Angle of light source

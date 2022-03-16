@@ -45,7 +45,7 @@ namespace FCartographer.Window
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.gradientLightingTab = new System.Windows.Forms.TabPage();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.gradientLightingEnabled = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.rayLightingTab = new System.Windows.Forms.TabPage();
             this.rayColorPanel = new System.Windows.Forms.Panel();
@@ -217,7 +217,7 @@ namespace FCartographer.Window
             // 
             // gradientLightingTab
             // 
-            this.gradientLightingTab.Controls.Add(this.checkBox2);
+            this.gradientLightingTab.Controls.Add(this.gradientLightingEnabled);
             this.gradientLightingTab.Controls.Add(this.label5);
             this.gradientLightingTab.Location = new System.Drawing.Point(4, 24);
             this.gradientLightingTab.Name = "gradientLightingTab";
@@ -227,14 +227,15 @@ namespace FCartographer.Window
             this.gradientLightingTab.Text = "Gradient Lighting";
             this.gradientLightingTab.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // gradientLightingEnabled
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(404, 6);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(15, 14);
-            this.checkBox2.TabIndex = 4;
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.gradientLightingEnabled.AutoSize = true;
+            this.gradientLightingEnabled.Location = new System.Drawing.Point(404, 6);
+            this.gradientLightingEnabled.Name = "gradientLightingEnabled";
+            this.gradientLightingEnabled.Size = new System.Drawing.Size(15, 14);
+            this.gradientLightingEnabled.TabIndex = 4;
+            this.gradientLightingEnabled.UseVisualStyleBackColor = true;
+            this.gradientLightingEnabled.CheckedChanged += new System.EventHandler(this.gradientLightingEnabled_CheckedChanged);
             // 
             // label5
             // 
@@ -517,7 +518,7 @@ namespace FCartographer.Window
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabPage gradientLightingTab;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox gradientLightingEnabled;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TabPage rayLightingTab;
         private System.Windows.Forms.Panel rayColorPanel;

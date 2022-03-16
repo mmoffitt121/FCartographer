@@ -71,7 +71,7 @@ namespace FCartographer
             darkside.L = Math.Clamp(darkside.L - 0.15, 0, 1);
 
             shader.lightcolor = brightside.ToARGB();
-            shader.darkcolor = darkside.ToARGB();
+            //shader.darkcolor = darkside.ToARGB();
 
             shader.Render();
         }
