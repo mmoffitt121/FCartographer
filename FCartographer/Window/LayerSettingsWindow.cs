@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace FCartographer.Window
 {
+    /// <summary>
+    /// Window that controls layer settings
+    /// </summary>
     public partial class LayerSettingsWindow : Form
     {
         private Layer layer;
@@ -18,6 +21,12 @@ namespace FCartographer.Window
         private bool savechanges;
 
         private bool old_torender;
+
+        // Layer Info
+
+        private string layername;
+
+        private string old_layername;
 
         // Ray Lighting
 
@@ -73,10 +82,16 @@ namespace FCartographer.Window
 
             old_torender = layer.ToRender();
 
+            // Layer Info
+
+            layername = layer.Name();
+            old_layername = layer.Name();
+            nameBox.Text = layername;
+
             switch (layer.GetType())
             {
                 case Layer.LayerType.HeightMap:
-                    string[] tokeep = { "Ray Lighting", "Gradient Lighting", "Contour Lines" };
+                    string[] tokeep = { "Ray Lighting", "Gradient Lighting", "Contour Lines", "Layer Info" };
                     RemoveAllOtherTabs(tokeep);
 
                     HeightLayer lyr = (HeightLayer)layer;
@@ -181,8 +196,13 @@ namespace FCartographer.Window
         }
 
         // ---
-        // Lighting Settings
+        // Settings
         // ---
+
+        private void nameBox_TextChanged(object sender, EventArgs e)
+        {
+            layername = nameBox.Text;
+        }
 
         // Ray
 
@@ -332,6 +352,8 @@ namespace FCartographer.Window
 
         private void ResetAndRender()
         {
+            layer.SetName(old_layername);
+
             switch (layer.GetType())
             {
                 case Layer.LayerType.HeightMap:
@@ -368,6 +390,8 @@ namespace FCartographer.Window
 
         private void SetAndRender()
         {
+            layer.SetName(nameBox.Text);
+
             switch (layer.GetType())
             {
                 case Layer.LayerType.HeightMap:

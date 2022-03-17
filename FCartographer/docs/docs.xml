@@ -2218,6 +2218,11 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:FCartographer.Window.LayerSettingsWindow">
+            <summary>
+            Window that controls layer settings
+            </summary>
+        </member>
         <member name="M:FCartographer.Window.LayerSettingsWindow.#ctor(FCartographer.Layer,FCartographer.Form1)">
             <summary>
             Constructor that takes layer to change settings of and parent form as input

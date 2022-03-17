@@ -64,6 +64,10 @@ namespace FCartographer
             int wid = GetData().Width * 4;
             int hei = GetData().Height;
 
+            drawlines = true;
+            bool smoothgradient = true;
+            minorinterval = 50;
+
             for (int i = 0; i < wid * hei; i += 4)
             {
                 int v = inp[i];
@@ -151,12 +155,21 @@ namespace FCartographer
                     outp[i + 1] = minorcolor.G;
                     outp[i + 0] = minorcolor.B;
                 }
+                else if (smoothgradient)
+                {
+                    outp[i + 3] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.A, highcolor.A, ((float)v) / 255), 0, 255);
+                    outp[i + 2] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.R, highcolor.R, ((float)v) / 255), 0, 255);
+                    outp[i + 1] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.G, highcolor.G, ((float)v) / 255), 0, 255);
+                    outp[i + 0] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.B, highcolor.B, ((float)v) / 255), 0, 255);
+                }
                 else
                 {
-                    outp[i + 3] = (byte)Math.Clamp(Math.Round(Lerp(lowcolor.A, highcolor.A, ((float)v) / 255), minorinterval), 0, 255);
-                    outp[i + 2] = (byte)Math.Clamp(Math.Round(Lerp(lowcolor.R, highcolor.R, ((float)v) / 255), minorinterval), 0, 255);
-                    outp[i + 1] = (byte)Math.Clamp(Math.Round(Lerp(lowcolor.G, highcolor.G, ((float)v) / 255), minorinterval), 0, 255);
-                    outp[i + 0] = (byte)Math.Clamp(Math.Round(Lerp(lowcolor.B, highcolor.B, ((float)v) / 255), minorinterval), 0, 255);
+                    v = v - v % minorinterval + startpoint;
+
+                    outp[i + 3] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.A, highcolor.A, ((float)v) / 255), 0, 255);
+                    outp[i + 2] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.R, highcolor.R, ((float)v) / 255), 0, 255);
+                    outp[i + 1] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.G, highcolor.G, ((float)v) / 255), 0, 255);
+                    outp[i + 0] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.B, highcolor.B, ((float)v) / 255), 0, 255);
                 }
             }
 

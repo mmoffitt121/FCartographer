@@ -33,7 +33,7 @@ namespace FCartographer.Window
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.nameBox = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.waterLightingTab = new System.Windows.Forms.TabPage();
             this.trackBar4 = new System.Windows.Forms.TrackBar();
@@ -42,6 +42,26 @@ namespace FCartographer.Window
             this.wavesEnabled = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.contourRenderTab = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.label25 = new System.Windows.Forms.Label();
+            this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.trackBar5 = new System.Windows.Forms.TrackBar();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.trackBar6 = new System.Windows.Forms.TrackBar();
+            this.label31 = new System.Windows.Forms.Label();
+            this.trackBar7 = new System.Windows.Forms.TrackBar();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.gradientLightingTab = new System.Windows.Forms.TabPage();
@@ -88,9 +108,16 @@ namespace FCartographer.Window
             this.lightIntensityLabel = new System.Windows.Forms.Label();
             this.intensitySlider = new System.Windows.Forms.TrackBar();
             this.tabGroup = new System.Windows.Forms.TabControl();
+            this.infoTab = new System.Windows.Forms.TabPage();
             this.waterLightingTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
             this.contourRenderTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar7)).BeginInit();
             this.gradientLightingTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gVectorModeSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gFlattenSlider)).BeginInit();
@@ -105,6 +132,7 @@ namespace FCartographer.Window
             ((System.ComponentModel.ISupportInitialize)(this.ambientSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensitySlider)).BeginInit();
             this.tabGroup.SuspendLayout();
+            this.infoTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // previewButton
@@ -140,18 +168,19 @@ namespace FCartographer.Window
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 13);
+            this.label1.Location = new System.Drawing.Point(3, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 15);
             this.label1.TabIndex = 4;
             this.label1.Text = "Layer Name";
             // 
-            // textBox1
+            // nameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(98, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(341, 23);
-            this.textBox1.TabIndex = 5;
+            this.nameBox.Location = new System.Drawing.Point(95, 6);
+            this.nameBox.Name = "nameBox";
+            this.nameBox.Size = new System.Drawing.Size(324, 23);
+            this.nameBox.TabIndex = 5;
+            this.nameBox.TextChanged += new System.EventHandler(this.nameBox_TextChanged);
             // 
             // waterLightingTab
             // 
@@ -163,7 +192,7 @@ namespace FCartographer.Window
             this.waterLightingTab.Location = new System.Drawing.Point(4, 24);
             this.waterLightingTab.Name = "waterLightingTab";
             this.waterLightingTab.Padding = new System.Windows.Forms.Padding(3);
-            this.waterLightingTab.Size = new System.Drawing.Size(425, 520);
+            this.waterLightingTab.Size = new System.Drawing.Size(425, 553);
             this.waterLightingTab.TabIndex = 3;
             this.waterLightingTab.Text = "Water";
             this.waterLightingTab.UseVisualStyleBackColor = true;
@@ -213,15 +242,218 @@ namespace FCartographer.Window
             // 
             // contourRenderTab
             // 
+            this.contourRenderTab.Controls.Add(this.label8);
+            this.contourRenderTab.Controls.Add(this.label10);
+            this.contourRenderTab.Controls.Add(this.trackBar1);
+            this.contourRenderTab.Controls.Add(this.panel1);
+            this.contourRenderTab.Controls.Add(this.label17);
+            this.contourRenderTab.Controls.Add(this.label19);
+            this.contourRenderTab.Controls.Add(this.label20);
+            this.contourRenderTab.Controls.Add(this.label23);
+            this.contourRenderTab.Controls.Add(this.trackBar2);
+            this.contourRenderTab.Controls.Add(this.label25);
+            this.contourRenderTab.Controls.Add(this.trackBar3);
+            this.contourRenderTab.Controls.Add(this.label26);
+            this.contourRenderTab.Controls.Add(this.label27);
+            this.contourRenderTab.Controls.Add(this.trackBar5);
+            this.contourRenderTab.Controls.Add(this.label28);
+            this.contourRenderTab.Controls.Add(this.label29);
+            this.contourRenderTab.Controls.Add(this.label30);
+            this.contourRenderTab.Controls.Add(this.trackBar6);
+            this.contourRenderTab.Controls.Add(this.label31);
+            this.contourRenderTab.Controls.Add(this.trackBar7);
             this.contourRenderTab.Controls.Add(this.checkBox3);
             this.contourRenderTab.Controls.Add(this.label6);
             this.contourRenderTab.Location = new System.Drawing.Point(4, 24);
             this.contourRenderTab.Name = "contourRenderTab";
             this.contourRenderTab.Padding = new System.Windows.Forms.Padding(3);
-            this.contourRenderTab.Size = new System.Drawing.Size(425, 520);
+            this.contourRenderTab.Size = new System.Drawing.Size(425, 553);
             this.contourRenderTab.TabIndex = 2;
             this.contourRenderTab.Text = "Contour Lines";
             this.contourRenderTab.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(379, 286);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(25, 15);
+            this.label8.TabIndex = 59;
+            this.label8.Text = "360";
+            // 
+            // label10
+            // 
+            this.label10.AllowDrop = true;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 286);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(49, 30);
+            this.label10.TabIndex = 58;
+            this.label10.Text = "Sample \r\nRadius";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(82, 286);
+            this.trackBar1.Maximum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(266, 45);
+            this.trackBar1.TabIndex = 57;
+            this.trackBar1.TickFrequency = 0;
+            this.trackBar1.Value = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.DimGray;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.panel1.Location = new System.Drawing.Point(327, 352);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(85, 29);
+            this.panel1.TabIndex = 56;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 352);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(36, 15);
+            this.label17.TabIndex = 55;
+            this.label17.Text = "Color";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(380, 235);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(25, 15);
+            this.label19.TabIndex = 54;
+            this.label19.Text = "360";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(381, 184);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(25, 15);
+            this.label20.TabIndex = 53;
+            this.label20.Text = "360";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(7, 235);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(43, 15);
+            this.label23.TabIndex = 52;
+            this.label23.Text = "Flatten";
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(83, 235);
+            this.trackBar2.Maximum = 20;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(266, 45);
+            this.trackBar2.TabIndex = 51;
+            this.trackBar2.TickFrequency = 0;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(7, 184);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(55, 15);
+            this.label25.TabIndex = 50;
+            this.label25.Text = "Direction";
+            // 
+            // trackBar3
+            // 
+            this.trackBar3.Location = new System.Drawing.Point(83, 184);
+            this.trackBar3.Maximum = 360;
+            this.trackBar3.Name = "trackBar3";
+            this.trackBar3.Size = new System.Drawing.Size(266, 45);
+            this.trackBar3.TabIndex = 49;
+            this.trackBar3.TickFrequency = 0;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(380, 133);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(32, 15);
+            this.label26.TabIndex = 48;
+            this.label26.Text = "10 %";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(8, 133);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(66, 15);
+            this.label27.TabIndex = 47;
+            this.label27.Text = "Persistence";
+            // 
+            // trackBar5
+            // 
+            this.trackBar5.Location = new System.Drawing.Point(83, 133);
+            this.trackBar5.Maximum = 20;
+            this.trackBar5.Name = "trackBar5";
+            this.trackBar5.Size = new System.Drawing.Size(266, 45);
+            this.trackBar5.TabIndex = 46;
+            this.trackBar5.TickFrequency = 0;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(380, 82);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(25, 15);
+            this.label28.TabIndex = 45;
+            this.label28.Text = "255";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(381, 31);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(32, 15);
+            this.label29.TabIndex = 44;
+            this.label29.Text = "50 %";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(7, 82);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(53, 15);
+            this.label30.TabIndex = 43;
+            this.label30.Text = "Ambient";
+            // 
+            // trackBar6
+            // 
+            this.trackBar6.Location = new System.Drawing.Point(83, 82);
+            this.trackBar6.Maximum = 255;
+            this.trackBar6.Name = "trackBar6";
+            this.trackBar6.Size = new System.Drawing.Size(266, 45);
+            this.trackBar6.TabIndex = 42;
+            this.trackBar6.TickFrequency = 0;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(7, 31);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(52, 15);
+            this.label31.TabIndex = 41;
+            this.label31.Text = "Intensity";
+            // 
+            // trackBar7
+            // 
+            this.trackBar7.Location = new System.Drawing.Point(83, 31);
+            this.trackBar7.Maximum = 100;
+            this.trackBar7.Name = "trackBar7";
+            this.trackBar7.Size = new System.Drawing.Size(266, 45);
+            this.trackBar7.TabIndex = 40;
+            this.trackBar7.TickFrequency = 0;
             // 
             // checkBox3
             // 
@@ -268,7 +500,7 @@ namespace FCartographer.Window
             this.gradientLightingTab.Location = new System.Drawing.Point(4, 24);
             this.gradientLightingTab.Name = "gradientLightingTab";
             this.gradientLightingTab.Padding = new System.Windows.Forms.Padding(3);
-            this.gradientLightingTab.Size = new System.Drawing.Size(425, 520);
+            this.gradientLightingTab.Size = new System.Drawing.Size(425, 553);
             this.gradientLightingTab.TabIndex = 1;
             this.gradientLightingTab.Text = "Gradient Lighting";
             this.gradientLightingTab.UseVisualStyleBackColor = true;
@@ -506,7 +738,7 @@ namespace FCartographer.Window
             this.rayLightingTab.Location = new System.Drawing.Point(4, 24);
             this.rayLightingTab.Name = "rayLightingTab";
             this.rayLightingTab.Padding = new System.Windows.Forms.Padding(3);
-            this.rayLightingTab.Size = new System.Drawing.Size(425, 520);
+            this.rayLightingTab.Size = new System.Drawing.Size(425, 553);
             this.rayLightingTab.TabIndex = 0;
             this.rayLightingTab.Text = "Ray Lighting";
             this.rayLightingTab.UseVisualStyleBackColor = true;
@@ -692,23 +924,34 @@ namespace FCartographer.Window
             // 
             // tabGroup
             // 
+            this.tabGroup.Controls.Add(this.infoTab);
             this.tabGroup.Controls.Add(this.rayLightingTab);
             this.tabGroup.Controls.Add(this.gradientLightingTab);
             this.tabGroup.Controls.Add(this.contourRenderTab);
             this.tabGroup.Controls.Add(this.waterLightingTab);
-            this.tabGroup.Location = new System.Drawing.Point(12, 45);
+            this.tabGroup.Location = new System.Drawing.Point(12, 12);
             this.tabGroup.Name = "tabGroup";
             this.tabGroup.SelectedIndex = 0;
-            this.tabGroup.Size = new System.Drawing.Size(433, 548);
+            this.tabGroup.Size = new System.Drawing.Size(433, 581);
             this.tabGroup.TabIndex = 0;
+            // 
+            // infoTab
+            // 
+            this.infoTab.Controls.Add(this.label1);
+            this.infoTab.Controls.Add(this.nameBox);
+            this.infoTab.Location = new System.Drawing.Point(4, 24);
+            this.infoTab.Name = "infoTab";
+            this.infoTab.Padding = new System.Windows.Forms.Padding(3);
+            this.infoTab.Size = new System.Drawing.Size(425, 553);
+            this.infoTab.TabIndex = 4;
+            this.infoTab.Text = "Layer Info";
+            this.infoTab.UseVisualStyleBackColor = true;
             // 
             // LayerSettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 634);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.previewButton);
@@ -722,6 +965,12 @@ namespace FCartographer.Window
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
             this.contourRenderTab.ResumeLayout(false);
             this.contourRenderTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar7)).EndInit();
             this.gradientLightingTab.ResumeLayout(false);
             this.gradientLightingTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gVectorModeSlider)).EndInit();
@@ -738,8 +987,9 @@ namespace FCartographer.Window
             ((System.ComponentModel.ISupportInitialize)(this.ambientSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensitySlider)).EndInit();
             this.tabGroup.ResumeLayout(false);
+            this.infoTab.ResumeLayout(false);
+            this.infoTab.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -748,7 +998,7 @@ namespace FCartographer.Window
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox nameBox;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TabPage waterLightingTab;
         private System.Windows.Forms.TrackBar trackBar4;
@@ -803,5 +1053,26 @@ namespace FCartographer.Window
         private System.Windows.Forms.Label gVectorModeDisplay;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TrackBar gVectorModeSlider;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TrackBar trackBar5;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TrackBar trackBar6;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TrackBar trackBar7;
+        private System.Windows.Forms.TabPage infoTab;
     }
 }
