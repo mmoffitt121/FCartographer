@@ -45,6 +45,9 @@ namespace FCartographer.Window
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.gradientLightingTab = new System.Windows.Forms.TabPage();
+            this.gVectorModeDisplay = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.gVectorModeSlider = new System.Windows.Forms.TrackBar();
             this.gColorPanel = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.gFlattenDisplay = new System.Windows.Forms.Label();
@@ -85,13 +88,11 @@ namespace FCartographer.Window
             this.lightIntensityLabel = new System.Windows.Forms.Label();
             this.intensitySlider = new System.Windows.Forms.TrackBar();
             this.tabGroup = new System.Windows.Forms.TabControl();
-            this.gVectorModeDisplay = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.gVectorModeSlider = new System.Windows.Forms.TrackBar();
             this.waterLightingTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
             this.contourRenderTab.SuspendLayout();
             this.gradientLightingTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gVectorModeSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gFlattenSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gDirectionSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gPersistanceSlider)).BeginInit();
@@ -104,7 +105,6 @@ namespace FCartographer.Window
             ((System.ComponentModel.ISupportInitialize)(this.ambientSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensitySlider)).BeginInit();
             this.tabGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gVectorModeSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // previewButton
@@ -273,6 +273,36 @@ namespace FCartographer.Window
             this.gradientLightingTab.Text = "Gradient Lighting";
             this.gradientLightingTab.UseVisualStyleBackColor = true;
             // 
+            // gVectorModeDisplay
+            // 
+            this.gVectorModeDisplay.AutoSize = true;
+            this.gVectorModeDisplay.Location = new System.Drawing.Point(379, 287);
+            this.gVectorModeDisplay.Name = "gVectorModeDisplay";
+            this.gVectorModeDisplay.Size = new System.Drawing.Size(25, 15);
+            this.gVectorModeDisplay.TabIndex = 39;
+            this.gVectorModeDisplay.Text = "360";
+            // 
+            // label24
+            // 
+            this.label24.AllowDrop = true;
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 287);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(49, 30);
+            this.label24.TabIndex = 38;
+            this.label24.Text = "Sample \r\nRadius";
+            // 
+            // gVectorModeSlider
+            // 
+            this.gVectorModeSlider.Location = new System.Drawing.Point(82, 287);
+            this.gVectorModeSlider.Maximum = 1;
+            this.gVectorModeSlider.Name = "gVectorModeSlider";
+            this.gVectorModeSlider.Size = new System.Drawing.Size(266, 45);
+            this.gVectorModeSlider.TabIndex = 37;
+            this.gVectorModeSlider.TickFrequency = 0;
+            this.gVectorModeSlider.Value = 1;
+            this.gVectorModeSlider.Scroll += new System.EventHandler(this.gVectorModeSlider_Scroll);
+            // 
             // gColorPanel
             // 
             this.gColorPanel.BackColor = System.Drawing.Color.DimGray;
@@ -282,6 +312,7 @@ namespace FCartographer.Window
             this.gColorPanel.Name = "gColorPanel";
             this.gColorPanel.Size = new System.Drawing.Size(85, 29);
             this.gColorPanel.TabIndex = 36;
+            this.gColorPanel.Click += new System.EventHandler(this.gColorPanel_Click);
             // 
             // label4
             // 
@@ -315,18 +346,19 @@ namespace FCartographer.Window
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(7, 236);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(38, 15);
+            this.label13.Size = new System.Drawing.Size(43, 15);
             this.label13.TabIndex = 32;
-            this.label13.Text = "Angle";
+            this.label13.Text = "Flatten";
             // 
             // gFlattenSlider
             // 
             this.gFlattenSlider.Location = new System.Drawing.Point(83, 236);
-            this.gFlattenSlider.Maximum = 360;
+            this.gFlattenSlider.Maximum = 20;
             this.gFlattenSlider.Name = "gFlattenSlider";
             this.gFlattenSlider.Size = new System.Drawing.Size(266, 45);
             this.gFlattenSlider.TabIndex = 31;
             this.gFlattenSlider.TickFrequency = 0;
+            this.gFlattenSlider.Scroll += new System.EventHandler(this.gFlattenSlider_Scroll);
             // 
             // label16
             // 
@@ -345,6 +377,7 @@ namespace FCartographer.Window
             this.gDirectionSlider.Size = new System.Drawing.Size(266, 45);
             this.gDirectionSlider.TabIndex = 29;
             this.gDirectionSlider.TickFrequency = 0;
+            this.gDirectionSlider.Scroll += new System.EventHandler(this.gDirectionSlider_Scroll);
             // 
             // gPersistanceDisplay
             // 
@@ -367,11 +400,12 @@ namespace FCartographer.Window
             // gPersistanceSlider
             // 
             this.gPersistanceSlider.Location = new System.Drawing.Point(83, 134);
-            this.gPersistanceSlider.Maximum = 100;
+            this.gPersistanceSlider.Maximum = 20;
             this.gPersistanceSlider.Name = "gPersistanceSlider";
             this.gPersistanceSlider.Size = new System.Drawing.Size(266, 45);
             this.gPersistanceSlider.TabIndex = 26;
             this.gPersistanceSlider.TickFrequency = 0;
+            this.gPersistanceSlider.Scroll += new System.EventHandler(this.gPersistanceSlider_Scroll);
             // 
             // gAmbientDisplay
             // 
@@ -408,6 +442,7 @@ namespace FCartographer.Window
             this.gAmbientSlider.Size = new System.Drawing.Size(266, 45);
             this.gAmbientSlider.TabIndex = 22;
             this.gAmbientSlider.TickFrequency = 0;
+            this.gAmbientSlider.Scroll += new System.EventHandler(this.gAmbientSlider_Scroll);
             // 
             // label22
             // 
@@ -426,6 +461,7 @@ namespace FCartographer.Window
             this.gIntensitySlider.Size = new System.Drawing.Size(266, 45);
             this.gIntensitySlider.TabIndex = 20;
             this.gIntensitySlider.TickFrequency = 0;
+            this.gIntensitySlider.Scroll += new System.EventHandler(this.gIntensitySlider_Scroll);
             // 
             // gradientLightingEnabled
             // 
@@ -666,33 +702,6 @@ namespace FCartographer.Window
             this.tabGroup.Size = new System.Drawing.Size(433, 548);
             this.tabGroup.TabIndex = 0;
             // 
-            // gVectorModeDisplay
-            // 
-            this.gVectorModeDisplay.AutoSize = true;
-            this.gVectorModeDisplay.Location = new System.Drawing.Point(379, 287);
-            this.gVectorModeDisplay.Name = "gVectorModeDisplay";
-            this.gVectorModeDisplay.Size = new System.Drawing.Size(25, 15);
-            this.gVectorModeDisplay.TabIndex = 39;
-            this.gVectorModeDisplay.Text = "360";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(6, 287);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(38, 15);
-            this.label24.TabIndex = 38;
-            this.label24.Text = "Angle";
-            // 
-            // gVectorModeSlider
-            // 
-            this.gVectorModeSlider.Location = new System.Drawing.Point(82, 287);
-            this.gVectorModeSlider.Maximum = 360;
-            this.gVectorModeSlider.Name = "gVectorModeSlider";
-            this.gVectorModeSlider.Size = new System.Drawing.Size(266, 45);
-            this.gVectorModeSlider.TabIndex = 37;
-            this.gVectorModeSlider.TickFrequency = 0;
-            // 
             // LayerSettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -715,6 +724,7 @@ namespace FCartographer.Window
             this.contourRenderTab.PerformLayout();
             this.gradientLightingTab.ResumeLayout(false);
             this.gradientLightingTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gVectorModeSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gFlattenSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gDirectionSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gPersistanceSlider)).EndInit();
@@ -728,7 +738,6 @@ namespace FCartographer.Window
             ((System.ComponentModel.ISupportInitialize)(this.ambientSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensitySlider)).EndInit();
             this.tabGroup.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gVectorModeSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

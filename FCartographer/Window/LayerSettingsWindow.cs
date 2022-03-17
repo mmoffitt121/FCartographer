@@ -41,17 +41,21 @@ namespace FCartographer.Window
 
         private bool gradientlighting_enabled;
         private float gintensity;
-        private float gangle;
+        private int gambient;
+        private int gpersistence;
+        private float gdirection;
+        private int gflatten;
         private int gvectormode;
-        private Color glightcolor;
-        private Color gdarkcolor;
+        private Color gcolor;
 
         private bool old_gradientlighting_enabled;
         private float old_gintensity;
-        private float old_gangle;
+        private int old_gambient;
+        private int old_gpersistence;
+        private float old_gdirection;
+        private int old_gflatten;
         private int old_gvectormode;
-        private Color old_glightcolor;
-        private Color old_gdarkcolor;
+        private Color old_gcolor;
 
 
 
@@ -113,15 +117,37 @@ namespace FCartographer.Window
 
                     gradientlighting_enabled = lyr.render_gradient;
                     gintensity = lyr.gts.intensity;
-                    gangle = lyr.gts.angle;
+                    gambient = lyr.gts.ambient;
+                    gpersistence = lyr.gts.persistance;
+                    gdirection = lyr.gts.angle;
+                    gflatten = lyr.gts.flatten;
                     gvectormode = lyr.gts.vectormode;
-                    glightcolor = lyr.gts.lightcolor;
+                    gcolor = lyr.gts.lightcolor;
 
                     old_gradientlighting_enabled = lyr.render_gradient;
                     old_gintensity = lyr.gts.intensity;
-                    old_gangle = lyr.gts.angle;
+                    old_gambient = lyr.gts.ambient;
+                    old_gpersistence = lyr.gts.persistance;
+                    old_gdirection = lyr.gts.angle;
+                    old_gflatten = lyr.gts.flatten;
                     old_gvectormode = lyr.gts.vectormode;
-                    old_glightcolor = lyr.gts.lightcolor;
+                    old_gcolor = lyr.gts.lightcolor;
+
+                    gradientLightingEnabled.Checked = gradientlighting_enabled;
+                    gIntensitySlider.Value = (int)(gintensity * 100);
+                    gAmbientSlider.Value = gambient;
+                    gPersistanceSlider.Value = gpersistence;
+                    gDirectionSlider.Value = (int)gdirection;
+                    gFlattenSlider.Value = gflatten;
+                    gVectorModeSlider.Value = gvectormode;
+                    gColorPanel.BackColor = gcolor;
+
+                    gIntensityDisplay.Text = (int)(gintensity * 100) + " %";
+                    gAmbientDisplay.Text = gambient + "";
+                    gPersistanceDisplay.Text = gpersistence + "";
+                    gDirectionDisplay.Text = (int)gdirection + "";
+                    gFlattenDisplay.Text = gflatten + "";
+                    gVectorModeDisplay.Text = gvectormode + 1 + "";
 
                     break;
             }
@@ -213,6 +239,53 @@ namespace FCartographer.Window
             gradientlighting_enabled = gradientLightingEnabled.Checked;
         }
 
+        private void gIntensitySlider_Scroll(object sender, EventArgs e)
+        {
+            gintensity = ((float)gIntensitySlider.Value) / 100;
+            gIntensityDisplay.Text = (int)(gintensity * 100) + " %";
+        }
+
+        private void gAmbientSlider_Scroll(object sender, EventArgs e)
+        {
+            gambient = gAmbientSlider.Value;
+            gAmbientDisplay.Text = gambient + "";
+        }
+
+        private void gPersistanceSlider_Scroll(object sender, EventArgs e)
+        {
+            gpersistence = gPersistanceSlider.Value;
+            gPersistanceDisplay.Text = gpersistence + "";
+        }
+
+        private void gDirectionSlider_Scroll(object sender, EventArgs e)
+        {
+            gdirection = gDirectionSlider.Value;
+            gDirectionDisplay.Text = gdirection + "";
+        }
+
+        private void gFlattenSlider_Scroll(object sender, EventArgs e)
+        {
+            gflatten = gFlattenSlider.Value;
+            gFlattenDisplay.Text = gflatten + "";
+        }
+
+        private void gVectorModeSlider_Scroll(object sender, EventArgs e)
+        {
+            gvectormode = gVectorModeSlider.Value;
+            gVectorModeDisplay.Text = gvectormode + 1 + "";
+        }
+
+        private void gColorPanel_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.Color = gColorPanel.BackColor;
+
+            cd.ShowDialog();
+
+            gColorPanel.BackColor = cd.Color;
+            gcolor = cd.Color;
+        }
+
         // ---
         // Applying Changes
         // ---
@@ -277,6 +350,13 @@ namespace FCartographer.Window
                     // Gradient
 
                     lyr.render_gradient = old_gradientlighting_enabled;
+                    lyr.gts.intensity = old_gintensity;
+                    lyr.gts.ambient = old_gambient;
+                    lyr.gts.persistance = old_gpersistence;
+                    lyr.gts.angle = old_gdirection;
+                    lyr.gts.flatten = old_gflatten;
+                    lyr.gts.vectormode = old_gvectormode;
+                    lyr.gts.lightcolor = old_gcolor;
 
                     lyr.SetToRender(true);
                     lyr.Render();
@@ -306,6 +386,13 @@ namespace FCartographer.Window
                     // Gradient
 
                     lyr.render_gradient = gradientlighting_enabled;
+                    lyr.gts.intensity = gintensity;
+                    lyr.gts.ambient = gambient;
+                    lyr.gts.persistance = gpersistence;
+                    lyr.gts.angle = gdirection;
+                    lyr.gts.flatten = gflatten;
+                    lyr.gts.vectormode = gvectormode;
+                    lyr.gts.lightcolor = gcolor;
 
                     lyr.SetToRender(true);
                     lyr.Render();
