@@ -45,6 +45,23 @@ namespace FCartographer.Window
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.gradientLightingTab = new System.Windows.Forms.TabPage();
+            this.gColorPanel = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.gFlattenDisplay = new System.Windows.Forms.Label();
+            this.gDirectionDisplay = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.gFlattenSlider = new System.Windows.Forms.TrackBar();
+            this.label16 = new System.Windows.Forms.Label();
+            this.gDirectionSlider = new System.Windows.Forms.TrackBar();
+            this.gPersistanceDisplay = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.gPersistanceSlider = new System.Windows.Forms.TrackBar();
+            this.gAmbientDisplay = new System.Windows.Forms.Label();
+            this.gIntensityDisplay = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.gAmbientSlider = new System.Windows.Forms.TrackBar();
+            this.label22 = new System.Windows.Forms.Label();
+            this.gIntensitySlider = new System.Windows.Forms.TrackBar();
             this.gradientLightingEnabled = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.rayLightingTab = new System.Windows.Forms.TabPage();
@@ -68,10 +85,18 @@ namespace FCartographer.Window
             this.lightIntensityLabel = new System.Windows.Forms.Label();
             this.intensitySlider = new System.Windows.Forms.TrackBar();
             this.tabGroup = new System.Windows.Forms.TabControl();
+            this.gVectorModeDisplay = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.gVectorModeSlider = new System.Windows.Forms.TrackBar();
             this.waterLightingTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
             this.contourRenderTab.SuspendLayout();
             this.gradientLightingTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gFlattenSlider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gDirectionSlider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gPersistanceSlider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gAmbientSlider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gIntensitySlider)).BeginInit();
             this.rayLightingTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.angleSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.directionSlider)).BeginInit();
@@ -79,6 +104,7 @@ namespace FCartographer.Window
             ((System.ComponentModel.ISupportInitialize)(this.ambientSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensitySlider)).BeginInit();
             this.tabGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gVectorModeSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // previewButton
@@ -217,6 +243,26 @@ namespace FCartographer.Window
             // 
             // gradientLightingTab
             // 
+            this.gradientLightingTab.Controls.Add(this.gVectorModeDisplay);
+            this.gradientLightingTab.Controls.Add(this.label24);
+            this.gradientLightingTab.Controls.Add(this.gVectorModeSlider);
+            this.gradientLightingTab.Controls.Add(this.gColorPanel);
+            this.gradientLightingTab.Controls.Add(this.label4);
+            this.gradientLightingTab.Controls.Add(this.gFlattenDisplay);
+            this.gradientLightingTab.Controls.Add(this.gDirectionDisplay);
+            this.gradientLightingTab.Controls.Add(this.label13);
+            this.gradientLightingTab.Controls.Add(this.gFlattenSlider);
+            this.gradientLightingTab.Controls.Add(this.label16);
+            this.gradientLightingTab.Controls.Add(this.gDirectionSlider);
+            this.gradientLightingTab.Controls.Add(this.gPersistanceDisplay);
+            this.gradientLightingTab.Controls.Add(this.label18);
+            this.gradientLightingTab.Controls.Add(this.gPersistanceSlider);
+            this.gradientLightingTab.Controls.Add(this.gAmbientDisplay);
+            this.gradientLightingTab.Controls.Add(this.gIntensityDisplay);
+            this.gradientLightingTab.Controls.Add(this.label21);
+            this.gradientLightingTab.Controls.Add(this.gAmbientSlider);
+            this.gradientLightingTab.Controls.Add(this.label22);
+            this.gradientLightingTab.Controls.Add(this.gIntensitySlider);
             this.gradientLightingTab.Controls.Add(this.gradientLightingEnabled);
             this.gradientLightingTab.Controls.Add(this.label5);
             this.gradientLightingTab.Location = new System.Drawing.Point(4, 24);
@@ -226,6 +272,160 @@ namespace FCartographer.Window
             this.gradientLightingTab.TabIndex = 1;
             this.gradientLightingTab.Text = "Gradient Lighting";
             this.gradientLightingTab.UseVisualStyleBackColor = true;
+            // 
+            // gColorPanel
+            // 
+            this.gColorPanel.BackColor = System.Drawing.Color.DimGray;
+            this.gColorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.gColorPanel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gColorPanel.Location = new System.Drawing.Point(327, 353);
+            this.gColorPanel.Name = "gColorPanel";
+            this.gColorPanel.Size = new System.Drawing.Size(85, 29);
+            this.gColorPanel.TabIndex = 36;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 353);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(36, 15);
+            this.label4.TabIndex = 35;
+            this.label4.Text = "Color";
+            // 
+            // gFlattenDisplay
+            // 
+            this.gFlattenDisplay.AutoSize = true;
+            this.gFlattenDisplay.Location = new System.Drawing.Point(380, 236);
+            this.gFlattenDisplay.Name = "gFlattenDisplay";
+            this.gFlattenDisplay.Size = new System.Drawing.Size(25, 15);
+            this.gFlattenDisplay.TabIndex = 34;
+            this.gFlattenDisplay.Text = "360";
+            // 
+            // gDirectionDisplay
+            // 
+            this.gDirectionDisplay.AutoSize = true;
+            this.gDirectionDisplay.Location = new System.Drawing.Point(381, 185);
+            this.gDirectionDisplay.Name = "gDirectionDisplay";
+            this.gDirectionDisplay.Size = new System.Drawing.Size(25, 15);
+            this.gDirectionDisplay.TabIndex = 33;
+            this.gDirectionDisplay.Text = "360";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 236);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(38, 15);
+            this.label13.TabIndex = 32;
+            this.label13.Text = "Angle";
+            // 
+            // gFlattenSlider
+            // 
+            this.gFlattenSlider.Location = new System.Drawing.Point(83, 236);
+            this.gFlattenSlider.Maximum = 360;
+            this.gFlattenSlider.Name = "gFlattenSlider";
+            this.gFlattenSlider.Size = new System.Drawing.Size(266, 45);
+            this.gFlattenSlider.TabIndex = 31;
+            this.gFlattenSlider.TickFrequency = 0;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(7, 185);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(55, 15);
+            this.label16.TabIndex = 30;
+            this.label16.Text = "Direction";
+            // 
+            // gDirectionSlider
+            // 
+            this.gDirectionSlider.Location = new System.Drawing.Point(83, 185);
+            this.gDirectionSlider.Maximum = 360;
+            this.gDirectionSlider.Name = "gDirectionSlider";
+            this.gDirectionSlider.Size = new System.Drawing.Size(266, 45);
+            this.gDirectionSlider.TabIndex = 29;
+            this.gDirectionSlider.TickFrequency = 0;
+            // 
+            // gPersistanceDisplay
+            // 
+            this.gPersistanceDisplay.AutoSize = true;
+            this.gPersistanceDisplay.Location = new System.Drawing.Point(380, 134);
+            this.gPersistanceDisplay.Name = "gPersistanceDisplay";
+            this.gPersistanceDisplay.Size = new System.Drawing.Size(32, 15);
+            this.gPersistanceDisplay.TabIndex = 28;
+            this.gPersistanceDisplay.Text = "10 %";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(8, 134);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(66, 15);
+            this.label18.TabIndex = 27;
+            this.label18.Text = "Persistence";
+            // 
+            // gPersistanceSlider
+            // 
+            this.gPersistanceSlider.Location = new System.Drawing.Point(83, 134);
+            this.gPersistanceSlider.Maximum = 100;
+            this.gPersistanceSlider.Name = "gPersistanceSlider";
+            this.gPersistanceSlider.Size = new System.Drawing.Size(266, 45);
+            this.gPersistanceSlider.TabIndex = 26;
+            this.gPersistanceSlider.TickFrequency = 0;
+            // 
+            // gAmbientDisplay
+            // 
+            this.gAmbientDisplay.AutoSize = true;
+            this.gAmbientDisplay.Location = new System.Drawing.Point(380, 83);
+            this.gAmbientDisplay.Name = "gAmbientDisplay";
+            this.gAmbientDisplay.Size = new System.Drawing.Size(25, 15);
+            this.gAmbientDisplay.TabIndex = 25;
+            this.gAmbientDisplay.Text = "255";
+            // 
+            // gIntensityDisplay
+            // 
+            this.gIntensityDisplay.AutoSize = true;
+            this.gIntensityDisplay.Location = new System.Drawing.Point(381, 32);
+            this.gIntensityDisplay.Name = "gIntensityDisplay";
+            this.gIntensityDisplay.Size = new System.Drawing.Size(32, 15);
+            this.gIntensityDisplay.TabIndex = 24;
+            this.gIntensityDisplay.Text = "50 %";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(7, 83);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(53, 15);
+            this.label21.TabIndex = 23;
+            this.label21.Text = "Ambient";
+            // 
+            // gAmbientSlider
+            // 
+            this.gAmbientSlider.Location = new System.Drawing.Point(83, 83);
+            this.gAmbientSlider.Maximum = 255;
+            this.gAmbientSlider.Name = "gAmbientSlider";
+            this.gAmbientSlider.Size = new System.Drawing.Size(266, 45);
+            this.gAmbientSlider.TabIndex = 22;
+            this.gAmbientSlider.TickFrequency = 0;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(7, 32);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(52, 15);
+            this.label22.TabIndex = 21;
+            this.label22.Text = "Intensity";
+            // 
+            // gIntensitySlider
+            // 
+            this.gIntensitySlider.Location = new System.Drawing.Point(83, 32);
+            this.gIntensitySlider.Maximum = 100;
+            this.gIntensitySlider.Name = "gIntensitySlider";
+            this.gIntensitySlider.Size = new System.Drawing.Size(266, 45);
+            this.gIntensitySlider.TabIndex = 20;
+            this.gIntensitySlider.TickFrequency = 0;
             // 
             // gradientLightingEnabled
             // 
@@ -466,6 +666,33 @@ namespace FCartographer.Window
             this.tabGroup.Size = new System.Drawing.Size(433, 548);
             this.tabGroup.TabIndex = 0;
             // 
+            // gVectorModeDisplay
+            // 
+            this.gVectorModeDisplay.AutoSize = true;
+            this.gVectorModeDisplay.Location = new System.Drawing.Point(379, 287);
+            this.gVectorModeDisplay.Name = "gVectorModeDisplay";
+            this.gVectorModeDisplay.Size = new System.Drawing.Size(25, 15);
+            this.gVectorModeDisplay.TabIndex = 39;
+            this.gVectorModeDisplay.Text = "360";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(6, 287);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(38, 15);
+            this.label24.TabIndex = 38;
+            this.label24.Text = "Angle";
+            // 
+            // gVectorModeSlider
+            // 
+            this.gVectorModeSlider.Location = new System.Drawing.Point(82, 287);
+            this.gVectorModeSlider.Maximum = 360;
+            this.gVectorModeSlider.Name = "gVectorModeSlider";
+            this.gVectorModeSlider.Size = new System.Drawing.Size(266, 45);
+            this.gVectorModeSlider.TabIndex = 37;
+            this.gVectorModeSlider.TickFrequency = 0;
+            // 
             // LayerSettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -488,6 +715,11 @@ namespace FCartographer.Window
             this.contourRenderTab.PerformLayout();
             this.gradientLightingTab.ResumeLayout(false);
             this.gradientLightingTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gFlattenSlider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gDirectionSlider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gPersistanceSlider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gAmbientSlider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gIntensitySlider)).EndInit();
             this.rayLightingTab.ResumeLayout(false);
             this.rayLightingTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.angleSlider)).EndInit();
@@ -496,6 +728,7 @@ namespace FCartographer.Window
             ((System.ComponentModel.ISupportInitialize)(this.ambientSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.intensitySlider)).EndInit();
             this.tabGroup.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gVectorModeSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -541,5 +774,25 @@ namespace FCartographer.Window
         private System.Windows.Forms.Label lightIntensityLabel;
         private System.Windows.Forms.TrackBar intensitySlider;
         private System.Windows.Forms.TabControl tabGroup;
+        private System.Windows.Forms.Panel gColorPanel;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label gFlattenDisplay;
+        private System.Windows.Forms.Label gDirectionDisplay;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TrackBar gFlattenSlider;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TrackBar gDirectionSlider;
+        private System.Windows.Forms.Label gPersistanceDisplay;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TrackBar gPersistanceSlider;
+        private System.Windows.Forms.Label gAmbientDisplay;
+        private System.Windows.Forms.Label gIntensityDisplay;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TrackBar gAmbientSlider;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TrackBar gIntensitySlider;
+        private System.Windows.Forms.Label gVectorModeDisplay;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TrackBar gVectorModeSlider;
     }
 }
