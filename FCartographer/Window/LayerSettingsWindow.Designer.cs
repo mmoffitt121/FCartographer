@@ -981,6 +981,7 @@ namespace FCartographer.Window
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.previewButton);
             this.Controls.Add(this.tabGroup);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LayerSettingsWindow";
