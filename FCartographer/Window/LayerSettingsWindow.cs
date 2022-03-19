@@ -66,7 +66,29 @@ namespace FCartographer.Window
         private int old_gvectormode;
         private Color old_gcolor;
 
+        // Contour lighting
 
+        private bool contourlighting_enabled;
+        private int startelevation;
+        private int minorinterval;
+        private int majorinterval;
+        private bool lines;
+        private Color minorlinecolor;
+        private Color majorlinecolor;
+        private bool smoothgradient;
+        private Color highcolor;
+        private Color lowcolor;
+
+        private bool old_contourlighting_enabled;
+        private int old_startelevation;
+        private int old_minorinterval;
+        private int old_majorinterval;
+        private bool old_lines;
+        private Color old_minorlinecolor;
+        private Color old_majorlinecolor;
+        private bool old_smoothgradient;
+        private Color old_highcolor;
+        private Color old_lowcolor;
 
         /// <summary>
         /// Constructor that takes layer to change settings of and parent form as input
@@ -164,6 +186,48 @@ namespace FCartographer.Window
                     gFlattenDisplay.Text = gflatten + "";
                     gVectorModeDisplay.Text = gvectormode + 1 + "";
 
+                    // Contour lighting
+
+                    contourlighting_enabled = lyr.render_contour;
+                    startelevation = lyr.ctr.startpoint;
+                    minorinterval = lyr.ctr.minorinterval;
+                    majorinterval = lyr.ctr.majorinterval;
+                    lines = lyr.ctr.drawlines;
+                    minorlinecolor = lyr.ctr.minorcolor;
+                    majorlinecolor = lyr.ctr.majorcolor;
+                    smoothgradient = lyr.ctr.smoothgradient;
+                    highcolor = lyr.ctr.highcolor;
+                    lowcolor = lyr.ctr.lowcolor;
+
+                    old_contourlighting_enabled = lyr.render_contour;
+                    old_startelevation = lyr.ctr.startpoint;
+                    old_minorinterval = lyr.ctr.minorinterval;
+                    old_majorinterval = lyr.ctr.majorinterval;
+                    old_lines = lyr.ctr.drawlines;
+                    old_minorlinecolor = lyr.ctr.minorcolor;
+                    old_majorlinecolor = lyr.ctr.majorcolor;
+                    old_smoothgradient = lyr.ctr.smoothgradient;
+                    old_highcolor = lyr.ctr.highcolor;
+                    old_lowcolor = lyr.ctr.lowcolor;
+
+                    countourLinesCheckBox.Checked = old_contourlighting_enabled;
+                    startElevationSlider.Value = startelevation;
+                    minorIntervalSlider.Value = minorinterval;
+                    majorIntervalSlider.Value = majorinterval;
+                    linesCheckBox.Checked = lines;
+                    majorLineColor.BackColor = majorlinecolor;
+                    minorLineColor.BackColor = minorlinecolor;
+                    smoothCheckBox.Checked = smoothgradient;
+                    highColor.BackColor = highcolor;
+                    lowColor.BackColor = lowcolor;
+
+                    startElevationDisplay.Text = startelevation + "";
+                    minorIntervalDisplay.Text = minorinterval + "";
+                    majorIntervalDisplay.Text = majorinterval + "";
+
+                    break;
+                default:
+                    RemoveAllOtherTabs(new string[] {"Layer Info"});
                     break;
             }
         }
@@ -306,6 +370,85 @@ namespace FCartographer.Window
             gcolor = cd.Color;
         }
 
+        // Contour
+
+        private void startElevationSlider_Scroll(object sender, EventArgs e)
+        {
+            startelevation = startElevationSlider.Value;
+            startElevationDisplay.Text = startelevation + "";
+        }
+
+        private void minorIntervalSlider_Scroll(object sender, EventArgs e)
+        {
+            minorinterval = minorIntervalSlider.Value;
+            minorIntervalDisplay.Text = minorinterval + "";
+        }
+
+        private void majorIntervalSlider_Scroll(object sender, EventArgs e)
+        {
+            majorinterval = majorIntervalSlider.Value;
+            majorIntervalDisplay.Text = majorinterval + "";
+        }
+
+        private void countourLinesCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            contourlighting_enabled = countourLinesCheckBox.Checked;
+        }
+
+        private void linesCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            lines = linesCheckBox.Checked;
+        }
+
+        private void smoothCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            smoothgradient = smoothCheckBox.Checked;
+        }
+
+        private void minorLineColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.Color = minorLineColor.BackColor;
+
+            cd.ShowDialog();
+
+            minorLineColor.BackColor = cd.Color;
+            minorlinecolor = cd.Color;
+        }
+
+        private void majorLineColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.Color = majorLineColor.BackColor;
+
+            cd.ShowDialog();
+
+            majorLineColor.BackColor = cd.Color;
+            majorlinecolor = cd.Color;
+        }
+
+        private void highColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.Color = highColor.BackColor;
+
+            cd.ShowDialog();
+
+            highColor.BackColor = cd.Color;
+            highcolor = cd.Color;
+        }
+
+        private void lowColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog cd = new ColorDialog();
+            cd.Color = lowColor.BackColor;
+
+            cd.ShowDialog();
+
+            lowColor.BackColor = cd.Color;
+            lowcolor = cd.Color;
+        }
+
         // ---
         // Applying Changes
         // ---
@@ -380,6 +523,19 @@ namespace FCartographer.Window
                     lyr.gts.vectormode = old_gvectormode;
                     lyr.gts.lightcolor = old_gcolor;
 
+                    // Contour
+
+                    lyr.render_contour = old_contourlighting_enabled;
+                    lyr.ctr.startpoint = old_startelevation;
+                    lyr.ctr.minorinterval = old_minorinterval;
+                    lyr.ctr.majorinterval = old_majorinterval;
+                    lyr.ctr.drawlines = old_lines;
+                    lyr.ctr.minorcolor = old_minorlinecolor;
+                    lyr.ctr.majorcolor = old_majorlinecolor;
+                    lyr.ctr.smoothgradient = old_smoothgradient;
+                    lyr.ctr.highcolor = old_highcolor;
+                    lyr.ctr.lowcolor = old_lowcolor;
+
                     lyr.SetToRender(true);
                     lyr.Render();
                     lyr.SetToRender(old_torender);
@@ -417,6 +573,19 @@ namespace FCartographer.Window
                     lyr.gts.flatten = gflatten;
                     lyr.gts.vectormode = gvectormode;
                     lyr.gts.lightcolor = gcolor;
+
+                    // Contour
+
+                    lyr.render_contour = contourlighting_enabled;
+                    lyr.ctr.startpoint = startelevation;
+                    lyr.ctr.minorinterval = minorinterval;
+                    lyr.ctr.majorinterval = majorinterval;
+                    lyr.ctr.drawlines = lines;
+                    lyr.ctr.minorcolor = minorlinecolor;
+                    lyr.ctr.majorcolor = majorlinecolor;
+                    lyr.ctr.smoothgradient = smoothgradient;
+                    lyr.ctr.highcolor = highcolor;
+                    lyr.ctr.lowcolor = lowcolor;
 
                     lyr.SetToRender(true);
                     lyr.Render();

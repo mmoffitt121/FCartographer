@@ -250,7 +250,11 @@ namespace FCartographer
 
             LayerSettingsWindow lsw = new LayerSettingsWindow(project.CurrentLayer(), this);
 
+            lsw.StartPosition = FormStartPosition.CenterParent;
+
             lsw.ShowDialog();
+
+            DisplayLayers();
         }
 
         /// <summary>

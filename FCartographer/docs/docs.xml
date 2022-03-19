@@ -1347,6 +1347,11 @@
             Determines whether the contour lines will be drawn
             </summary>
         </member>
+        <member name="F:FCartographer.ContourRenderer.smoothgradient">
+            <summary>
+            Determines if color changes smooth or discrete
+            </summary>
+        </member>
         <member name="F:FCartographer.ContourRenderer.minorinterval">
             <summary>
             Interval at which lines are drawn

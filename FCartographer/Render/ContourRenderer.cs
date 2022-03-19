@@ -24,6 +24,10 @@ namespace FCartographer
         /// Determines whether the contour lines will be drawn
         /// </summary>
         public bool drawlines;
+        /// <summary>
+        /// Determines if color changes smooth or discrete
+        /// </summary>
+        public bool smoothgradient = true;
 
         /// <summary>
         /// Interval at which lines are drawn
@@ -63,10 +67,6 @@ namespace FCartographer
 
             int wid = GetData().Width * 4;
             int hei = GetData().Height;
-
-            drawlines = true;
-            bool smoothgradient = true;
-            minorinterval = 50;
 
             for (int i = 0; i < wid * hei; i += 4)
             {
