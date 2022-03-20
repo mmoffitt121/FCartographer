@@ -202,9 +202,9 @@ namespace FCartographer
             // Canvas Initialization
             Canvas.Width = width;
             Canvas.Height = height;
-            SetScrollMargin(100);
+            /*SetScrollMargin(100);
             SetScrollIncrement(50);
-            SetScrollbarDimensions();
+            SetScrollbarDimensions();*/
             CenterCanvas();
 
             // Project Initialization
@@ -243,9 +243,9 @@ namespace FCartographer
             // Canvas Initialization
             Canvas.Width = project.width;
             Canvas.Height = project.height;
-            SetScrollMargin(100);
+            /*SetScrollMargin(100);
             SetScrollIncrement(50);
-            SetScrollbarDimensions();
+            SetScrollbarDimensions();*/
             CenterCanvas();
 
             // Brush Initialization

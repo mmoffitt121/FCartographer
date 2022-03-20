@@ -18,8 +18,6 @@ namespace FCartographer
     {
         private Point canvas_location;
 
-        private int scrollmargin;
-
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Setting Canvas Location
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -69,10 +67,8 @@ namespace FCartographer
         /// </summary>
         private void CenterCanvas()
         {
-            VerticalScroll.Value = 0;
-            HorizontalScroll.Value = 0;
-            SetCanvasYLocation((int)((float)CanvasHolder.Height / 2 - (float)(Canvas.Height / 2)) - VerticalScroll.Value);
-            SetCanvasXLocation((int)((float)CanvasHolder.Width / 2 - (float)(Canvas.Width / 2)) - HorizontalScroll.Value);
+            SetCanvasYLocation(500);
+            SetCanvasXLocation(500);
         }
 
         /// <summary>
@@ -80,8 +76,8 @@ namespace FCartographer
         /// </summary>
         private void Form1_Resize(object sender, EventArgs e)
         {
-            SetCanvasYLocation((int)((float)CanvasHolder.Height / 2 - (float)(Canvas.Height / 2)) - VerticalScroll.Value);
-            SetCanvasXLocation((int)((float)CanvasHolder.Width / 2 - (float)(Canvas.Width / 2)) - HorizontalScroll.Value);
+            SetCanvasYLocation(500);
+            SetCanvasXLocation(500);
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -97,7 +93,7 @@ namespace FCartographer
         }
 
 
-        // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+        /*// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Vertical Scroll
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -172,6 +168,6 @@ namespace FCartographer
         private void VerticalScroll_ValueChanged(object sender, EventArgs e)
         {
             RenderGraphics(project.GetGraphics());
-        }
+        }*/
     }
 }

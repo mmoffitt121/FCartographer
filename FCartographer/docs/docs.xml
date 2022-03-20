@@ -308,41 +308,6 @@
             Zooms in on canvas when button is clicked
             </summary>
         </member>
-        <member name="M:FCartographer.Form1.ScrollVertically(System.Object,System.Windows.Forms.ScrollEventArgs)">
-            <summary>
-            Changes canvas y based on scrollbar
-            </summary>
-        </member>
-        <member name="M:FCartographer.Form1.ScrollHorizontally(System.Object,System.Windows.Forms.ScrollEventArgs)">
-            <summary>
-            Changes canvas x based on scrollbar
-            </summary>
-        </member>
-        <member name="M:FCartographer.Form1.SetScrollbarDimensions">
-            <summary>
-            Sets the dimension of the scroll bar based on the Canvas width, height, and the LargeChange variable in each.
-            </summary>
-        </member>
-        <member name="M:FCartographer.Form1.SetScrollIncrement(System.Int32)">
-            <summary>
-            Sets the LargeChange and SmallChange values of each scrollbar
-            </summary>
-        </member>
-        <member name="M:FCartographer.Form1.SetScrollMargin(System.Int32)">
-            <summary>
-            Sets how far beyond the canvas the user can scroll
-            </summary>
-        </member>
-        <member name="M:FCartographer.Form1.HorizontalScroll_ValueChanged(System.Object,System.EventArgs)">
-            <summary>
-            Re-compiles the graphcis when scrolling horizontally.
-            </summary>
-        </member>
-        <member name="M:FCartographer.Form1.VerticalScroll_ValueChanged(System.Object,System.EventArgs)">
-            <summary>
-            Re-compiles the graphcis when scrolling vertically.
-            </summary>
-        </member>
         <member name="M:FCartographer.Form1.SetCurrentTool(FCartographer.Form1.ToolSelected)">
             <summary>
             Sets the current selected tool enum

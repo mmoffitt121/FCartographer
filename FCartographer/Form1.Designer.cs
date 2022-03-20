@@ -29,7 +29,6 @@ namespace FCartographer
         /// </summary>
         private void InitializeComponent()
         {
-            this.Canvas = new System.Windows.Forms.Panel();
             this.ToolsPanel = new System.Windows.Forms.Panel();
             this.waterTools = new System.Windows.Forms.Panel();
             this.waterLevelValue = new System.Windows.Forms.Label();
@@ -76,8 +75,7 @@ namespace FCartographer
             this.AddLayer = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.CanvasHolder = new System.Windows.Forms.Panel();
-            this.HorizontalScroll = new System.Windows.Forms.HScrollBar();
-            this.VerticalScroll = new System.Windows.Forms.VScrollBar();
+            this.Canvas = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ToolsPanel.SuspendLayout();
             this.waterTools.SuspendLayout();
@@ -93,20 +91,9 @@ namespace FCartographer
             this.menuStrip1.SuspendLayout();
             this.Navigation.SuspendLayout();
             this.CanvasHolder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Canvas)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Canvas
-            // 
-            this.Canvas.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Canvas.BackColor = System.Drawing.Color.White;
-            this.Canvas.Location = new System.Drawing.Point(263, 199);
-            this.Canvas.Name = "Canvas";
-            this.Canvas.Size = new System.Drawing.Size(829, 509);
-            this.Canvas.TabIndex = 0;
-            this.Canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseDown);
-            this.Canvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseMove);
-            this.Canvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Canvas_MouseUp);
             // 
             // ToolsPanel
             // 
@@ -541,9 +528,8 @@ namespace FCartographer
             // 
             // CanvasHolder
             // 
+            this.CanvasHolder.AutoScroll = true;
             this.CanvasHolder.AutoScrollMargin = new System.Drawing.Size(500, 500);
-            this.CanvasHolder.Controls.Add(this.HorizontalScroll);
-            this.CanvasHolder.Controls.Add(this.VerticalScroll);
             this.CanvasHolder.Controls.Add(this.Canvas);
             this.CanvasHolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CanvasHolder.Location = new System.Drawing.Point(159, 3);
@@ -551,29 +537,14 @@ namespace FCartographer
             this.CanvasHolder.Size = new System.Drawing.Size(1343, 893);
             this.CanvasHolder.TabIndex = 4;
             // 
-            // HorizontalScroll
+            // Canvas
             // 
-            this.HorizontalScroll.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.HorizontalScroll.Location = new System.Drawing.Point(0, 871);
-            this.HorizontalScroll.Maximum = 50;
-            this.HorizontalScroll.Minimum = -50;
-            this.HorizontalScroll.Name = "HorizontalScroll";
-            this.HorizontalScroll.Size = new System.Drawing.Size(1325, 22);
-            this.HorizontalScroll.TabIndex = 1;
-            this.HorizontalScroll.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ScrollHorizontally);
-            this.HorizontalScroll.ValueChanged += new System.EventHandler(this.HorizontalScroll_ValueChanged);
-            // 
-            // VerticalScroll
-            // 
-            this.VerticalScroll.Dock = System.Windows.Forms.DockStyle.Right;
-            this.VerticalScroll.Location = new System.Drawing.Point(1325, 0);
-            this.VerticalScroll.Maximum = 50;
-            this.VerticalScroll.Minimum = -50;
-            this.VerticalScroll.Name = "VerticalScroll";
-            this.VerticalScroll.Size = new System.Drawing.Size(18, 893);
-            this.VerticalScroll.TabIndex = 2;
-            this.VerticalScroll.Scroll += new System.Windows.Forms.ScrollEventHandler(this.ScrollVertically);
-            this.VerticalScroll.ValueChanged += new System.EventHandler(this.VerticalScroll_ValueChanged);
+            this.Canvas.BackColor = System.Drawing.Color.White;
+            this.Canvas.Location = new System.Drawing.Point(340, 242);
+            this.Canvas.Name = "Canvas";
+            this.Canvas.Size = new System.Drawing.Size(672, 404);
+            this.Canvas.TabIndex = 3;
+            this.Canvas.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -624,6 +595,7 @@ namespace FCartographer
             this.menuStrip1.PerformLayout();
             this.Navigation.ResumeLayout(false);
             this.CanvasHolder.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Canvas)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -631,8 +603,6 @@ namespace FCartographer
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel Canvas;
         private System.Windows.Forms.Panel ElevationSettings;
         private System.Windows.Forms.TrackBar StrengthControl;
         private System.Windows.Forms.Panel ToolsPanel;
@@ -658,8 +628,6 @@ namespace FCartographer
         private System.Windows.Forms.Panel CanvasHolder;
         private System.Windows.Forms.Button ZoomOut;
         private System.Windows.Forms.Button ZoomIn;
-        private new System.Windows.Forms.VScrollBar VerticalScroll;
-        private new System.Windows.Forms.HScrollBar HorizontalScroll;
         private System.Windows.Forms.FlowLayoutPanel LayerPane;
         private System.Windows.Forms.Button AddLayer;
         private System.Windows.Forms.Panel NationsSettings;
@@ -682,6 +650,7 @@ namespace FCartographer
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label waterLevelValue;
         private System.Windows.Forms.Button renderLayerButton;
+        private System.Windows.Forms.PictureBox Canvas;
     }
 }
 
