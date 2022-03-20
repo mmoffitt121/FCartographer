@@ -92,6 +92,11 @@ namespace FCartographer
             System.Diagnostics.Debug.WriteLine("Click!");
         }
 
+        private void CanvasHolder_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
 
         /*// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
         // Vertical Scroll

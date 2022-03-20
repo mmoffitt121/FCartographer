@@ -536,6 +536,7 @@ namespace FCartographer
             this.CanvasHolder.Name = "CanvasHolder";
             this.CanvasHolder.Size = new System.Drawing.Size(1343, 893);
             this.CanvasHolder.TabIndex = 4;
+            this.CanvasHolder.Scroll += new System.Windows.Forms.ScrollEventHandler(this.CanvasHolder_Scroll);
             // 
             // Canvas
             // 
