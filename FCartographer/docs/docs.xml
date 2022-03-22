@@ -1926,16 +1926,6 @@
             Brush preset constructor.
             </summary>
         </member>
-        <member name="T:FCartographer.AnglePicker">
-            <summary>
-            Shader responsible for terrain layers
-            </summary>
-        </member>
-        <member name="F:FCartographer.AnglePicker.angle">
-            <summary>
-            Float that represents the picked angle.
-            </summary>
-        </member>
         <member name="T:FCartographer.BitmapDataConverter">
             <summary>
             Responsible for converting bitmaps to different data types and vice versa.

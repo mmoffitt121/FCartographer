@@ -76,8 +76,8 @@ namespace FCartographer
         /// </summary>
         private void Form1_Resize(object sender, EventArgs e)
         {
-            SetCanvasYLocation(500);
-            SetCanvasXLocation(500);
+            //SetCanvasYLocation(500);
+            //SetCanvasXLocation(500);
         }
 
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

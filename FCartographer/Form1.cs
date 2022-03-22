@@ -43,6 +43,8 @@ namespace FCartographer
         /// </summary>
         private NationsBrushPreset nations_brushpreset;
 
+        private Bitmap displaybuffer;
+
         /*
         /// <summary>
         /// Array of possible brushes for the user to use
@@ -172,6 +174,11 @@ namespace FCartographer
         // Rendering
         // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+        private void Canvas_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(displaybuffer, 0, 0);
+        }
+
         /// <summary>
         /// Draws rendered graphics to the canvas
         /// Input: Bitmap display -> Already rendered graphics to display to user
@@ -179,6 +186,21 @@ namespace FCartographer
         public void RenderGraphics(Bitmap display)
         {
             g.DrawImage(display, 0, 0);
+            Canvas.Invalidate();
+        }
+
+        /// <summary>
+        /// Renders a caller-defined region of the canvas
+        /// </summary>
+        /// <param name="display"></param>
+        /// <param name="x0"></param>
+        /// <param name="y0"></param>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        public void RenderRegion(Bitmap display, int x, int y)
+        {
+            g.DrawImage(display, x, y);
+            Canvas.Invalidate(new Rectangle(x, y, display.Width, display.Height));
         }
 
 
@@ -207,6 +229,8 @@ namespace FCartographer
             SetScrollbarDimensions();*/
             CenterCanvas();
 
+            displaybuffer = new Bitmap(width, height);
+
             // Project Initialization
             project = new Project(width, height);
             project.AddLayer(Layer.LayerType.NationMap);
@@ -220,7 +244,7 @@ namespace FCartographer
             BrushSelect_Click(new object(), new EventArgs());
 
             // Canvas Interface Initialization
-            g = Canvas.CreateGraphics();
+            g = Graphics.FromImage(displaybuffer);
 
             // Layer Control Initialization
             DisplayLayers();
@@ -248,6 +272,8 @@ namespace FCartographer
             SetScrollbarDimensions();*/
             CenterCanvas();
 
+            displaybuffer = new Bitmap(Canvas.Width, Canvas.Height);
+
             // Brush Initialization
             // NationLayer lyr = (NationLayer)(project.CurrentLayer());
             // terrain_brushpreset = new TerrainBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), false);
@@ -257,7 +283,7 @@ namespace FCartographer
             BrushSelect_Click(new object(), new EventArgs());
 
             // Canvas Interface Initialization
-            g = Canvas.CreateGraphics();
+            g = Graphics.FromImage(displaybuffer);
 
             // Layer Control Initialization
             DisplayLayers();
