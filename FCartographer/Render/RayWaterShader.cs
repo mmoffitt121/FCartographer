@@ -206,11 +206,12 @@ namespace FCartographer
                 // Sun reflection
                 // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
 
-                byte sunr;
-                byte sung;
-                byte sunb;
+                float sunreflection = 0;
 
+                if (render_sun_reflection)
+                {
 
+                }
 
                 // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
                 // Wave rendering
@@ -316,9 +317,9 @@ namespace FCartographer
 
                         luminosity = Math.Clamp(luminosity, 0, 1);
 
-                        r = (byte)Math.Clamp(amb * r + luminosity * lr * intensity * ((float)r) / 255, 0, 255);
-                        g = (byte)Math.Clamp(amb * g + luminosity * lg * intensity * ((float)g) / 255, 0, 255);
-                        b = (byte)Math.Clamp(amb * b + luminosity * lb * intensity * ((float)b) / 255, 0, 255);
+                        r = (byte)Math.Clamp(amb * r + luminosity * lr * intensity * ((float)r) / 255 + luminosity * lr * sunreflection, 0, 255);
+                        g = (byte)Math.Clamp(amb * g + luminosity * lg * intensity * ((float)g) / 255 + luminosity * lg * sunreflection, 0, 255);
+                        b = (byte)Math.Clamp(amb * b + luminosity * lb * intensity * ((float)b) / 255 + luminosity * lb * sunreflection, 0, 255);
                     }
 
                     // ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---  ---
