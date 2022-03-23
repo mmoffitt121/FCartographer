@@ -57,7 +57,7 @@ namespace FCartographer
 
             if (ToRender())
             {
-                render_g.Clear(Color.FromArgb(255, 255, 255, 255));
+                render_g.DrawRectangle(new Pen(Color.White), rx0, ry0, rx1 - rx0 - 1, ry1 - ry0 - 1);
                 if (render_contour)
                 {
                     ctr.Render(rx0, ry0, rx1, ry1);

@@ -78,118 +78,120 @@ namespace FCartographer
 
         private void RenderContour(int x0, int y0, int x1, int y1)
         {
-            byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData(), x0, y0, x1, y1);
-            byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput(), x0, y0, x1, y1);
+            byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData());
+            byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput());
 
-            int wid = (x1 - x0) * 4;
-            int hei = (y1 - y0);
+            int wid = GetData().Width * 4;
 
-            for (int i = 0; i < wid * hei; i += 4)
+            for (int x = x0; x < x1; x++)
             {
-                int v = inp[i];
-
-                bool major;
-                bool minor;
-
-                int[,] adj = new int[,] { { -1, -1, -1 }, { -1, -1, -1 }, { -1, -1, -1 } };
-
-                // Build matrix of adjacent bytes
-                adj[1, 1] = inp[i];
-
-                // Check if up and down valid
-                bool upvalid = i - wid > 0;
-                bool downvalid = i + wid < inp.Length;
-
-                if (upvalid) 
+                for (int y = y0; y < y1; y++)
                 {
-                    adj[1, 0] = inp[i - wid];
-                }
+                    int i = y * wid + x * 4;
+                    int v = inp[i];
 
-                if (downvalid)
-                {
-                    adj[1, 2] = inp[i + wid];
-                }
+                    bool major;
+                    bool minor;
 
-                if (i % wid > 0)  // Check if left valid
-                {
-                    adj[0, 1] = inp[i - 4];
+                    int[,] adj = new int[,] { { -1, -1, -1 }, { -1, -1, -1 }, { -1, -1, -1 } };
+
+                    // Build matrix of adjacent bytes
+                    adj[1, 1] = inp[i];
+
+                    // Check if up and down valid
+                    bool upvalid = i - wid > 0;
+                    bool downvalid = i + wid < inp.Length;
 
                     if (upvalid)
                     {
-                        adj[0, 0] = inp[i - wid - 4];
+                        adj[1, 0] = inp[i - wid];
                     }
 
                     if (downvalid)
                     {
-                        adj[0, 2] = inp[i + wid - 4];
+                        adj[1, 2] = inp[i + wid];
                     }
-                }
 
-                if (i % wid != wid - 4)  // Check if right valid
-                {
-                    adj[2, 1] = inp[i + 4];
-
-                    if (upvalid)
+                    if (i % wid > 0)  // Check if left valid
                     {
-                        adj[2, 0] = inp[i - wid + 4];
+                        adj[0, 1] = inp[i - 4];
+
+                        if (upvalid)
+                        {
+                            adj[0, 0] = inp[i - wid - 4];
+                        }
+
+                        if (downvalid)
+                        {
+                            adj[0, 2] = inp[i + wid - 4];
+                        }
                     }
 
-                    if (downvalid)
+                    if (i % wid != wid - 4)  // Check if right valid
                     {
-                        adj[2, 2] = inp[i + wid + 4];
+                        adj[2, 1] = inp[i + 4];
+
+                        if (upvalid)
+                        {
+                            adj[2, 0] = inp[i - wid + 4];
+                        }
+
+                        if (downvalid)
+                        {
+                            adj[2, 2] = inp[i + wid + 4];
+                        }
                     }
-                }
 
-                major = false;
-                minor = false;
+                    major = false;
+                    minor = false;
 
-                foreach (int j in adj)
-                {
-                    // System.Diagnostics.Debug.WriteLine(j + " " + v);
-                    if (v > j && ((int)(v / (minorinterval * majorinterval))) * minorinterval * majorinterval > j && drawlines)
+                    foreach (int j in adj)
                     {
-                        major = true;
+                        if (v > j && ((int)(v / (minorinterval * majorinterval))) * minorinterval * majorinterval > j && drawlines)
+                        {
+                            major = true;
+                        }
+
+                        if (v > j && ((int)(v / minorinterval)) * minorinterval > j && drawlines)
+                        {
+                            minor = true;
+                        }
                     }
 
-                    if (v > j && ((int)(v / minorinterval)) * minorinterval > j && drawlines)
+                    if (major)
                     {
-                        minor = true;
+                        outp[i + 3] = majorcolor.A;
+                        outp[i + 2] = majorcolor.R;
+                        outp[i + 1] = majorcolor.G;
+                        outp[i + 0] = majorcolor.B;
                     }
-                }
+                    else if (minor)
+                    {
+                        outp[i + 3] = minorcolor.A;
+                        outp[i + 2] = minorcolor.R;
+                        outp[i + 1] = minorcolor.G;
+                        outp[i + 0] = minorcolor.B;
+                    }
+                    else if (smoothgradient)
+                    {
+                        outp[i + 3] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.A, highcolor.A, ((float)v) / 255), 0, 255);
+                        outp[i + 2] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.R, highcolor.R, ((float)v) / 255), 0, 255);
+                        outp[i + 1] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.G, highcolor.G, ((float)v) / 255), 0, 255);
+                        outp[i + 0] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.B, highcolor.B, ((float)v) / 255), 0, 255);
+                    }
+                    else
+                    {
+                        v = v - v % minorinterval + startpoint;
 
-                if (major)
-                {
-                    outp[i + 3] = majorcolor.A;
-                    outp[i + 2] = majorcolor.R;
-                    outp[i + 1] = majorcolor.G;
-                    outp[i + 0] = majorcolor.B;
-                }
-                else if (minor)
-                {
-                    outp[i + 3] = minorcolor.A;
-                    outp[i + 2] = minorcolor.R;
-                    outp[i + 1] = minorcolor.G;
-                    outp[i + 0] = minorcolor.B;
-                }
-                else if (smoothgradient)
-                {
-                    outp[i + 3] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.A, highcolor.A, ((float)v) / 255), 0, 255);
-                    outp[i + 2] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.R, highcolor.R, ((float)v) / 255), 0, 255);
-                    outp[i + 1] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.G, highcolor.G, ((float)v) / 255), 0, 255);
-                    outp[i + 0] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.B, highcolor.B, ((float)v) / 255), 0, 255);
-                }
-                else
-                {
-                    v = v - v % minorinterval + startpoint;
-
-                    outp[i + 3] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.A, highcolor.A, ((float)v) / 255), 0, 255);
-                    outp[i + 2] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.R, highcolor.R, ((float)v) / 255), 0, 255);
-                    outp[i + 1] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.G, highcolor.G, ((float)v) / 255), 0, 255);
-                    outp[i + 0] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.B, highcolor.B, ((float)v) / 255), 0, 255);
+                        outp[i + 3] = 255;
+                        outp[i + 2] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.R, highcolor.R, ((float)v) / 255), 0, 255);
+                        outp[i + 1] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.G, highcolor.G, ((float)v) / 255), 0, 255);
+                        outp[i + 0] = (byte)Math.Clamp(Lerper.Lerp(lowcolor.B, highcolor.B, ((float)v) / 255), 0, 255);
+                    }
                 }
             }
 
-            BitmapDataConverter.DrawByteArrayToBitmap(GetOutput(), outp, x0, y0, x1, y1);
+            BitmapDataConverter.DrawByteArrayToBitmap(GetOutput(), outp);
         }
 
         private static double Lerp(double a, double b, double x)
