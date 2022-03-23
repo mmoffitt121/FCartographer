@@ -122,12 +122,12 @@ namespace FCartographer
             {
                 project.CurrentLayer().Render();
                 RenderGraphics(project.GetGraphics());
-            }
 
-            project.CurrentLayer().rx0 = -1;
-            project.CurrentLayer().rx1 = -1;
-            project.CurrentLayer().ry0 = -1;
-            project.CurrentLayer().ry1 = -1;
+                project.CurrentLayer().rx0 = -1;
+                project.CurrentLayer().rx1 = -1;
+                project.CurrentLayer().ry0 = -1;
+                project.CurrentLayer().ry1 = -1;
+            }
         }
 
         /// <summary>

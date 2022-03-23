@@ -65,7 +65,6 @@ namespace FCartographer
         /// </summary>
         public override void Render(int x0, int y0, int x1, int y1)
         {
-            System.Diagnostics.Debug.WriteLine(x0 + " " + y0 + " " + x1 + " " + y1 + " ");
             if (x0 >= 0 && y0 >= 0 && x1 > x0 && y1 > y0)
             {
                 RenderContour(x0, y0, x1, y1);

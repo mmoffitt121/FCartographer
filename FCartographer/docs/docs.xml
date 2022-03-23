@@ -1444,6 +1444,11 @@
             Render override function
             </summary>
         </member>
+        <member name="M:FCartographer.GradientTerrainShader.Render(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Render override function
+            </summary>
+        </member>
         <member name="M:FCartographer.GradientTerrainShader.#ctor(System.Drawing.Bitmap,System.Drawing.Bitmap)">
             <summary>
             GradientTerrainShader constructor
@@ -1544,6 +1549,11 @@
             </summary>
         </member>
         <member name="M:FCartographer.RayTerrainShader.Render">
+            <summary>
+            Render override function
+            </summary>
+        </member>
+        <member name="M:FCartographer.RayTerrainShader.Render(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Render override function
             </summary>

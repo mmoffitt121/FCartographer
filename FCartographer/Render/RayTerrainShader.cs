@@ -64,18 +64,34 @@ namespace FCartographer
         /// </summary>
         public override void Render()
         {
-            RenderShadows();
+            RenderShadows(0, 0, GetData().Width, GetData().Height);
         }
 
-        private void RenderShadows()
+        /// <summary>
+        /// Render override function
+        /// </summary>
+        public override void Render(int x0, int y0, int x1, int y1)
+        {
+            if (x0 >= 0 && y0 >= 0 && x1 > x0 && y1 > y0)
+            {
+                RenderShadows(x0, y0, x1, y1);
+            }
+            else
+            {
+                Render();
+            }
+        }
+
+        private void RenderShadows(int x0, int y0, int x1, int y1)
         {
             byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData());
             byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput());
 
+            rendermode = 3;
             switch (rendermode)
             {
                 case 0:
-                    DefaultRenderShadows(inp, outp);
+                    DefaultRenderShadows(inp, outp, x0, y0, x1, y1);
                     break;
                 case 1:
                 case 2:
@@ -84,10 +100,13 @@ namespace FCartographer
                     break;
             }
 
-            BitmapDataConverter.DrawByteArrayToBitmap(GetOutput(), outp);
+            Bitmap intermediate = new Bitmap(GetOutput().Width, GetOutput().Height);
+            BitmapDataConverter.DrawByteArrayToBitmap(intermediate, outp);
+            Graphics gr = Graphics.FromImage(GetOutput());
+            gr.DrawImage(intermediate, x0, y0, new Rectangle(x0, y0, x1-x0, y1-y0), GraphicsUnit.Pixel);
         }
 
-        private void DefaultRenderShadows(byte[] inp, byte[] outp)
+        private void DefaultRenderShadows(byte[] inp, byte[] outp, int x0, int y0, int x1, int y1)
         {
             int wid = GetData().Width * 4;
             int hei = GetData().Height;
@@ -103,30 +122,35 @@ namespace FCartographer
             byte lb = lightcolor.B;
 
             float luminosity;
-            for (int i = 0; i < wid * hei; i += 4)
+            for (int xi = x0; xi < x1; xi++)
             {
-                float x = i % wid / 4;
-                float y = i / wid;
-                float h = inp[i];
-                luminosity = 1f;
-                while (x < wid / 4 && x >= 0 && y < hei && y >= 0 && h <= 255 && h >= 0 && luminosity > 0)
+                for (int yi = y0; yi < y1; yi++)
                 {
-                    if (luminosity > 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]))
+                    int i = yi * wid + xi * 4;
+
+                    float x = i % wid / 4;
+                    float y = i / wid;
+                    float h = inp[i];
+                    luminosity = 1f;
+                    while (x < wid / 4 && x >= 0 && y < hei && y >= 0 && h <= 255 && h >= 0 && luminosity > 0)
                     {
-                        luminosity = 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]);
+                        if (luminosity > 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]))
+                        {
+                            luminosity = 1 + dropoff * (h - bias - inp[wid * (int)y + 4 * (int)x]);
+                        }
+
+                        x += dx;
+                        y += dy;
+                        h += dh;
                     }
 
-                    x += dx;
-                    y += dy;
-                    h += dh;
+                    luminosity = Math.Clamp(luminosity, 0, 1);
+
+                    outp[i + 3] = 255;
+                    outp[i + 2] = (byte)Math.Clamp(amb * outp[i + 2] + luminosity * lr * intensity * ((float)outp[i + 2]) / 255, 0, 255);
+                    outp[i + 1] = (byte)Math.Clamp(amb * outp[i + 1] + luminosity * lg * intensity * ((float)outp[i + 1]) / 255, 0, 255);
+                    outp[i + 0] = (byte)Math.Clamp(amb * outp[i + 0] + luminosity * lb * intensity * ((float)outp[i + 0]) / 255, 0, 255);
                 }
-
-                luminosity = Math.Clamp(luminosity, 0, 1);
-
-                outp[i + 3] = 255;
-                outp[i + 2] = (byte)Math.Clamp(amb * outp[i + 2] + luminosity * lr * intensity * ((float)outp[i + 2]) / 255, 0, 255);
-                outp[i + 1] = (byte)Math.Clamp(amb * outp[i + 1] + luminosity * lg * intensity * ((float)outp[i + 1]) / 255, 0, 255);
-                outp[i + 0] = (byte)Math.Clamp(amb * outp[i + 0] + luminosity * lb * intensity * ((float)outp[i + 0]) / 255, 0, 255);
             }
         }
 

@@ -57,6 +57,38 @@ namespace FCartographer
 
             if (ToRender())
             {
+                if (render_rays)
+                {
+                    float direction = rts.direction;
+                    float angle = rts.angle;
+
+                    int wid = GetData().Width;
+                    int hei = GetData().Height;
+
+                    double longestray = Math.Min(255 * Math.Tan(angle), Math.Sqrt(wid * wid + hei * hei));
+
+                    int dx = (int)(longestray * Math.Cos(direction));
+                    int dy = (int)(longestray * Math.Sin(direction));
+
+                    if (dx < 0)
+                    {
+                        rx0 += dx;
+                    }
+                    else
+                    {
+                        rx1 += dx;
+                    }
+
+                    if (dy < 0)
+                    {
+                        ry0 += dy;
+                    }
+                    else
+                    {
+                        ry1 += dy;
+                    }
+                }
+
                 render_g.DrawRectangle(new Pen(Color.White), rx0, ry0, rx1 - rx0 - 1, ry1 - ry0 - 1);
                 if (render_contour)
                 {
