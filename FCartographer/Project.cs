@@ -279,7 +279,32 @@ namespace FCartographer
                 {
                     outg.DrawImage(layers[i].GetData(), 0, 0, width, height);
                 }
-                
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Composits layers together
+        /// </summary>
+        private Bitmap CompositeRegion(int x0, int y0, int x1, int y1)
+        {
+            outg.DrawRectangle(new Pen(Color.White), x0, y0, x1, y1);
+
+            for (int i = 0; i < layers.Count; i++)
+            {
+                if (!layers[i].Visible())
+                {
+                    continue;
+                }
+                if (layers[i].ToRender())
+                {
+                    outg.DrawImage(layers[i].GetOutData(), x0, y0, new Rectangle(x0, y0, x1, y1), GraphicsUnit.Pixel);
+                }
+                else
+                {
+                    outg.DrawImage(layers[i].GetData(), x0, y0, new Rectangle(x0, y0, x1, y1), GraphicsUnit.Pixel);
+                }
             }
 
             return output;

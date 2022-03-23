@@ -50,6 +50,11 @@ namespace FCartographer
         /// </summary>
         public Graphics render_g;
 
+        /// <summary>
+        /// Value used to mark part of region to render
+        /// </summary>
+        public int rx0, rx1, ry0, ry1 = -1;
+
         private bool visible;
         private bool torender;
 
@@ -195,7 +200,24 @@ namespace FCartographer
         /// </summary>
         public virtual void Draw(BrushPreset brush, MouseEventArgs e, int? xprime, int? yprime)
         {
+            int size = brush.GetSize();
 
+            if (rx0 > e.X - size / 2 || rx0 == -1)
+            {
+                rx0 = Math.Clamp(e.X - size / 2, 0, data.Width);
+            }
+            if (ry0 > e.Y - size / 2 || ry0 == -1)
+            {
+                ry0 = Math.Clamp(e.Y - size / 2, 0, data.Height);
+            }
+            if (rx1 < e.X + size / 2)
+            {
+                rx1 = Math.Clamp(e.X + size / 2, 0, data.Width);
+            }
+            if (ry1 < e.Y + size / 2)
+            {
+                ry1 = Math.Clamp(e.Y + size / 2, 0, data.Height);
+            }
         }
 
         /// <summary>
@@ -204,6 +226,17 @@ namespace FCartographer
         public virtual void DrawTemp(BrushPreset brush, MouseEventArgs e, Graphics gr, int? xprime, int? yprime)
         {
 
+        }
+
+        /// <summary>
+        /// Resets the bounds of the layer to render
+        /// </summary>
+        public void ResetRenderBounds()
+        {
+            rx0 = -1;
+            rx1 = -1;
+            ry0 = -1;
+            ry1 = -1;
         }
 
         /// <summary>

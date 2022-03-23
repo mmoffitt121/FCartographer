@@ -60,19 +60,19 @@ namespace FCartographer
                 render_g.Clear(Color.FromArgb(255, 255, 255, 255));
                 if (render_contour)
                 {
-                    ctr.Render();
+                    ctr.Render(rx0, ry0, rx1, ry1);
                 }
                 
                 if (render_gradient)
                 {
                     gts.opacity = 0.5f;
-                    gts.Render();
+                    gts.Render(rx0, ry0, rx1, ry1);
                 }
                 
                 if (render_rays)
                 {
                     rts.opacity = 0.5f;
-                    rts.Render();
+                    rts.Render(rx0, ry0, rx1, ry1);
                 }
 
                 if (waterlayer != null)
@@ -110,6 +110,7 @@ namespace FCartographer
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.DrawImage(brush.GetImage(), e.X - size / 2, e.Y - size / 2, size, size);
+            base.Draw(brush, e, xprime, yprime);
         }
 
         /// <summary>

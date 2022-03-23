@@ -45,6 +45,8 @@ namespace FCartographer
 
         private Bitmap displaybuffer;
 
+        private bool liverendering = false;
+
         /*
         /// <summary>
         /// Array of possible brushes for the user to use
@@ -122,6 +124,10 @@ namespace FCartographer
                 RenderGraphics(project.GetGraphics());
             }
 
+            project.CurrentLayer().rx0 = -1;
+            project.CurrentLayer().rx1 = -1;
+            project.CurrentLayer().ry0 = -1;
+            project.CurrentLayer().ry1 = -1;
         }
 
         /// <summary>
@@ -155,9 +161,6 @@ namespace FCartographer
                         project.DrawTemp(terrain_brushpreset, e, g, xprime, yprime);
                         break;
                     case Layer.LayerType.NationMap:
-                        project.Draw(nations_brushpreset, e, xprime, yprime);
-                        project.DrawTemp(nations_brushpreset, e, g, xprime, yprime);
-                        break;
                     case Layer.LayerType.Biome:
                         project.Draw(nations_brushpreset, e, xprime, yprime);
                         project.DrawTemp(nations_brushpreset, e, g, xprime, yprime);
@@ -183,6 +186,7 @@ namespace FCartographer
         /// Draws rendered graphics to the canvas
         /// Input: Bitmap display -> Already rendered graphics to display to user
         /// </summary>
+        /// <param name="display"></param>
         public void RenderGraphics(Bitmap display)
         {
             g.DrawImage(display, 0, 0);
@@ -193,10 +197,8 @@ namespace FCartographer
         /// Renders a caller-defined region of the canvas
         /// </summary>
         /// <param name="display"></param>
-        /// <param name="x0"></param>
-        /// <param name="y0"></param>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void RenderRegion(Bitmap display, int x, int y)
         {
             g.DrawImage(display, x, y);
@@ -239,6 +241,8 @@ namespace FCartographer
             NationLayer lyr = (NationLayer)(project.CurrentLayer());
             terrain_brushpreset = new TerrainBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), false);
             nations_brushpreset = new NationsBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, lyr.GetNation(0).GetDataColor(), true);
+
+            project.AddLayer(Layer.LayerType.HeightMap);
 
             // Tool Initialization
             BrushSelect_Click(new object(), new EventArgs());

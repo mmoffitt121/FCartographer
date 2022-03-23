@@ -57,16 +57,32 @@ namespace FCartographer
         /// </summary>
         public override void Render()
         {
-            RenderContour();
+            RenderContour(0, 0, GetData().Width, GetData().Height);
         }
 
-        private void RenderContour()
+        /// <summary>
+        /// Renders contour lines onto internal data
+        /// </summary>
+        public override void Render(int x0, int y0, int x1, int y1)
         {
-            byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData());
-            byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput());
+            System.Diagnostics.Debug.WriteLine(x0 + " " + y0 + " " + x1 + " " + y1 + " ");
+            if (x0 >= 0 && y0 >= 0 && x1 > x0 && y1 > y0)
+            {
+                RenderContour(x0, y0, x1, y1);
+            }
+            else
+            {
+                Render();
+            }
+        }
 
-            int wid = GetData().Width * 4;
-            int hei = GetData().Height;
+        private void RenderContour(int x0, int y0, int x1, int y1)
+        {
+            byte[] inp = BitmapDataConverter.BitmapToByteArray(GetData(), x0, y0, x1, y1);
+            byte[] outp = BitmapDataConverter.BitmapToByteArray(GetOutput(), x0, y0, x1, y1);
+
+            int wid = (x1 - x0) * 4;
+            int hei = (y1 - y0);
 
             for (int i = 0; i < wid * hei; i += 4)
             {
@@ -173,7 +189,7 @@ namespace FCartographer
                 }
             }
 
-            BitmapDataConverter.DrawImage(GetOutput(), outp, true);
+            BitmapDataConverter.DrawByteArrayToBitmap(GetOutput(), outp, x0, y0, x1, y1);
         }
 
         private static double Lerp(double a, double b, double x)

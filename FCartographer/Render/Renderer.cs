@@ -38,6 +38,14 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Responsible for rendering layer based on input data.
+        /// </summary>
+        public virtual void Render(int x0, int y0, int x1, int y1)
+        {
+
+        }
+
+        /// <summary>
         /// Returns the base data held in the renderer
         /// </summary>
         /// <returns></returns>

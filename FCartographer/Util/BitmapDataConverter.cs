@@ -104,12 +104,39 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Converts bitmap to byte array
+        /// </summary>
+        public static byte[] BitmapToByteArray(Bitmap bitmap, int x0, int y0, int x1, int y1)
+        {
+            System.Diagnostics.Debug.WriteLine(" > " + x0 + " " + y0 + " " + x1 + " " + y1 + " ");
+            BitmapData dat = bitmap.LockBits(new Rectangle(x0, y0, x1 - x0, y1 - y0), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            byte[] output = new byte[(x1 - x0) * (y1 - y0) * 4];
+
+            Marshal.Copy(dat.Scan0, output, 0, (x1 - x0) * (y1 - y0) * 4);
+
+            bitmap.UnlockBits(dat);
+
+            return output;
+        }
+
+        /// <summary>
         /// Marshals byte array to bitmap
         /// </summary>
         public static void DrawByteArrayToBitmap(Bitmap bitmap, byte[] bytes)
         {
             BitmapData dat = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
             Marshal.Copy(bytes, 0, dat.Scan0, bytes.Length);
+
+            bitmap.UnlockBits(dat);
+        }
+
+        /// <summary>
+        /// Marshals byte array to bitmap
+        /// </summary>
+        public static void DrawByteArrayToBitmap(Bitmap bitmap, byte[] bytes, int x0, int y0, int x1, int y1)
+        {
+            BitmapData dat = bitmap.LockBits(new Rectangle(x0, y0, x1 - x0, y1 - y0), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+            Marshal.Copy(bytes, 0, dat.Scan0, (x1 - x0) * (y1 - y0) * 4);
 
             bitmap.UnlockBits(dat);
         }

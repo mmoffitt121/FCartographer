@@ -151,6 +151,15 @@
             Draws rendered graphics to the canvas
             Input: Bitmap display -> Already rendered graphics to display to user
             </summary>
+            <param name="display"></param>
+        </member>
+        <member name="M:FCartographer.Form1.RenderRegion(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            Renders a caller-defined region of the canvas
+            </summary>
+            <param name="display"></param>
+            <param name="x"></param>
+            <param name="y"></param>
         </member>
         <member name="M:FCartographer.Form1.NewProject(System.Int32,System.Int32)">
             <summary>
@@ -791,6 +800,26 @@
             Graphics object for interfacing with 
             </summary>
         </member>
+        <member name="F:FCartographer.Layer.rx0">
+            <summary>
+            Value used to mark part of region to render
+            </summary>
+        </member>
+        <member name="F:FCartographer.Layer.rx1">
+            <summary>
+            Value used to mark part of region to render
+            </summary>
+        </member>
+        <member name="F:FCartographer.Layer.ry0">
+            <summary>
+            Value used to mark part of region to render
+            </summary>
+        </member>
+        <member name="F:FCartographer.Layer.ry1">
+            <summary>
+            Value used to mark part of region to render
+            </summary>
+        </member>
         <member name="M:FCartographer.Layer.GetWidth">
             <summary>
             Returns the width of the layer.
@@ -884,6 +913,11 @@
         <member name="M:FCartographer.Layer.DrawTemp(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Overridden in subclasses, called to draw to temp data using input brush.
+            </summary>
+        </member>
+        <member name="M:FCartographer.Layer.ResetRenderBounds">
+            <summary>
+            Resets the bounds of the layer to render
             </summary>
         </member>
         <member name="M:FCartographer.Layer.SetColor(System.Drawing.Color)">
@@ -1277,6 +1311,11 @@
             Composits layers together
             </summary>
         </member>
+        <member name="M:FCartographer.Project.CompositeRegion(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Composits layers together
+            </summary>
+        </member>
         <member name="M:FCartographer.Project.#ctor(System.Int32,System.Int32)">
             <summary>
             Constructor, creates project object of specified width and height
@@ -1343,6 +1382,11 @@
             </summary>
         </member>
         <member name="M:FCartographer.ContourRenderer.Render">
+            <summary>
+            Renders contour lines onto internal data
+            </summary>
+        </member>
+        <member name="M:FCartographer.ContourRenderer.Render(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Renders contour lines onto internal data
             </summary>
@@ -1685,6 +1729,11 @@
             Responsible for rendering layer based on input data.
             </summary>
         </member>
+        <member name="M:FCartographer.Renderer.Render(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Responsible for rendering layer based on input data.
+            </summary>
+        </member>
         <member name="M:FCartographer.Renderer.GetData">
             <summary>
             Returns the base data held in the renderer
@@ -1949,7 +1998,17 @@
             Converts bitmap to byte array
             </summary>
         </member>
+        <member name="M:FCartographer.BitmapDataConverter.BitmapToByteArray(System.Drawing.Bitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Converts bitmap to byte array
+            </summary>
+        </member>
         <member name="M:FCartographer.BitmapDataConverter.DrawByteArrayToBitmap(System.Drawing.Bitmap,System.Byte[])">
+            <summary>
+            Marshals byte array to bitmap
+            </summary>
+        </member>
+        <member name="M:FCartographer.BitmapDataConverter.DrawByteArrayToBitmap(System.Drawing.Bitmap,System.Byte[],System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Marshals byte array to bitmap
             </summary>
