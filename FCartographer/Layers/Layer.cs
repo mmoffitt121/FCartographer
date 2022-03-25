@@ -139,6 +139,14 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Overridden in subclasses, called to composite changes and render output. Based on render region.
+        /// </summary>
+        public virtual void Render(int rx0, int ry0, int rx1, int ry1)
+        {
+
+        }
+
+        /// <summary>
         /// Returns the base data of the bitmap.
         /// </summary>
         public Bitmap GetData()

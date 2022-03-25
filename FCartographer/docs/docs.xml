@@ -869,6 +869,11 @@
             Overridden in subclasses, called to composite changes and render output.
             </summary>
         </member>
+        <member name="M:FCartographer.Layer.Render(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Overridden in subclasses, called to composite changes and render output. Based on render region.
+            </summary>
+        </member>
         <member name="M:FCartographer.Layer.GetData">
             <summary>
             Returns the base data of the bitmap.
@@ -1185,6 +1190,11 @@
             </summary>
         </member>
         <member name="M:FCartographer.WaterLayer.Render">
+            <summary>
+            Override void that composits temp data to the layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.WaterLayer.Render(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Override void that composits temp data to the layer.
             </summary>
@@ -1686,7 +1696,16 @@
             Override Render function
             </summary>
         </member>
-        <member name="M:FCartographer.RayWaterShader.RenderWater">
+        <member name="M:FCartographer.RayWaterShader.Render(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Override render function with specified render region
+            </summary>
+            <param name="x0"></param>
+            <param name="y0"></param>
+            <param name="x1"></param>
+            <param name="y1"></param>
+        </member>
+        <member name="M:FCartographer.RayWaterShader.RenderWater(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Masks and renders the water according to an internal sun
             </summary>

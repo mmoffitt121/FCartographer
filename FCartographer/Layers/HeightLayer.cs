@@ -109,7 +109,7 @@ namespace FCartographer
 
                 if (waterlayer != null)
                 {
-                    waterlayer.Render();
+                    waterlayer.Render(rx0, ry0, rx1, ry1);
                 }
             }
         }

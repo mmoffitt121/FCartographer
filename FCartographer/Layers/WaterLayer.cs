@@ -104,6 +104,38 @@ namespace FCartographer
         }
 
         /// <summary>
+        /// Override void that composits temp data to the layer.
+        /// </summary>
+        public override void Render(int x0, int y0, int x1, int y1)
+        {
+            data_g.Clear(color1);
+
+            if (ToRender())
+            {
+                render_g.DrawRectangle(new Pen(Color.White), rx0, ry0, rx1 - rx0 - 1, ry1 - ry0 - 1);
+
+                rws.SetTerrain(terrain);
+                if (terrain == null)
+                {
+                    rws.SetAngles(direction, angle);
+                }
+                else
+                {
+                    rws.SetAngles(terrain.rts.direction, terrain.rts.angle);
+                }
+
+                rws.render_waves = render_waves;
+                rws.render_rays = render_waves;
+                rws.render_depth = render_depth;
+                rws.render_sun_reflection = render_sun_reflection;
+
+                rws.level = level;
+                rws.c1 = color1;
+                rws.Render();
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="layers"></param>
