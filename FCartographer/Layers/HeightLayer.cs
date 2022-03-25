@@ -59,8 +59,8 @@ namespace FCartographer
             {
                 if (render_rays)
                 {
-                    float direction = rts.direction;
-                    float angle = rts.angle;
+                    float direction = (-rts.direction) * MathF.PI / 180;
+                    float angle = (rts.angle + 90) * MathF.PI / 180;
 
                     int wid = GetData().Width;
                     int hei = GetData().Height;
@@ -72,20 +72,20 @@ namespace FCartographer
 
                     if (dx < 0)
                     {
-                        rx0 += dx;
+                        rx0 = Math.Max(rx0 + dx, 0);
                     }
                     else
                     {
-                        rx1 += dx;
+                        rx1 = Math.Min(rx1 + dx, wid);
                     }
 
                     if (dy < 0)
                     {
-                        ry0 += dy;
+                        ry0 = Math.Max(ry0 + dy, 0);
                     }
                     else
                     {
-                        ry1 += dy;
+                        ry1 = Math.Min(ry1 + dy, hei);
                     }
                 }
 
