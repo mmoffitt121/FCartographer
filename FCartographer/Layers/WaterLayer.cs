@@ -131,7 +131,7 @@ namespace FCartographer
 
                 rws.level = level;
                 rws.c1 = color1;
-                rws.Render();
+                rws.Render(x0, y0, x1, y1);
             }
         }
 

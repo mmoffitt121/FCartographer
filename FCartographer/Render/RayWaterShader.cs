@@ -177,9 +177,9 @@ namespace FCartographer
             float dy = MathF.Sin((180 - direction) * MathF.PI / 180) * MathF.Sin((angle + 90) * MathF.PI / 180);
             float dh = MathF.Cos((angle + 90) * MathF.PI / 180);
 
-            int min = 255;
-            int max = 0;
-            for (int i = 0; i < inp.Length; i++)
+            int min = 0;//255;
+            int max = 255;//0;
+            /*for (int i = 0; i < inp.Length; i++)
             {
                 if (inp[i] < min)
                 {
@@ -189,7 +189,7 @@ namespace FCartographer
                 {
                     max = inp[i];
                 }
-            }
+            }*/
 
             int range = max - min;
 
