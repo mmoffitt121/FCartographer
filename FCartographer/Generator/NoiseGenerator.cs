@@ -13,19 +13,34 @@ namespace FCartographer
     /// </summary>
     public class NoiseGenerator : Generator
     {
-        private int octives;
-        private NoiseMode noisemode;
+        /// <summary>
+        /// Parameter determining how many octives down to render.
+        /// </summary>
+        public int octives;
+        /// <summary>
+        /// Noise mode
+        /// </summary>
+        public NoiseMode noisemode;
 
-        private int scale;
+        /// <summary>
+        /// Scale at which to render
+        /// </summary>
+        public int scale;
 
         private int[] perlinhash;
 
         private int width;
         private int height;
 
-        private double persistence;
+        /// <summary>
+        /// Noise persistence as octives increase
+        /// </summary>
+        public double persistence;
 
-        private int repeat;
+        /// <summary>
+        /// Whether or not noise tiles in repetition
+        /// </summary>
+        public int repeat;
 
         /// <summary>
         /// Overwritable function that performs the layer processes.
@@ -256,6 +271,10 @@ namespace FCartographer
             scale = _scale;
         }
 
+        /// <summary>
+        /// Sets whether the noise repeats
+        /// </summary>
+        /// <param name="_repeat"></param>
         public void SetRepeat(int _repeat)
         {
             repeat = _repeat;
