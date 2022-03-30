@@ -362,6 +362,22 @@
             Fill tool
             </summary>
         </member>
+        <member name="T:FCartographer.DirtTextureGenerator">
+            <summary>
+            Class that handles generation of dirt
+            </summary>
+        </member>
+        <member name="M:FCartographer.DirtTextureGenerator.Generate">
+            <summary>
+            Generates the dirt texture
+            </summary>
+        </member>
+        <member name="M:FCartographer.DirtTextureGenerator.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Constructor, takes destination for texture generation
+            </summary>
+            <param name="_data"></param>
+        </member>
         <member name="T:FCartographer.ErosionSimulator">
             <summary>
             Erosion simulator class, simulates erosion on a heightmap.
@@ -497,6 +513,31 @@
             Generator base class, used to generate layers.
             </summary>
         </member>
+        <member name="F:FCartographer.NoiseGenerator.octives">
+            <summary>
+            Parameter determining how many octives down to render.
+            </summary>
+        </member>
+        <member name="F:FCartographer.NoiseGenerator.noisemode">
+            <summary>
+            Noise mode
+            </summary>
+        </member>
+        <member name="F:FCartographer.NoiseGenerator.scale">
+            <summary>
+            Scale at which to render
+            </summary>
+        </member>
+        <member name="F:FCartographer.NoiseGenerator.persistence">
+            <summary>
+            Noise persistence as octives increase
+            </summary>
+        </member>
+        <member name="F:FCartographer.NoiseGenerator.repeat">
+            <summary>
+            Whether or not noise tiles in repetition
+            </summary>
+        </member>
         <member name="M:FCartographer.NoiseGenerator.Generate">
             <summary>
             Overwritable function that performs the layer processes.
@@ -558,6 +599,12 @@
             Sets the scale of the noise
             </summary>
             <param name="_scale"></param>
+        </member>
+        <member name="M:FCartographer.NoiseGenerator.SetRepeat(System.Int32)">
+            <summary>
+            Sets whether the noise repeats
+            </summary>
+            <param name="_repeat"></param>
         </member>
         <member name="M:FCartographer.NoiseGenerator.#ctor(System.Drawing.Bitmap)">
             <summary>
@@ -1127,6 +1174,11 @@
         <member name="M:FCartographer.NationLayer.#ctor(System.Int32,System.Int32,System.String)">
             <summary>
             Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
+            </summary>
+        </member>
+        <member name="T:FCartographer.TextureLayer">
+            <summary>
+            Layer that holds maskable textures
             </summary>
         </member>
         <member name="T:FCartographer.WaterLayer">
