@@ -44,6 +44,10 @@ namespace FCartographer
             {
                 parentform.project.AddLayer(Layer.LayerType.Biome, NameOfNewLayer.Text);
             }
+            if (LayerToAdd.SelectedIndex.Equals(4))
+            {
+                parentform.project.AddLayer(Layer.LayerType.Texture, NameOfNewLayer.Text);
+            }
 
             parentform.RenderGraphics(parentform.project.GetGraphics());
 
@@ -89,6 +93,11 @@ namespace FCartographer
             {
                 NameOfNewLayer.Text = "New Biome Layer";
                 DescriptionBox.Text = "A biome layer is used primarily for world generation. Paint biomes, then select the layer and generate terrain from the layer.";
+            }
+            if (LayerToAdd.SelectedIndex.Equals(4))
+            {
+                NameOfNewLayer.Text = "New Texture Layer";
+                DescriptionBox.Text = "A texture layer contains a list of textures the user can draw onto the canvas.";
             }
         }
 

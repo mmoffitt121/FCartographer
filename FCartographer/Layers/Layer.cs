@@ -361,6 +361,11 @@ namespace FCartographer
             Biome,
 
             /// <summary>
+            /// Layer that contains maskable textures
+            /// </summary>
+            Texture,
+
+            /// <summary>
             /// Reference, for imported images/annotations/sketches
             /// </summary>
             Reference

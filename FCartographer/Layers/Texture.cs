@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace FCartographer
 {
-    internal class Texture
+    public class Texture
     {
         public string name;
         public int opacity;
@@ -31,6 +31,9 @@ namespace FCartographer
             switch (genmode)
             {
                 case 0:
+                    gen = null;
+                    break;
+                case 1:
                     gen = new DirtTextureGenerator(texture);
                     break;
             }
@@ -47,18 +50,27 @@ namespace FCartographer
             {
                 gen.Generate();
             }
-        }
-
-        public void InitializeTexture(int genmode, int wid, int hei)
-        {
-            SetTexture(new Bitmap(wid, hei));
-            SetGenerator(genmode);
-            GenerateTexture();
+            else
+            {
+                Graphics.FromImage(texture).Clear(Color.Black);
+            }
         }
 
         public void UpdateTexture()
         {
             GenerateTexture();
+        }
+
+        public Texture(int wid, int hei)
+        {
+            // Setting name
+            name = "New Texture";
+
+            mask = new Bitmap(wid, hei);
+            texture = new Bitmap(wid, hei);
+
+            Graphics.FromImage(mask).Clear(Color.Black);
+            Graphics.FromImage(texture).Clear(Color.Black);
         }
     }
 }

@@ -88,7 +88,8 @@ namespace FCartographer
             "Terrain",
             "Nations",
             "Water",
-            "Biome"});
+            "Biome",
+            "Texture"});
             this.LayerToAdd.Location = new System.Drawing.Point(77, 17);
             this.LayerToAdd.Name = "LayerToAdd";
             this.LayerToAdd.Size = new System.Drawing.Size(187, 23);

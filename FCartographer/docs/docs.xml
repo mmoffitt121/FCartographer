@@ -1037,6 +1037,11 @@
             Layer that contains data for world generation
             </summary>
         </member>
+        <member name="F:FCartographer.Layer.LayerType.Texture">
+            <summary>
+            Layer that contains maskable textures
+            </summary>
+        </member>
         <member name="F:FCartographer.Layer.LayerType.Reference">
             <summary>
             Reference, for imported images/annotations/sketches
