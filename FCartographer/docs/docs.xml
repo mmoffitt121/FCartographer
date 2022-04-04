@@ -1186,6 +1186,93 @@
             Layer that holds maskable textures
             </summary>
         </member>
+        <member name="M:FCartographer.TextureLayer.Render">
+            <summary>
+            Override void that composits temp data to the layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.Draw(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Override void that Draws on a temporary layer. Bitmap is cleared when drawing is complete.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.DrawTemp(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Override void that Draws on the display canvas. Bitmap is cleared when drawing is complete.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.Fill(System.Windows.Forms.MouseEventArgs,FCartographer.BrushPreset)">
+            <summary>
+            Fills contiguous region with pixels of selected nation.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.DrawToCanvas(FCartographer.BrushPreset,System.Windows.Forms.MouseEventArgs,System.Drawing.Graphics,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Generalized draw to canvas function, used by both Draw() and DrawTemp(). Used to draw on canvas based
+            on input brush settings, as well as mouse location and movement.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.SetColor(System.Drawing.Color)">
+            <summary>
+            Override void that sets the internal layer saved color.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.InitializeColor(System.Drawing.Color)">
+            <summary>
+            Override void that initializes the internal layer saved color without interacting with the layer's 
+            internal pen.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.SetSize(System.Int32)">
+            <summary>
+            Override void that sets the internal layer saved pen.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.UpdateBrushOptions(FCartographer.BrushPreset)">
+            <summary>
+            Grabs internal brush options from the input layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.NewTexture">
+            <summary>
+            Creates new nation with random data color.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.GetTextureCount">
+            <summary>
+            Returns the amount of items in the intenal nation list
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.GetSelected">
+            <summary>
+            Returns the index of the selected nation
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.SelectTexture(System.Int32)">
+            <summary>
+            Changes the index of layer to be selected
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.IsSelected(System.Int32)">
+            <summary>
+            Checks if an index is selected
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.GetTexture(System.Int32)">
+            <summary>
+            Gets a nation by it's index in the nations list. If index too high, return null.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Unnamed constructor, creates layer of size x and y. Inherits base constructor.
+            </summary>
+        </member>
+        <member name="M:FCartographer.TextureLayer.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
+            </summary>
+        </member>
         <member name="T:FCartographer.WaterLayer">
             <summary>
             Layer that contains water information and renders water layers.

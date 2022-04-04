@@ -74,6 +74,9 @@ namespace FCartographer
                 case Layer.LayerType.Biome:
                     layers.Add(new BiomeLayer(width, height, _name));
                     break;
+                case Layer.LayerType.Texture:
+                    layers.Add(new TextureLayer(width, height, _name));
+                    break;
                 default:
                     break;
             }

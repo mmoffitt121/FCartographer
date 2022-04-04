@@ -22,9 +22,6 @@ namespace FCartographer
 
         private Color brushcolor;
 
-        NationStrokeRenderer nsr;
-        NationFillRenderer nfr;
-
         /// <summary>
         /// Override void that composits temp data to the layer.
         /// </summary>
@@ -38,8 +35,6 @@ namespace FCartographer
             if (ToRender())
             {
                 render_g.Clear(Color.FromArgb(0, 0, 0, 0));
-                nfr.Render();
-                nsr.Render();
             }
         }
 
@@ -185,7 +180,7 @@ namespace FCartographer
         /// </summary>
         public TextureLayer(int x, int y) : base(x, y, "Nations Layer", "Nations Layer Description")
         {
-            SetType(LayerType.NationMap);
+            SetType(LayerType.Texture);
             SetName("Nation layer");
 
             InitializeColor(Color.FromArgb(255, 200, 0, 255));
@@ -201,7 +196,7 @@ namespace FCartographer
         /// </summary>
         public TextureLayer(int x, int y, string _name) : base(x, y, _name, "Nations Layer", "Nations Layer Description")
         {
-            SetType(LayerType.NationMap);
+            SetType(LayerType.Texture);
 
             InitializeColor(Color.FromArgb(255, 200, 0, 255));
             pen = new Pen(brushcolor, 30);
