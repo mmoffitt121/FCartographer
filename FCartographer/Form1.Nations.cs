@@ -17,6 +17,75 @@ namespace FCartographer
     public partial class Form1 : Form
     {
         /// <summary>
+        /// Displays the desired textures in the nations panel
+        /// </summary>
+        public void DisplayTextures()
+        {
+            ClearNationsPane();
+
+            if (project.GetLayerCount() == 0)
+            {
+                return;
+            }
+
+            Layer lyr = project.CurrentLayer();
+
+            if (lyr.GetType() != Layer.LayerType.Texture)
+            {
+                return;
+            }
+
+            TextureLayer lr = (TextureLayer)lyr;
+
+            for (int i = 0; i < lr.GetTextureCount(); i++)
+            {
+                // The Base Panel
+                Panel panel = new Panel()
+                {
+                    //Location = new Point(10, 10),
+                    BackColor = Color.NavajoWhite,
+                    BorderStyle = BorderStyle.FixedSingle,
+                    Dock = DockStyle.None,
+                    Anchor = (AnchorStyles.Left | AnchorStyles.Right),
+                    Width = 110,
+                    Height = 25,
+
+                    TabIndex = i
+                };
+
+                // Panel that displays Layer Type Icon
+                Panel icon = new Panel()
+                {
+                    //BackColor = lr.GetTexture(i).GetColor(),
+                    BorderStyle = BorderStyle.FixedSingle,
+                    Location = new Point(2, 2),
+                    Width = 19,
+                    Height = 19
+                };
+
+                // Text that displays layer's name
+                Label text = new Label()
+                {
+                    Text = lr.GetTexture(i).name,
+                    ForeColor = Color.DarkRed,
+                    Location = new Point(23, 2),
+                    Width = 90
+                };
+
+                text.Click += NationPanelChild_Select;
+                icon.Click += NationPanelChild_Select;
+
+                panel.Controls.Add(text);
+                panel.Controls.Add(icon);
+
+                panel.Click += NationPanel_Select;
+
+                NationPane.Controls.Add(panel);
+            }
+
+            DisplaySelectedNation();
+        }
+        /// <summary>
         /// Places a panel for each nation in the nation pane for user navigation.
         /// Also places references to each nation panel object in List of nation display objects.
         /// </summary>

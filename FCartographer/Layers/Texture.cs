@@ -15,6 +15,7 @@ namespace FCartographer
         private Bitmap texture;
 
         private Generator gen;
+        private Bitmap thumbnail;
 
         public Bitmap GetTexture()
         {

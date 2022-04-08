@@ -262,6 +262,11 @@
             Event that fires when a move layer down button was clicked. Calls the project object to switch the selected layer with the one below.
             </summary>
         </member>
+        <member name="M:FCartographer.Form1.DisplayTextures">
+            <summary>
+            Displays the desired textures in the nations panel
+            </summary>
+        </member>
         <member name="M:FCartographer.Form1.DisplayNations">
             <summary>
             Places a panel for each nation in the nation pane for user navigation.
@@ -1233,7 +1238,7 @@
             Grabs internal brush options from the input layer.
             </summary>
         </member>
-        <member name="M:FCartographer.TextureLayer.NewTexture">
+        <member name="M:FCartographer.TextureLayer.NewTexture(System.Int32)">
             <summary>
             Creates new nation with random data color.
             </summary>

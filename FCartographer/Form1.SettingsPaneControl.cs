@@ -40,6 +40,12 @@ namespace FCartographer
                     SetWaterLayerReference();
                     UpdateWaterControls();
                     break;
+                case Layer.LayerType.Texture:
+                    SetNationsSettingsActive(true);
+                    SetBitmapToolsActive(true);
+                    SetNationsPaneActive(true);
+                    DisplayTextures();
+                    break;
                 default:
                     break;
             }

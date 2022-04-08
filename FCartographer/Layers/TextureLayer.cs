@@ -123,7 +123,7 @@ namespace FCartographer
         /// <summary>
         /// Creates new nation with random data color.
         /// </summary>
-        public void NewTexture()
+        public void NewTexture(int tex_index)
         {
             textures.Add(new Texture(GetData().Width, GetData().Height));
         }
@@ -188,7 +188,9 @@ namespace FCartographer
             pen.Width = 20;
 
             textures = new List<Texture>();
-            NewTexture();
+            NewTexture(0);
+            NewTexture(1);
+            NewTexture(2);
         }
 
         /// <summary>
@@ -203,7 +205,9 @@ namespace FCartographer
             pen.Width = 20;
 
             textures = new List<Texture>();
-            NewTexture();
+            NewTexture(0);
+            NewTexture(1);
+            NewTexture(2);
         }
     }
 }
