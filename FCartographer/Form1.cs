@@ -156,6 +156,7 @@ namespace FCartographer
             {
                 switch (project.CurrentLayer().GetType())
                 {
+                    case Layer.LayerType.Texture:
                     case Layer.LayerType.HeightMap:
                         project.Draw(terrain_brushpreset, e, xprime, yprime);
                         project.DrawTemp(terrain_brushpreset, e, g, xprime, yprime);

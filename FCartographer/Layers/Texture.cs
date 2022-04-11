@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace FCartographer
 {
@@ -20,6 +21,11 @@ namespace FCartographer
         public Bitmap GetTexture()
         {
             return texture;
+        }
+
+        public Bitmap GetMask()
+        {
+            return mask;
         }
 
         public void SetTexture(Bitmap _texture)
@@ -40,6 +46,11 @@ namespace FCartographer
             }
         }
 
+        public void Draw()
+        {
+
+        }
+
         public Generator GetGenerator()
         {
             return gen;
@@ -49,6 +60,7 @@ namespace FCartographer
         {
             if (gen != null)
             {
+                Graphics.FromImage(texture).Clear(Color.Black); // !!!
                 gen.Generate();
             }
             else
@@ -72,6 +84,21 @@ namespace FCartographer
 
             Graphics.FromImage(mask).Clear(Color.Black);
             Graphics.FromImage(texture).Clear(Color.Black);
+        }
+
+        public Texture(int wid, int hei, int _genmode)
+        {
+            // Setting name
+            name = "New Texture";
+
+            mask = new Bitmap(wid, hei);
+            texture = new Bitmap(wid, hei);
+
+            Graphics.FromImage(mask).Clear(Color.Black);
+            Graphics.FromImage(texture).Clear(Color.Black);
+
+            SetGenerator(_genmode);
+            GenerateTexture();
         }
     }
 }

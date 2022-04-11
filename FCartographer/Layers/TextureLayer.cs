@@ -35,6 +35,10 @@ namespace FCartographer
             if (ToRender())
             {
                 render_g.Clear(Color.FromArgb(0, 0, 0, 0));
+                foreach (Texture t in textures)
+                {
+
+                }
             }
         }
 
