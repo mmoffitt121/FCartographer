@@ -37,7 +37,7 @@ namespace FCartographer
                 render_g.Clear(Color.FromArgb(0, 0, 0, 0));
                 foreach (Texture t in textures)
                 {
-
+                    render_g.DrawImage(t.GetMaskedTexture(), 0, 0);
                 }
             }
         }
@@ -182,10 +182,10 @@ namespace FCartographer
         /// <summary>
         /// Unnamed constructor, creates layer of size x and y. Inherits base constructor.
         /// </summary>
-        public TextureLayer(int x, int y) : base(x, y, "Nations Layer", "Nations Layer Description")
+        public TextureLayer(int x, int y) : base(x, y, "Texture Layer", "Texture Layer Description")
         {
             SetType(LayerType.Texture);
-            SetName("Nation layer");
+            SetName("Texture layer");
 
             InitializeColor(Color.FromArgb(255, 200, 0, 255));
             pen = new Pen(brushcolor, 20);
@@ -200,7 +200,7 @@ namespace FCartographer
         /// <summary>
         /// Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
         /// </summary>
-        public TextureLayer(int x, int y, string _name) : base(x, y, _name, "Nations Layer", "Nations Layer Description")
+        public TextureLayer(int x, int y, string _name) : base(x, y, _name, "Texture Layer", "Texture Layer Description")
         {
             SetType(LayerType.Texture);
 

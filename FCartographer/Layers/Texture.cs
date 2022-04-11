@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Imaging;
+using FCartographer.Util;
 
 namespace FCartographer
 {
@@ -74,6 +75,12 @@ namespace FCartographer
             GenerateTexture();
         }
 
+        public Bitmap GetMaskedTexture()
+        {
+            BitmapOperations.ApplyMask(texture, mask);
+            return texture;
+        }
+
         public Texture(int wid, int hei)
         {
             // Setting name
@@ -82,7 +89,7 @@ namespace FCartographer
             mask = new Bitmap(wid, hei);
             texture = new Bitmap(wid, hei);
 
-            Graphics.FromImage(mask).Clear(Color.Black);
+            Graphics.FromImage(mask).Clear(Color.White);
             Graphics.FromImage(texture).Clear(Color.Black);
         }
 
@@ -94,7 +101,7 @@ namespace FCartographer
             mask = new Bitmap(wid, hei);
             texture = new Bitmap(wid, hei);
 
-            Graphics.FromImage(mask).Clear(Color.Black);
+            Graphics.FromImage(mask).Clear(Color.White);
             Graphics.FromImage(texture).Clear(Color.Black);
 
             SetGenerator(_genmode);

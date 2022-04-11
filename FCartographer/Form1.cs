@@ -243,7 +243,7 @@ namespace FCartographer
             terrain_brushpreset = new TerrainBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, Color.FromArgb(255, 20, 20, 20), false);
             nations_brushpreset = new NationsBrushPreset(@"Tools/Brushes/RadialBrush0.png", 20, 50, lyr.GetNation(0).GetDataColor(), true);
 
-            project.AddLayer(Layer.LayerType.HeightMap);
+            project.AddLayer(Layer.LayerType.Texture);
 
             // Tool Initialization
             BrushSelect_Click(new object(), new EventArgs());
