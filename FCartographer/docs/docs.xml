@@ -740,6 +740,36 @@
             Named constructor, creates layer of size x and y, and an input name. Inherits base constructor.
             </summary>
         </member>
+        <member name="T:FCartographer.CompositeLayer">
+            <summary>
+            Layer that aggregates many CompositeLayerItems
+            </summary>
+        </member>
+        <member name="M:FCartographer.CompositeLayer.#ctor(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Unnamed constructor, creates layer of size x and y, and an input name.
+            </summary>
+        </member>
+        <member name="M:FCartographer.CompositeLayer.#ctor(System.Int32,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Named constructor, creates layer of size x and y, and an input name.
+            </summary>
+        </member>
+        <member name="T:FCartographer.CompositeLayerItem">
+            <summary>
+            Represents a unit inside a composite layer.
+            </summary>
+        </member>
+        <member name="M:FCartographer.CompositeLayerItem.SetName(System.String)">
+            <summary>
+            Name mutator
+            </summary>
+        </member>
+        <member name="M:FCartographer.CompositeLayerItem.GetName">
+            <summary>
+            Name accessor
+            </summary>
+        </member>
         <member name="T:FCartographer.HeightLayer">
             <summary>
             Layer that holds and interfaces with data for heightmaps.
@@ -1077,16 +1107,6 @@
         <member name="M:FCartographer.Nation.GetDataColor">
             <summary>
             Data color accessor
-            </summary>
-        </member>
-        <member name="M:FCartographer.Nation.SetName(System.String)">
-            <summary>
-            Name mutator
-            </summary>
-        </member>
-        <member name="M:FCartographer.Nation.GetName">
-            <summary>
-            Name accessor
             </summary>
         </member>
         <member name="M:FCartographer.Nation.#ctor(System.Collections.Generic.List{FCartographer.Nation})">

@@ -11,10 +11,10 @@ namespace FCartographer
     /// <summary>
     /// Layer that holds and interfaces with data for nation maps.
     /// </summary>
-    public class NationLayer : Layer
+    public class NationLayer : CompositeLayer
     {
         //private TerrainShader shader;
-        private List<Nation> nations;
+        private List<CompositeLayerItem> items;
         private int selected;
 
         private Pen pen;
@@ -129,7 +129,7 @@ namespace FCartographer
         /// </summary>
         public void NewNation()
         {
-            nations.Add(new Nation(nations));
+            items.Add(new Nation(items));
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace FCartographer
         /// </summary>
         public int GetNationCount()
         {
-            return nations.Count;
+            return items.Count;
         }
 
         /// <summary>
@@ -169,9 +169,9 @@ namespace FCartographer
         /// </summary>
         public Nation GetNation(int i)
         {
-            if (i < nations.Count)
+            if (i < items.Count)
             {
-                return nations[i];
+                return (Nation)items[i];
             }
             else
             {
@@ -194,7 +194,7 @@ namespace FCartographer
             nsr = new NationStrokeRenderer(GetData(), GetOutData());
             nfr = new NationFillRenderer(GetData(), GetOutData());
 
-            nations = new List<Nation>();
+            items = new List<CompositeLayerItem>();
             NewNation();
         }
 
@@ -212,7 +212,7 @@ namespace FCartographer
             nsr = new NationStrokeRenderer(GetData(), GetOutData());
             nfr = new NationFillRenderer(GetData(), GetOutData());
 
-            nations = new List<Nation>();
+            items = new List<CompositeLayerItem>();
             NewNation();
         }
     }
